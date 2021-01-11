@@ -1,0 +1,28 @@
+{
+    "name": "cocolis/cocoliswoocommerce",
+    "description": "Cocolis Woocommerce Plugin to add Cocolis.fr as a delivery method",
+    "type" : "wordpress-plugin",
+    "require": {
+        "cocolis/php": "dev-develop",
+        "php": "^7.3"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "2.17.x-dev"
+    },
+    "license": "GNU 3.0",
+    "authors": [
+        {
+            "name": "Cocolis",
+            "email": "contact@cocolis.fr"
+        }
+    ],
+    "autoload": {
+      "psr-4": {
+        "PrestaShop\\Module\\Cocolis\\": "src/"
+      }
+    },
+    "config": {
+		"vendor-dir":  "cocolis-woocommerce/vendor"
+	},
+    "minimum-stability": "dev"
+}

@@ -1,3 +1,4 @@
+FROM --platform=linux/amd64 mysql
 FROM wordpress:latest
 LABEL Sébastien Fieloux "sebastien.fieloux@gmail.com"
 ENV \
