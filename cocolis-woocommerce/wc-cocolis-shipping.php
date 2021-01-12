@@ -19,51 +19,60 @@ use Cocolis\Api\Client;
 /**
  * Check if WooCommerce is active
  */
-if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
-	function cocolis_shipping_method_init() {
-		if ( ! class_exists( 'WC_Cocolis_Shipping_Method' ) ) {
-			class WC_Cocolis_Shipping_Method extends WC_Shipping_Method {
-				/**
-				 * Constructor for your shipping class
-				 *
-				 * @access public
-				 * @return void
-				 */
-				public function __construct() {
+if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
+    function cocolis_shipping_method_init()
+    {
+        if (! class_exists('WC_Cocolis_Shipping_Method')) {
+            class WC_Cocolis_Shipping_Method extends WC_Shipping_Method
+            {
+                /**
+                 * Constructor for your shipping class
+                 *
+                 * @access public
+                 * @return void
+                 */
+                public function __construct()
+                {
                     global $woocommerce;
                     $this->id                 = 'cocolis-woocommerce';
                     $this->method_title       = __('Cocolis Shipping Method');
                     $this->method_description = __('Cocolis Woocommerce Plugin to add Cocolis.fr as a delivery method');
                     // Define user set variables.
-                    $this->production_mode          = $this->get_option('production_mode');
-                    $this->app_id          = $this->get_option('app_id');
-                    $this->password          = $this->get_option('password');
+                    $this->production_mode = $this->get_option('production_mode');
+                    $this->app_id = $this->get_option('app_id');
+                    $this->password = $this->get_option('password');
+                    $this->width = $this->get_option('width');
+                    $this->length = $this->get_option('length');
+                    $this->height = $this->get_option('height');
 
                     // Availability & Countries
                     $this->availability = 'including';
                     $this->countries = array(
-                        'FR' // France
+                        'BE','BG','CZ','DK','DE','EE','IE','EL','ES',
+                        'FR','HR','IT','CY','LV','LT','LU','HU','MT',
+                        'NL','AT','PL','PT','RO','SI','SK','FI','SE'
                     );
  
                     $this->enabled = isset($this->settings['enabled']) ? $this->settings['enabled'] : 'yes';
                     $this->title = isset($this->settings['title']) ? $this->settings['title'] : __('Cocolis Shipping', 'cocolis');
-					$this->init();
-				}
+                    $this->init();
+                }
 
-				/**
-				 * Init your settings
-				 *
-				 * @access public
-				 * @return void
-				 */
-				function init() {
-					// Load the settings API
-					$this->init_form_fields(); // This is part of the settings API. Override the method to add your own settings
+                /**
+                 * Init your settings
+                 *
+                 * @access public
+                 * @return void
+                 */
+                public function init()
+                {
+                    // Load the settings API
+                    $this->init_form_fields(); // This is part of the settings API. Override the method to add your own settings
 
-					// Save settings in admin if you have any defined
-					add_action( 'woocommerce_update_options_shipping_' . $this->id, array( $this, 'process_admin_options' ) );
+                    // Save settings in admin if you have any defined
+                    add_action('woocommerce_update_options_shipping_' . $this->id, array( $this, 'process_admin_options' ));
                     add_filter('woocommerce_settings_api_sanitized_fields_' . $this->id, array( $this, 'validate_settings_fields' ));
-				}
+                }
 
                 public function init_form_fields()
                 {
@@ -101,6 +110,30 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
                         'default'           => 'password',
                         'css'      => 'width:196px;',
                         ),
+                        'width' => array(
+                        'title'             => __('Width in cm'),
+                        'type'              => 'number',
+                        'description'       => __('Allows you to calculate the costs in the absence of the width indicated in the product sheet.'),
+                        'desc_tip'          => true,
+                        'default'           => 1,
+                        'css'      => 'width:196px;',
+                        ),
+                        'height' => array(
+                        'title'             => __('Height in cm'),
+                        'type'              => 'number',
+                        'description'       => __('Allows you to calculate the costs in the absence of the height indicated in the product sheet.'),
+                        'desc_tip'          => true,
+                        'default'           => 1,
+                        'css'      => 'width:196px;',
+                        ),
+                        'length' => array(
+                        'title'             => __('Length in cm'),
+                        'type'              => 'number',
+                        'description'       => __('Allows you to calculate the costs in the absence of the length indicated in the product sheet.'),
+                        'desc_tip'          => true,
+                        'default'           => 1,
+                        'css'      => 'width:196px;',
+                        ),
                     );
                 }
 
@@ -125,47 +158,82 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 
                 public function authenticatedClient()
                 {
+                    $prod = $this->settings['production_mode'] == "sandbox" ? false : true;
                     $client = Client::create(array(
-                        'app_id' => $this->app_id,
-                        'password' => $this->password,
-                        'live' => $this->production_mode,
+                        'app_id' => $this->settings['app_id'],
+                        'password' => $this->settings['password'],
+                        'live' => $prod,
                     ));
                     $client->signIn();
                     return $client;
                 }
 
-				/**
-				 * calculate_shipping function.
-				 *
-				 * @access public
-				 * @param mixed $package
-				 * @return void
-				 */
-				public function calculate_shipping( $package ) {
-                    foreach ($package as $item) {
-                        var_dump($item);
+                /**
+                 * calculate_shipping function.
+                 *
+                 * @access public
+                 * @param mixed $package
+                 * @return void
+                 */
+                public function calculate_shipping($package = array())
+                {
+                    $package = (object) $package;
+                    $destination = (object) $package->destination;
+                    $postcode = $destination->postcode;
+                    $total = 0;
+                    $dimensions = 0;
+                    if (!empty($postcode)) {
+                        $client = $this->authenticatedClient();
+                        $products = $package->contents;
+                        foreach ($products as $product) {
+                            $product = (object) $product;
+                            $width = (int) $product->data->get_width();
+                            $length = (int) $product->data->get_length();
+                            $height = (int) $product->data->get_height();
+
+                            if ($width == 0 || $length == 0 || $height == 0) {
+                                // Use the default value of volume for delivery fees
+                                $width = $this->width;
+                                $length = $this->length;
+                                $height = $this->height;
+                                $dimensions += (($width * $length * $height) / pow(10, 6)) * (int) $product->quantity;
+                            } else {
+                                $dimensions += (($width * $length * $height) / pow(10, 6)) * (int) $product->quantity;
+                            }
+
+                            $total += (int) $product->data->get_price() * (int) $product->quantity;
+                        }
+                        
+
+                        if ($dimensions < 0.01) {
+                            $dimensions += 0.01;
+                        }
+
+                        $dimensions = round($dimensions, 2);
+
+                        $match = $client->getRideClient()->canMatch(75015, $postcode, $dimensions, $total * 100);
+                        $shipping_cost = ($match->estimated_prices->regular) / 100;
+                        
+                        $rate = array(
+                            'label' => $this->title,
+                            'cost' => $shipping_cost,
+                        );
+
+                        // Register the rate
+                        $this->add_rate($rate);
                     }
-                    exit;
-                    
-					$rate = array(
-						'label' => $this->title,
-						'cost' => '0',
-						'calc_tax' => 'per_item'
-					);
+                }
+            }
+        }
+    }
 
-					// Register the rate
-					$this->add_rate( $rate );
-				}
-			}
-		}
-	}
+    add_action('woocommerce_shipping_init', 'cocolis_shipping_method_init');
 
-	add_action( 'woocommerce_shipping_init', 'cocolis_shipping_method_init' );
+    function add_cocolis_shipping_method($methods)
+    {
+        $methods['add_cocolis_shipping_method'] = 'WC_Cocolis_Shipping_Method';
+        return $methods;
+    }
 
-	function add_cocolis_shipping_method( $methods ) {
-		$methods['add_cocolis_shipping_method'] = 'WC_Cocolis_Shipping_Method';
-		return $methods;
-	}
-
-	add_filter( 'woocommerce_shipping_methods', 'add_cocolis_shipping_method' );
+    add_filter('woocommerce_shipping_methods', 'add_cocolis_shipping_method');
 }

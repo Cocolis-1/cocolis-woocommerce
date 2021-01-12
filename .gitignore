@@ -1,8 +1,5 @@
 db_data
 .vs_code
-<<<<<<< Updated upstream
-.history/*
-=======
 .history/*
 cocolis-woocommerce/vendor
->>>>>>> Stashed changes
+.DS_Store
