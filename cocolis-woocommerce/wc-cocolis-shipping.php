@@ -1,4 +1,9 @@
 <?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+
 require_once dirname(__FILE__) . '/vendor/autoload.php';
 use Cocolis\Api\Client;
 
@@ -247,4 +252,5 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
     }
 
     add_filter('woocommerce_shipping_methods', 'add_cocolis_shipping_method');
+    include_once "wc-cocolis-payment.php";
 }
