@@ -213,14 +213,25 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
                         $match = $client->getRideClient()->canMatch(75015, $postcode, $dimensions, $total * 100);
                         $shipping_cost = ($match->estimated_prices->regular) / 100;
-                        
+
                         $rate = array(
+                            'id'   => '1',
                             'label' => $this->title,
                             'cost' => $shipping_cost,
                         );
 
                         // Register the rate
                         $this->add_rate($rate);
+                        
+                        if($total >= 500){
+                            $shipping_cost_insurance = ($match->estimated_prices->with_insurance) / 100;
+                            $rate = array(
+                                'id'   => 'idassurance',
+                                'label' => $this->title . ' with insurance',
+                                'cost' => $shipping_cost_insurance,
+                            );
+                            $this->add_rate($rate);
+                        }
                     }
                 }
             }
