@@ -1,6 +1,6 @@
 <?php
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
@@ -139,6 +139,22 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         'default'           => 1,
                         'css'      => 'width:196px;',
                         ),
+                        'email' => array(
+                        'title'             => __('Email'),
+                        'type'              => 'email',
+                        'description'       => __("Required for the ride creation at Cocolis (vendor email)"),
+                        'desc_tip'          => true,
+                        'default'           => 'admin@vendor.com',
+                        'css'      => 'width:196px;',
+                        ),
+                        'phone' => array(
+                        'title'             => __('Phone'),
+                        'type'              => 'tel',
+                        'description'       => __("Required for the ride creation at Cocolis (landline or cell phone)"),
+                        'desc_tip'          => true,
+                        'default'           => '0600000000',
+                        'css'      => 'width:196px;',
+                        ),
                     );
                 }
 
@@ -155,7 +171,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     try {
                         $this->authenticatedClient();
                     } catch (\Cocolis\Api\Errors\UnauthorizedException $th) {
-                        wp_die("Les identifiants fournis ne sont pas reconnu par l'API de Cocolis", "Erreur d'authentification sur le serveur API", ['response' => 401, 'back_link' => true]);
+                        wp_die("The credentials provided are not recognized by the Cocolis API.", "Authentication error on the API server", ['response' => 401, 'back_link' => true]);
                         exit;
                     }
                     return $form_field;
@@ -228,11 +244,11 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         // Register the rate
                         $this->add_rate($rate);
                         
-                        if($total >= 500){
+                        if ($total >= 500) {
                             $shipping_cost_insurance = ($match->estimated_prices->with_insurance) / 100;
                             $rate = array(
                                 'id'   => 'idassurance',
-                                'label' => $this->title . ' with insurance',
+                                'label' => $this->title . __(' with insurance'),
                                 'cost' => $shipping_cost_insurance,
                             );
                             $this->add_rate($rate);
