@@ -4,8 +4,8 @@ if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
-require_once dirname(__FILE__) . '/vendor/autoload.php';
-include_once "wc-cocolis-shipping.php";
+require_once dirname(__FILE__, 2) . '/vendor/autoload.php';
+include_once dirname(__FILE__, 2) . "/wc-cocolis-shipping.php";
 
 /**
  * Plugin Name: Cocolis Woocommerce
@@ -150,11 +150,13 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
         $images = [];
         foreach ($arrayproducts as $image) {
-            array_push($images, $image['img']);
+            if (!empty($image['img'])) {
+                array_push($images, $image['img']);
+            }
         }
 
         //TODO: VERIFY IF TRANSLATION BROKE THIS METHOD
-        if (str_contains($order->get_shipping_method(), "Cocolis Shipping with insurance")) {
+        if (str_contains($order->get_shipping_method(), "with insurance")) {
             $birthday = new DateTime($order_birthdate);
 
             $params = [
@@ -164,10 +166,10 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     "from_postal_code" => $store_postcode,
                     "to_address" => $composed_address,
                     "to_postal_code" => $order_shipping_postcode,
-                    "from_is_flexible" => true,
+                    "from_is_flexible" => false,
                     "from_pickup_date" => $from_date,
                     "from_need_help" => true,
-                    "to_is_flexible" => true,
+                    "to_is_flexible" => false,
                     "to_need_help" => true,
                     "with_insurance" => true,
                     "to_pickup_date" => $to_date,
@@ -177,8 +179,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     "volume" => $dimensions,
                     "environment" => "objects",
                     "photo_urls" => $images,
-                    "rider_extra_information" => "Bonjour, Je souhaite envoyer les objets suivants : "
-                        . implode(", ", $arrayname) . '. Merci !' . " (Achat effectué sur une marketplace)",
+                    "rider_extra_information" => "Livraison de la commande : " . implode(", ", $arrayname),
                     "ride_objects_attributes" => $arrayproducts,
                     "ride_delivery_information_attributes" => [
                         "from_address" => $store_address,
@@ -203,12 +204,12 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         "insurance_city" => $order_shipping_city,
                         "insurance_country" => $order_shipping_country,
                         "insurance_birthdate" => $birthday->format('c')
-                ], 
+                ],
             ];
 
             $client = $client->getRideClient();
             $client->create($params);
-        }else{
+        } else {
             $params = [
                 "description" => "Livraison de la commande : " . implode(", ", $arrayname) . " vendue sur le site marketplace.",
                 "external_id" => $order_id,
@@ -216,10 +217,10 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 "from_postal_code" => $store_postcode,
                 "to_address" => $composed_address,
                 "to_postal_code" => $order_shipping_postcode,
-                "from_is_flexible" => true,
+                "from_is_flexible" => false,
                 "from_pickup_date" => $from_date,
                 "from_need_help" => true,
-                "to_is_flexible" => true,
+                "to_is_flexible" => false,
                 "to_need_help" => true,
                 "with_insurance" => false,
                 "to_pickup_date" => $to_date,
@@ -229,8 +230,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 "volume" => $dimensions,
                 "environment" => "objects",
                 "photo_urls" => $images,
-                "rider_extra_information" => "Bonjour, Je souhaite envoyer les objets suivants : "
-                    . implode(", ", $arrayname) . '. Merci !' . " (Achat effectué sur une marketplace)",
+                "rider_extra_information" => "Livraison de la commande : " . implode(", ", $arrayname),
                 "ride_objects_attributes" => $arrayproducts,
                 "ride_delivery_information_attributes" => [
                     "from_address" => $store_address,
@@ -254,6 +254,5 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             $client = $client->getRideClient();
             $client->create($params);
         }
-        exit;
     }
 }
