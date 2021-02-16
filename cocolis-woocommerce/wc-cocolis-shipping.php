@@ -5,6 +5,8 @@ if (! defined('ABSPATH')) {
 }
 
 require_once dirname(__FILE__) . '/vendor/autoload.php';
+include_once "class/wc-cocolis-payment.php";
+include_once "class/wc-cocolis-webhooks.php";
 use Cocolis\Api\Client;
 
 /**
@@ -24,6 +26,7 @@ use Cocolis\Api\Client;
 /**
  * Check if WooCommerce is active
  */
+
 if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
     function cocolis_shipping_method_init()
     {
@@ -172,7 +175,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         $this->authenticatedClient();
                         $this->registerWebhooks();
                     } catch (\Cocolis\Api\Errors\UnauthorizedException $th) {
-                        wp_die("The credentials provided are not recognized by the Cocolis API.", "Authentication error on the API server", ['response' => 401, 'back_link' => true]);
+                        wp_die(__("The credentials provided are not recognized by the Cocolis API."), __("Authentication error on the API server"), ['response' => 401, 'back_link' => true]);
                         exit;
                     }
                     return $form_field;
@@ -280,7 +283,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
                         $dimensions = round($dimensions, 2);
 
-                        $match = $client->getRideClient()->canMatch(75015, $postcode, $dimensions, $total * 100);
+                        $match = $client->getRideClient()->canMatch(get_option('woocommerce_store_postcode'), $postcode, $dimensions, $total * 100);
                         $shipping_cost = ($match->estimated_prices->regular) / 100;
 
                         $rate = array(
@@ -291,6 +294,8 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
                         // Register the rate
                         $this->add_rate($rate);
+
+                        $total = WC()->cart->get_subtotal();
                         
                         if ($total >= 500) {
                             $shipping_cost_insurance = ($match->estimated_prices->with_insurance) / 100;
@@ -307,14 +312,13 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         }
     }
 
-    function cocolis_activation_redirect( $plugin ) {
-        if( $plugin == plugin_basename( __FILE__ ) ) {
-            exit( wp_redirect( admin_url( 'admin.php?page=wc-settings&tab=shipping&section=cocolis-woocommerce' ) ) );
+    function cocolis_activation_redirect($plugin)
+    {
+        if ($plugin == plugin_basename(__FILE__)) {
+            exit(wp_redirect(admin_url('admin.php?page=wc-settings&tab=shipping&section=cocolis-woocommerce')));
         }
     }
-    add_action( 'activated_plugin', 'cocolis_activation_redirect' );
 
-    add_action('woocommerce_shipping_init', 'cocolis_shipping_method_init');
 
     function add_cocolis_shipping_method($methods)
     {
@@ -322,9 +326,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         return $methods;
     }
 
-    add_filter('woocommerce_shipping_methods', 'add_cocolis_shipping_method');
-    
-    add_filter('woocommerce_cart_shipping_method_full_label', 'filter_woocommerce_cart_shipping_method_full_label', 10, 2);
 
     function filter_woocommerce_cart_shipping_method_full_label($label, $method)
     {
@@ -339,9 +340,25 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         return $label;
     }
 
+    function action_after_shipping_rate($method, $index)
+    {
+        // Targeting checkout page only:
+        if (is_cart()) {
+            return;
+        } // Exit on cart page
 
-    // Include parts
+        if ('cocolis' === $method->id) {
+            echo __("<p>Livraison collaborative Cocolis assurée jusqu'à 500 euros. Pour en savoir plus, cliquez <a href='#'>ici</a></p>");
+        }
+    }
 
-    include_once "class/wc-cocolis-payment.php";
-    include_once "class/wc-cocolis-webhooks.php";
+    add_action('woocommerce_after_shipping_rate', 'action_after_shipping_rate', 20, 2);
+
+    add_filter('woocommerce_shipping_methods', 'add_cocolis_shipping_method');
+    
+    add_filter('woocommerce_cart_shipping_method_full_label', 'filter_woocommerce_cart_shipping_method_full_label', 10, 2);
+
+    add_action('activated_plugin', 'cocolis_activation_redirect');
+
+    add_action('woocommerce_shipping_init', 'cocolis_shipping_method_init');
 }

@@ -28,8 +28,6 @@ include_once dirname(__FILE__, 2) . "/wc-cocolis-shipping.php";
  * Check if WooCommerce is active
  */
 if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
-
-    
     function webhook_offer_accepted($request)
     {
         $data = $request->get_body_params();

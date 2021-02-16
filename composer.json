@@ -7,7 +7,7 @@
         "php": "^7.3"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "2.17.x-dev"
+        "friendsofphp/php-cs-fixer": "^2.18.2"
     },
     "license": "GNU 3.0",
     "authors": [

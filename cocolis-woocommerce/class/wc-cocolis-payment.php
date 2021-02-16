@@ -25,31 +25,73 @@ include_once dirname(__FILE__, 2) . "/wc-cocolis-shipping.php";
  * Check if WooCommerce is active
  */
 if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
-    add_filter('woocommerce_billing_fields', 'add_birth_date_billing_field', 20, 1);
-    function add_birth_date_billing_field($billing_fields)
+    add_filter('woocommerce_checkout_fields', 'show_terms_insurance');
+  
+    function show_terms_insurance($fields)
     {
-        $billing_fields['birth_date'] = array(
-        'type'        => 'date',
-        'label'       => __('Birth date (for insurance)'),
-        'class'       => array('form-row-wide'),
-        'priority'    => 25,
-        'required'    => true,
-        'clear'       => true,
-        'placeholder' => __('Birth date required for insurance')
-    );
-        return $billing_fields;
+        global $woocommerce;
+        $total = WC()->cart->get_subtotal();
+        // Maximal cost insurance
+        if ($total <= 1500) {
+            $max_value = 1500;
+        } elseif ($total <= 3000) {
+            $max_value = 3000;
+        } elseif ($total <= 5000) {
+            $max_value = 5000;
+        } else {
+            $max_value = 5000;
+        }
+        
+        $chosen_methods = WC()->session->get('chosen_shipping_methods');
+        $chosen_shipping = $chosen_methods[0];
+        $shipping_class = new WC_Cocolis_Shipping_Method();
+
+        // Fictive request for get the insurance link
+        $link_insurance = $shipping_class->authenticatedClient()->getRideClient()->canMatch(get_option('woocommerce_store_postcode'), 75001, 0.5, WC()->cart->get_subtotal() * 100)->insurance_detail->conditions_url;
+
+        if ($chosen_shipping == 'cocolis_assurance') {
+            $fields['billing']['birth_date'] = array(
+                'type'        => 'date',
+                'label'       => __('Birth date for insurance'),
+                'class'       => array('form-row-wide'),
+                'required'    => true,
+                'clear'       => true
+            );
+
+                
+            $fields['billing']['terms_insurance_cocolis'] = array(
+                'type'      => 'checkbox',
+                'label'     => __("I confirm that I have read the <a href='" . $link_insurance . "'>insurance conditions</a> and that I choose the insurance up to " . $max_value . " €.", 'woocommerce'),
+                'class'     => array('form-row-wide'),
+                'clear'     => true,
+                'required'  => true,
+            );
+        }
+  
+        return $fields;
     }
 
-    add_action('woocommerce_checkout_update_order_meta', 'save_birth_date_billing_field', 20, 2);
+    function validate($data, $errors)
+    {
+        if ($data['shipping_method'][0] == 'cocolis_assurance' && (empty($data['birth_date']) || !isset($data['birth_date']) || empty($data['terms_insurance_cocolis'] || !isset($data['terms_insurance_cocolis'])))) {
+            $errors->add('validation', __('Please fill insurance details for Cocolis delivery. (Refresh if changes are made)'));
+        }
+    }
+    add_action('woocommerce_after_checkout_validation', 'validate', 10, 2);
 
-    function save_birth_date_billing_field($order_id, $posted)
+    function save_insurance_billing_field($order_id, $posted)
     {
         if (isset($posted['birth_date'])) {
             update_post_meta($order_id, 'birth_date', $posted['birth_date']);
         }
+
+        if (isset($posted['terms_insurance_cocolis'])) {
+            update_post_meta($order_id, 'terms_insurance_cocolis', $posted['terms_insurance_cocolis']);
+        }
     }
 
-    add_action('woocommerce_order_status_processing', 'payment_complete');
+    add_action('woocommerce_checkout_update_order_meta', 'save_insurance_billing_field', 20, 2);
+
     function payment_complete($order_id)
     {
         $order = wc_get_order($order_id);
@@ -112,7 +154,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
             $phone = $shipping_class->settings['phone'];
             if (empty($phone)) {
-                wp_die("No phone number provided in the Cocolis configuration", "Required seller phone number", ['response' => 401, 'back_link' => true]);
+                wp_die(__("No phone number provided in the Cocolis configuration"), __("Required seller phone number"), ['response' => 401, 'back_link' => true]);
                 exit;
             }
 
@@ -255,4 +297,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             $client->create($params);
         }
     }
+
+    add_action('woocommerce_order_status_processing', 'payment_complete');
 }

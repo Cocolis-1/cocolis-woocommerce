@@ -1,0 +1,186 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Cocolis Woocommerce\n"
+"POT-Creation-Date: 2021-02-15 14:37+0100\n"
+"PO-Revision-Date: 2021-02-15 14:43+0100\n"
+"Last-Translator: \n"
+"Language-Team: Cocolis\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-KeywordsList: __\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: class/wc-cocolis-payment.php:33
+msgid "Birth date (for insurance)"
+msgstr "Date de naissance (pour l’assurance)"
+
+#: class/wc-cocolis-payment.php:38
+msgid "Birth date required for insurance"
+msgstr "Date de naissance requise pour l’assurance"
+
+#: class/wc-cocolis-payment.php:115
+msgid "No phone number provided in the Cocolis configuration"
+msgstr "Pas de numéro de téléphone fourni dans la configuration Cocolis"
+
+#: class/wc-cocolis-payment.php:115
+msgid "Required seller phone number"
+msgstr "Le numéro de téléphone du vendeur est requis"
+
+#: class/wc-cocolis-webhooks.php:48
+msgid "A carrier has been selected to carry out the Cocolis delivery."
+msgstr "Un transporteur a été sélectionné pour effectuer la livraison Cocolis."
+
+#: class/wc-cocolis-webhooks.php:65
+msgid "The public ride URL : "
+msgstr "L’URL de l’annonce publique : "
+
+#: class/wc-cocolis-webhooks.php:70
+msgid "Buyer tracking delivery URL : "
+msgstr "URL de livraison de suivi de l’acheteur : "
+
+#: class/wc-cocolis-webhooks.php:75
+msgid "[Private] Seller tracking delivery URL : "
+msgstr "[Privé] URL de livraison de suivi du vendeur : "
+
+#: class/wc-cocolis-webhooks.php:102
+msgid "Delivery completed by Cocolis"
+msgstr "Livraison complétée par Cocolis"
+
+#: class/wc-cocolis-webhooks.php:127
+msgid "An offer was published on cocolis.fr"
+msgstr "Une offre a été publiée sur cocolis.fr"
+
+#: class/wc-cocolis-webhooks.php:151
+msgid ""
+"The delivery is cancelled by the carrier. The seller and the buyer are "
+"informed, their tracking page is updated."
+msgstr ""
+"La livraison est annulée par le transporteur. Le vendeur et l’acheteur sont "
+"informés, leur page de suivi est mise à jour."
+
+#: class/wc-cocolis-webhooks.php:175
+msgid ""
+"The ride did not find a carrier. Get closer to our support and with cocolis."
+"fr"
+msgstr ""
+"Le trajet n’a pas trouvé de transporteur. Rapprochez-vous de notre support "
+"et avec cocolis.fr"
+
+#: wc-cocolis-shipping.php:45
+msgid "Cocolis Shipping Method"
+msgstr "Méthode de livraison Cocolis"
+
+#: wc-cocolis-shipping.php:46
+msgid "Cocolis Woocommerce Plugin to add Cocolis.fr as a delivery method"
+msgstr ""
+"Plugin Woocommerce pour ajouter Cocolis.fr en tant que prestataire de "
+"livraison"
+
+#: wc-cocolis-shipping.php:64
+msgid "Cocolis Shipping"
+msgstr "Livraison Cocolis"
+
+#: wc-cocolis-shipping.php:88
+msgid "Enable"
+msgstr "Activer"
+
+#: wc-cocolis-shipping.php:90
+msgid "Enable this shipping."
+msgstr "Activer ce mode de livraison."
+
+#: wc-cocolis-shipping.php:94
+msgid "Mode"
+msgstr "Mode"
+
+#: wc-cocolis-shipping.php:96
+msgid "Use this module in developement mode (sandbox) or in production ?"
+msgstr "Utiliser ce module en mode développement (sandbox) ou en production ?"
+
+#: wc-cocolis-shipping.php:105
+msgid "App id"
+msgstr "App id"
+
+#: wc-cocolis-shipping.php:107
+msgid "Enter the app-id provided to you by Cocolis"
+msgstr "Entrez l’app-id qui vous a été fourni par Cocolis"
+
+#: wc-cocolis-shipping.php:113
+msgid "Password"
+msgstr "Mot de passe"
+
+#: wc-cocolis-shipping.php:115
+msgid "Enter the password provided to you by Cocolis"
+msgstr "Entrez le mot de passe qui vous a été fourni par Cocolis"
+
+#: wc-cocolis-shipping.php:121
+msgid "Default width in cm"
+msgstr "Largeur par défaut en cm"
+
+#: wc-cocolis-shipping.php:123
+msgid ""
+"Allows you to calculate the costs in the absence of the width indicated in "
+"the product sheet."
+msgstr ""
+"Permet de calculer les coûts en l’absence de la largeur indiquée dans la "
+"fiche produit."
+
+#: wc-cocolis-shipping.php:129
+msgid "Default height in cm"
+msgstr "Hauteur par défaut en cm"
+
+#: wc-cocolis-shipping.php:131
+msgid ""
+"Allows you to calculate the costs in the absence of the height indicated in "
+"the product sheet."
+msgstr ""
+"Permet de calculer les coûts en l’absence de la hauteur indiquée dans la "
+"fiche produit."
+
+#: wc-cocolis-shipping.php:137
+msgid "Default length in cm"
+msgstr "Longueur par défaut en cm"
+
+#: wc-cocolis-shipping.php:139
+msgid ""
+"Allows you to calculate the costs in the absence of the length indicated in "
+"the product sheet."
+msgstr ""
+"Permet de calculer les coûts en l’absence de la longueur indiquée dans la "
+"fiche produit."
+
+#: wc-cocolis-shipping.php:145
+msgid "Email"
+msgstr "Email"
+
+#: wc-cocolis-shipping.php:147
+msgid "Required for the ride creation at Cocolis (vendor email)"
+msgstr ""
+"Nécessaire pour la création d’une annonce chez Cocolis (email du vendeur)"
+
+#: wc-cocolis-shipping.php:153
+msgid "Phone"
+msgstr "Téléphone"
+
+#: wc-cocolis-shipping.php:155
+msgid "Required for the ride creation at Cocolis (landline or cell phone)"
+msgstr ""
+"Requis pour la création de trajet chez Cocolis (téléphone fixe ou cellulaire)"
+
+#: wc-cocolis-shipping.php:177
+msgid "The credentials provided are not recognized by the Cocolis API."
+msgstr ""
+"Les informations d’identification fournies ne sont pas reconnues par l’API "
+"Cocolis."
+
+#: wc-cocolis-shipping.php:177
+msgid "Authentication error on the API server"
+msgstr "Erreur d’authentification sur le serveur API"
+
+#: wc-cocolis-shipping.php:301
+msgid " with insurance"
+msgstr " avec assurance"
