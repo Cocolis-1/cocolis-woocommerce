@@ -44,10 +44,8 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         
         $chosen_methods = WC()->session->get('chosen_shipping_methods');
         $chosen_shipping = $chosen_methods[0];
-        $shipping_class = new WC_Cocolis_Shipping_Method();
 
-        // Fictive request for get the insurance link
-        $link_insurance = $shipping_class->authenticatedClient()->getRideClient()->canMatch(get_option('woocommerce_store_postcode'), 75001, 0.5, WC()->cart->get_subtotal() * 100)->insurance_detail->conditions_url;
+        $link_insurance = "https://www.cocolis.fr/static/docs/notice_information_COCOLIS_AO.pdf";
 
         if ($chosen_shipping == 'cocolis_assurance') {
             $fields['billing']['birth_date'] = array(
@@ -58,10 +56,9 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 'clear'       => true
             );
 
-                
             $fields['billing']['terms_insurance_cocolis'] = array(
                 'type'      => 'checkbox',
-                'label'     => __("I confirm that I have read the <a href='" . $link_insurance . "'>insurance conditions</a> and that I choose the insurance up to " . $max_value . " €.", 'woocommerce'),
+                'label'     => __("I confirm that I have read the <a href='" . $link_insurance . "'>insurance conditions</a> and that I choose the insurance up to " . $max_value . " €.", 'cocolis-woocommerce'),
                 'class'     => array('form-row-wide'),
                 'clear'     => true,
                 'required'  => true,
@@ -74,7 +71,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
     function validate($data, $errors)
     {
         if ($data['shipping_method'][0] == 'cocolis_assurance' && (empty($data['birth_date']) || !isset($data['birth_date']) || empty($data['terms_insurance_cocolis'] || !isset($data['terms_insurance_cocolis'])))) {
-            $errors->add('validation', __('Please fill insurance details for Cocolis delivery. (Refresh if changes are made)'));
+            $errors->add('validation', __('Please fill insurance details for Cocolis delivery (refresh if you have changed delivery mode)'));
         }
     }
     add_action('woocommerce_after_checkout_validation', 'validate', 10, 2);
