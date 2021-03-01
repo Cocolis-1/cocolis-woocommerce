@@ -58,7 +58,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
             $fields['billing']['terms_insurance_cocolis'] = array(
                 'type'      => 'checkbox',
-                'label'     => __("I confirm that I have read the <a href='" . $link_insurance . "'>insurance conditions</a> and that I choose the insurance up to " . $max_value . " €.", 'cocolis-woocommerce'),
+                'label'     => __("I confirm that I have read the <a href='" . $link_insurance . "' target='_blank'>insurance conditions</a> and that I choose the insurance up to " . $max_value . " €.", 'cocolis-woocommerce'),
                 'class'     => array('form-row-wide'),
                 'clear'     => true,
                 'required'  => true,

@@ -329,7 +329,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
     function filter_woocommerce_cart_shipping_method_full_label($label, $method)
     {
-        if ($method->id === "cocolis" || $method->id === "cocolis_assurance") {
+        if ($method->id === "cocolis") {
             $label = '<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
             viewBox="0 0 32 32" style="enable-background:new 0 0 32 32; vertical-align: middle;" width="42" height="42" xml:space="preserve">
             <style type="text/css">
@@ -357,7 +357,36 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             <path class="st2" d="M10.1,12.3c0,3.1,2.5,5.5,6,5.5c2.6,0,4.5-1.5,6-3.6l-1.4-1.6c-1.4,1.4-2.6,2.5-4.6,2.5c-1.9,0-3-1.3-3-2.9
                 c0-1.6,1.2-2.8,3.3-2.8c0.4,0,0.9,0,1.4,0.1l-1.4-2.8c-0.2,0-0.5-0.1-0.7-0.1C12.8,6.6,10.1,9.2,10.1,12.3"/>
             </svg>                  
-            <b>' . $label . '</b>';
+            <b>' . $label . "</b> <br>Assurance incluse jusqu'à 500 €";
+        }else if($method->id === "cocolis_assurance"){
+            $label = '<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            viewBox="0 0 32 32" style="enable-background:new 0 0 32 32; vertical-align: middle;" width="42" height="42" xml:space="preserve">
+            <style type="text/css">
+                .st0{fill:#484867;}
+                .st1{fill:#0069D8;}
+                .st2{fill:#FFFFFF;}
+            </style>
+            <path class="st0" d="M23.6,25.8c0.3,0,0.6-0.3,0.6-0.6c0-0.3-0.3-0.6-0.6-0.6c-0.3,0-0.6,0.3-0.6,0.6C23,25.5,23.3,25.8,23.6,25.8z
+                    M25.7,27.4c0.1,0,0.2,0,0.3,0l-0.4-0.9c-0.1,0-0.1,0-0.2,0c-0.7,0-1.1,0.4-1.1,1.1c0,0.4,0.3,1.2,0.3,1.6c0,0.2-0.1,0.3-0.4,0.3
+                c-0.1,0-0.3,0-0.4,0l0.4,0.9c0.1,0,0.2,0,0.3,0c0.7,0,1.1-0.5,1.1-1.1c0-0.5-0.3-1.2-0.3-1.6C25.3,27.5,25.4,27.4,25.7,27.4
+                L25.7,27.4z M23.8,26.5h-1l-0.5,2L21,29.2l1.2-4.6h-1L20,29.2c0,0.2,0,0.3,0,0.4c0,0.4,0.3,0.7,0.7,0.7c0.2,0,0.4-0.1,0.5-0.2
+                l0.8-0.5c0,0.4,0.3,0.7,0.7,0.7c0.2,0,0.4-0.1,0.5-0.2l0.2-0.1l0.3-1.2l-0.7,0.4L23.8,26.5L23.8,26.5z M18,29.4
+                c-0.5,0-0.9-0.4-0.9-1c0-0.6,0.4-1,0.9-1c0.5,0,1,0.4,1,1C18.9,29,18.5,29.4,18,29.4z M18,26.4c-1.1,0-2,0.9-2,2
+                c0,0.2,0,0.4,0.1,0.6c-0.3,0.3-0.6,0.4-1,0.4c-0.6,0-1-0.5-1-1c0-0.6,0.4-1,1.1-1c0.1,0,0.3,0,0.4,0l-0.4-1c-0.1,0-0.1,0-0.2,0
+                c-1,0-1.8,0.9-1.8,2c0,1.1,0.8,1.9,2,1.9c0.6,0,1.1-0.3,1.5-0.7c0.4,0.4,0.9,0.7,1.5,0.7c1.1,0,2-0.9,2-2
+                C19.9,27.3,19.1,26.4,18,26.4"/>
+            <path class="st1" d="M10.9,29.4c-0.5,0-0.9-0.4-0.9-1c0-0.6,0.4-1,0.9-1c0.5,0,1,0.4,1,1C11.9,29,11.4,29.4,10.9,29.4L10.9,29.4z
+                    M10.9,26.4c-1.1,0-2,0.9-2,2C9,28.6,9,28.8,9,29c-0.3,0.3-0.6,0.4-1,0.4c-0.6,0-1-0.5-1-1c0-0.6,0.4-1,1.1-1c0.1,0,0.3,0,0.4,0
+                l-0.4-1c-0.1,0-0.1,0-0.2,0c-1,0-1.9,0.9-1.9,2c0,1.1,0.8,1.9,2,1.9c0.6,0,1.1-0.3,1.5-0.7c0.4,0.4,0.9,0.7,1.5,0.7c1.1,0,2-0.9,2-2
+                C12.9,27.3,12,26.4,10.9,26.4"/>
+            <path class="st1" d="M16,23.2c-0.5,0-0.9-0.1-1.3-0.4l-7.5-4.4c-0.4-0.2-0.7-0.5-0.9-0.9C6.1,17.3,6,16.9,6,16.5V7.8
+                c0-0.3,0.1-0.7,0.2-1c0.1-0.3,0.3-0.5,0.5-0.7l0,0C6.9,5.9,7,5.8,7.2,5.7l7.4-4.3C15.1,1.2,15.5,1,16,1c0.5,0,0.9,0.1,1.3,0.4
+                l7.5,4.3c0.2,0.1,0.3,0.2,0.5,0.3c0.2,0.2,0.4,0.5,0.6,0.8C25.9,7.2,26,7.5,26,7.8v8.7c0,0.4-0.1,0.8-0.3,1.2
+                c-0.2,0.4-0.5,0.7-0.9,0.9l-7.4,4.3C17,23.1,16.5,23.2,16,23.2L16,23.2z M18.5,7.7C18.5,7.7,18.5,7.7,18.5,7.7l-0.2-0.2"/>
+            <path class="st2" d="M10.1,12.3c0,3.1,2.5,5.5,6,5.5c2.6,0,4.5-1.5,6-3.6l-1.4-1.6c-1.4,1.4-2.6,2.5-4.6,2.5c-1.9,0-3-1.3-3-2.9
+                c0-1.6,1.2-2.8,3.3-2.8c0.4,0,0.9,0,1.4,0.1l-1.4-2.8c-0.2,0-0.5-0.1-0.7-0.1C12.8,6.6,10.1,9.2,10.1,12.3"/>
+            </svg>                  
+            <b>' . $label . "</b> <br>Assurance incluse jusqu'à 1500 € (ou 3000 € ou 5000 € en fonction du montant à payer)";
         }
 
         return $label;
@@ -371,7 +400,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         } // Exit on cart page
 
         if ('cocolis' === $method->id) {
-            echo __("<p>Livraison collaborative Cocolis assurée jusqu'à 500 euros. Pour en savoir plus, cliquez <a href='#'>ici</a></p>");
+            // Waiting GitHub returns
         }
     }
 
