@@ -46,6 +46,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         $chosen_shipping = $chosen_methods[0];
 
         $link_insurance = "https://www.cocolis.fr/static/docs/notice_information_COCOLIS_AO.pdf";
+        $link_insurance = "<a href='" . $link_insurance . "' target='_blank'>" . __('insurance conditions', 'cocolis-woocommerce') . "</a>";
 
         if ($chosen_shipping == 'cocolis_assurance') {
             $fields['billing']['birth_date'] = array(
@@ -58,7 +59,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
             $fields['billing']['terms_insurance_cocolis'] = array(
                 'type'      => 'checkbox',
-                'label'     => __("I confirm that I have read the <a href='" . $link_insurance . "' target='_blank'>insurance conditions</a> and that I choose the insurance up to " . $max_value . " €.", 'cocolis-woocommerce'),
+                'label'     => __("I confirm that I have read the ", 'cocolis-woocommerce') . $link_insurance . __(" and that I choose the insurance up to ", 'cocolis-woocommerce') . $max_value . " €",
                 'class'     => array('form-row-wide'),
                 'clear'     => true,
                 'required'  => true,
@@ -71,7 +72,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
     function validate($data, $errors)
     {
         if ($data['shipping_method'][0] == 'cocolis_assurance' && (empty($data['birth_date']) || !isset($data['birth_date']) || empty($data['terms_insurance_cocolis'] || !isset($data['terms_insurance_cocolis'])))) {
-            $errors->add('validation', __('Please fill insurance details for Cocolis delivery (refresh if you have changed delivery mode)'));
+            $errors->add('validation', __('Please fill insurance details for Cocolis delivery (refresh if you have changed delivery mode)', 'cocolis-woocommerce'));
         }
     }
     add_action('woocommerce_after_checkout_validation', 'validate', 10, 2);
@@ -151,7 +152,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
             $phone = $shipping_class->settings['phone'];
             if (empty($phone)) {
-                wp_die(__("No phone number provided in the Cocolis configuration"), __("Required seller phone number"), ['response' => 401, 'back_link' => true]);
+                wp_die(__("No phone number provided in the Cocolis configuration", 'cocolis-woocommerce'), __("Required seller phone number", 'cocolis-woocommerce'), ['response' => 401, 'back_link' => true]);
                 exit;
             }
 

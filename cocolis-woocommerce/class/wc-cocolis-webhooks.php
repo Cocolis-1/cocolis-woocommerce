@@ -43,7 +43,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         $order = new WC_Order($orderid);
 
         if (!empty($order)) {
-            $note = __("A carrier has been selected to carry out the Cocolis delivery.");
+            $note = __("A carrier has been selected to carry out the Cocolis delivery.", 'cocolis-woocommerce');
 
             // Add the note
             $order->add_order_note($note, true);
@@ -60,17 +60,17 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 $link = $prod ? 'https://cocolis.fr/ride-public/' .
                     $slug : 'https://sandbox.cocolis.fr/ride-public/' . $slug;
 
-                $note = __("The public ride URL : " . $link);
+                $note = printf(__("The public ride URL : %s ", 'cocolis-woocommerce'), $link);
 
                 // Add the note
                 $order->add_order_note($note, true);
 
-                $note = __("Buyer tracking delivery URL : " . $ride->getBuyerURL());
+                $note = printf(__("Buyer tracking delivery URL : %s", 'cocolis-woocommerce'), $ride->getBuyerURL());
 
                 // Add the note
                 $order->add_order_note($note, true);
 
-                $note = __("[Private] Seller tracking delivery URL : " . $ride->getSellerURL());
+                $note = printf(__("[Private] Seller tracking delivery URL : ", 'cocolis-woocommerce'), $ride->getSellerURL());
 
                 // Add the note
                 $order->add_order_note($note);
@@ -97,7 +97,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
 
         if (!empty($order)) {
-            $note = __("Delivery completed by Cocolis");
+            $note = __("Delivery completed by Cocolis", 'cocolis-woocommerce');
 
             // Add the note
             $order->add_order_note($note);
@@ -122,7 +122,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
 
         if (!empty($order)) {
-            $note = __("An offer was published on cocolis.fr");
+            $note = __("An offer was published on cocolis.fr", 'cocolis-woocommerce');
 
             // Add the note
             $order->add_order_note($note, true);
@@ -146,7 +146,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
 
         if (!empty($order)) {
-            $note = __("The delivery is cancelled by the carrier. The seller and the buyer are informed, their tracking page is updated.");
+            $note = __("The delivery is cancelled by the carrier. The seller and the buyer are informed, their tracking page is updated.", 'cocolis-woocommerce');
 
             // Add the note
             $order->add_order_note($note, true);
@@ -170,7 +170,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
 
         if (!empty($order)) {
-            $note = __("The ride did not find a carrier. Get closer to our support and with cocolis.fr");
+            $note = __("The ride did not find a carrier. Get closer to our support and with cocolis.fr", 'cocolis-woocommerce');
 
             // Add the note
             $order->add_order_note($note, true);
