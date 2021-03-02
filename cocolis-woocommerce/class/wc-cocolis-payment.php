@@ -51,7 +51,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         if ($chosen_shipping == 'cocolis_assurance') {
             $fields['billing']['birth_date'] = array(
                 'type'        => 'date',
-                'label'       => __('Birth date for insurance'),
+                'label'       => __('Birth date for insurance', 'cocolis-woocommerce'),
                 'class'       => array('form-row-wide'),
                 'required'    => true,
                 'clear'       => true
