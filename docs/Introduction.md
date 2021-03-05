@@ -21,7 +21,7 @@ Les versions minimales supportées sont les suivantes:
 
 Le plugin peut s’installer comme n’importe quel plugin WordPress depuis la section Extensions du site.
 
-**Il existe deux manières d'installer le module : **
+** Il existe deux manières d'installer le module : **
 
 - Par le catalogue d'extensions inclus dans Wordpress :
 
