@@ -15,7 +15,7 @@ Tout d’abord, vous devez avoir le plugin WooCommerce installé sur votre site 
 utiliser le plugin Cocolis pour WooCommerce.
 
 Les versions minimales supportées sont les suivantes:
-- **PHP 5.6 ou supérieure**,
+- **PHP 7.3 ou supérieure**,
 - **WordPress 4.7 ou supérieure**
 - **WooCommerce 5.3.3 ou supérieure**
 
