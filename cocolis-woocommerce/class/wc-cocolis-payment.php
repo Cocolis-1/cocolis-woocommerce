@@ -195,8 +195,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             }
         }
 
-        //TODO: VERIFY IF TRANSLATION BROKE THIS METHOD
-        if (str_contains($order->get_shipping_method(), "with insurance")) {
+        if (str_contains($order->get_shipping_method(), "with insurance") || str_contains($order->get_shipping_method(), "avec assurance")) {
             $birthday = new DateTime($order_birthdate);
 
             $params = [

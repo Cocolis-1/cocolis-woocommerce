@@ -57,17 +57,17 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 $link = $prod ? 'https://cocolis.fr/ride-public/' .
                     $slug : 'https://sandbox.cocolis.fr/ride-public/' . $slug;
 
-                $note = printf(__("The public ride URL : %s ", 'cocolis-woocommerce'), $link);
+                $note = __("The public ride URL : ", 'cocolis-woocommerce') . $link;
 
                 // Add the note
                 $order->add_order_note($note, true);
 
-                $note = printf(__("Buyer tracking delivery URL : %s", 'cocolis-woocommerce'), $ride->getBuyerURL());
+                $note = __("Buyer tracking delivery URL : ", 'cocolis-woocommerce') . $ride->getBuyerURL();
 
                 // Add the note
                 $order->add_order_note($note, true);
 
-                $note = printf(__("[Private] Seller tracking delivery URL : ", 'cocolis-woocommerce'), $ride->getSellerURL());
+                $note = __("[Private] Seller tracking delivery URL : ", 'cocolis-woocommerce') . $ride->getSellerURL();
 
                 // Add the note
                 $order->add_order_note($note);
