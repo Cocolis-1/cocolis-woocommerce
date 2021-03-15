@@ -4,7 +4,7 @@ Une fois le module installé, il est nécessaire d'effectuer quelques réglages 
 
 Le module est disponible aussi en anglais, il s'affichera en fonction de la langue de votre Wordpress.
 
-![Capture d'écran de la page de configuration]()
+![Capture d'écran de la page de configuration](https://res.cloudinary.com/cocolis-prod/image/upload/v1615223852/Documentation/woocommerce/110348164-a2527d80-8031-11eb-9a8e-89fe90a26a8b_tns4qm.png)
 
 ## Authentification
 
