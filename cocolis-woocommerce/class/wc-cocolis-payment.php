@@ -195,8 +195,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             }
         }
 
-        //TODO: VERIFY IF TRANSLATION BROKE THIS METHOD
-        if (str_contains($order->get_shipping_method(), "with insurance")) {
+        if (str_contains($order->get_shipping_method(), "with insurance") || str_contains($order->get_shipping_method(), "avec assurance")) {
             $birthday = new DateTime($order_birthdate);
 
             $params = [
@@ -211,6 +210,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     "from_need_help" => true,
                     "to_is_flexible" => false,
                     "to_need_help" => true,
+                    "content_value" => (int) $order->get_subtotal() * 100,
                     "with_insurance" => true,
                     "to_pickup_date" => $to_date,
                     "is_passenger" => false,
@@ -229,7 +229,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         "from_contact_email" => $shipping_class->settings['email'],
                         "from_contact_phone" => $phone,
                         "from_contact_name" => $store_name,
-                        "from_extra_information" => 'Vendeur MarketPlace',
+                        "from_extra_information" => 'Vendeur Marketplace',
                         "to_address" => $order_shipping_address_1,
                         "to_postal_code" => $order_shipping_postcode,
                         "to_city" => $order_shipping_city,
@@ -280,7 +280,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     "from_contact_email" => $shipping_class->settings['email'],
                     "from_contact_phone" => $phone,
                     "from_contact_name" => $store_name,
-                    "from_extra_information" => 'Vendeur MarketPlace',
+                    "from_extra_information" => 'Vendeur Marketplace',
                     "to_address" => $order_shipping_address_1,
                     "to_postal_code" => $order_shipping_postcode,
                     "to_city" => $order_shipping_city,
