@@ -1,25 +1,25 @@
 # Cocolis.fr plugin for Woocommerce
 
-Ce module Cocolis adapté pour WooCommerce vous permet d'installer facilement notre solution de livraison sur votre site et de la proposer à tous vos clients sans frais supplémentaires.
+This Cocolis module adapted for WooCommerce allows you to easily install our shipping solution on your site and offer it to all your customers at no extra cost.
 
 **Description**
 
-Cocolis, c'est le 1er site de co-voiturage de colis. Il connecte les gens pour permettre le transport d’objets à moindre coût.
+Cocolis is the 1st site of parcel sharing. It connects people to allow the transport of objects at a lower cost.
 
-En utilisant Cocolis, vous êtes gagnants des deux côtés : le conducteur gagne de l'argent et l'expéditeur en épargne.
+By using Cocolis, you win on both sides: the driver earns money and the sender saves money.
 
-⌚ C’est pratique : le lieu et l'heure de livraison sont définis entre vous.
+⌚ It's convenient: the location and time of delivery are defined between you.
 
-🌳 Ecolo : une seule voiture pour transporter les colis de plusieurs personnes !
+🌳 Green: one car to transport the packages of several people!
 
-💰 Et pas cher : vous ne payez qu’une participation aux frais de route du transporteur.
+💰 And cheap: you only pay a contribution to the carrier's road expenses.
 
-Cocolis fait du cotransportage (nouveauté de la loi "LOM"). C'est la solution idéale pour une livraison à domicile, un transport, des gros colis, lourds ou fragiles. Ou tout simplement pour trouver un transporteur. Déjà plus de 300 000 membres sur Cocolis ! Une solution logistique maline et pas chère pour tous !
+Cocolis makes cotransportation (newness of the law "LOM"). It is the ideal solution for a home delivery, a transport, large, heavy or fragile parcels. Or simply to find a carrier. Already more than 300 000 members on Cocolis ! A smart and cheap logistic solution for everyone!
 
-Notre module vous permet de proposer notre solution de livraison sans frais à vos clients.
+Our module allows you to offer our free delivery solution to your customers.
 
 **Documentation**
 
-= Une question sur l'utilisation de notre module =
+A question about the use of our module?
 
-Rendez-vous [ici](https://doc.cocolis.fr "Documentation de Cocolis") pour obtenir de l'aide.
+Go [here](https://doc.cocolis.fr "Documentation de Cocolis") to get help.
