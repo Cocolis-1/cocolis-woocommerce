@@ -1,31 +1,31 @@
 {
-    "name": "cocolis/woocommerce",
-    "description": "Cocolis Woocommerce Plugin to add Cocolis.fr as a delivery method",
-    "type" : "wordpress-plugin",
-    "require": {
-        "cocolis/php": "master"
-    },
-    "version": "1.0.0",
-    "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.18.2"
-    },
-    "license": "GNU 3.0",
-    "authors": [
-        {
-            "name": "Cocolis",
-            "email": "contact@cocolis.fr"
-        }
-    ],
-    "autoload": {
-      "psr-4": {
-        "PrestaShop\\Module\\Cocolis\\": "src/"
-      }
-    },
-    "scripts": {
-      "wp-package": "PACKAGE_VERSION=$(cat composer.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && zip -r cocolis-v$PACKAGE_VERSION.zip cocolis readme.txt"
-    },
-    "config": {
-		"vendor-dir":  "cocolis/vendor"
-	},
-    "minimum-stability": "dev"
+  "name": "cocolis/woocommerce",
+  "description": "Cocolis Woocommerce Plugin to add Cocolis.fr as a delivery method",
+  "type" : "wordpress-plugin",
+  "require": {
+    "cocolis/php": "master"
+  },
+  "version": "1.0.0",
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^2.18.2"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Cocolis",
+      "email": "contact@cocolis.fr"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "PrestaShop\\Module\\Cocolis\\": "src/"
+    }
+  },
+  "scripts": {
+    "wp-package": "PACKAGE_VERSION=$(cat composer.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && zip -r cocolis-v$PACKAGE_VERSION.zip cocolis readme.txt"
+  },
+  "config": {
+    "vendor-dir":  "cocolis/vendor"
+  },
+  "minimum-stability": "dev"
 }
