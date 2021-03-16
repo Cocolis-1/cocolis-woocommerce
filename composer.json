@@ -22,7 +22,7 @@
     }
   },
   "scripts": {
-    "wp-package": "PACKAGE_VERSION=$(cat composer.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && zip -r cocolis-v$PACKAGE_VERSION.zip cocolis readme.txt"
+    "wp-package": "zip -r cocolis.zip cocolis readme.txt"
   },
   "config": {
     "vendor-dir":  "cocolis/vendor"
