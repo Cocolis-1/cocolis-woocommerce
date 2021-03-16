@@ -23,3 +23,10 @@ Our module allows you to offer our free delivery solution to your customers.
 A question about the use of our module?
 
 Go [here](https://doc.cocolis.fr "Documentation de Cocolis") to get help.
+
+
+**Realease**
+
+To create a release, just run :
+
+`composer run wp-package`
