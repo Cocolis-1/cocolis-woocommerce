@@ -1,5 +1,5 @@
 === Cocolis WooCommerce ===
-Contributors: Cocolis
+Contributors: cocolis
 Tags: woocommerce, delivery, cocolis, livraison
 Stable tag: trunk
 Requires at least: 4.7
