@@ -22,7 +22,7 @@
     }
   },
   "scripts": {
-    "wp-package": "zip -r cocolis.zip cocolis readme.txt"
+    "wp-package": "zip -r cocolis.zip cocolis"
   },
   "config": {
     "vendor-dir":  "cocolis/vendor"
