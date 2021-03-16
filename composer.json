@@ -1,5 +1,5 @@
 {
-    "name": "cocolis/cocoliswoocommerce",
+    "name": "cocolis/woocommerce",
     "description": "Cocolis Woocommerce Plugin to add Cocolis.fr as a delivery method",
     "type" : "wordpress-plugin",
     "require": {
