@@ -21,7 +21,7 @@
       }
     },
     "config": {
-		"vendor-dir":  "cocolis-woocommerce/vendor"
+		"vendor-dir":  "cocolis/vendor"
 	},
     "minimum-stability": "dev"
 }

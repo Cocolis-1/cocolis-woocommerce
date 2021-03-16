@@ -1,14 +1,7 @@
 <?php
 
-if (! defined('ABSPATH')) {
-    exit; // Exit if accessed directly
-}
-
-require_once dirname(__FILE__, 2) . '/vendor/autoload.php';
-include_once dirname(__FILE__, 2) . "/wc-cocolis-shipping.php";
-
 /**
- * Plugin Name: Cocolis Woocommerce
+ * Plugin Name: Cocolis
  * Plugin URI: https://www.cocolis.fr
  * Description: A plugin to add Cocolis.fr as a carrier on Woocommerce
  * Author:  Cocolis.fr
@@ -19,7 +12,14 @@ include_once dirname(__FILE__, 2) . "/wc-cocolis-shipping.php";
  * Domain Path: /languages
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.O.html
- */
+*/
+
+if (! defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
+
+require_once dirname(__FILE__, 2) . '/vendor/autoload.php';
+include_once dirname(__FILE__, 2) . "/wc-cocolis-shipping.php";
 
 /**
  * Check if WooCommerce is active
@@ -46,12 +46,12 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         $chosen_shipping = $chosen_methods[0];
 
         $link_insurance = "https://www.cocolis.fr/static/docs/notice_information_COCOLIS_AO.pdf";
-        $link_insurance = "<a href='" . $link_insurance . "' target='_blank'>" . __('insurance conditions', 'cocolis-woocommerce') . "</a>";
+        $link_insurance = "<a href='" . $link_insurance . "' target='_blank'>" . __('insurance conditions', 'cocolis') . "</a>";
 
         if ($chosen_shipping == 'cocolis_assurance') {
             $fields['billing']['birth_date'] = array(
                 'type'        => 'date',
-                'label'       => __('Birth date for insurance', 'cocolis-woocommerce'),
+                'label'       => __('Birth date for insurance', 'cocolis'),
                 'class'       => array('form-row-wide'),
                 'required'    => true,
                 'clear'       => true
@@ -59,7 +59,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
             $fields['billing']['terms_insurance_cocolis'] = array(
                 'type'      => 'checkbox',
-                'label'     => __("I confirm that I have read the ", 'cocolis-woocommerce') . $link_insurance . __(" and that I choose the insurance up to ", 'cocolis-woocommerce') . $max_value . " €",
+                'label'     => __("I confirm that I have read the ", 'cocolis') . $link_insurance . __(" and that I choose the insurance up to ", 'cocolis') . $max_value . " €",
                 'class'     => array('form-row-wide'),
                 'clear'     => true,
                 'required'  => true,
@@ -72,7 +72,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
     function validate($data, $errors)
     {
         if ($data['shipping_method'][0] == 'cocolis_assurance' && (empty($data['birth_date']) || !isset($data['birth_date']) || empty($data['terms_insurance_cocolis'] || !isset($data['terms_insurance_cocolis'])))) {
-            $errors->add('validation', __('Please fill insurance details for Cocolis delivery (refresh if you have changed delivery mode)', 'cocolis-woocommerce'));
+            $errors->add('validation', __('Please fill insurance details for Cocolis delivery (refresh if you have changed delivery mode)', 'cocolis'));
         }
     }
     add_action('woocommerce_after_checkout_validation', 'validate', 10, 2);
@@ -94,7 +94,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
     {
         $order = wc_get_order($order_id);
         $order_data = $order->get_data();
-        if ($order->has_shipping_method('cocolis-woocommerce')) {
+        if ($order->has_shipping_method('cocolis')) {
             // The main address pieces:
             $store_name = get_bloginfo('name');
             $store_address     = get_option('woocommerce_store_address');
@@ -152,7 +152,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
             $phone = $shipping_class->settings['phone'];
             if (empty($phone)) {
-                wp_die(__("No phone number provided in the Cocolis configuration", 'cocolis-woocommerce'), __("Required seller phone number", 'cocolis-woocommerce'), ['response' => 401, 'back_link' => true]);
+                wp_die(__("No phone number provided in the Cocolis configuration", 'cocolis'), __("Required seller phone number", 'cocolis'), ['response' => 401, 'back_link' => true]);
                 exit;
             }
 
