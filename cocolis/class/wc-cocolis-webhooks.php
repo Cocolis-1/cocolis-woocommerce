@@ -1,14 +1,7 @@
 <?php
 
-if (! defined('ABSPATH')) {
-    exit; // Exit if accessed directly
-}
-
-require_once dirname(__FILE__, 2) . '/vendor/autoload.php';
-include_once dirname(__FILE__, 2) . "/wc-cocolis-shipping.php";
-
 /**
- * Plugin Name: Cocolis Woocommerce
+ * Plugin Name: Cocolis
  * Plugin URI: https://www.cocolis.fr
  * Description: A plugin to add Cocolis.fr as a carrier on Woocommerce
  * Author:  Cocolis.fr
@@ -19,7 +12,14 @@ include_once dirname(__FILE__, 2) . "/wc-cocolis-shipping.php";
  * Domain Path: /languages
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.O.html
- */
+*/
+
+if (! defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
+
+require_once dirname(__FILE__, 2) . '/vendor/autoload.php';
+include_once dirname(__FILE__, 2) . "/wc-cocolis-shipping.php";
 
 /**
  * Check if WooCommerce is active
@@ -40,7 +40,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         $order = new WC_Order($orderid);
 
         if (!empty($order)) {
-            $note = __("A carrier has been selected to carry out the Cocolis delivery.", 'cocolis-woocommerce');
+            $note = __("A carrier has been selected to carry out the Cocolis delivery.", 'cocolis');
 
             // Add the note
             $order->add_order_note($note, true);
@@ -57,17 +57,17 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 $link = $prod ? 'https://cocolis.fr/ride-public/' .
                     $slug : 'https://sandbox.cocolis.fr/ride-public/' . $slug;
 
-                $note = printf(__("The public ride URL : %s ", 'cocolis-woocommerce'), $link);
+                $note = __("The public ride URL : ", 'cocolis') . $link;
 
                 // Add the note
                 $order->add_order_note($note, true);
 
-                $note = printf(__("Buyer tracking delivery URL : %s", 'cocolis-woocommerce'), $ride->getBuyerURL());
+                $note = __("Buyer tracking delivery URL : ", 'cocolis') . $ride->getBuyerURL();
 
                 // Add the note
                 $order->add_order_note($note, true);
 
-                $note = printf(__("[Private] Seller tracking delivery URL : ", 'cocolis-woocommerce'), $ride->getSellerURL());
+                $note = __("[Private] Seller tracking delivery URL : ", 'cocolis') . $ride->getSellerURL();
 
                 // Add the note
                 $order->add_order_note($note);
@@ -94,7 +94,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
 
         if (!empty($order)) {
-            $note = __("Delivery completed by Cocolis", 'cocolis-woocommerce');
+            $note = __("Delivery completed by Cocolis", 'cocolis');
 
             // Add the note
             $order->add_order_note($note);
@@ -119,7 +119,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
 
         if (!empty($order)) {
-            $note = __("An offer was published on cocolis.fr", 'cocolis-woocommerce');
+            $note = __("An offer was published on cocolis.fr", 'cocolis');
 
             // Add the note
             $order->add_order_note($note, true);
@@ -143,7 +143,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
 
         if (!empty($order)) {
-            $note = __("The delivery is cancelled by the carrier. The seller and the buyer are informed, their tracking page is updated.", 'cocolis-woocommerce');
+            $note = __("The delivery is cancelled by the carrier. The seller and the buyer are informed, their tracking page is updated.", 'cocolis');
 
             // Add the note
             $order->add_order_note($note, true);
@@ -167,7 +167,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
 
         if (!empty($order)) {
-            $note = __("The ride did not find a carrier. Get closer to our support and with cocolis.fr", 'cocolis-woocommerce');
+            $note = __("The ride did not find a carrier. Get closer to our support and with cocolis.fr", 'cocolis');
 
             // Add the note
             $order->add_order_note($note, true);

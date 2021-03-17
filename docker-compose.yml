@@ -22,7 +22,7 @@ services:
       - "8189:80"
     restart: always
     volumes:
-       - ./cocolis-woocommerce:/var/www/html/wp-content/plugins/cocolis-woocommerce
+       - ./cocolis:/var/www/html/wp-content/plugins/cocolis
     environment:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_USER: wordpress
@@ -30,4 +30,4 @@ services:
       WORDPRESS_DB_NAME: wordpress
 volumes:
     db_data: {}
-    cocolis-woocommerce: {}
+    cocolis: {}

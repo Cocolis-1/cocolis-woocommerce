@@ -1,16 +1,7 @@
 <?php
 
-if (! defined('ABSPATH')) {
-    exit; // Exit if accessed directly
-}
-
-require_once dirname(__FILE__) . '/vendor/autoload.php';
-include_once "class/wc-cocolis-payment.php";
-include_once "class/wc-cocolis-webhooks.php";
-use Cocolis\Api\Client;
-
 /**
- * Plugin Name: Cocolis Woocommerce
+ * Plugin Name: Cocolis
  * Plugin URI: https://www.cocolis.fr
  * Description: A plugin to add Cocolis.fr as a carrier on Woocommerce
  * Author:  Cocolis.fr
@@ -21,11 +12,20 @@ use Cocolis\Api\Client;
  * Domain Path: /languages
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.O.html
- */
+*/
+
+if (! defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
+
+require_once dirname(__FILE__) . '/vendor/autoload.php';
+include_once "class/wc-cocolis-payment.php";
+include_once "class/wc-cocolis-webhooks.php";
+use Cocolis\Api\Client;
 
 /**
  * Check if WooCommerce is active
- */
+*/
 
 if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
     function cocolis_shipping_method_init()
@@ -42,9 +42,9 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 public function __construct()
                 {
                     global $woocommerce;
-                    $this->id                 = 'cocolis-woocommerce';
-                    $this->method_title       = __('Cocolis Shipping Method', 'cocolis-woocommerce');
-                    $this->method_description = __('Cocolis Woocommerce Plugin to add Cocolis.fr as a delivery method', 'cocolis-woocommerce');
+                    $this->id                 = 'cocolis';
+                    $this->method_title       = __('Cocolis Shipping Method', 'cocolis');
+                    $this->method_description = __('Cocolis Woocommerce Plugin to add Cocolis.fr as a delivery method', 'cocolis');
                     // Define user set variables.
                     $this->production_mode = $this->get_option('production_mode');
                     $this->app_id = $this->get_option('app_id');
@@ -62,7 +62,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     );
  
                     $this->enabled = isset($this->settings['enabled']) ? $this->settings['enabled'] : 'yes';
-                    $this->title = isset($this->settings['title']) ? $this->settings['title'] : __('Cocolis Shipping', 'cocolis-woocommerce');
+                    $this->title = isset($this->settings['title']) ? $this->settings['title'] : __('Cocolis Shipping', 'cocolis');
                     $this->init();
                 }
 
@@ -86,74 +86,74 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 {
                     $this->form_fields = array(
                         'enabled' => array(
-                            'title' => __('Enable', 'cocolis-woocommerce'),
+                            'title' => __('Enable', 'cocolis'),
                             'type' => 'checkbox',
-                            'description' => __('Enable this shipping.', 'cocolis-woocommerce'),
+                            'description' => __('Enable this shipping.', 'cocolis'),
                             'default' => 'no'
                         ),
                         'production_mode' => array(
-                        'title'             => __('Mode', 'cocolis-woocommerce'),
+                        'title'             => __('Mode', 'cocolis'),
                         'type'              => 'select',
-                        'description'       => __('Use this module in developement mode (sandbox) or in production ?', 'cocolis-woocommerce'),
+                        'description'       => __('Use this module in developement mode (sandbox) or in production ?', 'cocolis'),
                         'desc_tip'          => true,
                         'default'           => 'sandbox',
                         'options' => array(
-                            'sandbox' => __('Sandbox', 'cocolis-woocommerce'),
-                            'production' => __('Production', 'cocolis-woocommerce')),
+                            'sandbox' => __('Sandbox', 'cocolis'),
+                            'production' => __('Production', 'cocolis')),
                         'css'      => 'width:196px;',
                         ),
                         'app_id' => array(
-                        'title'             => __('App id', 'cocolis-woocommerce'),
+                        'title'             => __('App id', 'cocolis'),
                         'type'              => 'text',
-                        'description'       => __('Enter the app-id provided to you by Cocolis', 'cocolis-woocommerce'),
+                        'description'       => __('Enter the app-id provided to you by Cocolis', 'cocolis'),
                         'desc_tip'          => true,
                         'default'           => 'app_id',
                         'css'      => 'width:196px;',
                         ),
                         'password' => array(
-                        'title'             => __('Password', 'cocolis-woocommerce'),
+                        'title'             => __('Password', 'cocolis'),
                         'type'              => 'password',
-                        'description'       => __('Enter the password provided to you by Cocolis', 'cocolis-woocommerce'),
+                        'description'       => __('Enter the password provided to you by Cocolis', 'cocolis'),
                         'desc_tip'          => true,
                         'default'           => 'password',
                         'css'      => 'width:196px;',
                         ),
                         'width' => array(
-                        'title'             => __('Default width in cm', 'cocolis-woocommerce'),
+                        'title'             => __('Default width in cm', 'cocolis'),
                         'type'              => 'number',
-                        'description'       => __('Allows you to calculate the costs in the absence of the width indicated in the product sheet.', 'cocolis-woocommerce'),
+                        'description'       => __('Allows you to calculate the costs in the absence of the width indicated in the product sheet.', 'cocolis'),
                         'desc_tip'          => true,
                         'default'           => 1,
                         'css'      => 'width:196px;',
                         ),
                         'height' => array(
-                        'title'             => __('Default height in cm', 'cocolis-woocommerce'),
+                        'title'             => __('Default height in cm', 'cocolis'),
                         'type'              => 'number',
-                        'description'       => __('Allows you to calculate the costs in the absence of the height indicated in the product sheet.', 'cocolis-woocommerce'),
+                        'description'       => __('Allows you to calculate the costs in the absence of the height indicated in the product sheet.', 'cocolis'),
                         'desc_tip'          => true,
                         'default'           => 1,
                         'css'      => 'width:196px;',
                         ),
                         'length' => array(
-                        'title'             => __('Default length in cm', 'cocolis-woocommerce'),
+                        'title'             => __('Default length in cm', 'cocolis'),
                         'type'              => 'number',
-                        'description'       => __('Allows you to calculate the costs in the absence of the length indicated in the product sheet.', 'cocolis-woocommerce'),
+                        'description'       => __('Allows you to calculate the costs in the absence of the length indicated in the product sheet.', 'cocolis'),
                         'desc_tip'          => true,
                         'default'           => 1,
                         'css'      => 'width:196px;',
                         ),
                         'email' => array(
-                        'title'             => __('Email', 'cocolis-woocommerce'),
+                        'title'             => __('Email', 'cocolis'),
                         'type'              => 'email',
-                        'description'       => __("Required for the ride creation at Cocolis (vendor email)", 'cocolis-woocommerce'),
+                        'description'       => __("Required for the ride creation at Cocolis (vendor email)", 'cocolis'),
                         'desc_tip'          => true,
                         'default'           => 'admin@vendor.com',
                         'css'      => 'width:196px;',
                         ),
                         'phone' => array(
-                        'title'             => __('Phone', 'cocolis-woocommerce'),
+                        'title'             => __('Phone', 'cocolis'),
                         'type'              => 'tel',
-                        'description'       => __("Required for the ride creation at Cocolis (landline or cell phone)", 'cocolis-woocommerce'),
+                        'description'       => __("Required for the ride creation at Cocolis (landline or cell phone)", 'cocolis'),
                         'desc_tip'          => true,
                         'default'           => '0600000000',
                         'css'      => 'width:196px;',
@@ -175,7 +175,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         $this->authenticatedClient();
                         $this->registerWebhooks();
                     } catch (\Cocolis\Api\Errors\UnauthorizedException $th) {
-                        wp_die(__("The credentials provided are not recognized by the Cocolis API.", 'cocolis-woocommerce'), __("Authentication error on the API server", 'cocolis-woocommerce'), ['response' => 401, 'back_link' => true]);
+                        wp_die(__("The credentials provided are not recognized by the Cocolis API.", 'cocolis'), __("Authentication error on the API server", 'cocolis'), ['response' => 401, 'back_link' => true]);
                         exit;
                     }
                     return $form_field;
@@ -301,7 +301,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                             $shipping_cost_insurance = ($match->estimated_prices->with_insurance) / 100;
                             $rate = array(
                                 'id'   => 'cocolis_assurance',
-                                'label' => $this->title . __(' with insurance', 'cocolis-woocommerce'),
+                                'label' => $this->title . __(' with insurance', 'cocolis'),
                                 'cost' => $shipping_cost_insurance,
                             );
                             $this->add_rate($rate);
@@ -315,7 +315,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
     function cocolis_activation_redirect($plugin)
     {
         if ($plugin == plugin_basename(__FILE__)) {
-            exit(wp_redirect(admin_url('admin.php?page=wc-settings&tab=shipping&section=cocolis-woocommerce')));
+            exit(wp_redirect(admin_url('admin.php?page=wc-settings&tab=shipping&section=cocolis')));
         }
     }
 
@@ -359,7 +359,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             <b> ' . $label;
 
         if ($method->id === "cocolis") {
-            $label = $label . "</b> </br>" . __("Insurance included up to 500 €", 'cocolis-woocommerce');
+            $label = $label . "</b> </br>" . __("Insurance included up to 500 €", 'cocolis');
         } elseif ($method->id === "cocolis_assurance") {
             $total = WC()->cart->get_subtotal();
             // Maximal cost insurance
@@ -373,7 +373,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 $max_value = 5000;
             }
 
-            $label = $label . "</b> <br>" . __("Insurance included up to ", 'cocolis-woocommerce') . $max_value . " €";
+            $label = $label . "</b> <br>" . __("Insurance included up to ", 'cocolis') . $max_value . " €";
         }
 
         return $label;
@@ -393,7 +393,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
     function language_init()
     {
-        load_plugin_textdomain('cocolis-woocommerce', false, 'cocolis-woocommerce/languages');
+        load_plugin_textdomain('cocolis', false, 'cocolis/languages');
     }
       
     add_action('init', 'language_init');
