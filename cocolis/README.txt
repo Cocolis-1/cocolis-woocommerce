@@ -1,7 +1,7 @@
 === Cocolis ===
 Contributors: cocolis
 Tags: woocommerce, delivery, cocolis, livraison
-Stable tag: 1.0
+Stable tag: 1.0.1
 Requires at least: 4.7
 Tested up to: 5.6.2
 Requires PHP: 5.6.0
@@ -56,6 +56,9 @@ Rendez-vous [ici](https://doc.cocolis.fr "Documentation de Cocolis") pour obteni
 [https://docs.cocolis.fr.s3.amazonaws.com/modules/suivi.png Suivi acheteur]
 
 == Changelog ==
+
+= 1.0.1 =
+* Modifications mineures, code révisé
 
 = 1.0 =
 * Version de lancement de notre module
