@@ -1,7 +1,7 @@
 === Cocolis ===
 Contributors: cocolis
 Tags: woocommerce, delivery, cocolis, livraison
-Stable tag: trunk
+Stable tag: 1.0
 Requires at least: 4.7
 Tested up to: 5.6.2
 Requires PHP: 5.6.0

@@ -1,33 +1,26 @@
 <?php
 
-/**
- * Plugin Name: Cocolis
- * Plugin URI: https://www.cocolis.fr
- * Description: A plugin to add Cocolis.fr as a carrier on Woocommerce
- * Author:  Cocolis.fr
- * Author URI: https://www.cocolis.fr
- * Version: 1.0
- * Developer: Alexandre BETTAN, Sebastien Fieloux
- * Developer URI: https://github.com/btnalexandre, https://github.com/sebfie
- * Domain Path: /languages
- * License: GNU General Public License v3.0
- * License URI: http://www.gnu.org/licenses/gpl-3.O.html
-*/
-
-if (! defined('ABSPATH')) {
+if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
-require_once dirname(__FILE__, 2) . '/vendor/autoload.php';
-include_once dirname(__FILE__, 2) . "/wc-cocolis-shipping.php";
+class WC_Cocolis_Payment_Method
+{
+    public function __construct()
+    {
+        add_filter('woocommerce_checkout_fields', array($this, 'cocolis_show_terms_insurance'));
 
-/**
- * Check if WooCommerce is active
- */
-if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
-    add_filter('woocommerce_checkout_fields', 'show_terms_insurance');
-  
-    function show_terms_insurance($fields)
+        add_action('woocommerce_checkout_update_order_meta', array($this, 'cocolis_save_insurance_billing_field'), 10, 2);
+
+        add_action('woocommerce_after_checkout_validation', array($this, 'cocolis_validate'), 20, 2);
+
+        add_action('woocommerce_order_status_processing', array($this, 'cocolis_payment_complete'));
+    }
+
+    /**
+     * Legal terms for MAIF insurance
+     */
+    function cocolis_show_terms_insurance($fields)
     {
         global $woocommerce;
         $total = WC()->cart->get_subtotal();
@@ -41,7 +34,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         } else {
             $max_value = 5000;
         }
-        
+
         $chosen_methods = WC()->session->get('chosen_shipping_methods');
         $chosen_shipping = $chosen_methods[0];
 
@@ -65,19 +58,32 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 'required'  => true,
             );
         }
-  
         return $fields;
     }
 
-    function validate($data, $errors)
+    /**
+     * Validate legal cases
+     */
+    function cocolis_validate($data, $errors)
     {
         if ($data['shipping_method'][0] == 'cocolis_assurance' && (empty($data['birth_date']) || !isset($data['birth_date']) || empty($data['terms_insurance_cocolis'] || !isset($data['terms_insurance_cocolis'])))) {
+            // if any validation errors
+            if (!empty($errors->get_error_codes())) {
+
+                // remove all of them
+                foreach ($errors->get_error_codes() as $code) {
+                    $errors->remove($code);
+                }
+            }
+
             $errors->add('validation', __('Please fill insurance details for Cocolis delivery (refresh if you have changed delivery mode)', 'cocolis'));
         }
     }
-    add_action('woocommerce_after_checkout_validation', 'validate', 10, 2);
 
-    function save_insurance_billing_field($order_id, $posted)
+    /**
+     * Save the consentment
+     */
+    function cocolis_save_insurance_billing_field($order_id, $posted)
     {
         if (isset($posted['birth_date'])) {
             update_post_meta($order_id, 'birth_date', $posted['birth_date']);
@@ -88,9 +94,10 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         }
     }
 
-    add_action('woocommerce_checkout_update_order_meta', 'save_insurance_billing_field', 20, 2);
-
-    function payment_complete($order_id)
+    /**
+     * Status change on order to Processing
+     */
+    function cocolis_payment_complete($order_id)
     {
         $order = wc_get_order($order_id);
         $order_data = $order->get_data();
@@ -125,8 +132,8 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             $order_birthdate = $order->get_meta('birth_date');
 
             $from_composed_address = $store_address . ', '
-                    . $store_postcode . ' ' . $store_city;
-            
+                . $store_postcode . ' ' . $store_city;
+
             $composed_address = $order_shipping_address_1 . ', ' . $order_shipping_postcode . ' ' . $order_shipping_city;
 
             $from_date = new DateTime('NOW');
@@ -148,7 +155,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
             $shipping_class = new WC_Cocolis_Shipping_Method();
 
-            $client = $shipping_class->authenticatedClient();
+            $client = $shipping_class->cocolis_authenticated_client();
 
             $phone = $shipping_class->settings['phone'];
             if (empty($phone)) {
@@ -195,55 +202,55 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             }
         }
 
-        if (str_contains($order->get_shipping_method(), "with insurance") || str_contains($order->get_shipping_method(), "avec assurance")) {
+        if (strpos($order->get_shipping_method(), "with insurance") !== false || strpos($order->get_shipping_method(), "avec assurance") !== false) {
             $birthday = new DateTime($order_birthdate);
 
             $params = [
-                    "description" => "Livraison de la commande : " . implode(", ", $arrayname) . " vendue sur le site marketplace.",
-                    "external_id" => $order_id,
-                    "from_address" => $from_composed_address,
+                "description" => "Livraison de la commande : " . implode(", ", $arrayname) . " vendue sur le site marketplace.",
+                "external_id" => $order_id,
+                "from_address" => $from_composed_address,
+                "from_postal_code" => $store_postcode,
+                "to_address" => $composed_address,
+                "to_postal_code" => $order_shipping_postcode,
+                "from_is_flexible" => false,
+                "from_pickup_date" => $from_date,
+                "from_need_help" => true,
+                "to_is_flexible" => false,
+                "to_need_help" => true,
+                "content_value" => (int) $order->get_subtotal() * 100,
+                "with_insurance" => true,
+                "to_pickup_date" => $to_date,
+                "is_passenger" => false,
+                "is_packaged" => true,
+                "price" => (int) $order->get_shipping_total() * 100,
+                "volume" => $dimensions,
+                "environment" => "objects",
+                "photo_urls" => $images,
+                "rider_extra_information" => "Livraison de la commande : " . implode(", ", $arrayname),
+                "ride_objects_attributes" => $arrayproducts,
+                "ride_delivery_information_attributes" => [
+                    "from_address" => $store_address,
                     "from_postal_code" => $store_postcode,
-                    "to_address" => $composed_address,
+                    "from_city" => $store_city,
+                    "from_country" => $store_country,
+                    "from_contact_email" => $shipping_class->settings['email'],
+                    "from_contact_phone" => $phone,
+                    "from_contact_name" => $store_name,
+                    "from_extra_information" => 'Vendeur Marketplace',
+                    "to_address" => $order_shipping_address_1,
                     "to_postal_code" => $order_shipping_postcode,
-                    "from_is_flexible" => false,
-                    "from_pickup_date" => $from_date,
-                    "from_need_help" => true,
-                    "to_is_flexible" => false,
-                    "to_need_help" => true,
-                    "content_value" => (int) $order->get_subtotal() * 100,
-                    "with_insurance" => true,
-                    "to_pickup_date" => $to_date,
-                    "is_passenger" => false,
-                    "is_packaged" => true,
-                    "price" => (int) $order->get_shipping_total() * 100,
-                    "volume" => $dimensions,
-                    "environment" => "objects",
-                    "photo_urls" => $images,
-                    "rider_extra_information" => "Livraison de la commande : " . implode(", ", $arrayname),
-                    "ride_objects_attributes" => $arrayproducts,
-                    "ride_delivery_information_attributes" => [
-                        "from_address" => $store_address,
-                        "from_postal_code" => $store_postcode,
-                        "from_city" => $store_city,
-                        "from_country" => $store_country,
-                        "from_contact_email" => $shipping_class->settings['email'],
-                        "from_contact_phone" => $phone,
-                        "from_contact_name" => $store_name,
-                        "from_extra_information" => 'Vendeur Marketplace',
-                        "to_address" => $order_shipping_address_1,
-                        "to_postal_code" => $order_shipping_postcode,
-                        "to_city" => $order_shipping_city,
-                        "to_country" => $order_shipping_country,
-                        "to_contact_name" => $order_shipping_first_name . ' ' . $order_shipping_last_name,
-                        "to_contact_email" => $order_shipping_email,
-                        "to_contact_phone" => $order_shipping_phone,
-                        "insurance_firstname" => $order_shipping_first_name,
-                        "insurance_lastname" =>  $order_shipping_last_name,
-                        "insurance_address" => $order_shipping_address_1,
-                        "insurance_postal_code" => $order_shipping_postcode,
-                        "insurance_city" => $order_shipping_city,
-                        "insurance_country" => $order_shipping_country,
-                        "insurance_birthdate" => $birthday->format('c')
+                    "to_city" => $order_shipping_city,
+                    "to_country" => $order_shipping_country,
+                    "to_contact_name" => $order_shipping_first_name . ' ' . $order_shipping_last_name,
+                    "to_contact_email" => $order_shipping_email,
+                    "to_contact_phone" => $order_shipping_phone,
+                    "insurance_firstname" => $order_shipping_first_name,
+                    "insurance_lastname" =>  $order_shipping_last_name,
+                    "insurance_address" => $order_shipping_address_1,
+                    "insurance_postal_code" => $order_shipping_postcode,
+                    "insurance_city" => $order_shipping_city,
+                    "insurance_country" => $order_shipping_country,
+                    "insurance_birthdate" => $birthday->format('c')
                 ],
             ];
 
@@ -295,6 +302,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             $client->create($params);
         }
     }
-
-    add_action('woocommerce_order_status_processing', 'payment_complete');
 }
+
+new WC_Cocolis_Payment_Method();
