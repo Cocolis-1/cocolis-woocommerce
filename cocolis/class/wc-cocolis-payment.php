@@ -193,113 +193,113 @@ class WC_Cocolis_Payment_Method
                     "length" => (int) $length,
                 ]);
             }
-        }
 
-        $images = [];
-        foreach ($arrayproducts as $image) {
-            if (!empty($image['img'])) {
-                array_push($images, $image['img']);
+            $images = [];
+            foreach ($arrayproducts as $image) {
+                if (!empty($image['img'])) {
+                    array_push($images, $image['img']);
+                }
             }
-        }
 
-        if (strpos($order->get_shipping_method(), "with insurance") !== false || strpos($order->get_shipping_method(), "avec assurance") !== false) {
-            $birthday = new DateTime($order_birthdate);
+            if (strpos($order->get_shipping_method(), "with insurance") !== false || strpos($order->get_shipping_method(), "avec assurance") !== false) {
+                $birthday = new DateTime($order_birthdate);
 
-            $params = [
-                "description" => "Livraison de la commande : " . implode(", ", $arrayname) . " vendue sur le site marketplace.",
-                "external_id" => $order_id,
-                "from_address" => $from_composed_address,
-                "from_postal_code" => $store_postcode,
-                "to_address" => $composed_address,
-                "to_postal_code" => $order_shipping_postcode,
-                "from_is_flexible" => false,
-                "from_pickup_date" => $from_date,
-                "from_need_help" => true,
-                "to_is_flexible" => false,
-                "to_need_help" => true,
-                "content_value" => (int) $order->get_subtotal() * 100,
-                "with_insurance" => true,
-                "to_pickup_date" => $to_date,
-                "is_passenger" => false,
-                "is_packaged" => true,
-                "price" => (int) $order->get_shipping_total() * 100,
-                "volume" => $dimensions,
-                "environment" => "objects",
-                "photo_urls" => $images,
-                "rider_extra_information" => "Livraison de la commande : " . implode(", ", $arrayname),
-                "ride_objects_attributes" => $arrayproducts,
-                "ride_delivery_information_attributes" => [
-                    "from_address" => $store_address,
+                $params = [
+                    "description" => "Livraison de la commande : " . implode(", ", $arrayname) . " vendue sur le site marketplace.",
+                    "external_id" => $order_id,
+                    "from_address" => $from_composed_address,
                     "from_postal_code" => $store_postcode,
-                    "from_city" => $store_city,
-                    "from_country" => $store_country,
-                    "from_contact_email" => $shipping_class->settings['email'],
-                    "from_contact_phone" => $phone,
-                    "from_contact_name" => $store_name,
-                    "from_extra_information" => 'Vendeur Marketplace',
-                    "to_address" => $order_shipping_address_1,
+                    "to_address" => $composed_address,
                     "to_postal_code" => $order_shipping_postcode,
-                    "to_city" => $order_shipping_city,
-                    "to_country" => $order_shipping_country,
-                    "to_contact_name" => $order_shipping_first_name . ' ' . $order_shipping_last_name,
-                    "to_contact_email" => $order_shipping_email,
-                    "to_contact_phone" => $order_shipping_phone,
-                    "insurance_firstname" => $order_shipping_first_name,
-                    "insurance_lastname" =>  $order_shipping_last_name,
-                    "insurance_address" => $order_shipping_address_1,
-                    "insurance_postal_code" => $order_shipping_postcode,
-                    "insurance_city" => $order_shipping_city,
-                    "insurance_country" => $order_shipping_country,
-                    "insurance_birthdate" => $birthday->format('c')
-                ],
-            ];
+                    "from_is_flexible" => false,
+                    "from_pickup_date" => $from_date,
+                    "from_need_help" => true,
+                    "to_is_flexible" => false,
+                    "to_need_help" => true,
+                    "content_value" => (int) $order->get_subtotal() * 100,
+                    "with_insurance" => true,
+                    "to_pickup_date" => $to_date,
+                    "is_passenger" => false,
+                    "is_packaged" => true,
+                    "price" => (int) $order->get_shipping_total() * 100,
+                    "volume" => $dimensions,
+                    "environment" => "objects",
+                    "photo_urls" => $images,
+                    "rider_extra_information" => "Livraison de la commande : " . implode(", ", $arrayname),
+                    "ride_objects_attributes" => $arrayproducts,
+                    "ride_delivery_information_attributes" => [
+                        "from_address" => $store_address,
+                        "from_postal_code" => $store_postcode,
+                        "from_city" => $store_city,
+                        "from_country" => $store_country,
+                        "from_contact_email" => $shipping_class->settings['email'],
+                        "from_contact_phone" => $phone,
+                        "from_contact_name" => $store_name,
+                        "from_extra_information" => 'Vendeur Marketplace',
+                        "to_address" => $order_shipping_address_1,
+                        "to_postal_code" => $order_shipping_postcode,
+                        "to_city" => $order_shipping_city,
+                        "to_country" => $order_shipping_country,
+                        "to_contact_name" => $order_shipping_first_name . ' ' . $order_shipping_last_name,
+                        "to_contact_email" => $order_shipping_email,
+                        "to_contact_phone" => $order_shipping_phone,
+                        "insurance_firstname" => $order_shipping_first_name,
+                        "insurance_lastname" =>  $order_shipping_last_name,
+                        "insurance_address" => $order_shipping_address_1,
+                        "insurance_postal_code" => $order_shipping_postcode,
+                        "insurance_city" => $order_shipping_city,
+                        "insurance_country" => $order_shipping_country,
+                        "insurance_birthdate" => $birthday->format('c')
+                    ],
+                ];
 
-            $client = $client->getRideClient();
-            $client->create($params);
-        } else {
-            $params = [
-                "description" => "Livraison de la commande : " . implode(", ", $arrayname) . " vendue sur le site marketplace.",
-                "external_id" => $order_id,
-                "from_address" => $from_composed_address,
-                "from_postal_code" => $store_postcode,
-                "to_address" => $composed_address,
-                "to_postal_code" => $order_shipping_postcode,
-                "from_is_flexible" => false,
-                "from_pickup_date" => $from_date,
-                "from_need_help" => true,
-                "to_is_flexible" => false,
-                "to_need_help" => true,
-                "with_insurance" => false,
-                "to_pickup_date" => $to_date,
-                "is_passenger" => false,
-                "is_packaged" => true,
-                "price" => (int) $order->get_shipping_total() * 100,
-                "volume" => $dimensions,
-                "environment" => "objects",
-                "photo_urls" => $images,
-                "rider_extra_information" => "Livraison de la commande : " . implode(", ", $arrayname),
-                "ride_objects_attributes" => $arrayproducts,
-                "ride_delivery_information_attributes" => [
-                    "from_address" => $store_address,
+                $client = $client->getRideClient();
+                $client->create($params);
+            } else {
+                $params = [
+                    "description" => "Livraison de la commande : " . implode(", ", $arrayname) . " vendue sur le site marketplace.",
+                    "external_id" => $order_id,
+                    "from_address" => $from_composed_address,
                     "from_postal_code" => $store_postcode,
-                    "from_city" => $store_city,
-                    "from_country" => $store_country,
-                    "from_contact_email" => $shipping_class->settings['email'],
-                    "from_contact_phone" => $phone,
-                    "from_contact_name" => $store_name,
-                    "from_extra_information" => 'Vendeur Marketplace',
-                    "to_address" => $order_shipping_address_1,
+                    "to_address" => $composed_address,
                     "to_postal_code" => $order_shipping_postcode,
-                    "to_city" => $order_shipping_city,
-                    "to_country" => $order_shipping_country,
-                    "to_contact_name" => $order_shipping_first_name . ' ' . $order_shipping_last_name,
-                    "to_contact_email" => $order_shipping_email,
-                    "to_contact_phone" => $order_shipping_phone
-                ],
-            ];
+                    "from_is_flexible" => false,
+                    "from_pickup_date" => $from_date,
+                    "from_need_help" => true,
+                    "to_is_flexible" => false,
+                    "to_need_help" => true,
+                    "with_insurance" => false,
+                    "to_pickup_date" => $to_date,
+                    "is_passenger" => false,
+                    "is_packaged" => true,
+                    "price" => (int) $order->get_shipping_total() * 100,
+                    "volume" => $dimensions,
+                    "environment" => "objects",
+                    "photo_urls" => $images,
+                    "rider_extra_information" => "Livraison de la commande : " . implode(", ", $arrayname),
+                    "ride_objects_attributes" => $arrayproducts,
+                    "ride_delivery_information_attributes" => [
+                        "from_address" => $store_address,
+                        "from_postal_code" => $store_postcode,
+                        "from_city" => $store_city,
+                        "from_country" => $store_country,
+                        "from_contact_email" => $shipping_class->settings['email'],
+                        "from_contact_phone" => $phone,
+                        "from_contact_name" => $store_name,
+                        "from_extra_information" => 'Vendeur Marketplace',
+                        "to_address" => $order_shipping_address_1,
+                        "to_postal_code" => $order_shipping_postcode,
+                        "to_city" => $order_shipping_city,
+                        "to_country" => $order_shipping_country,
+                        "to_contact_name" => $order_shipping_first_name . ' ' . $order_shipping_last_name,
+                        "to_contact_email" => $order_shipping_email,
+                        "to_contact_phone" => $order_shipping_phone
+                    ],
+                ];
 
-            $client = $client->getRideClient();
-            $client->create($params);
+                $client = $client->getRideClient();
+                $client->create($params);
+            }
         }
     }
 }
