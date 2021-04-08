@@ -23,7 +23,7 @@ class WC_Cocolis_Payment_Method
     function cocolis_show_terms_insurance($fields)
     {
         global $woocommerce;
-        $total = WC()->cart->get_subtotal();
+        $total = WC()->cart->get_cart_subtotal(true);
         // Maximal cost insurance
         if ($total <= 1500) {
             $max_value = 1500;
@@ -216,7 +216,7 @@ class WC_Cocolis_Payment_Method
                     "from_need_help" => true,
                     "to_is_flexible" => false,
                     "to_need_help" => true,
-                    "content_value" => (int) $order->get_subtotal() * 100,
+                    "content_value" => floatval($order->get_subtotal_to_display(true)) * 100,
                     "with_insurance" => true,
                     "to_pickup_date" => $to_date,
                     "is_passenger" => false,
@@ -272,7 +272,7 @@ class WC_Cocolis_Payment_Method
                     "to_pickup_date" => $to_date,
                     "is_passenger" => false,
                     "is_packaged" => true,
-                    "price" => (int) $order->get_shipping_total() * 100,
+                    "price" => floatval($order->get_subtotal_to_display(true)) * 100,
                     "volume" => $dimensions,
                     "environment" => "objects",
                     "photo_urls" => $images,
