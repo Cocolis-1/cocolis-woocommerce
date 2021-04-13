@@ -310,7 +310,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
 
 
-                                if ($total >= 500) {
+                                if ($total >= 150) {
                                     $shipping_cost_insurance = ($match->estimated_prices->with_insurance) / 100;
                                     if ($shipping_cost_insurance > 0) {
                                         $rate = array(
@@ -383,21 +383,21 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             <b> ' . $label;
 
         if ($method->id === "cocolis") {
-            $label = $label . "</b> </br>" . __("Insurance included up to 500 €", 'cocolis');
+            $label = $label . "</b> </br>" . __("Free insurance up to 150 €", 'cocolis');
         } elseif ($method->id === "cocolis_assurance") {
-            $total = WC()->cart->get_cart_subtotal(true);
+            $total = WC()->cart->get_subtotal();
             // Maximal cost insurance
-            if ($total <= 1500) {
+            if ($total <= 500) {
+                $max_value = 500;
+            } elseif ($total <= 1500) {
                 $max_value = 1500;
             } elseif ($total <= 3000) {
                 $max_value = 3000;
-            } elseif ($total <= 5000) {
-                $max_value = 5000;
             } else {
                 $max_value = 5000;
             }
 
-            $label = $label . "</b> <br>" . __("Insurance included up to ", 'cocolis') . $max_value . " €";
+            $label = $label . "</b> <br>" . __("Supplementary insurance up to ", 'cocolis') . $max_value . " €";
         }
 
         return $label;

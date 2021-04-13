@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Cocolis\n"
-"POT-Creation-Date: 2021-03-02 19:06+0100\n"
-"PO-Revision-Date: 2021-03-02 19:06+0100\n"
+"POT-Creation-Date: 2021-04-13 12:25+0200\n"
+"PO-Revision-Date: 2021-04-13 12:25+0200\n"
 "Last-Translator: \n"
 "Language-Team: Cocolis\n"
 "Language: fr_FR\n"
@@ -15,23 +15,23 @@ msgstr ""
 "X-Poedit-KeywordsList: __\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: class/wc-cocolis-payment.php:49
+#: class/wc-cocolis-payment.php:42
 msgid "insurance conditions"
 msgstr "conditions d’assurance"
 
-#: class/wc-cocolis-payment.php:54
+#: class/wc-cocolis-payment.php:47
 msgid "Birth date for insurance"
 msgstr "Date de naissance (pour l’assurance)"
 
-#: class/wc-cocolis-payment.php:62
+#: class/wc-cocolis-payment.php:55
 msgid "I confirm that I have read the "
 msgstr "Je confirme que j’ai lu les "
 
-#: class/wc-cocolis-payment.php:62
+#: class/wc-cocolis-payment.php:55
 msgid " and that I choose the insurance up to "
 msgstr " et que je choisis l’assurance jusqu’à "
 
-#: class/wc-cocolis-payment.php:75
+#: class/wc-cocolis-payment.php:79
 msgid ""
 "Please fill insurance details for Cocolis delivery (refresh if you have "
 "changed delivery mode)"
@@ -39,41 +39,39 @@ msgstr ""
 "Veuillez remplir les détails de l’assurance pour la livraison Cocolis "
 "(actualiser si vous avez changé de mode de livraison)"
 
-#: class/wc-cocolis-payment.php:155
+#: class/wc-cocolis-payment.php:162
 msgid "No phone number provided in the Cocolis configuration"
 msgstr "Pas de numéro de téléphone fourni dans la configuration Cocolis"
 
-#: class/wc-cocolis-payment.php:155
+#: class/wc-cocolis-payment.php:162
 msgid "Required seller phone number"
 msgstr "Le numéro de téléphone du vendeur est requis"
 
-#: class/wc-cocolis-webhooks.php:46
+#: class/wc-cocolis-webhooks.php:32
 msgid "A carrier has been selected to carry out the Cocolis delivery."
 msgstr "Un transporteur a été sélectionné pour effectuer la livraison Cocolis."
 
-#: class/wc-cocolis-webhooks.php:63
-#, php-format
-msgid "The public ride URL : %s "
+#: class/wc-cocolis-webhooks.php:49
+msgid "The public ride URL : "
 msgstr "L’URL de l’annonce publique : %s "
 
-#: class/wc-cocolis-webhooks.php:68
-#, php-format
-msgid "Buyer tracking delivery URL : %s"
-msgstr "URL de livraison de suivi de l’acheteur : %s"
+#: class/wc-cocolis-webhooks.php:54
+msgid "Buyer tracking delivery URL : "
+msgstr "URL de livraison de suivi de l’acheteur : %s "
 
-#: class/wc-cocolis-webhooks.php:73
+#: class/wc-cocolis-webhooks.php:59
 msgid "[Private] Seller tracking delivery URL : "
 msgstr "[Privé] URL de livraison de suivi du vendeur : "
 
-#: class/wc-cocolis-webhooks.php:100
+#: class/wc-cocolis-webhooks.php:86
 msgid "Delivery completed by Cocolis"
 msgstr "Livraison complétée par Cocolis"
 
-#: class/wc-cocolis-webhooks.php:125
+#: class/wc-cocolis-webhooks.php:111
 msgid "An offer was published on cocolis.fr"
 msgstr "Une offre a été publiée sur cocolis.fr"
 
-#: class/wc-cocolis-webhooks.php:149
+#: class/wc-cocolis-webhooks.php:135
 msgid ""
 "The delivery is cancelled by the carrier. The seller and the buyer are "
 "informed, their tracking page is updated."
@@ -81,7 +79,7 @@ msgstr ""
 "La livraison est annulée par le transporteur. Le vendeur et l’acheteur sont "
 "informés, leur page de suivi est mise à jour."
 
-#: class/wc-cocolis-webhooks.php:173
+#: class/wc-cocolis-webhooks.php:159
 msgid ""
 "The ride did not find a carrier. Get closer to our support and with cocolis."
 "fr"
@@ -89,63 +87,63 @@ msgstr ""
 "Le trajet n’a pas trouvé de transporteur. Rapprochez-vous de notre support "
 "et avec cocolis.fr"
 
-#: wc-cocolis-shipping.php:46
+#: wc-cocolis-shipping.php:48
 msgid "Cocolis Shipping Method"
 msgstr "Méthode de livraison Cocolis"
 
-#: wc-cocolis-shipping.php:47
+#: wc-cocolis-shipping.php:49
 msgid "Cocolis Woocommerce Plugin to add Cocolis.fr as a delivery method"
 msgstr "Ajoutez Cocolis.fr en tant que prestataire de livraison"
 
-#: wc-cocolis-shipping.php:65
+#: wc-cocolis-shipping.php:67
 msgid "Cocolis Shipping"
 msgstr "Livraison Cocolis"
 
-#: wc-cocolis-shipping.php:89
+#: wc-cocolis-shipping.php:91
 msgid "Enable"
 msgstr "Activer"
 
-#: wc-cocolis-shipping.php:91
+#: wc-cocolis-shipping.php:93
 msgid "Enable this shipping."
 msgstr "Activer ce mode de livraison."
 
-#: wc-cocolis-shipping.php:95
+#: wc-cocolis-shipping.php:97
 msgid "Mode"
 msgstr "Mode"
 
-#: wc-cocolis-shipping.php:97
+#: wc-cocolis-shipping.php:99
 msgid "Use this module in developement mode (sandbox) or in production ?"
 msgstr "Utiliser ce module en mode développement (sandbox) ou en production ?"
 
-#: wc-cocolis-shipping.php:101
+#: wc-cocolis-shipping.php:103
 msgid "Sandbox"
 msgstr "Bac à sable"
 
-#: wc-cocolis-shipping.php:102
+#: wc-cocolis-shipping.php:104
 msgid "Production"
 msgstr "Production"
 
-#: wc-cocolis-shipping.php:106
+#: wc-cocolis-shipping.php:109
 msgid "App id"
 msgstr "ID de l'application"
 
-#: wc-cocolis-shipping.php:108
+#: wc-cocolis-shipping.php:111
 msgid "Enter the app-id provided to you by Cocolis"
 msgstr "Entrez l’app-id qui vous a été fourni par Cocolis"
 
-#: wc-cocolis-shipping.php:114
+#: wc-cocolis-shipping.php:117
 msgid "Password"
 msgstr "Mot de passe"
 
-#: wc-cocolis-shipping.php:116
+#: wc-cocolis-shipping.php:119
 msgid "Enter the password provided to you by Cocolis"
 msgstr "Entrez le mot de passe qui vous a été fourni par Cocolis"
 
-#: wc-cocolis-shipping.php:122
+#: wc-cocolis-shipping.php:125
 msgid "Default width in cm"
 msgstr "Largeur par défaut en cm"
 
-#: wc-cocolis-shipping.php:124
+#: wc-cocolis-shipping.php:127
 msgid ""
 "Allows you to calculate the costs in the absence of the width indicated in "
 "the product sheet."
@@ -153,11 +151,11 @@ msgstr ""
 "Permet de calculer les coûts en l’absence de la largeur indiquée dans la "
 "fiche produit."
 
-#: wc-cocolis-shipping.php:130
+#: wc-cocolis-shipping.php:133
 msgid "Default height in cm"
 msgstr "Hauteur par défaut en cm"
 
-#: wc-cocolis-shipping.php:132
+#: wc-cocolis-shipping.php:135
 msgid ""
 "Allows you to calculate the costs in the absence of the height indicated in "
 "the product sheet."
@@ -165,11 +163,11 @@ msgstr ""
 "Permet de calculer les coûts en l’absence de la hauteur indiquée dans la "
 "fiche produit."
 
-#: wc-cocolis-shipping.php:138
+#: wc-cocolis-shipping.php:141
 msgid "Default length in cm"
 msgstr "Longueur par défaut en cm"
 
-#: wc-cocolis-shipping.php:140
+#: wc-cocolis-shipping.php:143
 msgid ""
 "Allows you to calculate the costs in the absence of the length indicated in "
 "the product sheet."
@@ -177,45 +175,45 @@ msgstr ""
 "Permet de calculer les coûts en l’absence de la longueur indiquée dans la "
 "fiche produit."
 
-#: wc-cocolis-shipping.php:146
+#: wc-cocolis-shipping.php:149
 msgid "Email"
 msgstr "Email"
 
-#: wc-cocolis-shipping.php:148
+#: wc-cocolis-shipping.php:151
 msgid "Required for the ride creation at Cocolis (vendor email)"
 msgstr ""
 "Nécessaire pour la création d’une annonce chez Cocolis (email du vendeur)"
 
-#: wc-cocolis-shipping.php:154
+#: wc-cocolis-shipping.php:157
 msgid "Phone"
 msgstr "Téléphone"
 
-#: wc-cocolis-shipping.php:156
+#: wc-cocolis-shipping.php:159
 msgid "Required for the ride creation at Cocolis (landline or cell phone)"
 msgstr ""
 "Requis pour la création de trajet chez Cocolis (téléphone fixe ou cellulaire)"
 
-#: wc-cocolis-shipping.php:178
+#: wc-cocolis-shipping.php:181
 msgid "The credentials provided are not recognized by the Cocolis API."
 msgstr ""
 "Les informations d’identification fournies ne sont pas reconnues par l’API "
 "Cocolis."
 
-#: wc-cocolis-shipping.php:178
+#: wc-cocolis-shipping.php:181
 msgid "Authentication error on the API server"
 msgstr "Erreur d’authentification sur le serveur API"
 
-#: wc-cocolis-shipping.php:304
+#: wc-cocolis-shipping.php:318
 msgid " with insurance"
 msgstr " avec assurance"
 
-#: wc-cocolis-shipping.php:360
-msgid "Insurance included up to 500 €"
-msgstr "Assurance incluse jusqu’à 500 €"
+#: wc-cocolis-shipping.php:386
+msgid "Free insurance up to 150 €"
+msgstr "Assurance offerte jusqu’à 150 €"
 
-#: wc-cocolis-shipping.php:401
-msgid "Insurance included up to "
-msgstr "Assurance incluse jusqu’à "
+#: wc-cocolis-shipping.php:400
+msgid "Supplementary insurance up to "
+msgstr "Assurance complémentaire jusqu'à "
 
 #~ msgid "Birth date required for insurance"
 #~ msgstr "Date de naissance requise pour l’assurance"
