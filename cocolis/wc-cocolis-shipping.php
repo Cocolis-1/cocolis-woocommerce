@@ -6,7 +6,7 @@
  * Description: A plugin to add Cocolis.fr as a carrier on Woocommerce
  * Author:  Cocolis.fr
  * Author URI: https://www.cocolis.fr
- * Version: 1.0.1
+ * Version: 1.0.3
  * Developer: Alexandre BETTAN, Sebastien FIELOUX
  * Developer URI: https://github.com/btnalexandre, https://github.com/sebfie
  * Domain Path: /languages
@@ -379,7 +379,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 c-0.2,0.4-0.5,0.7-0.9,0.9l-7.4,4.3C17,23.1,16.5,23.2,16,23.2L16,23.2z M18.5,7.7C18.5,7.7,18.5,7.7,18.5,7.7l-0.2-0.2"/>
             <path class="st2" d="M10.1,12.3c0,3.1,2.5,5.5,6,5.5c2.6,0,4.5-1.5,6-3.6l-1.4-1.6c-1.4,1.4-2.6,2.5-4.6,2.5c-1.9,0-3-1.3-3-2.9
                 c0-1.6,1.2-2.8,3.3-2.8c0.4,0,0.9,0,1.4,0.1l-1.4-2.8c-0.2,0-0.5-0.1-0.7-0.1C12.8,6.6,10.1,9.2,10.1,12.3"/>
-            </svg>                  
+            </svg>
             <b> ' . $label;
 
         if ($method->id === "cocolis") {
