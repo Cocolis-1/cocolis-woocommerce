@@ -1,31 +1,20 @@
 <?php
-
-/**
- * Plugin Name: Cocolis
- * Plugin URI: https://www.cocolis.fr
- * Description: A plugin to add Cocolis.fr as a carrier on Woocommerce
- * Author:  Cocolis.fr
- * Author URI: https://www.cocolis.fr
- * Version: 1.0
- * Developer: Alexandre BETTAN, Sebastien Fieloux
- * Developer URI: https://github.com/btnalexandre, https://github.com/sebfie
- * Domain Path: /languages
- * License: GNU General Public License v3.0
- * License URI: http://www.gnu.org/licenses/gpl-3.O.html
-*/
-
-if (! defined('ABSPATH')) {
+if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
-require_once dirname(__FILE__, 2) . '/vendor/autoload.php';
-include_once dirname(__FILE__, 2) . "/wc-cocolis-shipping.php";
+class WC_Cocolis_Webhooks_Method
+{
 
-/**
- * Check if WooCommerce is active
- */
-if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
-    function webhook_offer_accepted($request)
+    public function __construct()
+    {
+        add_action('rest_api_init', array($this, 'cocolis_register_hooks'));
+    }
+
+    /**
+     * Webhooks actions based on the ride at Cocolis
+     */
+    function cocolis_webhook_offer_accepted($request)
     {
         $data = $request->get_body_params();
         $orderid = $data['external_id'];
@@ -33,7 +22,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         $event = $data['event'];
 
         if (empty($event) || empty($orderid)) {
-            echo('Event or order ID missing from Webhook');
+            echo ('Event or order ID missing from Webhook');
             exit;
         }
 
@@ -44,11 +33,11 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
             // Add the note
             $order->add_order_note($note, true);
-            
+
             if (!empty($resource_id)) {
                 cocolis_shipping_method_init();
                 $shipping_class = new WC_Cocolis_Shipping_Method();
-                $client = $shipping_class->authenticatedClient();
+                $client = $shipping_class->cocolis_authenticated_client();
                 $client = $client->getRideClient();
                 $ride = $client->get($resource_id);
                 $slug = $ride->slug;
@@ -79,14 +68,14 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         exit;
     }
 
-    function webhook_offer_completed($request)
+    function cocolis_webhook_offer_completed($request)
     {
         $data = $request->get_body_params();
         $orderid = $data['external_id'];
         $event = $data['event'];
 
         if (empty($event) || empty($orderid)) {
-            echo('Event or order ID missing from Webhook');
+            echo ('Event or order ID missing from Webhook');
             exit;
         }
 
@@ -104,14 +93,14 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         exit;
     }
 
-    function webhook_ride_published($request)
+    function cocolis_webhook_ride_published($request)
     {
         $data = $request->get_body_params();
         $orderid = $data['external_id'];
         $event = $data['event'];
 
         if (empty($event) || empty($orderid)) {
-            echo('Event or order ID missing from Webhook');
+            echo ('Event or order ID missing from Webhook');
             exit;
         }
 
@@ -128,14 +117,14 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         exit;
     }
 
-    function webhook_offer_cancelled($request)
+    function cocolis_webhook_offer_cancelled($request)
     {
         $data = $request->get_body_params();
         $orderid = $data['external_id'];
         $event = $data['event'];
 
         if (empty($event) || empty($orderid)) {
-            echo('Event or order ID missing from Webhook');
+            echo ('Event or order ID missing from Webhook');
             exit;
         }
 
@@ -152,14 +141,14 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         exit;
     }
 
-    function webhook_ride_expired($request)
+    function cocolis_webhook_ride_expired($request)
     {
         $data = $request->get_body_params();
         $orderid = $data['external_id'];
         $event = $data['event'];
 
         if (empty($event) || empty($orderid)) {
-            echo('Event or order ID missing from Webhook');
+            echo ('Event or order ID missing from Webhook');
             exit;
         }
 
@@ -177,36 +166,39 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         exit;
     }
 
-    function register_hooks()
+    /**
+     * Register all routes for actions
+     */
+    function cocolis_register_hooks()
     {
-        register_rest_route('cocolis/v1', '/webhook_offer_accepted', array(
+        register_rest_route('cocolis/v1', '/cocolis_webhook_offer_accepted', array(
             // By using this constant we ensure that when the WP_REST_Server changes our readable endpoints will work as intended.
             'methods'  => 'POST',
             // Here we register our callback. The callback is fired when this endpoint is matched by the WP_REST_Server class.
-            'callback' => 'webhook_offer_accepted',
+            'callback' => 'cocolis_webhook_offer_accepted',
             'permission_callback' => '__return_true'
         ));
-        register_rest_route('cocolis/v1', '/webhook_offer_completed', array(
+        register_rest_route('cocolis/v1', '/cocolis_webhook_offer_completed', array(
             'methods'  => 'POST',
-            'callback' => 'webhook_offer_completed',
+            'callback' => 'cocolis_webhook_offer_completed',
             'permission_callback' => '__return_true'
         ));
-        register_rest_route('cocolis/v1', '/webhook_ride_published', array(
+        register_rest_route('cocolis/v1', '/cocolis_webhook_ride_published', array(
             'methods'  => 'POST',
-            'callback' => 'webhook_ride_published',
+            'callback' => 'cocolis_webhook_ride_published',
             'permission_callback' => '__return_true'
         ));
-        register_rest_route('cocolis/v1', '/webhook_offer_cancelled', array(
+        register_rest_route('cocolis/v1', '/cocolis_webhook_offer_cancelled', array(
             'methods'  => 'POST',
-            'callback' => 'webhook_offer_cancelled',
+            'callback' => 'cocolis_webhook_offer_cancelled',
             'permission_callback' => '__return_true'
         ));
-        register_rest_route('cocolis/v1', '/webhook_ride_published', array(
+        register_rest_route('cocolis/v1', '/cocolis_webhook_ride_published', array(
             'methods'  => 'POST',
-            'callback' => 'webhook_ride_published',
+            'callback' => 'cocolis_webhook_ride_published',
             'permission_callback' => '__return_true'
         ));
     }
-
-    add_action('rest_api_init', 'register_hooks');
 }
+
+new WC_Cocolis_Webhooks_Method();

@@ -38,7 +38,7 @@ Le plugin peut s’installer comme n’importe quel plugin WordPress depuis la s
 
 - Télerverser l'extension manuellement :
 
-1. Télécharger la dernière release [ici](https://github.com/Cocolis-1/cocolis-woocommerce/releases)
+1. Télécharger la dernière release [ici](https://github.com/Cocolis-1/cocolis-woocommerce/releases) (cocolis.zip)
 
 2. Accédez à votre espace d'administration Wordpress 
 (Généralement le lien de votre site suivi de **/wp-admin** par exemple : https://cocolis.fr/wp-admin)

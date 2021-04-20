@@ -1,0 +1,3 @@
+[submodule "cocolis/vendor/cocolis/php"]
+	path = cocolis/vendor/cocolis/php
+	url = git@github.com:Cocolis-1/cocolis-php.git

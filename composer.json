@@ -5,7 +5,7 @@
   "require": {
     "cocolis/php": "master"
   },
-  "version": "1.0.0",
+  "version": "1.0.3",
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^2.18.2"
   },
