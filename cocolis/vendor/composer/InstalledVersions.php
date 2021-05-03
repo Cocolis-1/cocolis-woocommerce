@@ -24,33 +24,34 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => 'dev-develop',
-    'version' => 'dev-develop',
+    'pretty_version' => '1.0.0',
+    'version' => '1.0.0.0',
     'aliases' => 
     array (
     ),
-    'reference' => '05bd241eb6cb0dad2c4bafbe1e52c0e72ee32b0f',
-    'name' => 'cocolis/cocoliswoocommerce',
+    'reference' => NULL,
+    'name' => 'cocolis/woocommerce',
   ),
   'versions' => 
   array (
-    'cocolis/cocoliswoocommerce' => 
+    'cocolis/php' => 
     array (
       'pretty_version' => 'dev-develop',
       'version' => 'dev-develop',
       'aliases' => 
       array (
+        0 => '9999999-dev',
       ),
-      'reference' => '05bd241eb6cb0dad2c4bafbe1e52c0e72ee32b0f',
+      'reference' => '82ffb2e571cd12ad1135bc04d15529965a80d83f',
     ),
-    'cocolis/php' => 
+    'cocolis/woocommerce' => 
     array (
-      'pretty_version' => 'dev-master',
-      'version' => 'dev-master',
+      'pretty_version' => '1.0.0',
+      'version' => '1.0.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '77ac8c1c1aa823ac7ce3e4452cfc06252265af06',
+      'reference' => NULL,
     ),
   ),
 );

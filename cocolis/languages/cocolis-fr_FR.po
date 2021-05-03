@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Cocolis\n"
-"POT-Creation-Date: 2021-04-13 12:25+0200\n"
-"PO-Revision-Date: 2021-04-13 12:25+0200\n"
+"POT-Creation-Date: 2021-05-03 17:55+0200\n"
+"PO-Revision-Date: 2021-05-03 17:55+0200\n"
 "Last-Translator: \n"
 "Language-Team: Cocolis\n"
 "Language: fr_FR\n"
@@ -208,8 +208,10 @@ msgid " with insurance"
 msgstr " avec assurance"
 
 #: wc-cocolis-shipping.php:386
-msgid "Free insurance up to 150 €"
-msgstr "Assurance offerte jusqu’à 150 €"
+#, fuzzy
+#| msgid "Free insurance up to 500 €"
+msgid "Free insurance up to 500 €"
+msgstr "Assurance offerte jusqu’à 500 €"
 
 #: wc-cocolis-shipping.php:400
 msgid "Supplementary insurance up to "

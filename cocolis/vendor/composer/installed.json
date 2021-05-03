@@ -2,17 +2,17 @@
     "packages": [
         {
             "name": "cocolis/php",
-            "version": "dev-master",
-            "version_normalized": "dev-master",
+            "version": "dev-develop",
+            "version_normalized": "dev-develop",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Cocolis-1/cocolis-php.git",
-                "reference": "77ac8c1c1aa823ac7ce3e4452cfc06252265af06"
+                "reference": "82ffb2e571cd12ad1135bc04d15529965a80d83f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Cocolis-1/cocolis-php/zipball/77ac8c1c1aa823ac7ce3e4452cfc06252265af06",
-                "reference": "77ac8c1c1aa823ac7ce3e4452cfc06252265af06",
+                "url": "https://api.github.com/repos/Cocolis-1/cocolis-php/zipball/82ffb2e571cd12ad1135bc04d15529965a80d83f",
+                "reference": "82ffb2e571cd12ad1135bc04d15529965a80d83f",
                 "shasum": ""
             },
             "require": {
@@ -25,7 +25,8 @@
                 "phpunit/php-code-coverage": "^9.2",
                 "phpunit/phpunit": "^9.4"
             },
-            "time": "2021-03-15T12:37:39+00:00",
+            "time": "2021-04-06T07:37:42+00:00",
+            "default-branch": true,
             "type": "package",
             "installation-source": "source",
             "autoload": {
@@ -58,11 +59,11 @@
             ],
             "support": {
                 "issues": "https://github.com/Cocolis-1/cocolis-php/issues",
-                "source": "https://github.com/Cocolis-1/cocolis-php/tree/2.0.2"
+                "source": "https://github.com/Cocolis-1/cocolis-php/tree/develop"
             },
             "install-path": "../cocolis/php"
         }
     ],
-    "dev": false,
+    "dev": true,
     "dev-package-names": []
 }
