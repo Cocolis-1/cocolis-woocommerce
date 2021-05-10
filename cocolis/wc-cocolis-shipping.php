@@ -353,6 +353,8 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
      */
     function cocolis_filter_woocommerce_cart_shipping_method_full_label($label, $method)
     {
+        $default_label = $label;
+
         $label = '<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
             viewBox="0 0 32 32" style="enable-background:new 0 0 32 32; vertical-align: middle;" width="42" height="42" xml:space="preserve">
             <style type="text/css">
@@ -400,7 +402,11 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             $label = $label . "</b> <br>" . __("Supplementary insurance up to ", 'cocolis') . $max_value . " €";
         }
 
-        return $label;
+        if ($method->id === "cocolis" || $method->id === "cocolis_assurance") {
+            return $label;
+        } else {
+            return $default_label;
+        }
     }
 
     /**
