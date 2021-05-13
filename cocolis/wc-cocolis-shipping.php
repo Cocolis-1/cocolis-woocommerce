@@ -6,7 +6,7 @@
  * Description: A plugin to add Cocolis.fr as a carrier on Woocommerce
  * Author:  Cocolis.fr
  * Author URI: https://www.cocolis.fr
- * Version: 1.0.3
+ * Version: 1.0.4
  * Developer: Alexandre BETTAN, Sebastien FIELOUX
  * Developer URI: https://github.com/btnalexandre, https://github.com/sebfie
  * Domain Path: /languages
@@ -310,7 +310,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
 
 
-                                if ($total >= 150) {
+                                if ($total >= 500) {
                                     $shipping_cost_insurance = ($match->estimated_prices->with_insurance) / 100;
                                     if ($shipping_cost_insurance > 0) {
                                         $rate = array(
@@ -353,6 +353,8 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
      */
     function cocolis_filter_woocommerce_cart_shipping_method_full_label($label, $method)
     {
+        $default_label = $label;
+
         $label = '<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
             viewBox="0 0 32 32" style="enable-background:new 0 0 32 32; vertical-align: middle;" width="42" height="42" xml:space="preserve">
             <style type="text/css">
@@ -383,7 +385,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             <b> ' . $label;
 
         if ($method->id === "cocolis") {
-            $label = $label . "</b> </br>" . __("Free insurance up to 150 €", 'cocolis');
+            $label = $label . "</b> </br>" . __("Free insurance up to 500 €", 'cocolis');
         } elseif ($method->id === "cocolis_assurance") {
             $total = WC()->cart->get_subtotal();
             // Maximal cost insurance
@@ -400,7 +402,11 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             $label = $label . "</b> <br>" . __("Supplementary insurance up to ", 'cocolis') . $max_value . " €";
         }
 
-        return $label;
+        if ($method->id === "cocolis" || $method->id === "cocolis_assurance") {
+            return $label;
+        } else {
+            return $default_label;
+        }
     }
 
     /**
