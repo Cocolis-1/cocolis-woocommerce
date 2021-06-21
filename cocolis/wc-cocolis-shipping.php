@@ -6,7 +6,7 @@
  * Description: A plugin to add Cocolis.fr as a carrier on Woocommerce
  * Author:  Cocolis.fr
  * Author URI: https://www.cocolis.fr
- * Version: 1.0.5
+ * Version: 1.0.6
  * Developer: Alexandre BETTAN, Sebastien FIELOUX
  * Developer URI: https://github.com/btnalexandre, https://github.com/sebfie
  * Domain Path: /languages
@@ -48,12 +48,12 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     $this->method_title       = __('Cocolis Shipping Method', 'cocolis');
                     $this->method_description = __('Cocolis Woocommerce Plugin to add Cocolis.fr as a delivery method', 'cocolis');
                     // Define user set variables.
-                    $this->production_mode = $this->get_option('production_mode');
-                    $this->app_id = $this->get_option('app_id');
-                    $this->password = $this->get_option('password');
-                    $this->width = $this->get_option('width');
-                    $this->length = $this->get_option('length');
-                    $this->height = $this->get_option('height');
+                    $this->production_mode = apply_filters('cocolis_store_production_mode', $this->get_option('production_mode'));
+                    $this->app_id = apply_filters('cocolis_store_app_id', $this->get_option('app_id'));
+                    $this->password = apply_filters('cocolis_store_password', $this->get_option('password'));
+                    $this->width = apply_filters('cocolis_store_width', $this->get_option('width'));
+                    $this->length = apply_filters('cocolis_store_length', $this->get_option('length'));
+                    $this->height = apply_filters('cocolis_store_height', $this->get_option('height'));
 
                     // Availability & Countries
                     $this->availability = 'including';
@@ -294,7 +294,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
                             $dimensions = round($dimensions, 2);
 
-                            $match = $client->getRideClient()->canMatch(get_option('woocommerce_store_postcode'), $postcode, $dimensions, $total * 100);
+                            $match = $client->getRideClient()->canMatch(apply_filters('cocolis_store_postcode', get_option('woocommerce_store_postcode')), $postcode, $dimensions, $total * 100);
 
                             // Register the rate
                             if ($match->result) {
