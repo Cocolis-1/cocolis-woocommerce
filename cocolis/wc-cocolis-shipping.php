@@ -6,7 +6,7 @@
  * Description: A plugin to add Cocolis.fr as a carrier on Woocommerce
  * Author:  Cocolis.fr
  * Author URI: https://www.cocolis.fr
- * Version: 1.0.4
+ * Version: 1.0.6
  * Developer: Alexandre BETTAN, Sebastien FIELOUX
  * Developer URI: https://github.com/btnalexandre, https://github.com/sebfie
  * Domain Path: /languages
@@ -48,12 +48,12 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     $this->method_title       = __('Cocolis Shipping Method', 'cocolis');
                     $this->method_description = __('Cocolis Woocommerce Plugin to add Cocolis.fr as a delivery method', 'cocolis');
                     // Define user set variables.
-                    $this->production_mode = $this->get_option('production_mode');
-                    $this->app_id = $this->get_option('app_id');
-                    $this->password = $this->get_option('password');
-                    $this->width = $this->get_option('width');
-                    $this->length = $this->get_option('length');
-                    $this->height = $this->get_option('height');
+                    $this->production_mode = apply_filters('cocolis_store_production_mode', $this->get_option('production_mode'));
+                    $this->app_id = apply_filters('cocolis_store_app_id', $this->get_option('app_id'));
+                    $this->password = apply_filters('cocolis_store_password', $this->get_option('password'));
+                    $this->width = apply_filters('cocolis_store_width', $this->get_option('width'));
+                    $this->length = apply_filters('cocolis_store_length', $this->get_option('length'));
+                    $this->height = apply_filters('cocolis_store_height', $this->get_option('height'));
 
                     // Availability & Countries
                     $this->availability = 'including';
@@ -259,70 +259,75 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                  */
                 public function calculate_shipping($package = array())
                 {
-                    $package = (object) $package;
-                    $destination = (object) $package->destination;
-                    $postcode = $destination->postcode;
-                    $total = 0;
-                    $dimensions = 0;
-                    if (!empty($postcode)) {
-                        $client = $this->cocolis_authenticated_client();
-                        $products = $package->contents;
-                        foreach ($products as $product) {
-                            $product = (object) $product;
-                            $width = (int) $product->data->get_width();
-                            $length = (int) $product->data->get_length();
-                            $height = (int) $product->data->get_height();
+                    try {
+                        $package = (object) $package;
+                        $destination = (object) $package->destination;
+                        $postcode = $destination->postcode;
+                        $total = 0;
+                        $dimensions = 0;
+                        if (!empty($postcode)) {
+                            $client = $this->cocolis_authenticated_client();
+                            $products = $package->contents;
+                            foreach ($products as $product) {
+                                $product = (object) $product;
+                                $width = (int) $product->data->get_width();
+                                $length = (int) $product->data->get_length();
+                                $height = (int) $product->data->get_height();
 
-                            if ($width == 0 || $length == 0 || $height == 0) {
-                                // Use the default value of volume for delivery fees
-                                $width = $this->width;
-                                $length = $this->length;
-                                $height = $this->height;
-                                $dimensions += (($width * $length * $height) / pow(10, 6)) * (int) $product->quantity;
-                            } else {
-                                $dimensions += (($width * $length * $height) / pow(10, 6)) * (int) $product->quantity;
+                                if ($width == 0 || $length == 0 || $height == 0) {
+                                    // Use the default value of volume for delivery fees
+                                    $width = $this->width;
+                                    $length = $this->length;
+                                    $height = $this->height;
+                                    $dimensions += (($width * $length * $height) / pow(10, 6)) * (int) $product->quantity;
+                                } else {
+                                    $dimensions += (($width * $length * $height) / pow(10, 6)) * (int) $product->quantity;
+                                }
+
+                                $total += (int) $product->data->get_price() * (int) $product->quantity;
                             }
 
-                            $total += (int) $product->data->get_price() * (int) $product->quantity;
-                        }
 
+                            if ($dimensions < 0.01) {
+                                $dimensions += 0.01;
+                            }
 
-                        if ($dimensions < 0.01) {
-                            $dimensions += 0.01;
-                        }
+                            $dimensions = round($dimensions, 2);
 
-                        $dimensions = round($dimensions, 2);
+                            $match = $client->getRideClient()->canMatch(apply_filters('cocolis_store_postcode', get_option('woocommerce_store_postcode')), $postcode, $dimensions, $total * 100);
 
-                        $match = $client->getRideClient()->canMatch(get_option('woocommerce_store_postcode'), $postcode, $dimensions, $total * 100);
+                            // Register the rate
+                            if ($match->result) {
+                                $shipping_cost = ($match->estimated_prices->regular) / 100;
 
-                        // Register the rate
-                        if ($match->result) {
-                            $shipping_cost = ($match->estimated_prices->regular) / 100;
+                                if ($shipping_cost > 0) {
+                                    $rate = array(
+                                        'id'   => 'cocolis',
+                                        'label' => '<svg viewBox="0 0 136.1 40" width="84" height="26"><path d="M107.9 10.1c2 0 3.6-1.6 3.6-3.6s-1.6-3.6-3.6-3.6-3.6 1.6-3.6 3.6 1.6 3.6 3.6 3.6m12.4 9c.7 0 1.4 0 2 .1l-2.5-5.3c-.4-.1-.8-.1-1.3-.1-4.3 0-6.5 2.6-6.5 6.5 0 2.2 2 7.2 2 9 0 1.2-.8 1.9-2.3 1.9-.6 0-1.7 0-2.7-.2l2.5 5.3c.6.1 1.2.2 1.9.2 4.4 0 6.7-2.7 6.7-6.4 0-2.7-2-7.2-2-9-.1-1 .5-2 2.2-2m-11.5-4.9h-6.1l-3.1 11.5-7.4 4.3 7.2-26.8h-6.1L86.1 30c-.3 1.1-.3 1.7-.3 2.3 0 2.3 1.9 4.2 4.3 4.2 1.2 0 2.2-.5 3.2-1.1l4.9-2.8c.1 2.2 1.9 3.9 4.3 3.9 1.2 0 2.2-.5 3.2-1.1l1.4-.8 1.9-7.1-4.3 2.5 4.1-15.8zM74 30.9c-3.2 0-5.7-2.4-5.7-5.8 0-3.5 2.6-5.8 5.7-5.8 3.2 0 5.8 2.4 5.8 5.8s-2.6 5.8-5.8 5.8m0-17.2c-6.5 0-11.8 5.1-11.8 11.4 0 1.2.2 2.3.5 3.4C61 30 59.1 31 56.5 31c-3.8 0-6-2.7-6-5.9s2.3-5.8 6.4-5.8c.8 0 1.7 0 2.7.2l-2.7-5.7c-.4-.1-.9-.1-1.3-.1-5.9 0-11.1 5.3-11.1 11.5 0 6.4 4.8 11.2 11.8 11.2 3.6 0 6.5-1.5 9-3.9 2.2 2.4 5.3 3.9 8.8 3.9 6.5 0 11.8-5.1 11.8-11.4-.1-6.2-5.4-11.3-11.9-11.3" fill="#484867"></path><path d="M31.4 30.9c-3.2 0-5.7-2.4-5.7-5.8 0-3.5 2.6-5.8 5.7-5.8 3.2 0 5.8 2.4 5.8 5.8s-2.6 5.8-5.8 5.8m0-17.2c-6.5 0-11.8 5.1-11.8 11.4 0 1.2.2 2.3.5 3.4-1.7 1.5-3.6 2.5-6.2 2.5-3.8 0-6-2.7-6-5.9s2.3-5.8 6.4-5.8c.8 0 1.7 0 2.7.2l-2.7-5.7c-.4-.1-.9-.1-1.3-.1-5.9 0-11.2 5.3-11.2 11.5 0 6.4 4.8 11.2 11.8 11.2 3.6 0 6.5-1.5 9-3.9 2.2 2.4 5.3 3.9 8.8 3.9 6.5 0 11.8-5.1 11.8-11.4.1-6.2-5.3-11.3-11.8-11.3" fill="#0069D8"></path></svg> ' . $this->title,
+                                        'cost' => $shipping_cost,
+                                    );
 
-                            if ($shipping_cost > 0) {
-                                $rate = array(
-                                    'id'   => 'cocolis',
-                                    'label' => '<svg viewBox="0 0 136.1 40" width="84" height="26"><path d="M107.9 10.1c2 0 3.6-1.6 3.6-3.6s-1.6-3.6-3.6-3.6-3.6 1.6-3.6 3.6 1.6 3.6 3.6 3.6m12.4 9c.7 0 1.4 0 2 .1l-2.5-5.3c-.4-.1-.8-.1-1.3-.1-4.3 0-6.5 2.6-6.5 6.5 0 2.2 2 7.2 2 9 0 1.2-.8 1.9-2.3 1.9-.6 0-1.7 0-2.7-.2l2.5 5.3c.6.1 1.2.2 1.9.2 4.4 0 6.7-2.7 6.7-6.4 0-2.7-2-7.2-2-9-.1-1 .5-2 2.2-2m-11.5-4.9h-6.1l-3.1 11.5-7.4 4.3 7.2-26.8h-6.1L86.1 30c-.3 1.1-.3 1.7-.3 2.3 0 2.3 1.9 4.2 4.3 4.2 1.2 0 2.2-.5 3.2-1.1l4.9-2.8c.1 2.2 1.9 3.9 4.3 3.9 1.2 0 2.2-.5 3.2-1.1l1.4-.8 1.9-7.1-4.3 2.5 4.1-15.8zM74 30.9c-3.2 0-5.7-2.4-5.7-5.8 0-3.5 2.6-5.8 5.7-5.8 3.2 0 5.8 2.4 5.8 5.8s-2.6 5.8-5.8 5.8m0-17.2c-6.5 0-11.8 5.1-11.8 11.4 0 1.2.2 2.3.5 3.4C61 30 59.1 31 56.5 31c-3.8 0-6-2.7-6-5.9s2.3-5.8 6.4-5.8c.8 0 1.7 0 2.7.2l-2.7-5.7c-.4-.1-.9-.1-1.3-.1-5.9 0-11.1 5.3-11.1 11.5 0 6.4 4.8 11.2 11.8 11.2 3.6 0 6.5-1.5 9-3.9 2.2 2.4 5.3 3.9 8.8 3.9 6.5 0 11.8-5.1 11.8-11.4-.1-6.2-5.4-11.3-11.9-11.3" fill="#484867"></path><path d="M31.4 30.9c-3.2 0-5.7-2.4-5.7-5.8 0-3.5 2.6-5.8 5.7-5.8 3.2 0 5.8 2.4 5.8 5.8s-2.6 5.8-5.8 5.8m0-17.2c-6.5 0-11.8 5.1-11.8 11.4 0 1.2.2 2.3.5 3.4-1.7 1.5-3.6 2.5-6.2 2.5-3.8 0-6-2.7-6-5.9s2.3-5.8 6.4-5.8c.8 0 1.7 0 2.7.2l-2.7-5.7c-.4-.1-.9-.1-1.3-.1-5.9 0-11.2 5.3-11.2 11.5 0 6.4 4.8 11.2 11.8 11.2 3.6 0 6.5-1.5 9-3.9 2.2 2.4 5.3 3.9 8.8 3.9 6.5 0 11.8-5.1 11.8-11.4.1-6.2-5.3-11.3-11.8-11.3" fill="#0069D8"></path></svg> ' . $this->title,
-                                    'cost' => $shipping_cost,
-                                );
-
-                                $this->add_rate($rate);
+                                    $this->add_rate($rate);
 
 
 
-                                if ($total >= 500) {
-                                    $shipping_cost_insurance = ($match->estimated_prices->with_insurance) / 100;
-                                    if ($shipping_cost_insurance > 0) {
-                                        $rate = array(
-                                            'id'   => 'cocolis_assurance',
-                                            'label' => $this->title . __(' with insurance', 'cocolis'),
-                                            'cost' => $shipping_cost_insurance,
-                                        );
-                                        $this->add_rate($rate);
+                                    if ($total >= 500) {
+                                        $shipping_cost_insurance = ($match->estimated_prices->with_insurance) / 100;
+                                        if ($shipping_cost_insurance > 0) {
+                                            $rate = array(
+                                                'id'   => 'cocolis_assurance',
+                                                'label' => $this->title . __(' with insurance', 'cocolis'),
+                                                'cost' => $shipping_cost_insurance,
+                                            );
+                                            $this->add_rate($rate);
+                                        }
                                     }
                                 }
                             }
                         }
+                    } catch (\Throwable $th) {
+                        error_log('Cocolis ERROR : ' . $th);
+                        return false;
                     }
                 }
             }
