@@ -273,7 +273,7 @@ class WC_Cocolis_Payment_Method
                         "to_pickup_date" => $to_date,
                         "is_passenger" => false,
                         "is_packaged" => true,
-                        "price" => floatval($order->get_subtotal_to_display(true)) * 100,
+                        "price" => (int) $order->get_shipping_total() * 100,
                         "volume" => $dimensions,
                         "environment" => "objects",
                         "photo_urls" => $images,
