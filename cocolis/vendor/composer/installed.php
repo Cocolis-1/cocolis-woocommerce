@@ -1,8 +1,8 @@
 <?php return array (
   'root' => 
   array (
-    'pretty_version' => '1.0.0',
-    'version' => '1.0.0.0',
+    'pretty_version' => '1.0.6',
+    'version' => '1.0.6.0',
     'aliases' => 
     array (
     ),
@@ -23,8 +23,8 @@
     ),
     'cocolis/woocommerce' => 
     array (
-      'pretty_version' => '1.0.0',
-      'version' => '1.0.0.0',
+      'pretty_version' => '1.0.6',
+      'version' => '1.0.6.0',
       'aliases' => 
       array (
       ),
