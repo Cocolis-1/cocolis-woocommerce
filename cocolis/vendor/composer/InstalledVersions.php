@@ -24,8 +24,8 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => '1.0.6',
-    'version' => '1.0.6.0',
+    'pretty_version' => '1.0.7',
+    'version' => '1.0.7.0',
     'aliases' => 
     array (
     ),
@@ -42,12 +42,12 @@ private static $installed = array (
       array (
         0 => '9999999-dev',
       ),
-      'reference' => '82ffb2e571cd12ad1135bc04d15529965a80d83f',
+      'reference' => 'c6300b2e471b28a15568768d8b3635fd007dcd2d',
     ),
     'cocolis/woocommerce' => 
     array (
-      'pretty_version' => '1.0.6',
-      'version' => '1.0.6.0',
+      'pretty_version' => '1.0.7',
+      'version' => '1.0.7.0',
       'aliases' => 
       array (
       ),

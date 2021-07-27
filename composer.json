@@ -5,7 +5,7 @@
   "require": {
     "cocolis/php": "dev-develop"
   },
-  "version": "1.0.7",
+  "version": "1.0.8",
   "license": "MIT",
   "authors": [
     {

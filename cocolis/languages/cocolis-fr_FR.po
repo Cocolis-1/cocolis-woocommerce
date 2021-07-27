@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Cocolis\n"
-"POT-Creation-Date: 2021-05-04 14:49+0200\n"
-"PO-Revision-Date: 2021-05-04 14:49+0200\n"
+"POT-Creation-Date: 2021-07-27 15:10+0200\n"
+"PO-Revision-Date: 2021-07-27 15:22+0200\n"
 "Last-Translator: \n"
 "Language-Team: Cocolis\n"
 "Language: fr_FR\n"
@@ -39,11 +39,11 @@ msgstr ""
 "Veuillez remplir les détails de l’assurance pour la livraison Cocolis "
 "(actualiser si vous avez changé de mode de livraison)"
 
-#: class/wc-cocolis-payment.php:162
+#: class/wc-cocolis-payment.php:163
 msgid "No phone number provided in the Cocolis configuration"
 msgstr "Pas de numéro de téléphone fourni dans la configuration Cocolis"
 
-#: class/wc-cocolis-payment.php:162
+#: class/wc-cocolis-payment.php:163
 msgid "Required seller phone number"
 msgstr "Le numéro de téléphone du vendeur est requis"
 
@@ -99,51 +99,67 @@ msgstr "Ajoutez Cocolis.fr en tant que prestataire de livraison"
 msgid "Cocolis Shipping"
 msgstr "Livraison Cocolis"
 
-#: wc-cocolis-shipping.php:91
+#: wc-cocolis-shipping.php:111
+msgid ""
+"The configuration of the Cocolis module is not correctly configured to fully "
+"use it."
+msgstr ""
+"La configuration du module Cocolis n’est pas correctement configurée pour "
+"l’utiliser pleinement."
+
+#: wc-cocolis-shipping.php:117
+msgid ""
+"The address entered in the Woocommerce settings is not properly configured "
+"to fully use the Cocolis module."
+msgstr ""
+"L’adresse saisie dans les paramètres de Woocommerce n’est pas correctement "
+"configurée pour utiliser pleinement le module Cocolis."
+
+#: wc-cocolis-shipping.php:128
 msgid "Enable"
 msgstr "Activer"
 
-#: wc-cocolis-shipping.php:93
+#: wc-cocolis-shipping.php:130
 msgid "Enable this shipping."
 msgstr "Activer ce mode de livraison."
 
-#: wc-cocolis-shipping.php:97
+#: wc-cocolis-shipping.php:134
 msgid "Mode"
 msgstr "Mode"
 
-#: wc-cocolis-shipping.php:99
+#: wc-cocolis-shipping.php:136
 msgid "Use this module in developement mode (sandbox) or in production ?"
 msgstr "Utiliser ce module en mode développement (sandbox) ou en production ?"
 
-#: wc-cocolis-shipping.php:103
+#: wc-cocolis-shipping.php:140
 msgid "Sandbox"
 msgstr "Bac à sable"
 
-#: wc-cocolis-shipping.php:104
+#: wc-cocolis-shipping.php:141
 msgid "Production"
 msgstr "Production"
 
-#: wc-cocolis-shipping.php:109
+#: wc-cocolis-shipping.php:146
 msgid "App id"
 msgstr "ID de l'application"
 
-#: wc-cocolis-shipping.php:111
+#: wc-cocolis-shipping.php:148
 msgid "Enter the app-id provided to you by Cocolis"
 msgstr "Entrez l’app-id qui vous a été fourni par Cocolis"
 
-#: wc-cocolis-shipping.php:117
+#: wc-cocolis-shipping.php:154
 msgid "Password"
 msgstr "Mot de passe"
 
-#: wc-cocolis-shipping.php:119
+#: wc-cocolis-shipping.php:156
 msgid "Enter the password provided to you by Cocolis"
 msgstr "Entrez le mot de passe qui vous a été fourni par Cocolis"
 
-#: wc-cocolis-shipping.php:125
+#: wc-cocolis-shipping.php:162
 msgid "Default width in cm"
 msgstr "Largeur par défaut en cm"
 
-#: wc-cocolis-shipping.php:127
+#: wc-cocolis-shipping.php:164
 msgid ""
 "Allows you to calculate the costs in the absence of the width indicated in "
 "the product sheet."
@@ -151,11 +167,11 @@ msgstr ""
 "Permet de calculer les coûts en l’absence de la largeur indiquée dans la "
 "fiche produit."
 
-#: wc-cocolis-shipping.php:133
+#: wc-cocolis-shipping.php:170
 msgid "Default height in cm"
 msgstr "Hauteur par défaut en cm"
 
-#: wc-cocolis-shipping.php:135
+#: wc-cocolis-shipping.php:172
 msgid ""
 "Allows you to calculate the costs in the absence of the height indicated in "
 "the product sheet."
@@ -163,11 +179,11 @@ msgstr ""
 "Permet de calculer les coûts en l’absence de la hauteur indiquée dans la "
 "fiche produit."
 
-#: wc-cocolis-shipping.php:141
+#: wc-cocolis-shipping.php:178
 msgid "Default length in cm"
 msgstr "Longueur par défaut en cm"
 
-#: wc-cocolis-shipping.php:143
+#: wc-cocolis-shipping.php:180
 msgid ""
 "Allows you to calculate the costs in the absence of the length indicated in "
 "the product sheet."
@@ -175,43 +191,43 @@ msgstr ""
 "Permet de calculer les coûts en l’absence de la longueur indiquée dans la "
 "fiche produit."
 
-#: wc-cocolis-shipping.php:149
+#: wc-cocolis-shipping.php:186
 msgid "Email"
 msgstr "Email"
 
-#: wc-cocolis-shipping.php:151
+#: wc-cocolis-shipping.php:188
 msgid "Required for the ride creation at Cocolis (vendor email)"
 msgstr ""
 "Nécessaire pour la création d’une annonce chez Cocolis (email du vendeur)"
 
-#: wc-cocolis-shipping.php:157
+#: wc-cocolis-shipping.php:194
 msgid "Phone"
 msgstr "Téléphone"
 
-#: wc-cocolis-shipping.php:159
+#: wc-cocolis-shipping.php:196
 msgid "Required for the ride creation at Cocolis (landline or cell phone)"
 msgstr ""
 "Requis pour la création de trajet chez Cocolis (téléphone fixe ou cellulaire)"
 
-#: wc-cocolis-shipping.php:181
+#: wc-cocolis-shipping.php:218
 msgid "The credentials provided are not recognized by the Cocolis API."
 msgstr ""
 "Les informations d’identification fournies ne sont pas reconnues par l’API "
 "Cocolis."
 
-#: wc-cocolis-shipping.php:181
+#: wc-cocolis-shipping.php:218
 msgid "Authentication error on the API server"
 msgstr "Erreur d’authentification sur le serveur API"
 
-#: wc-cocolis-shipping.php:318
+#: wc-cocolis-shipping.php:356
 msgid " with insurance"
 msgstr " avec assurance"
 
-#: wc-cocolis-shipping.php:386
+#: wc-cocolis-shipping.php:430
 msgid "Free insurance up to 500 €"
 msgstr "Assurance offerte jusqu’à 500 €"
 
-#: wc-cocolis-shipping.php:400
+#: wc-cocolis-shipping.php:444
 msgid "Supplementary insurance up to "
 msgstr "Assurance complémentaire jusqu'à "
 

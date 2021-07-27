@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2054ecd6e455ae19eba6d8ac21ef8c24",
+    "content-hash": "58a8167df2e67502ca0541016a868e45",
     "packages": [
         {
             "name": "cocolis/php",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Cocolis-1/cocolis-php.git",
-                "reference": "82ffb2e571cd12ad1135bc04d15529965a80d83f"
+                "reference": "c6300b2e471b28a15568768d8b3635fd007dcd2d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Cocolis-1/cocolis-php/zipball/82ffb2e571cd12ad1135bc04d15529965a80d83f",
-                "reference": "82ffb2e571cd12ad1135bc04d15529965a80d83f",
+                "url": "https://api.github.com/repos/Cocolis-1/cocolis-php/zipball/c6300b2e471b28a15568768d8b3635fd007dcd2d",
+                "reference": "c6300b2e471b28a15568768d8b3635fd007dcd2d",
                 "shasum": ""
             },
             "require": {
@@ -64,7 +64,7 @@
                 "issues": "https://github.com/Cocolis-1/cocolis-php/issues",
                 "source": "https://github.com/Cocolis-1/cocolis-php/tree/develop"
             },
-            "time": "2021-04-06T07:37:42+00:00"
+            "time": "2021-07-27T07:54:57+00:00"
         }
     ],
     "packages-dev": [],

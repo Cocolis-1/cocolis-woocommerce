@@ -6,7 +6,7 @@
  * Description: A plugin to add Cocolis.fr as a carrier on Woocommerce
  * Author:  Cocolis.fr
  * Author URI: https://www.cocolis.fr
- * Version: 1.0.7
+ * Version: 1.0.8
  * Developer: Alexandre BETTAN, Sebastien FIELOUX
  * Developer URI: https://github.com/btnalexandre, https://github.com/sebfie
  * Domain Path: /languages
@@ -82,7 +82,44 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     // Save settings in admin if you have any defined
                     add_action('woocommerce_update_options_shipping_' . $this->id, array($this, 'process_admin_options'));
                     add_filter('woocommerce_settings_api_sanitized_fields_' . $this->id, array($this, 'cocolis_validate_settings_fields'));
+                    add_action('admin_notices', array($this, 'general_admin_notice'));
                 }
+
+                function general_admin_notice()
+                {
+                    // The main address pieces:
+                    $store_name = apply_filters('cocolis_store_name', get_bloginfo('name'));
+                    $store_address     = apply_filters('cocolis_store_address', get_option('woocommerce_store_address'));
+                    $store_address_2   = apply_filters('cocolis_store_address_2', get_option('woocommerce_store_address_2'));
+                    $store_city        = apply_filters('cocolis_store_city', get_option('woocommerce_store_city'));
+                    $store_postcode    = apply_filters('cocolis_store_postcode', get_option('woocommerce_store_postcode'));
+
+                    // The country/state
+                    $store_raw_country = apply_filters('cocolis_store_country', get_option('woocommerce_default_country'));
+
+                    $app_id = $this->settings['app_id'];
+                    $password = $this->settings['password'];
+                    $width = $this->settings['width'];
+                    $height = $this->settings['height'];
+                    $length = $this->settings['length'];
+                    $email = $this->settings['email'];
+                    $phone = $this->settings['phone'];
+
+                    if (empty($app_id) || empty($password) || empty($width) || empty($height) || empty($length) || empty($email) || empty($phone)) {
+                        echo '<div class="notice notice-error is-dismissible">
+                             <h3>
+                                <b style="color: red">' . __('The configuration of the Cocolis module is not correctly configured to fully use it.', 'cocolis') . '</b>
+                            </h3>
+                         </div>';
+                    } else if (empty($store_name) || empty($store_address) || empty($store_city) || empty($store_postcode) || empty($store_raw_country)) {
+                        echo '<div class="notice notice-error is-dismissible">
+                            <h3>
+                                <b style="color: red">' . __('The address entered in the Woocommerce settings is not properly configured to fully use the Cocolis module.', 'cocolis') . '</b>
+                            </h3>
+                        </div>';
+                    }
+                }
+
 
                 public function init_form_fields()
                 {
