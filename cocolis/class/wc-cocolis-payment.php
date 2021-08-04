@@ -25,7 +25,9 @@ class WC_Cocolis_Payment_Method
         global $woocommerce;
         $total = WC()->cart->get_cart_subtotal(true);
         // Maximal cost insurance
-        if ($total <= 1500) {
+        if ($total <= 500) {
+            $max_value = 500;
+        } elseif ($total <= 1500) {
             $max_value = 1500;
         } elseif ($total <= 3000) {
             $max_value = 3000;

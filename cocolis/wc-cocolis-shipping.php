@@ -6,7 +6,7 @@
  * Description: A plugin to add Cocolis.fr as a carrier on Woocommerce
  * Author:  Cocolis.fr
  * Author URI: https://www.cocolis.fr
- * Version: 1.0.8
+ * Version: 1.0.9
  * Developer: Alexandre BETTAN, Sebastien FIELOUX
  * Developer URI: https://github.com/btnalexandre, https://github.com/sebfie
  * Domain Path: /languages
@@ -348,7 +348,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
 
 
-                                    if ($total >= 500) {
+                                    if ($total >= 150) {
                                         $shipping_cost_insurance = ($match->estimated_prices->with_insurance) / 100;
                                         if ($shipping_cost_insurance > 0) {
                                             $rate = array(
@@ -427,11 +427,13 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             <b> ' . $label;
 
         if ($method->id === "cocolis") {
-            $label = $label . "</b> </br>" . __("Free insurance up to 500 €", 'cocolis');
+            $label = $label . "</b> </br>" . __("Free insurance up to 150 €", 'cocolis');
         } elseif ($method->id === "cocolis_assurance") {
             $total = WC()->cart->get_subtotal();
             // Maximal cost insurance
-            if ($total <= 500) {
+            if ($total <= 150) {
+                $max_value = 150;
+            } elseif ($total <= 500) {
                 $max_value = 500;
             } elseif ($total <= 1500) {
                 $max_value = 1500;
