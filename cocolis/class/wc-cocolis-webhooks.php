@@ -5,10 +5,9 @@ if (!defined('ABSPATH')) {
 
 class WC_Cocolis_Webhooks_Method
 {
-
     public function __construct()
     {
-        add_action('rest_api_init', array($this, 'cocolis_register_hooks'));
+        add_action('rest_api_init', array($this, 'cocolis_register_hooks'), 999, 2);
     }
 
     /**
@@ -175,27 +174,27 @@ class WC_Cocolis_Webhooks_Method
             // By using this constant we ensure that when the WP_REST_Server changes our readable endpoints will work as intended.
             'methods'  => 'POST',
             // Here we register our callback. The callback is fired when this endpoint is matched by the WP_REST_Server class.
-            'callback' => 'cocolis_webhook_offer_accepted',
+            'callback' => array($this, 'cocolis_webhook_offer_accepted'),
             'permission_callback' => '__return_true'
         ));
         register_rest_route('cocolis/v1', '/cocolis_webhook_offer_completed', array(
             'methods'  => 'POST',
-            'callback' => 'cocolis_webhook_offer_completed',
+            'callback' => array($this, 'cocolis_webhook_offer_completed'),
             'permission_callback' => '__return_true'
         ));
         register_rest_route('cocolis/v1', '/cocolis_webhook_ride_published', array(
             'methods'  => 'POST',
-            'callback' => 'cocolis_webhook_ride_published',
+            'callback' => array($this, 'cocolis_webhook_ride_published'),
             'permission_callback' => '__return_true'
         ));
         register_rest_route('cocolis/v1', '/cocolis_webhook_offer_cancelled', array(
             'methods'  => 'POST',
-            'callback' => 'cocolis_webhook_offer_cancelled',
+            'callback' => array($this, 'cocolis_webhook_offer_cancelled'),
             'permission_callback' => '__return_true'
         ));
         register_rest_route('cocolis/v1', '/cocolis_webhook_ride_published', array(
             'methods'  => 'POST',
-            'callback' => 'cocolis_webhook_ride_published',
+            'callback' => array($this, 'cocolis_webhook_ride_published'),
             'permission_callback' => '__return_true'
         ));
     }

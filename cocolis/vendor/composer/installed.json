@@ -7,12 +7,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Cocolis-1/cocolis-php.git",
-                "reference": "c6300b2e471b28a15568768d8b3635fd007dcd2d"
+                "reference": "94098bda9003d423ff6cb9ba68e56f383c09fbc0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Cocolis-1/cocolis-php/zipball/c6300b2e471b28a15568768d8b3635fd007dcd2d",
-                "reference": "c6300b2e471b28a15568768d8b3635fd007dcd2d",
+                "url": "https://api.github.com/repos/Cocolis-1/cocolis-php/zipball/94098bda9003d423ff6cb9ba68e56f383c09fbc0",
+                "reference": "94098bda9003d423ff6cb9ba68e56f383c09fbc0",
                 "shasum": ""
             },
             "require": {
@@ -21,11 +21,11 @@
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.17@dev",
                 "kint-php/kint": "dev-master",
-                "php-vcr/phpunit-testlistener-vcr": "*",
+                "php-vcr/php-vcr": "dev-master",
                 "phpunit/php-code-coverage": "^9.2",
                 "phpunit/phpunit": "^9.4"
             },
-            "time": "2021-07-27T07:54:57+00:00",
+            "time": "2021-09-16T06:43:59+00:00",
             "default-branch": true,
             "type": "package",
             "installation-source": "source",

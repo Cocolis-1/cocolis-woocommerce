@@ -14,7 +14,7 @@ class WC_Cocolis_Payment_Method
 
         add_action('woocommerce_after_checkout_validation', array($this, 'cocolis_validate'), 20, 2);
 
-        add_action('woocommerce_order_status_processing', array($this, 'cocolis_payment_complete'));
+        add_action('woocommerce_order_status_processing', array($this, 'cocolis_payment_complete'), 100);
     }
 
     /**

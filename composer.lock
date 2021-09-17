@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "58a8167df2e67502ca0541016a868e45",
+    "content-hash": "bafb34b573aae9493861aa7fb393db24",
     "packages": [
         {
             "name": "cocolis/php",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Cocolis-1/cocolis-php.git",
-                "reference": "c6300b2e471b28a15568768d8b3635fd007dcd2d"
+                "reference": "94098bda9003d423ff6cb9ba68e56f383c09fbc0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Cocolis-1/cocolis-php/zipball/c6300b2e471b28a15568768d8b3635fd007dcd2d",
-                "reference": "c6300b2e471b28a15568768d8b3635fd007dcd2d",
+                "url": "https://api.github.com/repos/Cocolis-1/cocolis-php/zipball/94098bda9003d423ff6cb9ba68e56f383c09fbc0",
+                "reference": "94098bda9003d423ff6cb9ba68e56f383c09fbc0",
                 "shasum": ""
             },
             "require": {
@@ -26,7 +26,7 @@
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.17@dev",
                 "kint-php/kint": "dev-master",
-                "php-vcr/phpunit-testlistener-vcr": "*",
+                "php-vcr/php-vcr": "dev-master",
                 "phpunit/php-code-coverage": "^9.2",
                 "phpunit/phpunit": "^9.4"
             },
@@ -64,7 +64,7 @@
                 "issues": "https://github.com/Cocolis-1/cocolis-php/issues",
                 "source": "https://github.com/Cocolis-1/cocolis-php/tree/develop"
             },
-            "time": "2021-07-27T07:54:57+00:00"
+            "time": "2021-09-16T06:43:59+00:00"
         }
     ],
     "packages-dev": [],
@@ -77,5 +77,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }
