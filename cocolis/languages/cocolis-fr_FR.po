@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Cocolis\n"
-"POT-Creation-Date: 2021-08-04 12:37+0200\n"
-"PO-Revision-Date: 2021-08-04 12:57+0200\n"
+"POT-Creation-Date: 2021-09-22 19:03+0200\n"
+"PO-Revision-Date: 2021-09-22 19:03+0200\n"
 "Last-Translator: \n"
 "Language-Team: Cocolis\n"
 "Language: fr_FR\n"
@@ -15,23 +15,23 @@ msgstr ""
 "X-Poedit-KeywordsList: __\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: class/wc-cocolis-payment.php:42
+#: class/wc-cocolis-payment.php:48
 msgid "insurance conditions"
 msgstr "conditions d’assurance"
 
-#: class/wc-cocolis-payment.php:47
+#: class/wc-cocolis-payment.php:53
 msgid "Birth date for insurance"
 msgstr "Date de naissance (pour l’assurance)"
 
-#: class/wc-cocolis-payment.php:55
+#: class/wc-cocolis-payment.php:61
 msgid "I confirm that I have read the "
 msgstr "Je confirme que j’ai lu les "
 
-#: class/wc-cocolis-payment.php:55
+#: class/wc-cocolis-payment.php:61
 msgid " and that I choose the insurance up to "
 msgstr " et que je choisis l’assurance jusqu’à "
 
-#: class/wc-cocolis-payment.php:79
+#: class/wc-cocolis-payment.php:85
 msgid ""
 "Please fill insurance details for Cocolis delivery (refresh if you have "
 "changed delivery mode)"
@@ -39,39 +39,51 @@ msgstr ""
 "Veuillez remplir les détails de l’assurance pour la livraison Cocolis "
 "(actualiser si vous avez changé de mode de livraison)"
 
-#: class/wc-cocolis-payment.php:163
+#: class/wc-cocolis-payment.php:169
 msgid "No phone number provided in the Cocolis configuration"
 msgstr "Pas de numéro de téléphone fourni dans la configuration Cocolis"
 
-#: class/wc-cocolis-payment.php:163
+#: class/wc-cocolis-payment.php:169
 msgid "Required seller phone number"
 msgstr "Le numéro de téléphone du vendeur est requis"
 
-#: class/wc-cocolis-webhooks.php:32
+#: class/wc-cocolis-payment.php:318 class/wc-cocolis-payment.php:344
+msgid "Your request to Cocolis generated the following error: "
+msgstr "Votre demande à Cocolis a généré l’erreur suivante : "
+
+#: class/wc-cocolis-payment.php:338
+msgid ""
+"Cocolis has cancelled the ride associated with this order following your "
+"customer refund."
+msgstr ""
+"Cocolis a annulé le trajet associé à cette commande suite à votre "
+"remboursement client."
+
+#: class/wc-cocolis-webhooks.php:31
 msgid "A carrier has been selected to carry out the Cocolis delivery."
 msgstr "Un transporteur a été sélectionné pour effectuer la livraison Cocolis."
 
-#: class/wc-cocolis-webhooks.php:49
+#: class/wc-cocolis-webhooks.php:48
 msgid "The public ride URL : "
 msgstr "L’URL de l’annonce publique : %s "
 
-#: class/wc-cocolis-webhooks.php:54
+#: class/wc-cocolis-webhooks.php:53
 msgid "Buyer tracking delivery URL : "
 msgstr "URL de livraison de suivi de l’acheteur : %s "
 
-#: class/wc-cocolis-webhooks.php:59
+#: class/wc-cocolis-webhooks.php:58
 msgid "[Private] Seller tracking delivery URL : "
 msgstr "[Privé] URL de livraison de suivi du vendeur : "
 
-#: class/wc-cocolis-webhooks.php:86
+#: class/wc-cocolis-webhooks.php:85
 msgid "Delivery completed by Cocolis"
 msgstr "Livraison complétée par Cocolis"
 
-#: class/wc-cocolis-webhooks.php:111
+#: class/wc-cocolis-webhooks.php:110
 msgid "An offer was published on cocolis.fr"
 msgstr "Une offre a été publiée sur cocolis.fr"
 
-#: class/wc-cocolis-webhooks.php:135
+#: class/wc-cocolis-webhooks.php:134
 msgid ""
 "The delivery is cancelled by the carrier. The seller and the buyer are "
 "informed, their tracking page is updated."
@@ -79,7 +91,7 @@ msgstr ""
 "La livraison est annulée par le transporteur. Le vendeur et l’acheteur sont "
 "informés, leur page de suivi est mise à jour."
 
-#: class/wc-cocolis-webhooks.php:159
+#: class/wc-cocolis-webhooks.php:158
 msgid ""
 "The ride did not find a carrier. Get closer to our support and with cocolis."
 "fr"

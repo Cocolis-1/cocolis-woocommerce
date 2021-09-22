@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
@@ -15,6 +17,8 @@ class WC_Cocolis_Payment_Method
         add_action('woocommerce_after_checkout_validation', array($this, 'cocolis_validate'), 20, 2);
 
         add_action('woocommerce_order_status_processing', array($this, 'cocolis_payment_complete'), 100);
+
+        add_action('woocommerce_order_refunded', array($this, 'cocolis_order_refunded'), 10, 2);
     }
 
     /**
@@ -205,7 +209,7 @@ class WC_Cocolis_Payment_Method
                 }
 
                 if (strpos($order->get_shipping_method(), "with insurance") !== false || strpos($order->get_shipping_method(), "avec assurance") !== false) {
-                    $birthday = new DateTime($order_birthdate);
+                    $birthday = Carbon::parse($order_birthdate)->format(DateTime::ISO8601);
 
                     $params = [
                         "description" => "Livraison de la commande : " . implode(", ", $arrayname) . " vendue sur le site marketplace.",
@@ -252,12 +256,14 @@ class WC_Cocolis_Payment_Method
                             "insurance_postal_code" => $order_shipping_postcode,
                             "insurance_city" => $order_shipping_city,
                             "insurance_country" => $order_shipping_country,
-                            "insurance_birthdate" => $birthday->format('c')
+                            "insurance_birthdate" => $birthday
                         ],
                     ];
 
                     $client = $client->getRideClient();
-                    $client->create($params);
+                    $ride = $client->create($params);
+                    $order->update_meta_data('_cocolis_ride_id', $ride->id);
+                    $order->save();
                 } else {
                     $params = [
                         "description" => "Livraison de la commande : " . implode(", ", $arrayname) . " vendue sur le site marketplace.",
@@ -301,11 +307,42 @@ class WC_Cocolis_Payment_Method
                     ];
 
                     $client = $client->getRideClient();
-                    $client->create($params);
+                    $ride = $client->create($params);
+                    $order->update_meta_data('_cocolis_ride_id', $ride->id);
+                    $order->save();
                 }
             }
         } catch (\Throwable $th) {
             error_log('Cocolis ERROR : ' . $th);
+            $order = wc_get_order($order_id);
+            $note = __("Your request to Cocolis generated the following error: ", 'cocolis') . $th->getMessage();
+            $order->add_order_note($note);
+            return false;
+        }
+    }
+
+    /**
+     * When an order is refunded with Cocolis shipping
+     */
+    function cocolis_order_refunded($order_get_id, $refund_get_id)
+    {
+        try {
+            $order = wc_get_order($order_get_id);
+
+            if ($order->has_shipping_method('cocolis')) {
+                cocolis_shipping_method_init();
+                $shipping_class = new WC_Cocolis_Shipping_Method();
+                $client = $shipping_class->cocolis_authenticated_client();
+                $client = $client->getRideClient();
+                $client->remove($order->get_meta('_cocolis_ride_id'));
+                $note = __("Cocolis has cancelled the ride associated with this order following your customer refund.", 'cocolis');
+                $order->add_order_note($note);
+            }
+        } catch (\Throwable $th) {
+            error_log('Cocolis ERROR : ' . $th);
+            $order = wc_get_order($order_get_id);
+            $note = __("Your request to Cocolis generated the following error: ", 'cocolis') . $th->getMessage();
+            $order->add_order_note($note);
             return false;
         }
     }
