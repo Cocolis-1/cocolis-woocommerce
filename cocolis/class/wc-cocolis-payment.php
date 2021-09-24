@@ -316,7 +316,7 @@ class WC_Cocolis_Payment_Method
             error_log('Cocolis ERROR : ' . $th);
             $order = wc_get_order($order_id);
             $note = __("Your request to Cocolis generated the following error: ", 'cocolis') . $th->getMessage();
-            $order->add_order_note($note);
+            $order->add_order_note($note, false);
             return false;
         }
     }
@@ -336,13 +336,13 @@ class WC_Cocolis_Payment_Method
                 $client = $client->getRideClient();
                 $client->remove($order->get_meta('_cocolis_ride_id'));
                 $note = __("Cocolis has cancelled the ride associated with this order following your customer refund.", 'cocolis');
-                $order->add_order_note($note);
+                $order->add_order_note($note, false);
             }
         } catch (\Throwable $th) {
             error_log('Cocolis ERROR : ' . $th);
             $order = wc_get_order($order_get_id);
             $note = __("Your request to Cocolis generated the following error: ", 'cocolis') . $th->getMessage();
-            $order->add_order_note($note);
+            $order->add_order_note($note, false);
             return false;
         }
     }

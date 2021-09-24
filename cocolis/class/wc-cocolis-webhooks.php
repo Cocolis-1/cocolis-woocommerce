@@ -31,7 +31,7 @@ class WC_Cocolis_Webhooks_Method
             $note = __("A carrier has been selected to carry out the Cocolis delivery.", 'cocolis');
 
             // Add the note
-            $order->add_order_note($note, true);
+            $order->add_order_note($note, false);
 
             if (!empty($resource_id)) {
                 cocolis_shipping_method_init();
@@ -58,7 +58,7 @@ class WC_Cocolis_Webhooks_Method
                 $note = __("[Private] Seller tracking delivery URL : ", 'cocolis') . $ride->getSellerURL();
 
                 // Add the note
-                $order->add_order_note($note);
+                $order->add_order_note($note, false);
             }
 
             $order->update_status('processing');
@@ -85,7 +85,7 @@ class WC_Cocolis_Webhooks_Method
             $note = __("Delivery completed by Cocolis", 'cocolis');
 
             // Add the note
-            $order->add_order_note($note);
+            $order->add_order_note($note, false);
             $order->update_status('completed');
         }
         echo json_encode(['success' => true]);
@@ -110,7 +110,7 @@ class WC_Cocolis_Webhooks_Method
             $note = __("An offer was published on cocolis.fr", 'cocolis');
 
             // Add the note
-            $order->add_order_note($note);
+            $order->add_order_note($note, false);
         }
         echo json_encode(['success' => true]);
         exit;
@@ -134,7 +134,7 @@ class WC_Cocolis_Webhooks_Method
             $note = __("The delivery is cancelled by the carrier. The seller and the buyer are informed, their tracking page is updated.", 'cocolis');
 
             // Add the note
-            $order->add_order_note($note, true);
+            $order->add_order_note($note, false);
         }
         echo json_encode(['success' => true]);
         exit;
@@ -158,7 +158,7 @@ class WC_Cocolis_Webhooks_Method
             $note = __("The ride did not find a carrier. Get closer to our support and with cocolis.fr", 'cocolis');
 
             // Add the note
-            $order->add_order_note($note, true);
+            $order->add_order_note($note, false);
             $order->update_status('failed');
         }
         echo json_encode(['success' => true]);
