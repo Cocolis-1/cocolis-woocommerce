@@ -45,17 +45,17 @@ class WC_Cocolis_Webhooks_Method
                 $link = $prod ? 'https://cocolis.fr/ride-public/' .
                     $slug : 'https://sandbox.cocolis.fr/ride-public/' . $slug;
 
-                $note = __("The public ride URL : ", 'cocolis') . $link;
+                $note = __("Link to ad: ", 'cocolis') . $link;
 
                 // Add the note
                 $order->add_order_note($note, true);
 
-                $note = __("Buyer tracking delivery URL : ", 'cocolis') . $ride->getBuyerURL();
+                $note = __("Link to buyer tracking: ", 'cocolis') . $ride->getBuyerURL();
 
                 // Add the note
                 $order->add_order_note($note, true);
 
-                $note = __("[Private] Seller tracking delivery URL : ", 'cocolis') . $ride->getSellerURL();
+                $note = __("Link to vendor tracking: ", 'cocolis') . $ride->getSellerURL();
 
                 // Add the note
                 $order->add_order_note($note, false);
@@ -107,7 +107,7 @@ class WC_Cocolis_Webhooks_Method
 
 
         if (!empty($order)) {
-            $note = __("An offer was published on cocolis.fr", 'cocolis');
+            $note = __("The delivery offer has just been published on cocolis.fr", 'cocolis');
 
             // Add the note
             $order->add_order_note($note, false);

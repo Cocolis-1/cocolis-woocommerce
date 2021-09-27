@@ -27,7 +27,8 @@ class WC_Cocolis_Payment_Method
     function cocolis_show_terms_insurance($fields)
     {
         global $woocommerce;
-        $total = WC()->cart->get_cart_subtotal(true);
+        $total = WC()->cart->cart_contents_total + WC()->cart->tax_total;
+
         // Maximal cost insurance
         if ($total <= 500) {
             $max_value = 500;
@@ -335,7 +336,7 @@ class WC_Cocolis_Payment_Method
                 $client = $shipping_class->cocolis_authenticated_client();
                 $client = $client->getRideClient();
                 $client->remove($order->get_meta('_cocolis_ride_id'));
-                $note = __("Cocolis has cancelled the ride associated with this order following your customer refund.", 'cocolis');
+                $note = __("The delivery ad has been removed following the refund.", 'cocolis');
                 $order->add_order_note($note, false);
             }
         } catch (\Throwable $th) {
