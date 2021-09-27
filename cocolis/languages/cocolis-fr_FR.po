@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Cocolis\n"
-"POT-Creation-Date: 2021-09-22 19:03+0200\n"
-"PO-Revision-Date: 2021-09-22 19:03+0200\n"
+"POT-Creation-Date: 2021-09-27 13:57+0200\n"
+"PO-Revision-Date: 2021-09-27 13:58+0200\n"
 "Last-Translator: \n"
 "Language-Team: Cocolis\n"
 "Language: fr_FR\n"
@@ -52,36 +52,32 @@ msgid "Your request to Cocolis generated the following error: "
 msgstr "Votre demande à Cocolis a généré l’erreur suivante : "
 
 #: class/wc-cocolis-payment.php:338
-msgid ""
-"Cocolis has cancelled the ride associated with this order following your "
-"customer refund."
-msgstr ""
-"Cocolis a annulé le trajet associé à cette commande suite à votre "
-"remboursement client."
+msgid "The delivery ad has been removed following the refund."
+msgstr "L’annonce de livraison a été supprimée suite au remboursement."
 
 #: class/wc-cocolis-webhooks.php:31
 msgid "A carrier has been selected to carry out the Cocolis delivery."
 msgstr "Un transporteur a été sélectionné pour effectuer la livraison Cocolis."
 
 #: class/wc-cocolis-webhooks.php:48
-msgid "The public ride URL : "
-msgstr "L’URL de l’annonce publique : %s "
+msgid "Link to ad: "
+msgstr "Lien vers l’annonce : "
 
 #: class/wc-cocolis-webhooks.php:53
-msgid "Buyer tracking delivery URL : "
-msgstr "URL de livraison de suivi de l’acheteur : %s "
+msgid "Link to buyer tracking: "
+msgstr "Lien vers le suivi acheteur : "
 
 #: class/wc-cocolis-webhooks.php:58
-msgid "[Private] Seller tracking delivery URL : "
-msgstr "[Privé] URL de livraison de suivi du vendeur : "
+msgid "Link to vendor tracking: "
+msgstr "Lien vers le suivi vendeur : "
 
 #: class/wc-cocolis-webhooks.php:85
 msgid "Delivery completed by Cocolis"
 msgstr "Livraison complétée par Cocolis"
 
 #: class/wc-cocolis-webhooks.php:110
-msgid "An offer was published on cocolis.fr"
-msgstr "Une offre a été publiée sur cocolis.fr"
+msgid "The delivery offer has just been published on cocolis.fr"
+msgstr "L’annonce de livraison vient d’être publiée sur cocolis.fr"
 
 #: class/wc-cocolis-webhooks.php:134
 msgid ""
@@ -242,6 +238,22 @@ msgstr "Assurance offerte jusqu’à 150 €"
 #: wc-cocolis-shipping.php:446
 msgid "Supplementary insurance up to "
 msgstr "Assurance complémentaire jusqu'à "
+
+#~ msgid ""
+#~ "Cocolis has cancelled the ride associated with this order following your "
+#~ "customer refund."
+#~ msgstr ""
+#~ "Cocolis a annulé le trajet associé à cette commande suite à votre "
+#~ "remboursement client."
+
+#~ msgid "The public ride URL : "
+#~ msgstr "L’URL de l’annonce publique : %s "
+
+#~ msgid "Buyer tracking delivery URL : "
+#~ msgstr "URL de livraison de suivi de l’acheteur : %s "
+
+#~ msgid "[Private] Seller tracking delivery URL : "
+#~ msgstr "[Privé] URL de livraison de suivi du vendeur : "
 
 #~ msgid "Birth date required for insurance"
 #~ msgstr "Date de naissance requise pour l’assurance"
