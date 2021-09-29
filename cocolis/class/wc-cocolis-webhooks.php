@@ -17,7 +17,7 @@ class WC_Cocolis_Webhooks_Method
     {
         $data = $request->get_body_params();
         $orderid = $data['external_id'];
-        $resource_id = $data['resource_id'];
+        $ride_id = $data['ride_id'];
         $event = $data['event'];
 
         if (empty($event) || empty($orderid)) {
@@ -33,12 +33,12 @@ class WC_Cocolis_Webhooks_Method
             // Add the note
             $order->add_order_note($note, false);
 
-            if (!empty($resource_id)) {
+            if (!empty($ride_id)) {
                 cocolis_shipping_method_init();
                 $shipping_class = new WC_Cocolis_Shipping_Method();
                 $client = $shipping_class->cocolis_authenticated_client();
                 $client = $client->getRideClient();
-                $ride = $client->get($resource_id);
+                $ride = $client->get($ride_id);
                 $slug = $ride->slug;
                 $prod = $shipping_class->settings['production_mode'] == "sandbox" ? false : true;
 
@@ -48,12 +48,12 @@ class WC_Cocolis_Webhooks_Method
                 $note = __("Link to ad: ", 'cocolis') . $link;
 
                 // Add the note
-                $order->add_order_note($note, true);
+                $order->add_order_note($note, false);
 
                 $note = __("Link to buyer tracking: ", 'cocolis') . $ride->getBuyerURL();
 
                 // Add the note
-                $order->add_order_note($note, true);
+                $order->add_order_note($note, false);
 
                 $note = __("Link to vendor tracking: ", 'cocolis') . $ride->getSellerURL();
 

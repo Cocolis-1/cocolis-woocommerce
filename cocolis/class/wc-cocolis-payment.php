@@ -331,13 +331,19 @@ class WC_Cocolis_Payment_Method
             $order = wc_get_order($order_get_id);
 
             if ($order->has_shipping_method('cocolis')) {
-                cocolis_shipping_method_init();
-                $shipping_class = new WC_Cocolis_Shipping_Method();
-                $client = $shipping_class->cocolis_authenticated_client();
-                $client = $client->getRideClient();
-                $client->remove($order->get_meta('_cocolis_ride_id'));
-                $note = __("The delivery ad has been removed following the refund.", 'cocolis');
-                $order->add_order_note($note, false);
+                if (!empty($order->get_meta('_cocolis_ride_id'))) {
+                    cocolis_shipping_method_init();
+                    $shipping_class = new WC_Cocolis_Shipping_Method();
+                    $client = $shipping_class->cocolis_authenticated_client();
+                    $client = $client->getRideClient();
+                    $client->remove($order->get_meta('_cocolis_ride_id'));
+                    $note = __("The delivery ad has been removed following the refund.", 'cocolis');
+                    $order->add_order_note($note, false);
+                } else {
+                    $order = wc_get_order($order_get_id);
+                    $note = __("We did not find any related cocolis ads, so the ad was not cancelled.", 'cocolis');
+                    $order->add_order_note($note, false);
+                }
             }
         } catch (\Throwable $th) {
             error_log('Cocolis ERROR : ' . $th);
