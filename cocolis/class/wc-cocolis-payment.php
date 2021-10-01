@@ -19,6 +19,8 @@ class WC_Cocolis_Payment_Method
         add_action('woocommerce_order_status_processing', array($this, 'cocolis_payment_complete'), 100);
 
         add_action('woocommerce_order_refunded', array($this, 'cocolis_order_refunded'), 10, 2);
+
+        add_action('add_meta_boxes', array($this, 'add_meta_boxesws'));
     }
 
     /**
@@ -109,7 +111,7 @@ class WC_Cocolis_Payment_Method
         try {
             $order = wc_get_order($order_id);
             $order_data = $order->get_data();
-            if ($order->has_shipping_method('cocolis')) {
+            if ($order->has_shipping_method('cocolis') && empty($order->get_meta('_cocolis_ride_id'))) {
                 // The main address pieces:
                 $store_name = apply_filters('cocolis_store_name', get_bloginfo('name'));
                 $store_address     = apply_filters('cocolis_store_address', get_option('woocommerce_store_address'));
@@ -351,6 +353,46 @@ class WC_Cocolis_Payment_Method
             $note = __("Your request to Cocolis generated the following error: ", 'cocolis') . $th->getMessage();
             $order->add_order_note($note, false);
             return false;
+        }
+    }
+
+
+    function add_meta_boxesws()
+    {
+        $post_id = isset($_GET['post']) ? $_GET['post'] : false;
+        $order = wc_get_order($post_id);
+
+        if ($order->has_shipping_method('cocolis')) {
+            add_meta_box(
+                'custom_order_meta_box',
+                __('Manage my delivery with Cocolis', 'cocolis'),
+                array($this, 'custom_metabox_content'),
+                'shop_order',
+                'normal',
+                'default'
+            );
+        }
+    }
+
+    function custom_metabox_content()
+    {
+        $post_id = isset($_GET['post']) ? $_GET['post'] : false;
+        $order = wc_get_order($post_id);
+
+        if (!$post_id) return; // Exit
+
+        $value = "cocolis";
+?>
+        <p><a href="?post=<?php echo $post_id; ?>&action=edit&create_delivery=<?php echo $value; ?>" class="button"><?php echo __("Create Cocolis Ride", 'cocolis'); ?></a></p>
+<?php
+        // The displayed value using GET method
+        if (isset($_GET['create_delivery']) && !empty($_GET['create_delivery'])) {
+            if (empty($order->get_meta('_cocolis_ride_id'))) {
+                echo '<b style="color:#0069d8">' . __("The delivery offer has just been published on cocolis.fr", 'cocolis') . '</b>';
+                $this->cocolis_payment_complete($post_id);
+            } else {
+                echo '<b style="color:red">' . __("We have find a related cocolis ad to this order, so the ad was not published.", 'cocolis') . '</b>';
+            }
         }
     }
 }
