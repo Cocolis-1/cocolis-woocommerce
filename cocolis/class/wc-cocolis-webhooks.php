@@ -39,16 +39,7 @@ class WC_Cocolis_Webhooks_Method
                 $client = $shipping_class->cocolis_authenticated_client();
                 $client = $client->getRideClient();
                 $ride = $client->get($ride_id);
-                $slug = $ride->slug;
-                $prod = $shipping_class->settings['production_mode'] == "sandbox" ? false : true;
 
-                $link = $prod ? 'https://cocolis.fr/ride-public/' .
-                    $slug : 'https://sandbox.cocolis.fr/ride-public/' . $slug;
-
-                $note = __("Link to ad: ", 'cocolis') . $link;
-
-                // Add the note
-                $order->add_order_note($note, false);
 
                 $note = __("Link to buyer tracking: ", 'cocolis') . $ride->getBuyerURL();
 
@@ -97,6 +88,7 @@ class WC_Cocolis_Webhooks_Method
         $data = $request->get_body_params();
         $orderid = $data['external_id'];
         $event = $data['event'];
+        $ride_id = $data['ride_id'];
 
         if (empty($event) || empty($orderid)) {
             echo ('Event or order ID missing from Webhook');
@@ -107,7 +99,22 @@ class WC_Cocolis_Webhooks_Method
 
 
         if (!empty($order)) {
+            $shipping_class = new WC_Cocolis_Shipping_Method();
+            $client = $shipping_class->cocolis_authenticated_client();
+            $client = $client->getRideClient();
+            $ride = $client->get($ride_id);
+            $slug = $ride->slug;
+            $prod = $shipping_class->settings['production_mode'] == "sandbox" ? false : true;
+
             $note = __("The delivery offer has just been published on cocolis.fr", 'cocolis');
+
+            // Add the note
+            $order->add_order_note($note, false);
+
+            $link = $prod ? 'https://cocolis.fr/ride-public/' .
+                $slug : 'https://sandbox.cocolis.fr/ride-public/' . $slug;
+
+            $note = __("Link to ad: ", 'cocolis') . $link;
 
             // Add the note
             $order->add_order_note($note, false);
