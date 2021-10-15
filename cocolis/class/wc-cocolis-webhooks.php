@@ -33,25 +33,6 @@ class WC_Cocolis_Webhooks_Method
             // Add the note
             $order->add_order_note($note, false);
 
-            if (!empty($ride_id)) {
-                cocolis_shipping_method_init();
-                $shipping_class = new WC_Cocolis_Shipping_Method();
-                $client = $shipping_class->cocolis_authenticated_client();
-                $client = $client->getRideClient();
-                $ride = $client->get($ride_id);
-
-
-                $note = __("Link to buyer tracking: ", 'cocolis') . $ride->getBuyerURL();
-
-                // Add the note
-                $order->add_order_note($note, false);
-
-                $note = __("Link to vendor tracking: ", 'cocolis') . $ride->getSellerURL();
-
-                // Add the note
-                $order->add_order_note($note, false);
-            }
-
             $order->update_status('processing');
         }
         echo json_encode(['success' => true]);
@@ -99,6 +80,7 @@ class WC_Cocolis_Webhooks_Method
 
 
         if (!empty($order)) {
+            cocolis_shipping_method_init();
             $shipping_class = new WC_Cocolis_Shipping_Method();
             $client = $shipping_class->cocolis_authenticated_client();
             $client = $client->getRideClient();
@@ -115,6 +97,54 @@ class WC_Cocolis_Webhooks_Method
                 $slug : 'https://sandbox.cocolis.fr/ride-public/' . $slug;
 
             $note = __("Link to ad: ", 'cocolis') . $link;
+
+            // Add the note
+            $order->add_order_note($note, false);
+        }
+        echo json_encode(['success' => true]);
+        exit;
+    }
+
+    function cocolis_webhook_availabilities_buyer_filled($request)
+    {
+        $data = $request->get_body_params();
+        $orderid = $data['external_id'];
+        $event = $data['event'];
+
+        if (empty($event) || empty($orderid)) {
+            echo ('Event or order ID missing from Webhook');
+            exit;
+        }
+
+        $order = new WC_Order($orderid);
+
+
+        if (!empty($order)) {
+            $note = __("The buyer has updated his availability", 'cocolis');
+
+            // Add the note
+            $order->add_order_note($note, false);
+        }
+        echo json_encode(['success' => true]);
+        exit;
+    }
+
+    function cocolis_webhook_availabilities_seller_filled($request)
+    {
+        $data = $request->get_body_params();
+        $orderid = $data['external_id'];
+        $event = $data['event'];
+
+        if (empty($event) || empty($orderid)) {
+            echo ('Event or order ID missing from Webhook');
+            exit;
+        }
+
+        $order = new WC_Order($orderid);
+
+
+        if (!empty($order)) {
+            $note = __("The seller has updated his availability", 'cocolis');
 
             // Add the note
             $order->add_order_note($note, false);
@@ -202,6 +232,16 @@ class WC_Cocolis_Webhooks_Method
         register_rest_route('cocolis/v1', '/webhook_ride_published', array(
             'methods'  => 'POST',
             'callback' => array($this, 'cocolis_webhook_ride_published'),
+            'permission_callback' => '__return_true'
+        ));
+        register_rest_route('cocolis/v1', '/webhook_availabilities_buyer_filled', array(
+            'methods'  => 'POST',
+            'callback' => array($this, 'cocolis_webhook_availabilities_buyer_filled'),
+            'permission_callback' => '__return_true'
+        ));
+        register_rest_route('cocolis/v1', '/webhook_availabilities_seller_filled', array(
+            'methods'  => 'POST',
+            'callback' => array($this, 'cocolis_webhook_availabilities_seller_filled'),
             'permission_callback' => '__return_true'
         ));
     }

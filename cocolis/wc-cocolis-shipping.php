@@ -284,6 +284,16 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                             'url' => get_home_url() . '/wp-json/cocolis/v1/webhook_offer_completed',
                             'active' => true
                         ]);
+                        $client->getWebhookClient()->create([
+                            'event' => 'availabilities_buyer_filled',
+                            'url' => get_home_url() . '/wp-json/cocolis/v1/webhook_availabilities_buyer_filled',
+                            'active' => true
+                        ]);
+                        $client->getWebhookClient()->create([
+                            'event' => 'availabilities_seller_filled',
+                            'url' => get_home_url() . '/wp-json/cocolis/v1/webhook_availabilities_seller_filled',
+                            'active' => true
+                        ]);
                     }
                 }
 

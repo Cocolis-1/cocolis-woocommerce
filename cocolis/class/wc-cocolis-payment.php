@@ -313,6 +313,18 @@ class WC_Cocolis_Payment_Method
                     $ride = $client->create($params);
                     $order->update_meta_data('_cocolis_ride_id', $ride->id);
                     $order->save();
+
+                    // Adding buyer and seller url notes
+
+                    $note = __("Link to buyer tracking: ", 'cocolis') . $ride->getBuyerURL();
+
+                    // Add the note
+                    $order->add_order_note($note, false);
+
+                    $note = __("Link to vendor tracking: ", 'cocolis') . $ride->getSellerURL();
+
+                    // Add the note
+                    $order->add_order_note($note, false);
                 }
             }
         } catch (\Throwable $th) {
