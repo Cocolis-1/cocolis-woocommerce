@@ -6,7 +6,7 @@
  * Description: A plugin to add Cocolis.fr as a carrier on Woocommerce
  * Author:  Cocolis.fr
  * Author URI: https://www.cocolis.fr
- * Version: 1.0.6
+ * Version: 1.0.10
  * Developer: Alexandre BETTAN, Sebastien FIELOUX
  * Developer URI: https://github.com/btnalexandre, https://github.com/sebfie
  * Domain Path: /languages
@@ -82,7 +82,44 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     // Save settings in admin if you have any defined
                     add_action('woocommerce_update_options_shipping_' . $this->id, array($this, 'process_admin_options'));
                     add_filter('woocommerce_settings_api_sanitized_fields_' . $this->id, array($this, 'cocolis_validate_settings_fields'));
+                    add_action('admin_notices', array($this, 'general_admin_notice'));
                 }
+
+                function general_admin_notice()
+                {
+                    // The main address pieces:
+                    $store_name = apply_filters('cocolis_store_name', get_bloginfo('name'));
+                    $store_address     = apply_filters('cocolis_store_address', get_option('woocommerce_store_address'));
+                    $store_address_2   = apply_filters('cocolis_store_address_2', get_option('woocommerce_store_address_2'));
+                    $store_city        = apply_filters('cocolis_store_city', get_option('woocommerce_store_city'));
+                    $store_postcode    = apply_filters('cocolis_store_postcode', get_option('woocommerce_store_postcode'));
+
+                    // The country/state
+                    $store_raw_country = apply_filters('cocolis_store_country', get_option('woocommerce_default_country'));
+
+                    $app_id = $this->settings['app_id'];
+                    $password = $this->settings['password'];
+                    $width = $this->settings['width'];
+                    $height = $this->settings['height'];
+                    $length = $this->settings['length'];
+                    $email = $this->settings['email'];
+                    $phone = $this->settings['phone'];
+
+                    if (empty($app_id) || empty($password) || empty($width) || empty($height) || empty($length) || empty($email) || empty($phone)) {
+                        echo '<div class="notice notice-error is-dismissible">
+                             <h3>
+                                <b style="color: red">' . __('The configuration of the Cocolis module is not correctly configured to fully use it.', 'cocolis') . '</b>
+                            </h3>
+                         </div>';
+                    } else if (empty($store_name) || empty($store_address) || empty($store_city) || empty($store_postcode) || empty($store_raw_country)) {
+                        echo '<div class="notice notice-error is-dismissible">
+                            <h3>
+                                <b style="color: red">' . __('The address entered in the Woocommerce settings is not properly configured to fully use the Cocolis module.', 'cocolis') . '</b>
+                            </h3>
+                        </div>';
+                    }
+                }
+
 
                 public function init_form_fields()
                 {
@@ -247,6 +284,16 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                             'url' => get_home_url() . '/wp-json/cocolis/v1/webhook_offer_completed',
                             'active' => true
                         ]);
+                        $client->getWebhookClient()->create([
+                            'event' => 'availabilities_buyer_filled',
+                            'url' => get_home_url() . '/wp-json/cocolis/v1/webhook_availabilities_buyer_filled',
+                            'active' => true
+                        ]);
+                        $client->getWebhookClient()->create([
+                            'event' => 'availabilities_seller_filled',
+                            'url' => get_home_url() . '/wp-json/cocolis/v1/webhook_availabilities_seller_filled',
+                            'active' => true
+                        ]);
                     }
                 }
 
@@ -311,7 +358,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
 
 
-                                    if ($total >= 500) {
+                                    if ($total >= 150) {
                                         $shipping_cost_insurance = ($match->estimated_prices->with_insurance) / 100;
                                         if ($shipping_cost_insurance > 0) {
                                             $rate = array(
@@ -390,11 +437,13 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             <b> ' . $label;
 
         if ($method->id === "cocolis") {
-            $label = $label . "</b> </br>" . __("Free insurance up to 500 €", 'cocolis');
+            $label = $label . "</b> </br>" . __("Free insurance up to 150 €", 'cocolis');
         } elseif ($method->id === "cocolis_assurance") {
             $total = WC()->cart->get_subtotal();
             // Maximal cost insurance
-            if ($total <= 500) {
+            if ($total <= 150) {
+                $max_value = 150;
+            } elseif ($total <= 500) {
                 $max_value = 500;
             } elseif ($total <= 1500) {
                 $max_value = 1500;

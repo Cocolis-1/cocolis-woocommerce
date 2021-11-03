@@ -1,34 +1,102 @@
-<?php return array (
-  'root' => 
-  array (
-    'pretty_version' => '1.0.0',
-    'version' => '1.0.0.0',
-    'aliases' => 
-    array (
+<?php return array(
+    'root' => array(
+        'pretty_version' => '1.0.10',
+        'version' => '1.0.10.0',
+        'type' => 'wordpress-plugin',
+        'install_path' => __DIR__ . '/../../../',
+        'aliases' => array(),
+        'reference' => NULL,
+        'name' => 'cocolis/woocommerce',
+        'dev' => true,
     ),
-    'reference' => NULL,
-    'name' => 'cocolis/woocommerce',
-  ),
-  'versions' => 
-  array (
-    'cocolis/php' => 
-    array (
-      'pretty_version' => 'dev-develop',
-      'version' => 'dev-develop',
-      'aliases' => 
-      array (
-        0 => '9999999-dev',
-      ),
-      'reference' => '82ffb2e571cd12ad1135bc04d15529965a80d83f',
+    'versions' => array(
+        'cocolis/php' => array(
+            'pretty_version' => 'dev-develop',
+            'version' => 'dev-develop',
+            'type' => 'package',
+            'install_path' => __DIR__ . '/../cocolis/php',
+            'aliases' => array(
+                0 => '9999999-dev',
+            ),
+            'reference' => '94098bda9003d423ff6cb9ba68e56f383c09fbc0',
+            'dev_requirement' => false,
+        ),
+        'cocolis/woocommerce' => array(
+            'pretty_version' => '1.0.10',
+            'version' => '1.0.10.0',
+            'type' => 'wordpress-plugin',
+            'install_path' => __DIR__ . '/../../../',
+            'aliases' => array(),
+            'reference' => NULL,
+            'dev_requirement' => false,
+        ),
+        'nesbot/carbon' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../nesbot/carbon',
+            'aliases' => array(
+                0 => '2.x-dev',
+            ),
+            'reference' => '2d363e8ae89bde9c7625c9ec108cf7aa65921bed',
+            'dev_requirement' => false,
+        ),
+        'symfony/deprecation-contracts' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/deprecation-contracts',
+            'aliases' => array(
+                0 => '2.5.x-dev',
+            ),
+            'reference' => '6f981ee24cf69ee7ce9736146d1c57c2780598a8',
+            'dev_requirement' => false,
+        ),
+        'symfony/polyfill-mbstring' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/polyfill-mbstring',
+            'aliases' => array(
+                0 => '1.23.x-dev',
+            ),
+            'reference' => '344e456152e22a1bce3048c6c311059ea14bde47',
+            'dev_requirement' => false,
+        ),
+        'symfony/polyfill-php80' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/polyfill-php80',
+            'aliases' => array(
+                0 => '1.23.x-dev',
+            ),
+            'reference' => '57b712b08eddb97c762a8caa32c84e037892d2e9',
+            'dev_requirement' => false,
+        ),
+        'symfony/translation' => array(
+            'pretty_version' => '5.4.x-dev',
+            'version' => '5.4.9999999.9999999-dev',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/translation',
+            'aliases' => array(),
+            'reference' => '815ec5d1c49358e253bb7160b0584d4f9db9ea5f',
+            'dev_requirement' => false,
+        ),
+        'symfony/translation-contracts' => array(
+            'pretty_version' => '2.5.x-dev',
+            'version' => '2.5.9999999.9999999-dev',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/translation-contracts',
+            'aliases' => array(),
+            'reference' => '6e2aa82901f45c38761ba61c1082584ae6f5dbda',
+            'dev_requirement' => false,
+        ),
+        'symfony/translation-implementation' => array(
+            'dev_requirement' => false,
+            'provided' => array(
+                0 => '2.3',
+            ),
+        ),
     ),
-    'cocolis/woocommerce' => 
-    array (
-      'pretty_version' => '1.0.0',
-      'version' => '1.0.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => NULL,
-    ),
-  ),
 );

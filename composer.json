@@ -3,9 +3,10 @@
   "description": "Cocolis Woocommerce Plugin to add Cocolis.fr as a delivery method",
   "type": "wordpress-plugin",
   "require": {
-    "cocolis/php": "dev-develop"
+    "cocolis/php": "dev-develop",
+    "nesbot/carbon": "2.x-dev"
   },
-  "version": "1.0.6",
+  "version": "1.0.10",
   "license": "MIT",
   "authors": [
     {
