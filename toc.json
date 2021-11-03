@@ -18,6 +18,11 @@
       "type": "item",
       "title": "Remplacer les valeurs",
       "uri": "docs/Remplacer.md"
+    },
+    {
+      "type": "item",
+      "title": "Scénarios du module",
+      "uri": "docs/Scénarios.md"
     }
   ]
 }

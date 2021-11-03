@@ -1,7 +1,7 @@
 === Cocolis ===
 Contributors: cocolis
 Tags: woocommerce, delivery, cocolis, livraison
-Stable tag: 1.0.9
+Stable tag: 1.0.10
 Requires at least: 4.7
 Tested up to: 5.6.2
 Requires PHP: 5.6.0
@@ -54,6 +54,10 @@ Rendez-vous [ici](https://doc.cocolis.fr "Documentation de Cocolis") pour obteni
 3. Réglage du module
 
 == Changelog ==
+= 1.0.10 =
+* Important bug fixes
+* Added the possibility to cancel a Cocolis ride with the admin panel (see the doc)
+
 = 1.0.9 =
 * Rewritten insurance
 

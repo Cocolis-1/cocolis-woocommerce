@@ -17,7 +17,7 @@ class WC_Cocolis_Webhooks_Method
     {
         $data = $request->get_body_params();
         $orderid = $data['external_id'];
-        $resource_id = $data['resource_id'];
+        $ride_id = $data['ride_id'];
         $event = $data['event'];
 
         if (empty($event) || empty($orderid)) {
@@ -31,35 +31,7 @@ class WC_Cocolis_Webhooks_Method
             $note = __("A carrier has been selected to carry out the Cocolis delivery.", 'cocolis');
 
             // Add the note
-            $order->add_order_note($note, true);
-
-            if (!empty($resource_id)) {
-                cocolis_shipping_method_init();
-                $shipping_class = new WC_Cocolis_Shipping_Method();
-                $client = $shipping_class->cocolis_authenticated_client();
-                $client = $client->getRideClient();
-                $ride = $client->get($resource_id);
-                $slug = $ride->slug;
-                $prod = $shipping_class->settings['production_mode'] == "sandbox" ? false : true;
-
-                $link = $prod ? 'https://cocolis.fr/ride-public/' .
-                    $slug : 'https://sandbox.cocolis.fr/ride-public/' . $slug;
-
-                $note = __("The public ride URL : ", 'cocolis') . $link;
-
-                // Add the note
-                $order->add_order_note($note, true);
-
-                $note = __("Buyer tracking delivery URL : ", 'cocolis') . $ride->getBuyerURL();
-
-                // Add the note
-                $order->add_order_note($note, true);
-
-                $note = __("[Private] Seller tracking delivery URL : ", 'cocolis') . $ride->getSellerURL();
-
-                // Add the note
-                $order->add_order_note($note);
-            }
+            $order->add_order_note($note, false);
 
             $order->update_status('processing');
         }
@@ -85,7 +57,7 @@ class WC_Cocolis_Webhooks_Method
             $note = __("Delivery completed by Cocolis", 'cocolis');
 
             // Add the note
-            $order->add_order_note($note);
+            $order->add_order_note($note, false);
             $order->update_status('completed');
         }
         echo json_encode(['success' => true]);
@@ -93,6 +65,47 @@ class WC_Cocolis_Webhooks_Method
     }
 
     function cocolis_webhook_ride_published($request)
+    {
+        $data = $request->get_body_params();
+        $orderid = $data['external_id'];
+        $event = $data['event'];
+        $ride_id = $data['ride_id'];
+
+        if (empty($event) || empty($orderid)) {
+            echo ('Event or order ID missing from Webhook');
+            exit;
+        }
+
+        $order = new WC_Order($orderid);
+
+
+        if (!empty($order)) {
+            cocolis_shipping_method_init();
+            $shipping_class = new WC_Cocolis_Shipping_Method();
+            $client = $shipping_class->cocolis_authenticated_client();
+            $client = $client->getRideClient();
+            $ride = $client->get($ride_id);
+            $slug = $ride->slug;
+            $prod = $shipping_class->settings['production_mode'] == "sandbox" ? false : true;
+
+            $note = __("The delivery offer has just been published on cocolis.fr", 'cocolis');
+
+            // Add the note
+            $order->add_order_note($note, false);
+
+            $link = $prod ? 'https://cocolis.fr/ride-public/' .
+                $slug : 'https://sandbox.cocolis.fr/ride-public/' . $slug;
+
+            $note = __("Link to ad: ", 'cocolis') . $link;
+
+            // Add the note
+            $order->add_order_note($note, false);
+        }
+        echo json_encode(['success' => true]);
+        exit;
+    }
+
+    function cocolis_webhook_availabilities_buyer_filled($request)
     {
         $data = $request->get_body_params();
         $orderid = $data['external_id'];
@@ -107,10 +120,34 @@ class WC_Cocolis_Webhooks_Method
 
 
         if (!empty($order)) {
-            $note = __("An offer was published on cocolis.fr", 'cocolis');
+            $note = __("The buyer has updated his availability", 'cocolis');
 
             // Add the note
-            $order->add_order_note($note, true);
+            $order->add_order_note($note, false);
+        }
+        echo json_encode(['success' => true]);
+        exit;
+    }
+
+    function cocolis_webhook_availabilities_seller_filled($request)
+    {
+        $data = $request->get_body_params();
+        $orderid = $data['external_id'];
+        $event = $data['event'];
+
+        if (empty($event) || empty($orderid)) {
+            echo ('Event or order ID missing from Webhook');
+            exit;
+        }
+
+        $order = new WC_Order($orderid);
+
+
+        if (!empty($order)) {
+            $note = __("The seller has updated his availability", 'cocolis');
+
+            // Add the note
+            $order->add_order_note($note, false);
         }
         echo json_encode(['success' => true]);
         exit;
@@ -134,7 +171,7 @@ class WC_Cocolis_Webhooks_Method
             $note = __("The delivery is cancelled by the carrier. The seller and the buyer are informed, their tracking page is updated.", 'cocolis');
 
             // Add the note
-            $order->add_order_note($note, true);
+            $order->add_order_note($note, false);
         }
         echo json_encode(['success' => true]);
         exit;
@@ -158,7 +195,7 @@ class WC_Cocolis_Webhooks_Method
             $note = __("The ride did not find a carrier. Get closer to our support and with cocolis.fr", 'cocolis');
 
             // Add the note
-            $order->add_order_note($note, true);
+            $order->add_order_note($note, false);
             $order->update_status('failed');
         }
         echo json_encode(['success' => true]);
@@ -170,31 +207,41 @@ class WC_Cocolis_Webhooks_Method
      */
     function cocolis_register_hooks()
     {
-        register_rest_route('cocolis/v1', '/cocolis_webhook_offer_accepted', array(
+        register_rest_route('cocolis/v1', '/webhook_offer_accepted', array(
             // By using this constant we ensure that when the WP_REST_Server changes our readable endpoints will work as intended.
             'methods'  => 'POST',
             // Here we register our callback. The callback is fired when this endpoint is matched by the WP_REST_Server class.
             'callback' => array($this, 'cocolis_webhook_offer_accepted'),
             'permission_callback' => '__return_true'
         ));
-        register_rest_route('cocolis/v1', '/cocolis_webhook_offer_completed', array(
+        register_rest_route('cocolis/v1', '/webhook_offer_completed', array(
             'methods'  => 'POST',
             'callback' => array($this, 'cocolis_webhook_offer_completed'),
             'permission_callback' => '__return_true'
         ));
-        register_rest_route('cocolis/v1', '/cocolis_webhook_ride_published', array(
+        register_rest_route('cocolis/v1', '/webhook_ride_published', array(
             'methods'  => 'POST',
             'callback' => array($this, 'cocolis_webhook_ride_published'),
             'permission_callback' => '__return_true'
         ));
-        register_rest_route('cocolis/v1', '/cocolis_webhook_offer_cancelled', array(
+        register_rest_route('cocolis/v1', '/webhook_offer_cancelled', array(
             'methods'  => 'POST',
             'callback' => array($this, 'cocolis_webhook_offer_cancelled'),
             'permission_callback' => '__return_true'
         ));
-        register_rest_route('cocolis/v1', '/cocolis_webhook_ride_published', array(
+        register_rest_route('cocolis/v1', '/webhook_ride_published', array(
             'methods'  => 'POST',
             'callback' => array($this, 'cocolis_webhook_ride_published'),
+            'permission_callback' => '__return_true'
+        ));
+        register_rest_route('cocolis/v1', '/webhook_availabilities_buyer_filled', array(
+            'methods'  => 'POST',
+            'callback' => array($this, 'cocolis_webhook_availabilities_buyer_filled'),
+            'permission_callback' => '__return_true'
+        ));
+        register_rest_route('cocolis/v1', '/webhook_availabilities_seller_filled', array(
+            'methods'  => 'POST',
+            'callback' => array($this, 'cocolis_webhook_availabilities_seller_filled'),
             'permission_callback' => '__return_true'
         ));
     }

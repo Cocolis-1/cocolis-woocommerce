@@ -6,7 +6,7 @@
  * Description: A plugin to add Cocolis.fr as a carrier on Woocommerce
  * Author:  Cocolis.fr
  * Author URI: https://www.cocolis.fr
- * Version: 1.0.9
+ * Version: 1.0.10
  * Developer: Alexandre BETTAN, Sebastien FIELOUX
  * Developer URI: https://github.com/btnalexandre, https://github.com/sebfie
  * Domain Path: /languages
@@ -282,6 +282,16 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         $client->getWebhookClient()->create([
                             'event' => 'offer_completed',
                             'url' => get_home_url() . '/wp-json/cocolis/v1/webhook_offer_completed',
+                            'active' => true
+                        ]);
+                        $client->getWebhookClient()->create([
+                            'event' => 'availabilities_buyer_filled',
+                            'url' => get_home_url() . '/wp-json/cocolis/v1/webhook_availabilities_buyer_filled',
+                            'active' => true
+                        ]);
+                        $client->getWebhookClient()->create([
+                            'event' => 'availabilities_seller_filled',
+                            'url' => get_home_url() . '/wp-json/cocolis/v1/webhook_availabilities_seller_filled',
                             'active' => true
                         ]);
                     }
