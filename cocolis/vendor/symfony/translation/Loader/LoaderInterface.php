@@ -29,10 +29,10 @@ interface LoaderInterface
      * @param string $locale   A locale
      * @param string $domain   The domain
      *
-     * @return MessageCatalogue
+     * @return MessageCatalogue A MessageCatalogue instance
      *
      * @throws NotFoundResourceException when the resource cannot be found
      * @throws InvalidResourceException  when the resource cannot be loaded
      */
-    public function load($resource, string $locale, string $domain = 'messages');
+    public function load($resource, $locale, $domain = 'messages');
 }

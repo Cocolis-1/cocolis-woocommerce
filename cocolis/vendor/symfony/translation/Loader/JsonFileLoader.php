@@ -23,7 +23,7 @@ class JsonFileLoader extends FileLoader
     /**
      * {@inheritdoc}
      */
-    protected function loadResource(string $resource)
+    protected function loadResource($resource)
     {
         $messages = [];
         if ($data = file_get_contents($resource)) {
@@ -39,8 +39,12 @@ class JsonFileLoader extends FileLoader
 
     /**
      * Translates JSON_ERROR_* constant into meaningful message.
+     *
+     * @param int $errorCode Error code returned by json_last_error() call
+     *
+     * @return string Message string
      */
-    private function getJSONErrorMessage(int $errorCode): string
+    private function getJSONErrorMessage($errorCode)
     {
         switch ($errorCode) {
             case \JSON_ERROR_DEPTH:

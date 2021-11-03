@@ -4,7 +4,9 @@
   "type": "wordpress-plugin",
   "require": {
     "cocolis/php": "dev-develop",
-    "nesbot/carbon": "2.x-dev"
+    "nesbot/carbon": "^1.39",
+    "symfony/translation": "^3.4",
+    "symfony/polyfill-mbstring": "1.19.0"
   },
   "version": "1.0.10",
   "license": "MIT",
@@ -20,7 +22,7 @@
     }
   },
   "scripts": {
-    "wp-package": "zip -r cocolis.zip cocolis"
+    "wp-package": "zip -r cocolis.zip cocolis -x '*.git*'"
   },
   "config": {
     "vendor-dir": "cocolis/vendor"

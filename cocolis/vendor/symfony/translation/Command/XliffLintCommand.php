@@ -11,16 +11,13 @@
 
 namespace Symfony\Component\Translation\Command;
 
-use Symfony\Component\Console\CI\GithubActionReporter;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\RuntimeException;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Translation\Exception\InvalidArgumentException;
-use Symfony\Component\Translation\Util\XliffUtils;
 
 /**
  * Validates XLIFF files syntax and outputs encountered errors.
@@ -32,21 +29,18 @@ use Symfony\Component\Translation\Util\XliffUtils;
 class XliffLintCommand extends Command
 {
     protected static $defaultName = 'lint:xliff';
-    protected static $defaultDescription = 'Lint an XLIFF file and outputs encountered errors';
 
     private $format;
     private $displayCorrectFiles;
     private $directoryIteratorProvider;
     private $isReadableProvider;
-    private $requireStrictFileNames;
 
-    public function __construct(string $name = null, callable $directoryIteratorProvider = null, callable $isReadableProvider = null, bool $requireStrictFileNames = true)
+    public function __construct($name = null, $directoryIteratorProvider = null, $isReadableProvider = null)
     {
         parent::__construct($name);
 
         $this->directoryIteratorProvider = $directoryIteratorProvider;
         $this->isReadableProvider = $isReadableProvider;
-        $this->requireStrictFileNames = $requireStrictFileNames;
     }
 
     /**
@@ -55,16 +49,16 @@ class XliffLintCommand extends Command
     protected function configure()
     {
         $this
-            ->setDescription(self::$defaultDescription)
-            ->addArgument('filename', InputArgument::IS_ARRAY, 'A file, a directory or "-" for reading from STDIN')
-            ->addOption('format', null, InputOption::VALUE_REQUIRED, 'The output format')
+            ->setDescription('Lints a XLIFF file and outputs encountered errors')
+            ->addArgument('filename', null, 'A file or a directory or STDIN')
+            ->addOption('format', null, InputOption::VALUE_REQUIRED, 'The output format', 'txt')
             ->setHelp(<<<EOF
-The <info>%command.name%</info> command lints an XLIFF file and outputs to STDOUT
+The <info>%command.name%</info> command lints a XLIFF file and outputs to STDOUT
 the first encountered syntax error.
 
 You can validates XLIFF contents passed from STDIN:
 
-  <info>cat filename | php %command.full_name% -</info>
+  <info>cat filename | php %command.full_name%</info>
 
 You can also validate the syntax of a file:
 
@@ -83,75 +77,57 @@ EOF
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $io = new SymfonyStyle($input, $output);
-        $filenames = (array) $input->getArgument('filename');
-        $this->format = $input->getOption('format') ?? (GithubActionReporter::isGithubActionEnvironment() ? 'github' : 'txt');
+        $filename = $input->getArgument('filename');
+        $this->format = $input->getOption('format');
         $this->displayCorrectFiles = $output->isVerbose();
 
-        if (['-'] === $filenames) {
-            return $this->display($io, [$this->validate(file_get_contents('php://stdin'))]);
+        if (!$filename) {
+            if (!$stdin = $this->getStdin()) {
+                throw new RuntimeException('Please provide a filename or pipe file content to STDIN.');
+            }
+
+            return $this->display($io, [$this->validate($stdin)]);
         }
 
-        if (!$filenames) {
-            throw new RuntimeException('Please provide a filename or pipe file content to STDIN.');
+        if (!$this->isReadable($filename)) {
+            throw new RuntimeException(sprintf('File or directory "%s" is not readable.', $filename));
         }
 
         $filesInfo = [];
-        foreach ($filenames as $filename) {
-            if (!$this->isReadable($filename)) {
-                throw new RuntimeException(sprintf('File or directory "%s" is not readable.', $filename));
-            }
-
-            foreach ($this->getFiles($filename) as $file) {
-                $filesInfo[] = $this->validate(file_get_contents($file), $file);
-            }
+        foreach ($this->getFiles($filename) as $file) {
+            $filesInfo[] = $this->validate(file_get_contents($file), $file);
         }
 
         return $this->display($io, $filesInfo);
     }
 
-    private function validate(string $content, string $file = null): array
+    private function validate($content, $file = null)
     {
-        $errors = [];
-
         // Avoid: Warning DOMDocument::loadXML(): Empty string supplied as input
         if ('' === trim($content)) {
             return ['file' => $file, 'valid' => true];
         }
 
-        $internal = libxml_use_internal_errors(true);
+        libxml_use_internal_errors(true);
 
         $document = new \DOMDocument();
         $document->loadXML($content);
-
-        if (null !== $targetLanguage = $this->getTargetLanguageFromFile($document)) {
-            $normalizedLocalePattern = sprintf('(%s|%s)', preg_quote($targetLanguage, '/'), preg_quote(str_replace('-', '_', $targetLanguage), '/'));
-            // strict file names require translation files to be named '____.locale.xlf'
-            // otherwise, both '____.locale.xlf' and 'locale.____.xlf' are allowed
-            // also, the regexp matching must be case-insensitive, as defined for 'target-language' values
-            // http://docs.oasis-open.org/xliff/v1.2/os/xliff-core.html#target-language
-            $expectedFilenamePattern = $this->requireStrictFileNames ? sprintf('/^.*\.(?i:%s)\.(?:xlf|xliff)/', $normalizedLocalePattern) : sprintf('/^(?:.*\.(?i:%s)|(?i:%s)\..*)\.(?:xlf|xliff)/', $normalizedLocalePattern, $normalizedLocalePattern);
-
-            if (0 === preg_match($expectedFilenamePattern, basename($file))) {
-                $errors[] = [
-                    'line' => -1,
-                    'column' => -1,
-                    'message' => sprintf('There is a mismatch between the language included in the file name ("%s") and the "%s" value used in the "target-language" attribute of the file.', basename($file), $targetLanguage),
-                ];
-            }
+        if ($document->schemaValidate(__DIR__.'/../Resources/schemas/xliff-core-1.2-strict.xsd')) {
+            return ['file' => $file, 'valid' => true];
         }
 
-        foreach (XliffUtils::validateSchema($document) as $xmlError) {
-            $errors[] = [
-                'line' => $xmlError['line'],
-                'column' => $xmlError['column'],
-                'message' => $xmlError['message'],
+        $errorMessages = array_map(function ($error) {
+            return [
+                'line' => $error->line,
+                'column' => $error->column,
+                'message' => trim($error->message),
             ];
-        }
+        }, libxml_get_errors());
 
         libxml_clear_errors();
-        libxml_use_internal_errors($internal);
+        libxml_use_internal_errors(false);
 
-        return ['file' => $file, 'valid' => 0 === \count($errors), 'messages' => $errors];
+        return ['file' => $file, 'valid' => false, 'messages' => $errorMessages];
     }
 
     private function display(SymfonyStyle $io, array $files)
@@ -161,18 +137,15 @@ EOF
                 return $this->displayTxt($io, $files);
             case 'json':
                 return $this->displayJson($io, $files);
-            case 'github':
-                return $this->displayTxt($io, $files, true);
             default:
                 throw new InvalidArgumentException(sprintf('The format "%s" is not supported.', $this->format));
         }
     }
 
-    private function displayTxt(SymfonyStyle $io, array $filesInfo, bool $errorAsGithubAnnotations = false)
+    private function displayTxt(SymfonyStyle $io, array $filesInfo)
     {
         $countFiles = \count($filesInfo);
         $erroredFiles = 0;
-        $githubReporter = $errorAsGithubAnnotations ? new GithubActionReporter($io) : null;
 
         foreach ($filesInfo as $info) {
             if ($info['valid'] && $this->displayCorrectFiles) {
@@ -180,15 +153,9 @@ EOF
             } elseif (!$info['valid']) {
                 ++$erroredFiles;
                 $io->text('<error> ERROR </error>'.($info['file'] ? sprintf(' in %s', $info['file']) : ''));
-                $io->listing(array_map(function ($error) use ($info, $githubReporter) {
+                $io->listing(array_map(function ($error) {
                     // general document errors have a '-1' line number
-                    $line = -1 === $error['line'] ? null : $error['line'];
-
-                    if ($githubReporter) {
-                        $githubReporter->error($error['message'], $info['file'], $line, null !== $line ? $error['column'] : null);
-                    }
-
-                    return null === $line ? $error['message'] : sprintf('Line %d, Column %d: %s', $line, $error['column'], $error['message']);
+                    return -1 === $error['line'] ? $error['message'] : sprintf('Line %d, Column %d: %s', $error['line'], $error['column'], $error['message']);
                 }, $info['messages']));
             }
         }
@@ -218,7 +185,7 @@ EOF
         return min($errors, 1);
     }
 
-    private function getFiles(string $fileOrDirectory)
+    private function getFiles($fileOrDirectory)
     {
         if (is_file($fileOrDirectory)) {
             yield new \SplFileInfo($fileOrDirectory);
@@ -235,7 +202,24 @@ EOF
         }
     }
 
-    private function getDirectoryIterator(string $directory)
+    /**
+     * @return string|null
+     */
+    private function getStdin()
+    {
+        if (0 !== ftell(\STDIN)) {
+            return null;
+        }
+
+        $inputs = '';
+        while (!feof(\STDIN)) {
+            $inputs .= fread(\STDIN, 1024);
+        }
+
+        return $inputs;
+    }
+
+    private function getDirectoryIterator($directory)
     {
         $default = function ($directory) {
             return new \RecursiveIteratorIterator(
@@ -245,33 +229,22 @@ EOF
         };
 
         if (null !== $this->directoryIteratorProvider) {
-            return ($this->directoryIteratorProvider)($directory, $default);
+            return \call_user_func($this->directoryIteratorProvider, $directory, $default);
         }
 
         return $default($directory);
     }
 
-    private function isReadable(string $fileOrDirectory)
+    private function isReadable($fileOrDirectory)
     {
         $default = function ($fileOrDirectory) {
             return is_readable($fileOrDirectory);
         };
 
         if (null !== $this->isReadableProvider) {
-            return ($this->isReadableProvider)($fileOrDirectory, $default);
+            return \call_user_func($this->isReadableProvider, $fileOrDirectory, $default);
         }
 
         return $default($fileOrDirectory);
-    }
-
-    private function getTargetLanguageFromFile(\DOMDocument $xliffContents): ?string
-    {
-        foreach ($xliffContents->getElementsByTagName('file')[0]->attributes ?? [] as $attribute) {
-            if ('target-language' === $attribute->nodeName) {
-                return $attribute->nodeValue;
-            }
-        }
-
-        return null;
     }
 }
