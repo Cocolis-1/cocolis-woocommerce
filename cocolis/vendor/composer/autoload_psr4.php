@@ -6,9 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname(dirname($vendorDir));
 
 return array(
-    'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
-    'Symfony\\Component\\Translation\\' => array($vendorDir . '/symfony/translation'),
     'PrestaShop\\Module\\Cocolis\\' => array($baseDir . '/src'),
     'Cocolis\\Api\\' => array($vendorDir . '/cocolis/php/src'),
-    '' => array($vendorDir . '/nesbot/carbon/src'),
 );

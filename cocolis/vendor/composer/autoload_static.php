@@ -6,16 +6,7 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit322f102fd9e3e13154594cc51287238b
 {
-    public static $files = array (
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-    );
-
     public static $prefixLengthsPsr4 = array (
-        'S' => 
-        array (
-            'Symfony\\Polyfill\\Mbstring\\' => 26,
-            'Symfony\\Component\\Translation\\' => 30,
-        ),
         'P' => 
         array (
             'PrestaShop\\Module\\Cocolis\\' => 26,
@@ -27,14 +18,6 @@ class ComposerStaticInit322f102fd9e3e13154594cc51287238b
     );
 
     public static $prefixDirsPsr4 = array (
-        'Symfony\\Polyfill\\Mbstring\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
-        ),
-        'Symfony\\Component\\Translation\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/translation',
-        ),
         'PrestaShop\\Module\\Cocolis\\' => 
         array (
             0 => __DIR__ . '/../../..' . '/src',
@@ -45,18 +28,8 @@ class ComposerStaticInit322f102fd9e3e13154594cc51287238b
         ),
     );
 
-    public static $fallbackDirsPsr4 = array (
-        0 => __DIR__ . '/..' . '/nesbot/carbon/src',
-    );
-
-    public static $prefixesPsr0 = array (
-        'U' => 
-        array (
-            'UpdateHelper\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/kylekatarnls/update-helper/src',
-            ),
-        ),
+    public static $classMap = array (
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
@@ -64,8 +37,7 @@ class ComposerStaticInit322f102fd9e3e13154594cc51287238b
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit322f102fd9e3e13154594cc51287238b::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit322f102fd9e3e13154594cc51287238b::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInit322f102fd9e3e13154594cc51287238b::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit322f102fd9e3e13154594cc51287238b::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit322f102fd9e3e13154594cc51287238b::$classMap;
 
         }, null, ClassLoader::class);
     }
