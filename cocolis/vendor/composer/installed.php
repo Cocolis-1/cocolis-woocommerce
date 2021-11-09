@@ -1,7 +1,7 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '1.0.10',
-        'version' => '1.0.10.0',
+        'pretty_version' => '1.0.11',
+        'version' => '1.0.11.0',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../../',
         'aliases' => array(),
@@ -20,8 +20,8 @@
             'dev_requirement' => false,
         ),
         'cocolis/woocommerce' => array(
-            'pretty_version' => '1.0.10',
-            'version' => '1.0.10.0',
+            'pretty_version' => '1.0.11',
+            'version' => '1.0.11.0',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../../',
             'aliases' => array(),
