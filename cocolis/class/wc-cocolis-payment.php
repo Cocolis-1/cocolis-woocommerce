@@ -212,7 +212,8 @@ class WC_Cocolis_Payment_Method
                 }
 
                 if (strpos($order->get_shipping_method(), "with insurance") !== false || strpos($order->get_shipping_method(), "avec assurance") !== false) {
-                    $birthday = Carbon::parse($order_birthdate)->format(DateTime::ISO8601);
+                    $birthday = new DateTime($order_birthdate);
+                    $birthday = $birthday->format(DateTime::ISO8601);
 
                     $params = [
                         "description" => "Livraison de la commande : " . implode(", ", $arrayname) . " vendue sur le site marketplace.",
@@ -226,7 +227,7 @@ class WC_Cocolis_Payment_Method
                         "from_need_help" => true,
                         "to_is_flexible" => false,
                         "to_need_help" => true,
-                        "content_value" => floatval($order->get_subtotal_to_display(true)) * 100,
+                        "content_value" => ($order->get_total() - $order->get_total_shipping() - $order->get_shipping_tax()) * 100,
                         "with_insurance" => true,
                         "to_pickup_date" => $to_date,
                         "is_passenger" => false,
@@ -372,17 +373,20 @@ class WC_Cocolis_Payment_Method
     function add_meta_boxesws()
     {
         $post_id = isset($_GET['post']) ? $_GET['post'] : false;
-        $order = wc_get_order($post_id);
-
-        if ($order->has_shipping_method('cocolis')) {
-            add_meta_box(
-                'custom_order_meta_box',
-                __('Manage my delivery with Cocolis', 'cocolis'),
-                array($this, 'custom_metabox_content'),
-                'shop_order',
-                'normal',
-                'default'
-            );
+        if ($post_id) {
+            $order = wc_get_order($post_id);
+            if ($order) {
+                if ($order->has_shipping_method('cocolis')) {
+                    add_meta_box(
+                        'custom_order_meta_box',
+                        __('Manage my delivery with Cocolis', 'cocolis'),
+                        array($this, 'custom_metabox_content'),
+                        'shop_order',
+                        'normal',
+                        'default'
+                    );
+                }
+            }
         }
     }
 
