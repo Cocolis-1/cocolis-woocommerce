@@ -1,7 +1,7 @@
 === Cocolis ===
 Contributors: cocolis
 Tags: woocommerce, delivery, cocolis, livraison
-Stable tag: 1.0.11
+Stable tag: 1.0.12
 Requires at least: 4.7
 Tested up to: 5.6.2
 Requires PHP: 5.6.0
@@ -54,6 +54,9 @@ Rendez-vous [ici](https://doc.cocolis.fr "Documentation de Cocolis") pour obteni
 3. Réglage du module
 
 == Changelog ==
+= 1.0.12 =
+* Fixing error with PayPal and others payments methods, this update is highly recommended for all users.
+
 = 1.0.11 =
 * Urgent bug fixes
 
