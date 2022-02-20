@@ -5,7 +5,7 @@
   "require": {
     "cocolis/php": "dev-develop"
   },
-  "version": "1.0.11",
+  "version": "1.0.12",
   "license": "MIT",
   "authors": [
     {
@@ -19,7 +19,7 @@
     }
   },
   "scripts": {
-    "wp-package": "zip -r cocolis.zip cocolis -x '*.git*'"
+    "wp-package": "rm -rf cocolis.zip && zip -r cocolis.zip cocolis -x '*.git*'"
   },
   "config": {
     "vendor-dir": "cocolis/vendor"

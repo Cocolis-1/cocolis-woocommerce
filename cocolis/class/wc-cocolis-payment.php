@@ -1,7 +1,5 @@
 <?php
 
-use Carbon\Carbon;
-
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
@@ -163,6 +161,7 @@ class WC_Cocolis_Payment_Method
 
                 $arrayname = [];
 
+                cocolis_shipping_method_init();
                 $shipping_class = new WC_Cocolis_Shipping_Method();
 
                 $client = $shipping_class->cocolis_authenticated_client();
@@ -211,49 +210,56 @@ class WC_Cocolis_Payment_Method
                     }
                 }
 
+                $params = [
+                    "description" => "Livraison de la commande : " . implode(", ", $arrayname) . " vendue sur le site marketplace.",
+                    "external_id" => $order_id,
+                    "from_address" => $from_composed_address,
+                    "from_postal_code" => $store_postcode,
+                    "to_address" => $composed_address,
+                    "to_postal_code" => $order_shipping_postcode,
+                    "from_is_flexible" => false,
+                    "from_pickup_date" => $from_date,
+                    "from_need_help" => true,
+                    "to_is_flexible" => false,
+                    "to_need_help" => true,
+                    "with_insurance" => false,
+                    "to_pickup_date" => $to_date,
+                    "is_passenger" => false,
+                    "is_packaged" => true,
+                    "price" => (int) $order->get_shipping_total() * 100,
+                    "volume" => $dimensions,
+                    "environment" => "objects",
+                    "photo_urls" => $images,
+                    "rider_extra_information" => "Livraison de la commande : " . implode(", ", $arrayname),
+                    "ride_objects_attributes" => $arrayproducts,
+                    "ride_delivery_information_attributes" => [
+                        "from_address" => $store_address,
+                        "from_postal_code" => $store_postcode,
+                        "from_city" => $store_city,
+                        "from_country" => $store_country,
+                        "from_contact_email" => $shipping_class->settings['email'],
+                        "from_contact_phone" => $phone,
+                        "from_contact_name" => $store_name,
+                        "from_extra_information" => 'Vendeur Marketplace',
+                        "to_address" => $order_shipping_address_1,
+                        "to_postal_code" => $order_shipping_postcode,
+                        "to_city" => $order_shipping_city,
+                        "to_country" => $order_shipping_country,
+                        "to_contact_name" => $order_shipping_first_name . ' ' . $order_shipping_last_name,
+                        "to_contact_email" => $order_shipping_email,
+                        "to_contact_phone" => $order_shipping_phone
+                    ],
+                ];
+
                 if (strpos($order->get_shipping_method(), "with insurance") !== false || strpos($order->get_shipping_method(), "avec assurance") !== false) {
                     $birthday = new DateTime($order_birthdate);
                     $birthday = $birthday->format(DateTime::ISO8601);
 
-                    $params = [
-                        "description" => "Livraison de la commande : " . implode(", ", $arrayname) . " vendue sur le site marketplace.",
-                        "external_id" => $order_id,
-                        "from_address" => $from_composed_address,
-                        "from_postal_code" => $store_postcode,
-                        "to_address" => $composed_address,
-                        "to_postal_code" => $order_shipping_postcode,
-                        "from_is_flexible" => false,
-                        "from_pickup_date" => $from_date,
-                        "from_need_help" => true,
-                        "to_is_flexible" => false,
-                        "to_need_help" => true,
+                    $params['with_insurance'] = true;
+
+                    $params_insurance = [
                         "content_value" => ($order->get_total() - $order->get_total_shipping() - $order->get_shipping_tax()) * 100,
-                        "with_insurance" => true,
-                        "to_pickup_date" => $to_date,
-                        "is_passenger" => false,
-                        "is_packaged" => true,
-                        "price" => (int) $order->get_shipping_total() * 100,
-                        "volume" => $dimensions,
-                        "environment" => "objects",
-                        "photo_urls" => $images,
-                        "rider_extra_information" => "Livraison de la commande : " . implode(", ", $arrayname),
-                        "ride_objects_attributes" => $arrayproducts,
                         "ride_delivery_information_attributes" => [
-                            "from_address" => $store_address,
-                            "from_postal_code" => $store_postcode,
-                            "from_city" => $store_city,
-                            "from_country" => $store_country,
-                            "from_contact_email" => $shipping_class->settings['email'],
-                            "from_contact_phone" => $phone,
-                            "from_contact_name" => $store_name,
-                            "from_extra_information" => 'Vendeur Marketplace',
-                            "to_address" => $order_shipping_address_1,
-                            "to_postal_code" => $order_shipping_postcode,
-                            "to_city" => $order_shipping_city,
-                            "to_country" => $order_shipping_country,
-                            "to_contact_name" => $order_shipping_first_name . ' ' . $order_shipping_last_name,
-                            "to_contact_email" => $order_shipping_email,
-                            "to_contact_phone" => $order_shipping_phone,
                             "insurance_firstname" => $order_shipping_first_name,
                             "insurance_lastname" =>  $order_shipping_last_name,
                             "insurance_address" => $order_shipping_address_1,
@@ -264,69 +270,25 @@ class WC_Cocolis_Payment_Method
                         ],
                     ];
 
-                    $client = $client->getRideClient();
-                    $ride = $client->create($params);
-                    $order->update_meta_data('_cocolis_ride_id', $ride->id);
-                    $order->save();
-                } else {
-                    $params = [
-                        "description" => "Livraison de la commande : " . implode(", ", $arrayname) . " vendue sur le site marketplace.",
-                        "external_id" => $order_id,
-                        "from_address" => $from_composed_address,
-                        "from_postal_code" => $store_postcode,
-                        "to_address" => $composed_address,
-                        "to_postal_code" => $order_shipping_postcode,
-                        "from_is_flexible" => false,
-                        "from_pickup_date" => $from_date,
-                        "from_need_help" => true,
-                        "to_is_flexible" => false,
-                        "to_need_help" => true,
-                        "with_insurance" => false,
-                        "to_pickup_date" => $to_date,
-                        "is_passenger" => false,
-                        "is_packaged" => true,
-                        "price" => (int) $order->get_shipping_total() * 100,
-                        "volume" => $dimensions,
-                        "environment" => "objects",
-                        "photo_urls" => $images,
-                        "rider_extra_information" => "Livraison de la commande : " . implode(", ", $arrayname),
-                        "ride_objects_attributes" => $arrayproducts,
-                        "ride_delivery_information_attributes" => [
-                            "from_address" => $store_address,
-                            "from_postal_code" => $store_postcode,
-                            "from_city" => $store_city,
-                            "from_country" => $store_country,
-                            "from_contact_email" => $shipping_class->settings['email'],
-                            "from_contact_phone" => $phone,
-                            "from_contact_name" => $store_name,
-                            "from_extra_information" => 'Vendeur Marketplace',
-                            "to_address" => $order_shipping_address_1,
-                            "to_postal_code" => $order_shipping_postcode,
-                            "to_city" => $order_shipping_city,
-                            "to_country" => $order_shipping_country,
-                            "to_contact_name" => $order_shipping_first_name . ' ' . $order_shipping_last_name,
-                            "to_contact_email" => $order_shipping_email,
-                            "to_contact_phone" => $order_shipping_phone
-                        ],
-                    ];
-
-                    $client = $client->getRideClient();
-                    $ride = $client->create($params);
-                    $order->update_meta_data('_cocolis_ride_id', $ride->id);
-                    $order->save();
-
-                    // Adding buyer and seller url notes
-
-                    $note = __("Link to buyer tracking: ", 'cocolis') . $ride->getBuyerURL();
-
-                    // Add the note
-                    $order->add_order_note($note, false);
-
-                    $note = __("Link to vendor tracking: ", 'cocolis') . $ride->getSellerURL();
-
-                    // Add the note
-                    $order->add_order_note($note, false);
+                    $params = array_merge_recursive($params, $params_insurance);
                 }
+
+                $client = $client->getRideClient();
+                $ride = $client->create($params);
+                $order->update_meta_data('_cocolis_ride_id', $ride->id);
+                $order->save();
+
+                // Adding buyer and seller url notes
+
+                $note = __("Link to buyer tracking: ", 'cocolis') . $ride->getBuyerURL();
+
+                // Add the note
+                $order->add_order_note($note, false);
+
+                $note = __("Link to vendor tracking: ", 'cocolis') . $ride->getSellerURL();
+
+                // Add the note
+                $order->add_order_note($note, false);
             }
         } catch (\Throwable $th) {
             error_log('Cocolis ERROR : ' . $th);
