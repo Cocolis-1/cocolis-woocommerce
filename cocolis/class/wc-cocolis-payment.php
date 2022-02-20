@@ -1,7 +1,5 @@
 <?php
 
-use Carbon\Carbon;
-
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
@@ -163,6 +161,7 @@ class WC_Cocolis_Payment_Method
 
                 $arrayname = [];
 
+                cocolis_shipping_method_init();
                 $shipping_class = new WC_Cocolis_Shipping_Method();
 
                 $client = $shipping_class->cocolis_authenticated_client();
