@@ -1,7 +1,7 @@
 === Cocolis ===
 Contributors: cocolis
 Tags: woocommerce, delivery, cocolis, livraison
-Stable tag: 1.0.12
+Stable tag: 1.0.13
 Requires at least: 4.7
 Tested up to: 5.9
 Requires PHP: 5.6.0
@@ -54,6 +54,10 @@ Rendez-vous [ici](https://doc.cocolis.fr "Documentation de Cocolis") pour obteni
 3. Réglage du module
 
 == Changelog ==
+= 1.0.13 =
+* Add product_id parameter on filters to help marketplace connection/overwrite ride params
+* Upgrade Cocolis PHP sdk
+
 = 1.0.12 =
 * Fixing error with PayPal and others payments methods, this update is highly recommended for all users.
 

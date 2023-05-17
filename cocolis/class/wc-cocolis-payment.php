@@ -110,15 +110,16 @@ class WC_Cocolis_Payment_Method
             $order = wc_get_order($order_id);
             $order_data = $order->get_data();
             if ($order->has_shipping_method('cocolis') && empty($order->get_meta('_cocolis_ride_id'))) {
+                
                 // The main address pieces:
-                $store_name = apply_filters('cocolis_store_name', get_bloginfo('name'));
-                $store_address     = apply_filters('cocolis_store_address', get_option('woocommerce_store_address'));
-                $store_address_2   = apply_filters('cocolis_store_address_2', get_option('woocommerce_store_address_2'));
-                $store_city        = apply_filters('cocolis_store_city', get_option('woocommerce_store_city'));
-                $store_postcode    = apply_filters('cocolis_store_postcode', get_option('woocommerce_store_postcode'));
+                $store_name        = apply_filters('cocolis_store_name', get_bloginfo('name'), null);
+                $store_address     = apply_filters('cocolis_store_address', get_option('woocommerce_store_address'), null);
+                $store_address_2   = apply_filters('cocolis_store_address_2', get_option('woocommerce_store_address_2'), null);
+                $store_city        = apply_filters('cocolis_store_city', get_option('woocommerce_store_city'), null);
+                $store_postcode    = apply_filters('cocolis_store_postcode', get_option('woocommerce_store_postcode'), null);
 
                 // The country/state
-                $store_raw_country = apply_filters('cocolis_store_country', get_option('woocommerce_default_country'));
+                $store_raw_country = apply_filters('cocolis_store_country', get_option('woocommerce_default_country'), null);
 
                 // Split the country/state
                 $split_country = explode(":", $store_raw_country);
@@ -176,7 +177,19 @@ class WC_Cocolis_Payment_Method
 
                 foreach ($products as $product) {
                     $product = (object) $product;
-                    $data = wc_get_product($product->get_product_id());
+                    $product_id = $product->get_product_id();
+
+                    $store_name        = apply_filters('cocolis_store_name', get_bloginfo('name'), $product_id);
+                    $store_address     = apply_filters('cocolis_store_address', get_option('woocommerce_store_address'), $product_id);
+                    $store_address_2   = apply_filters('cocolis_store_address_2', get_option('woocommerce_store_address_2'), $product_id);
+                    $store_city        = apply_filters('cocolis_store_city', get_option('woocommerce_store_city'), $product_id);
+                    $store_postcode    = apply_filters('cocolis_store_postcode', get_option('woocommerce_store_postcode'), $product_id);
+                    $phone             = apply_filters('cocolis_store_phone', $phone, $product_id);
+
+                    // The country/state
+                    $store_raw_country = apply_filters('cocolis_store_country', get_option('woocommerce_default_country'), $product_id);
+                    
+                    $data = wc_get_product( $product_id );
                     $width = (int) $data->get_width();
                     $length = (int) $data->get_length();
                     $height = (int) $data->get_height();
