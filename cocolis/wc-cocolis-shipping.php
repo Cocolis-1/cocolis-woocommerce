@@ -88,14 +88,16 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 function general_admin_notice()
                 {
                     // The main address pieces:
-                    $store_name = apply_filters('cocolis_store_name', get_bloginfo('name'));
-                    $store_address     = apply_filters('cocolis_store_address', get_option('woocommerce_store_address'));
-                    $store_address_2   = apply_filters('cocolis_store_address_2', get_option('woocommerce_store_address_2'));
-                    $store_city        = apply_filters('cocolis_store_city', get_option('woocommerce_store_city'));
-                    $store_postcode    = apply_filters('cocolis_store_postcode', get_option('woocommerce_store_postcode'));
+                    $product_id = null;
+
+                    $store_name        = apply_filters('cocolis_store_name', get_bloginfo('name'), $product_id);
+                    $store_address     = apply_filters('cocolis_store_address', get_option('woocommerce_store_address'), $product_id);
+                    $store_address_2   = apply_filters('cocolis_store_address_2', get_option('woocommerce_store_address_2'), $product_id);
+                    $store_city        = apply_filters('cocolis_store_city', get_option('woocommerce_store_city'), $product_id);
+                    $store_postcode    = apply_filters('cocolis_store_postcode', get_option('woocommerce_store_postcode'), $product_id);
 
                     // The country/state
-                    $store_raw_country = apply_filters('cocolis_store_country', get_option('woocommerce_default_country'));
+                    $store_raw_country = apply_filters('cocolis_store_country', get_option('woocommerce_default_country'), $product_id);
 
                     $app_id = $this->settings['app_id'];
                     $password = $this->settings['password'];
@@ -341,7 +343,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
                             $dimensions = round($dimensions, 2);
 
-                            $match = $client->getRideClient()->canMatch(apply_filters('cocolis_store_postcode', get_option('woocommerce_store_postcode')), $postcode, $dimensions, $total * 100);
+                            $match = $client->getRideClient()->canMatch(apply_filters('cocolis_store_postcode', get_option('woocommerce_store_postcode'), $product->data->get_id()), $postcode, $dimensions, $total * 100);
 
                             // Register the rate
                             if ($match->result) {
