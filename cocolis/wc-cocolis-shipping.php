@@ -439,7 +439,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             <b> ' . $label;
 
         if ($method->id === "cocolis") {
-            $label = $label . "</b> </br>" . __("Free insurance up to 150 €", 'cocolis');
+            $label = $label . "</b> </br>" . __("Cocolis insurance included. <a target='_blank' href='https://www.cocolis.fr/static/docs/notice_information_COCOLIS_ACM.pdf'>Notice</a>", 'cocolis');
         } elseif ($method->id === "cocolis_assurance") {
             $total = WC()->cart->get_subtotal();
             // Maximal cost insurance

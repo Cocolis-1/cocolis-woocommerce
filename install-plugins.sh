@@ -1,4 +1,5 @@
 #!/bin/bash
+WORDPRESS_PATH="/var/www/html"
 COMMAND="sudo -u www-data wp --path=${WORDPRESS_PATH}"
 echo "Installing plugins and themes"
 
