@@ -253,8 +253,8 @@ msgid " with insurance"
 msgstr " avec assurance"
 
 #: wc-cocolis-shipping.php:430
-msgid "Free insurance up to 150 €"
-msgstr "Assurance offerte jusqu’à 150 €"
+msgid "Cocolis insurance included. <a target='_blank' href='https://www.cocolis.fr/static/docs/notice_information_COCOLIS_ACM.pdf'>Notice</a>"
+msgstr "Assurance Cocolis incluse. <a target='_blank' href='https://www.cocolis.fr/static/docs/notice_information_COCOLIS_ACM.pdf'>Notice d'assurance</a>"
 
 #: wc-cocolis-shipping.php:446
 msgid "Supplementary insurance up to "

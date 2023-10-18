@@ -12,7 +12,7 @@ fi
 
 echo "Updating existing plugins and themes"
 ${COMMAND} plugin update-all
-${COMMAND}t theme update-all
+${COMMAND} theme update-all
 
 echo "Fixing Permissions"
 chown www-data:www-data -R .
