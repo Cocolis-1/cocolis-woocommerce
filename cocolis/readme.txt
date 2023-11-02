@@ -54,6 +54,9 @@ Rendez-vous [ici](https://doc.cocolis.fr "Documentation de Cocolis") pour obteni
 3. Réglage du module
 
 == Changelog ==
+= 1.1.0 =
+* Always send content_value to API on ride creation to allow customers with insurance enabled by default to be able to create rides
+
 = 1.0.14 =
 * Update message about insurance
 
