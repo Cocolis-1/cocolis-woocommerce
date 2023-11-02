@@ -223,6 +223,7 @@ class WC_Cocolis_Payment_Method
                     }
                 }
 
+                $content_value = (float) ($order->get_total() - $order->get_total_tax() - $order->get_shipping_tax()) * 100: // In cents
                 $params = [
                     "description" => "Livraison de la commande : " . implode(", ", $arrayname) . " vendue sur le site marketplace.",
                     "external_id" => $order_id,
@@ -243,6 +244,7 @@ class WC_Cocolis_Payment_Method
                     "volume" => $dimensions,
                     "environment" => "objects",
                     "photo_urls" => $images,
+                    "content_value" => $content_value, // In cents
                     "rider_extra_information" => "Livraison de la commande : " . implode(", ", $arrayname),
                     "ride_objects_attributes" => $arrayproducts,
                     "ride_delivery_information_attributes" => [
@@ -271,7 +273,6 @@ class WC_Cocolis_Payment_Method
                     $params['with_insurance'] = true;
 
                     $params_insurance = [
-                        "content_value" => ($order->get_total() - $order->get_total_shipping() - $order->get_shipping_tax()) * 100,
                         "ride_delivery_information_attributes" => [
                             "insurance_firstname" => $order_shipping_first_name,
                             "insurance_lastname" =>  $order_shipping_last_name,
