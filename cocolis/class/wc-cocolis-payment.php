@@ -223,7 +223,7 @@ class WC_Cocolis_Payment_Method
                     }
                 }
 
-                $content_value = (float) ($order->get_total() - $order->get_total_tax() - $order->get_shipping_tax()) * 100: // In cents
+                $content_value = (float) ($order->get_total() - $order->get_total_tax() - $order->get_shipping_tax()) * 100; // In cents
                 $params = [
                     "description" => "Livraison de la commande : " . implode(", ", $arrayname) . " vendue sur le site marketplace.",
                     "external_id" => $order_id,
