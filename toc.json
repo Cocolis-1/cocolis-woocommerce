@@ -21,8 +21,17 @@
     },
     {
       "type": "item",
-      "title": "Scénarios du module",
-      "uri": "docs/Scénarios.md"
+      "title": "Fonctionnalités du module",
+      "uri": "docs/Fonctionnalites.md"
+    },
+    {
+      "type": "divider",
+      "title": "SDK"
+    },
+    {
+      "type": "item",
+      "title": "Détail fonctionnement api",
+      "uri": "https://doc.cocolis.fr/docs/cocolis-api/"
     }
   ]
 }
