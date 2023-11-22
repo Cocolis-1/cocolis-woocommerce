@@ -358,8 +358,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
                                     $this->add_rate($rate);
 
-
-
                                     if ($total >= 150) {
                                         $shipping_cost_insurance = ($match->estimated_prices->with_insurance) / 100;
                                         if ($shipping_cost_insurance > 0) {
