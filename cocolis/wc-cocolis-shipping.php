@@ -6,7 +6,7 @@
  * Description: A plugin to add Cocolis.fr as a carrier on Woocommerce
  * Author:  Cocolis.fr
  * Author URI: https://www.cocolis.fr
- * Version: 1.1.0
+ * Version: 1.1.1
  * Developer: Alexandre BETTAN, Sebastien FIELOUX
  * Developer URI: https://github.com/btnalexandre, https://github.com/sebfie
  * Domain Path: /languages
@@ -41,9 +41,10 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                  * @access public
                  * @return void
                  */
-                public function __construct()
+                public function __construct($instance_id = 0)
                 {
                     global $woocommerce;
+                    $this->instance_id = absint( $instance_id );
                     $this->id                 = 'cocolis';
                     $this->method_title       = __('Cocolis Shipping Method', 'cocolis');
                     $this->method_description = __('Cocolis Woocommerce Plugin to add Cocolis.fr as a delivery method', 'cocolis');
@@ -62,6 +63,10 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         'FR', 'HR', 'IT', 'CY', 'LV', 'LT', 'LU', 'HU', 'MT',
                         'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE'
                     );
+
+                    // $this->supports  = array(
+                    //     'shipping-zones'
+                    //  );
 
                     $this->enabled = isset($this->settings['enabled']) ? $this->settings['enabled'] : 'yes';
                     $this->title = isset($this->settings['title']) ? $this->settings['title'] : __('Cocolis Shipping', 'cocolis');
@@ -396,7 +401,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
      */
     function add_cocolis_shipping_method($methods)
     {
-        $methods['add_cocolis_shipping_method'] = 'WC_Cocolis_Shipping_Method';
+        $methods['cocolis'] = 'WC_Cocolis_Shipping_Method';
         return $methods;
     }
 

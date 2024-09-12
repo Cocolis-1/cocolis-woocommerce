@@ -15,7 +15,7 @@ class WC_Cocolis_Webhooks_Method
      */
     function cocolis_webhook_offer_accepted($request)
     {
-        $data = $request->get_body_params();
+        $data = $request->get_json_params();
         $orderid = $data['external_id'];
         $ride_id = $data['ride_id'];
         $event = $data['event'];
@@ -41,7 +41,7 @@ class WC_Cocolis_Webhooks_Method
 
     function cocolis_webhook_offer_completed($request)
     {
-        $data = $request->get_body_params();
+        $data = $request->get_json_params();
         $orderid = $data['external_id'];
         $event = $data['event'];
 
@@ -66,7 +66,7 @@ class WC_Cocolis_Webhooks_Method
 
     function cocolis_webhook_ride_published($request)
     {
-        $data = $request->get_body_params();
+        $data = $request->get_json_params();
         $orderid = $data['external_id'];
         $event = $data['event'];
         $ride_id = $data['ride_id'];
@@ -107,7 +107,7 @@ class WC_Cocolis_Webhooks_Method
 
     function cocolis_webhook_availabilities_buyer_filled($request)
     {
-        $data = $request->get_body_params();
+        $data = $request->get_json_params();
         $orderid = $data['external_id'];
         $event = $data['event'];
 
@@ -131,7 +131,7 @@ class WC_Cocolis_Webhooks_Method
 
     function cocolis_webhook_availabilities_seller_filled($request)
     {
-        $data = $request->get_body_params();
+        $data = $request->get_json_params();
         $orderid = $data['external_id'];
         $event = $data['event'];
 
@@ -155,7 +155,7 @@ class WC_Cocolis_Webhooks_Method
 
     function cocolis_webhook_offer_cancelled($request)
     {
-        $data = $request->get_body_params();
+        $data = $request->get_json_params();
         $orderid = $data['external_id'];
         $event = $data['event'];
 
@@ -179,7 +179,7 @@ class WC_Cocolis_Webhooks_Method
 
     function cocolis_webhook_ride_expired($request)
     {
-        $data = $request->get_body_params();
+        $data = $request->get_json_params();
         $orderid = $data['external_id'];
         $event = $data['event'];
 
