@@ -22,7 +22,7 @@ class WC_Cocolis_Payment_Method
     }
 
     /**
-     * Legal terms for MAIF insurance
+     * Legal terms for insurance
      */
     function cocolis_show_terms_insurance($fields)
     {
@@ -110,7 +110,7 @@ class WC_Cocolis_Payment_Method
             $order = wc_get_order($order_id);
             $order_data = $order->get_data();
             if ($order->has_shipping_method('cocolis') && empty($order->get_meta('_cocolis_ride_id'))) {
-                
+
                 // The main address pieces:
                 $store_name        = apply_filters('cocolis_store_name', get_bloginfo('name'), null);
                 $store_address     = apply_filters('cocolis_store_address', get_option('woocommerce_store_address'), null);
@@ -188,7 +188,7 @@ class WC_Cocolis_Payment_Method
 
                     // The country/state
                     $store_raw_country = apply_filters('cocolis_store_country', get_option('woocommerce_default_country'), $product_id);
-                    
+
                     $data = wc_get_product( $product_id );
                     $width = (int) $data->get_width();
                     $length = (int) $data->get_length();

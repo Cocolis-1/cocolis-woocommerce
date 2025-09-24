@@ -23,11 +23,11 @@ Choisissez en fonction de votre utilisation le mode désiré.
 
 Woocommerce ne nous permettant pas de définir des valeurs par défaut pour tous les produits mis en ligne, certaines valeurs sont à renseigner.
 
-Vos fiches produits doivent en temps normal comporter : 
+Vos fiches produits doivent en temps normal comporter :
 - Le poids
 - La largeur
-- La longueur 
-- La hauteur 
+- La longueur
+- La hauteur
 
 Si certains produits sont absents de ces valeurs, le module ira chercher **les valeurs par défaut** définies dans la page de configuration du module, à appliquer pour les frais de livraison.
 
@@ -38,6 +38,8 @@ Pour calculer les frais de livraison, le module se base sur l'adresse d'expédit
 ## Numéro de téléphone
 
 Le numéro de téléphone du client et du vendeur est **obligatoire** pour le bon déroulé des livraisons.
+
+> Voici comment le render obligatoire dans wordpress: [https://help.luludirect.lulu.com/en/support/solutions/articles/64000270781-how-do-i-make-a-phone-number-required-during-woocommerce-s-checkout-](Rendre numéro de téléphone obligatoire)
 
 Vous devez au préalable fournir un numéro de téléphone dans les paramètres du module dans le champ **Téléphone**.
 

@@ -1,45 +1,39 @@
-=== Cocolis ===
+=== Cocolis Officiel : Méthodes de livraison pour WooCommerce ===
 Contributors: cocolis
 Tags: woocommerce, delivery, cocolis, livraison
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 Requires at least: 4.7
-Tested up to: 5.9
+Tested up to: 6.8
 Requires PHP: 5.6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Proposez un service de livraison écologique et économique pour vos objets lourds et encombrants avec la livraison Cocolis.
-Ce plugin permet :
-* L’envoi de colis volumineux et lourds sans aucune contrainte
-* Le calcul du prix en temps réel pour votre livraison
-* La génération d’une page de suivi pour chaque destinataire
-* La protection de toutes les livraisons jusqu’à 5000€ avec notre assureur partenaire MAIF
-
+L’extension Cocolis pour WooCommerce offre une livraison économique et écologique, intégrée à votre site pour une meilleure expérience client.
 == Description ==
 
-Cocolis regroupe plusieurs fonctionnalités essentielles dans un seul plugin.
-
-Celui-ci permet :
+L'extension Cocolis regroupe toutes les fonctionnalités essentielles pour une gestion simplifiée de vos livraisons.
 
 EN FRONT OFFICE :
-  - L’affichage du prix et de la disponibilité de Cocolis en temps réel
-  - Le suivi de commande depuis le site marchand
-  - Le choix de créneaux de livraison modifiable à tout moment
+
+L’affichage du prix et de la disponibilité de Cocolis en temps réel
+
+Le suivi de commande depuis le site marchand
 
 EN BACK OFFICE :
-  - L’envoi de colis volumineux partout en France
-  - Le suivi des livraisons en cours
-  - La simplification de vos envois, sans bordereau nécessaire
+
+Envoi de colis volumineux partout en France, même les plus difficiles à emballer
+
+Suivi des livraisons en cours directement depuis votre tableau de bord
+
+Simplification des expéditions, sans bordereau nécessaire
 
 BÉNÉFICES POUR LE E-COMMERÇANT :
 
-Le plugin Cocolis est une solution complète et gratuite qui vous permettra de gagner du temps au quotidien dans le traitement de vos commandes et le suivi de vos expéditions. Vous pourrez facilement développer vos ventes en proposant un service de livraison économique et écologique pour tous types d’objets.
-En cas de besoin, vous pourrez vous appuyer sur le support technique Cocolis.
+Notre plugin vous aide à gagner du temps dans le traitement des commandes et à suivre facilement vos expéditions. Développez vos ventes en proposant un service de livraison écologique et économique pour tous types d'objets. Notre support technique est à votre disposition en cas de besoin.
 
-BÉNÉFICES POUR LE E-ACHETEUR :
+BÉNÉFICES POUR L’E-ACHETEUR :
 
-Cocolis permet à l’acheteur de passer commande sans se faire de souci pour sa livraison, quel que soit le type de bien ou la destination. Chaque envoi est également automatiquement assuré par notre partenaire MAIF.
-L’e-acheteur peut suivre son colis à tout moment sur une page de suivi et avoir également accès aux coordonnées personnelles de son livreur.
+Cocolis permet à l’acheteur de passer commande sans se faire de souci pour sa livraison, quel que soit le type de bien ou la destination. Chaque envoi peut être couvert par une assurance optionnelle allant jusqu’à 5000 €. Le client peut suivre son colis à tout moment et contacter facilement son transporteur.
 
 == Documentation ==
 
@@ -54,6 +48,9 @@ Rendez-vous [ici](https://doc.cocolis.fr "Documentation de Cocolis") pour obteni
 3. Réglage du module
 
 == Changelog ==
+= 1.1.2 =
+* Change description
+
 = 1.1.1 =
 * Fix webhooks params parsing
 
