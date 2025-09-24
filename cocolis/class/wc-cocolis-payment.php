@@ -42,8 +42,12 @@ class WC_Cocolis_Payment_Method
             $max_value = 5000;
         }
 
-        $chosen_methods = WC()->session->get('chosen_shipping_methods');
-        $chosen_shipping = $chosen_methods[0];
+        if (WC()->session && WC()->session->has_session()) {
+            $chosen_methods = WC()->session->get('chosen_shipping_methods');
+            $chosen_shipping = $chosen_methods[0];
+        } else {
+            $chosen_shipping = null;
+        }
 
         $link_insurance = "https://www.cocolis.fr/static/docs/notice_information_COCOLIS_AO.pdf";
         $link_insurance = "<a href='" . $link_insurance . "' target='_blank'>" . __('insurance conditions', 'cocolis') . "</a>";
