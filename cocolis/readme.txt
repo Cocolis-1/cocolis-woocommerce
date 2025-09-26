@@ -48,6 +48,9 @@ Rendez-vous [ici](https://doc.cocolis.fr "Documentation de Cocolis") pour obteni
 3. Réglage du module
 
 == Changelog ==
+= 1.1.4 =
+* Fix a php warning
+
 = 1.1.3 =
 * Fix a php issue when session is not enabled
 
