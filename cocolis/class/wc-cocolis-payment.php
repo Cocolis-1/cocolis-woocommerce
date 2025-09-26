@@ -44,7 +44,7 @@ class WC_Cocolis_Payment_Method
 
         if (WC()->session && WC()->session->has_session()) {
             $chosen_methods = WC()->session->get('chosen_shipping_methods');
-            $chosen_shipping = $chosen_methods[0];
+            $chosen_shipping = (is_array($chosen_methods) && !empty($chosen_methods)) ? $chosen_methods[0] : null;
         } else {
             $chosen_shipping = null;
         }
