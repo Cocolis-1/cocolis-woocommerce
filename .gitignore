@@ -4,3 +4,6 @@ db_data
 .DS_Store
 cocolis.zip
 .idea
+
+cocolis/vendor/
+vendor/
