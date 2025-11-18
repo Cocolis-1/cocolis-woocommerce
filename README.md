@@ -82,3 +82,4 @@ Resolution: Be sure to activate automatic payment in the settings of your cocoli
 Error: I do not see a Cocolis ride related to an order already passed on my website when I go to [https://cocolis.fr/rides/owner](https://cocolis.fr/rides/owner)
 
 Resolution: Be sure that the phone field in the payment page is required and filled and no information about the customer is missing. Check logs for any Cocolis Error like `Cocolis ERROR : Cocolis\\Api\\Errors\\UnprocessableEntityException`
+You can make the phone field required in the payment page like explained here [https://help.luludirect.lulu.com/en/support/solutions/articles/64000270781-how-do-i-make-a-phone-number-required-during-woocommerce-s-checkout-](https://help.luludirect.lulu.com/en/support/solutions/articles/64000270781-how-do-i-make-a-phone-number-required-during-woocommerce-s-checkout-)
