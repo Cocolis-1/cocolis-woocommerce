@@ -309,7 +309,15 @@ class WC_Cocolis_Payment_Method
                 $order->add_order_note($note, false);
             }
         } catch (\Throwable $th) {
-            error_log('Cocolis ERROR : ' . $th);
+            $logger = wc_get_logger();
+            $logger->error('Cocolis payment complete error', array(
+                'source' => 'cocolis',
+                'order_id' => $order_id,
+                'message' => $th->getMessage(),
+                'file' => $th->getFile(),
+                'line' => $th->getLine(),
+                'trace' => $th->getTraceAsString()
+            ));
             $order = wc_get_order($order_id);
             $note = __("Your request to Cocolis generated the following error: ", 'cocolis') . $th->getMessage();
             $order->add_order_note($note, false);
@@ -341,7 +349,16 @@ class WC_Cocolis_Payment_Method
                 }
             }
         } catch (\Throwable $th) {
-            error_log('Cocolis ERROR : ' . $th);
+            $logger = wc_get_logger();
+            $logger->error('Cocolis order refunded error', array(
+                'source' => 'cocolis',
+                'order_id' => $order_get_id,
+                'refund_id' => $refund_get_id,
+                'message' => $th->getMessage(),
+                'file' => $th->getFile(),
+                'line' => $th->getLine(),
+                'trace' => $th->getTraceAsString()
+            ));
             $order = wc_get_order($order_get_id);
             $note = __("Your request to Cocolis generated the following error: ", 'cocolis') . $th->getMessage();
             $order->add_order_note($note, false);
