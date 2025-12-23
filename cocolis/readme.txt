@@ -3,7 +3,7 @@ Contributors: cocolis
 Tags: woocommerce, delivery, cocolis, livraison
 Stable tag: 1.1.3
 Requires at least: 4.7
-Tested up to: 6.8
+Tested up to: 6.8.2
 Requires PHP: 5.6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -48,6 +48,10 @@ Rendez-vous [ici](https://doc.cocolis.fr "Documentation de Cocolis") pour obteni
 3. Réglage du module
 
 == Changelog ==
+= 1.1.5 =
+* Fix an issue on installation when creating webhooks
+* Attach photos to ride objects instead of ride itself
+
 = 1.1.4 =
 * Fix a php warning
 

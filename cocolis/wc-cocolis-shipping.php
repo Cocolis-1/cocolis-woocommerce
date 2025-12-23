@@ -6,7 +6,7 @@
  * Description: A plugin to add Cocolis.fr as a carrier on Woocommerce
  * Author:  Cocolis.fr
  * Author URI: https://www.cocolis.fr
- * Version: 1.1.4
+ * Version: 1.1.5
  * Developer: Alexandre BETTAN, Sebastien FIELOUX
  * Developer URI: https://github.com/btnalexandre, https://github.com/sebfie
  * Domain Path: /languages
@@ -252,60 +252,46 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     $client = $this->cocolis_authenticated_client();
                     $webhooks = $client->getWebhookClient()->getAll();
 
+                    $required_events = [
+                        'ride_published',
+                        'ride_expired',
+                        'offer_accepted',
+                        'offer_cancelled',
+                        'offer_completed',
+                        'pickup_slot_accepted_by_sender',
+                        'deposit_slot_accepted_by_recipient',
+                        'ride_availabilities_pending'
+                    ];
+
+                    $existing_webhooks = [];
                     if (!empty($webhooks)) {
                         foreach ($webhooks as $webhook) {
-                            if (strpos($webhook->url, get_home_url()) !== true) {
+                            $existing_webhooks[$webhook->event] = $webhook;
+                        }
+                    }
+
+                    foreach ($required_events as $event) {
+                        $webhook_url = get_home_url() . '/wp-json/cocolis/v1/webhook_' . $event;
+
+                        if (isset($existing_webhooks[$event])) {
+                            $existing_webhook = $existing_webhooks[$event];
+                            if ($existing_webhook->url !== $webhook_url) {
                                 $client->getWebhookClient()->update(
                                     [
-                                        'event' => $webhook->event,
-                                        'url' => get_home_url() . '/wp-json/cocolis/v1/webhook_' . $webhook->event,
+                                        'event' => $event,
+                                        'url' => $webhook_url,
                                         'active' => true
                                     ],
-                                    $webhook->id
+                                    $existing_webhook->id
                                 );
                             }
+                        } else {
+                            $client->getWebhookClient()->create([
+                                'event' => $event,
+                                'url' => $webhook_url,
+                                'active' => true
+                            ]);
                         }
-                    } else {
-                        $client->getWebhookClient()->create([
-                            'event' => 'ride_published',
-                            'url' => get_home_url() . '/wp-json/cocolis/v1/webhook_ride_published',
-                            'active' => true
-                        ]);
-                        $client->getWebhookClient()->create([
-                            'event' => 'ride_expired',
-                            'url' => get_home_url() . '/wp-json/cocolis/v1/webhook_ride_expired',
-                            'active' => true
-                        ]);
-                        $client->getWebhookClient()->create([
-                            'event' => 'offer_accepted',
-                            'url' => get_home_url() . '/wp-json/cocolis/v1/webhook_offer_accepted',
-                            'active' => true
-                        ]);
-                        $client->getWebhookClient()->create([
-                            'event' => 'offer_cancelled',
-                            'url' => get_home_url() . '/wp-json/cocolis/v1/webhook_offer_cancelled',
-                            'active' => true
-                        ]);
-                        $client->getWebhookClient()->create([
-                            'event' => 'offer_completed',
-                            'url' => get_home_url() . '/wp-json/cocolis/v1/webhook_offer_completed',
-                            'active' => true
-                        ]);
-                        $client->getWebhookClient()->create([
-                            'event' => 'pickup_slot_accepted_by_sender',
-                            'url' => get_home_url() . '/wp-json/cocolis/v1/webhook_pickup_slot_accepted_by_sender',
-                            'active' => true
-                        ]);
-                        $client->getWebhookClient()->create([
-                            'event' => 'deposit_slot_accepted_by_recipient',
-                            'url' => get_home_url() . '/wp-json/cocolis/v1/webhook_deposit_slot_accepted_by_recipient',
-                            'active' => true
-                        ]);
-                        $client->getWebhookClient()->create([
-                            'event' => 'ride_availabilities_pending',
-                            'url' => get_home_url() . '/wp-json/cocolis/v1/webhook_ride_availabilities_pending',
-                            'active' => true
-                        ]);
                     }
                 }
 
