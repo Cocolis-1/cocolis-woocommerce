@@ -224,6 +224,7 @@ class WC_Cocolis_Payment_Method
                 $params = [
                     "description" => "Livraison de la commande : " . implode(", ", $arrayname) . " vendue sur le site marketplace.",
                     "external_id" => $order_id,
+                    "idempotency_key" =>'cocolis_woocommerce_' . $order_id,
                     "from_address" => $from_composed_address,
                     "from_postal_code" => $store_postcode,
                     "to_address" => $composed_address,
