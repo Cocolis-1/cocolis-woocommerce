@@ -213,24 +213,18 @@ class WC_Cocolis_Payment_Method
                     array_push($arrayproducts, [
                         "title" => $product->get_name(),
                         "qty" => $product['qty'],
-                        "img" => wp_get_attachment_url($data->get_image_id()),
+                        "photo_urls" => array(wp_get_attachment_url($data->get_image_id())),
                         "height" => (int) $height,
                         "width" => (int) $width,
                         "length" => (int) $length,
                     ]);
                 }
 
-                $images = [];
-                foreach ($arrayproducts as $image) {
-                    if (!empty($image['img'])) {
-                        array_push($images, $image['img']);
-                    }
-                }
-
                 $content_value = (float) ($order->get_total() - $order->get_total_tax() - $order->get_shipping_tax()) * 100; // In cents
                 $params = [
                     "description" => "Livraison de la commande : " . implode(", ", $arrayname) . " vendue sur le site marketplace.",
                     "external_id" => $order_id,
+                    "idempotency_key" =>'cocolis_woocommerce_' . $order_id,
                     "from_address" => $from_composed_address,
                     "from_postal_code" => $store_postcode,
                     "to_address" => $composed_address,
@@ -247,7 +241,6 @@ class WC_Cocolis_Payment_Method
                     "price" => (int) $order->get_shipping_total() * 100,
                     "volume" => $dimensions,
                     "environment" => "objects",
-                    "photo_urls" => $images,
                     "content_value" => $content_value, // In cents
                     "rider_extra_information" => "Livraison de la commande : " . implode(", ", $arrayname),
                     "ride_objects_attributes" => $arrayproducts,
