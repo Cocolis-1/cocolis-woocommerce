@@ -168,7 +168,7 @@ class WC_Cocolis_Webhooks_Method
 
 
         if (!empty($order)) {
-            $note = __("A carrier offers their services in response to an advertisement, and confirmation is awaited from the sender and recipient.", 'cocolis');
+            $note = __("A carrier offers their services in response to a ride, and confirmation is awaited from the sender and recipient.", 'cocolis');
 
             // Add the note
             $order->add_order_note($note, false);
