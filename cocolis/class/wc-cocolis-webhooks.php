@@ -85,7 +85,7 @@ class WC_Cocolis_Webhooks_Method
             $client = $shipping_class->cocolis_authenticated_client();
             $client = $client->getRideClient();
             $ride = $client->get($ride_id);
-            $slug = $ride->slug;
+            $id = $ride->id;
             $prod = $shipping_class->settings['production_mode'] == "sandbox" ? false : true;
 
             $note = __("The delivery offer has just been published on cocolis.fr", 'cocolis');
@@ -93,8 +93,8 @@ class WC_Cocolis_Webhooks_Method
             // Add the note
             $order->add_order_note($note, false);
 
-            $link = $prod ? 'https://cocolis.fr/ride-public/' .
-                $slug : 'https://sandbox.cocolis.fr/ride-public/' . $slug;
+            $base_url = $prod ? 'https://www.cocolis.fr' : 'https://sandbox.cocolis.fr';
+            $link = sprintf('%s/ride/public/%s', $base_url, $id);
 
             $note = __("Link to ad: ", 'cocolis') . $link;
 
@@ -105,7 +105,7 @@ class WC_Cocolis_Webhooks_Method
         exit;
     }
 
-    function cocolis_webhook_availabilities_buyer_filled($request)
+    function cocolis_webhook_pickup_slot_accepted_by_sender($request)
     {
         $data = $request->get_json_params();
         $orderid = $data['external_id'];
@@ -120,7 +120,7 @@ class WC_Cocolis_Webhooks_Method
 
 
         if (!empty($order)) {
-            $note = __("The buyer has updated his availability", 'cocolis');
+            $note = __("The seller accepted the carrier's pickup slot", 'cocolis');
 
             // Add the note
             $order->add_order_note($note, false);
@@ -129,7 +129,7 @@ class WC_Cocolis_Webhooks_Method
         exit;
     }
 
-    function cocolis_webhook_availabilities_seller_filled($request)
+    function cocolis_webhook_deposit_slot_accepted_by_recipient($request)
     {
         $data = $request->get_json_params();
         $orderid = $data['external_id'];
@@ -144,7 +144,31 @@ class WC_Cocolis_Webhooks_Method
 
 
         if (!empty($order)) {
-            $note = __("The seller has updated his availability", 'cocolis');
+            $note = __("The buyer has accepted the carrier's delivery slot", 'cocolis');
+
+            // Add the note
+            $order->add_order_note($note, false);
+        }
+        echo json_encode(['success' => true]);
+        exit;
+    }
+
+    function cocolis_webhook_ride_availabilities_pending($request)
+    {
+        $data = $request->get_json_params();
+        $orderid = $data['external_id'];
+        $event = $data['event'];
+
+        if (empty($event) || empty($orderid)) {
+            echo ('Event or order ID missing from Webhook');
+            exit;
+        }
+
+        $order = new WC_Order($orderid);
+
+
+        if (!empty($order)) {
+            $note = __("A carrier offers their services in response to an advertisement, and confirmation is awaited from the sender and recipient.", 'cocolis');
 
             // Add the note
             $order->add_order_note($note, false);
@@ -234,14 +258,19 @@ class WC_Cocolis_Webhooks_Method
             'callback' => array($this, 'cocolis_webhook_ride_published'),
             'permission_callback' => '__return_true'
         ));
-        register_rest_route('cocolis/v1', '/webhook_availabilities_buyer_filled', array(
+        register_rest_route('cocolis/v1', '/webhook_pickup_slot_accepted_by_sender', array(
             'methods'  => 'POST',
-            'callback' => array($this, 'cocolis_webhook_availabilities_buyer_filled'),
+            'callback' => array($this, 'cocolis_webhook_pickup_slot_accepted_by_sender'),
             'permission_callback' => '__return_true'
         ));
-        register_rest_route('cocolis/v1', '/webhook_availabilities_seller_filled', array(
+        register_rest_route('cocolis/v1', '/webhook_deposit_slot_accepted_by_recipient', array(
             'methods'  => 'POST',
-            'callback' => array($this, 'cocolis_webhook_availabilities_seller_filled'),
+            'callback' => array($this, 'cocolis_webhook_deposit_slot_accepted_by_recipient'),
+            'permission_callback' => '__return_true'
+        ));
+        register_rest_route('cocolis/v1', '/webhook_ride_availabilities_pending', array(
+            'methods'  => 'POST',
+            'callback' => array($this, 'cocolis_webhook_ride_availabilities_pending'),
             'permission_callback' => '__return_true'
         ));
     }

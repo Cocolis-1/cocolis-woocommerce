@@ -292,13 +292,18 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                             'active' => true
                         ]);
                         $client->getWebhookClient()->create([
-                            'event' => 'availabilities_buyer_filled',
-                            'url' => get_home_url() . '/wp-json/cocolis/v1/webhook_availabilities_buyer_filled',
+                            'event' => 'pickup_slot_accepted_by_sender',
+                            'url' => get_home_url() . '/wp-json/cocolis/v1/webhook_pickup_slot_accepted_by_sender',
                             'active' => true
                         ]);
                         $client->getWebhookClient()->create([
-                            'event' => 'availabilities_seller_filled',
-                            'url' => get_home_url() . '/wp-json/cocolis/v1/webhook_availabilities_seller_filled',
+                            'event' => 'deposit_slot_accepted_by_recipient',
+                            'url' => get_home_url() . '/wp-json/cocolis/v1/webhook_deposit_slot_accepted_by_recipient',
+                            'active' => true
+                        ]);
+                        $client->getWebhookClient()->create([
+                            'event' => 'ride_availabilities_pending',
+                            'url' => get_home_url() . '/wp-json/cocolis/v1/webhook_ride_availabilities_pending',
                             'active' => true
                         ]);
                     }
