@@ -369,7 +369,14 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                             }
                         }
                     } catch (\Throwable $th) {
-                        error_log('Cocolis ERROR : ' . $th);
+                        $logger = wc_get_logger();
+                        $logger->error('Cocolis shipping calculation error', array(
+                            'source' => 'cocolis',
+                            'message' => $th->getMessage(),
+                            'file' => $th->getFile(),
+                            'line' => $th->getLine(),
+                            'trace' => $th->getTraceAsString()
+                        ));
                         return false;
                     }
                 }
