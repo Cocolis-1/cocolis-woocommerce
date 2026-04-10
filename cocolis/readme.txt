@@ -1,7 +1,7 @@
 === Cocolis Officiel : Méthodes de livraison pour WooCommerce ===
 Contributors: cocolis
 Tags: woocommerce, delivery, cocolis, livraison
-Stable tag: 1.1.3
+Stable tag: 1.1.5
 Requires at least: 4.7
 Tested up to: 6.8.2
 Requires PHP: 5.6.0
