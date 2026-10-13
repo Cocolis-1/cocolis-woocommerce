@@ -19,11 +19,29 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
+define('WC_COCOLIS_VERSION', '1.2.0');
+
 require_once dirname(__FILE__) . '/vendor/autoload.php';
 include_once "class/wc-cocolis-payment.php";
 include_once "class/wc-cocolis-webhooks.php";
 
 use Cocolis\Api\Client;
+
+/**
+ * Expose the module version on window, to ease debugging partner shops
+ * (type "window.cocolisVersion" in the browser console).
+ */
+function cocolis_expose_version_in_js()
+{
+    $script = 'window.cocolisVersion = ' . wp_json_encode(WC_COCOLIS_VERSION) . ';';
+    if (function_exists('wp_print_inline_script_tag')) {
+        wp_print_inline_script_tag($script);
+    } else {
+        echo '<script>' . $script . '</script>';
+    }
+}
+add_action('wp_head', 'cocolis_expose_version_in_js');
+add_action('admin_head', 'cocolis_expose_version_in_js');
 
 /**
  * Check if WooCommerce is active
