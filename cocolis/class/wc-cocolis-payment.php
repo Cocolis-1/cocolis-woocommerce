@@ -8,101 +8,11 @@ class WC_Cocolis_Payment_Method
 {
     public function __construct()
     {
-        add_filter('woocommerce_checkout_fields', array($this, 'cocolis_show_terms_insurance'));
-
-        add_action('woocommerce_checkout_update_order_meta', array($this, 'cocolis_save_insurance_billing_field'), 10, 2);
-
-        add_action('woocommerce_after_checkout_validation', array($this, 'cocolis_validate'), 20, 2);
-
         add_action('woocommerce_order_status_processing', array($this, 'cocolis_payment_complete'), 100);
 
         add_action('woocommerce_order_refunded', array($this, 'cocolis_order_refunded'), 10, 2);
 
-        add_action('add_meta_boxes', array($this, 'add_meta_boxesws'));
-    }
-
-    /**
-     * Legal terms for insurance
-     */
-    function cocolis_show_terms_insurance($fields)
-    {
-        global $woocommerce;
-        $total = WC()->cart->cart_contents_total + WC()->cart->tax_total;
-
-        // Maximal cost insurance
-        if ($total <= 500) {
-            $max_value = 500;
-        } elseif ($total <= 1500) {
-            $max_value = 1500;
-        } elseif ($total <= 3000) {
-            $max_value = 3000;
-        } elseif ($total <= 5000) {
-            $max_value = 5000;
-        } else {
-            $max_value = 5000;
-        }
-
-        if (WC()->session && WC()->session->has_session()) {
-            $chosen_methods = WC()->session->get('chosen_shipping_methods');
-            $chosen_shipping = (is_array($chosen_methods) && !empty($chosen_methods)) ? $chosen_methods[0] : null;
-        } else {
-            $chosen_shipping = null;
-        }
-
-        $link_insurance = "https://www.cocolis.fr/static/docs/notice_information_COCOLIS_AO.pdf";
-        $link_insurance = "<a href='" . $link_insurance . "' target='_blank'>" . __('insurance conditions', 'cocolis') . "</a>";
-
-        if ($chosen_shipping == 'cocolis_assurance') {
-            $fields['billing']['birth_date'] = array(
-                'type'        => 'date',
-                'label'       => __('Birth date for insurance', 'cocolis'),
-                'class'       => array('form-row-wide'),
-                'required'    => true,
-                'clear'       => true
-            );
-
-            $fields['billing']['terms_insurance_cocolis'] = array(
-                'type'      => 'checkbox',
-                'label'     => __("I confirm that I have read the ", 'cocolis') . $link_insurance . __(" and that I choose the insurance up to ", 'cocolis') . $max_value . " €",
-                'class'     => array('form-row-wide'),
-                'clear'     => true,
-                'required'  => true,
-            );
-        }
-        return $fields;
-    }
-
-    /**
-     * Validate legal cases
-     */
-    function cocolis_validate($data, $errors)
-    {
-        if ($data['shipping_method'][0] == 'cocolis_assurance' && (empty($data['birth_date']) || !isset($data['birth_date']) || empty($data['terms_insurance_cocolis'] || !isset($data['terms_insurance_cocolis'])))) {
-            // if any validation errors
-            if (!empty($errors->get_error_codes())) {
-
-                // remove all of them
-                foreach ($errors->get_error_codes() as $code) {
-                    $errors->remove($code);
-                }
-            }
-
-            $errors->add('validation', __('Please fill insurance details for Cocolis delivery (refresh if you have changed delivery mode)', 'cocolis'));
-        }
-    }
-
-    /**
-     * Save the consentment
-     */
-    function cocolis_save_insurance_billing_field($order_id, $posted)
-    {
-        if (isset($posted['birth_date'])) {
-            update_post_meta($order_id, 'birth_date', $posted['birth_date']);
-        }
-
-        if (isset($posted['terms_insurance_cocolis'])) {
-            update_post_meta($order_id, 'terms_insurance_cocolis', $posted['terms_insurance_cocolis']);
-        }
+        add_action('add_meta_boxes', array($this, 'add_meta_boxesws'), 10, 2);
     }
 
     /**
@@ -142,7 +52,6 @@ class WC_Cocolis_Payment_Method
                 $order_shipping_postcode = $order_data['shipping']['postcode'];
                 $order_shipping_country = $order_data['shipping']['country'];
                 $order_shipping_phone = $order_data['billing']['phone'];
-                $order_birthdate = $order->get_meta('birth_date');
 
                 $from_composed_address = $store_address . ', '
                     . $store_postcode . ' ' . $store_city;
@@ -171,10 +80,12 @@ class WC_Cocolis_Payment_Method
 
                 $client = $shipping_class->cocolis_authenticated_client();
 
-                $phone = $shipping_class->settings['phone'];
+                $phone = $shipping_class->get_option('phone');
                 if (empty($phone)) {
-                    wp_die(__("No phone number provided in the Cocolis configuration", 'cocolis'), __("Required seller phone number", 'cocolis'), ['response' => 401, 'back_link' => true]);
-                    exit;
+                    // Do not wp_die() here: this hook runs during checkout and would break the payment flow.
+                    error_log('Cocolis ERROR : no phone number provided in the Cocolis configuration');
+                    $order->add_order_note(__("No phone number provided in the Cocolis configuration", 'cocolis'), false);
+                    return false;
                 }
 
                 $dimensions = 0;
@@ -234,11 +145,10 @@ class WC_Cocolis_Payment_Method
                     "from_need_help" => true,
                     "to_is_flexible" => false,
                     "to_need_help" => true,
-                    "with_insurance" => false,
                     "to_pickup_date" => $to_date,
                     "is_passenger" => false,
                     "is_packaged" => true,
-                    "price" => (int) $order->get_shipping_total() * 100,
+                    "price" => (int) round((float) $order->get_shipping_total() * 100),
                     "volume" => $dimensions,
                     "environment" => "objects",
                     "content_value" => $content_value, // In cents
@@ -249,7 +159,7 @@ class WC_Cocolis_Payment_Method
                         "from_postal_code" => $store_postcode,
                         "from_city" => $store_city,
                         "from_country" => $store_country,
-                        "from_contact_email" => $shipping_class->settings['email'],
+                        "from_contact_email" => $shipping_class->get_option('email'),
                         "from_contact_phone" => $phone,
                         "from_contact_name" => $store_name,
                         "from_extra_information" => 'Vendeur Marketplace',
@@ -262,27 +172,6 @@ class WC_Cocolis_Payment_Method
                         "to_contact_phone" => $order_shipping_phone
                     ],
                 ];
-
-                if (strpos($order->get_shipping_method(), "with insurance") !== false || strpos($order->get_shipping_method(), "avec assurance") !== false) {
-                    $birthday = new DateTime($order_birthdate);
-                    $birthday = $birthday->format(DateTime::ISO8601);
-
-                    $params['with_insurance'] = true;
-
-                    $params_insurance = [
-                        "ride_delivery_information_attributes" => [
-                            "insurance_firstname" => $order_shipping_first_name,
-                            "insurance_lastname" =>  $order_shipping_last_name,
-                            "insurance_address" => $order_shipping_address_1,
-                            "insurance_postal_code" => $order_shipping_postcode,
-                            "insurance_city" => $order_shipping_city,
-                            "insurance_country" => $order_shipping_country,
-                            "insurance_birthdate" => $birthday
-                        ],
-                    ];
-
-                    $params = array_merge_recursive($params, $params_insurance);
-                }
 
                 $client = $client->getRideClient();
                 $ride = $client->create($params);
@@ -343,44 +232,71 @@ class WC_Cocolis_Payment_Method
     }
 
 
-    function add_meta_boxesws()
+    /**
+     * Resolve the order from the object passed to meta box hooks (WP_Post on the
+     * legacy order screen, WC_Order on the HPOS order screen), with a URL fallback.
+     *
+     * @param mixed $object
+     * @return WC_Order|false
+     */
+    private function get_order_from_metabox_object($object)
     {
-        $post_id = isset($_GET['post']) ? $_GET['post'] : false;
-        if ($post_id) {
-            $order = wc_get_order($post_id);
-            if ($order) {
-                if ($order->has_shipping_method('cocolis')) {
-                    add_meta_box(
-                        'custom_order_meta_box',
-                        __('Manage my delivery with Cocolis', 'cocolis'),
-                        array($this, 'custom_metabox_content'),
-                        'shop_order',
-                        'normal',
-                        'default'
-                    );
-                }
-            }
+        if ($object instanceof WC_Order) {
+            return $object;
+        }
+
+        if ($object instanceof WP_Post) {
+            return wc_get_order($object->ID);
+        }
+
+        $order_id = isset($_GET['id']) ? absint($_GET['id']) : (isset($_GET['post']) ? absint($_GET['post']) : 0);
+
+        return $order_id ? wc_get_order($order_id) : false;
+    }
+
+    function add_meta_boxesws($post_type = '', $object = null)
+    {
+        $order = $this->get_order_from_metabox_object($object);
+
+        if ($order && $order->has_shipping_method('cocolis')) {
+            // HPOS-aware screen id: 'woocommerce_page_wc-orders' or 'shop_order'.
+            $screen = function_exists('wc_get_page_screen_id') ? wc_get_page_screen_id('shop-order') : 'shop_order';
+
+            add_meta_box(
+                'custom_order_meta_box',
+                __('Manage my delivery with Cocolis', 'cocolis'),
+                array($this, 'custom_metabox_content'),
+                $screen,
+                'normal',
+                'default'
+            );
         }
     }
 
-    function custom_metabox_content()
+    function custom_metabox_content($object = null)
     {
-        $post_id = isset($_GET['post']) ? $_GET['post'] : false;
-        $order = wc_get_order($post_id);
+        $order = $this->get_order_from_metabox_object($object);
 
-        if (!$post_id) return; // Exit
+        if (!$order) return; // Exit
 
-        $value = "cocolis";
+        $create_url = wp_nonce_url(
+            add_query_arg('create_delivery', 'cocolis', $order->get_edit_order_url()),
+            'cocolis_create_delivery_' . $order->get_id()
+        );
 ?>
-        <p><a href="?post=<?php echo $post_id; ?>&action=edit&create_delivery=<?php echo $value; ?>" class="button"><?php echo __("Create Cocolis Ride", 'cocolis'); ?></a></p>
+        <p><a href="<?php echo esc_url($create_url); ?>" class="button"><?php echo esc_html__("Create Cocolis Ride", 'cocolis'); ?></a></p>
 <?php
         // The displayed value using GET method
-        if (isset($_GET['create_delivery']) && !empty($_GET['create_delivery'])) {
+        if (!empty($_GET['create_delivery'])
+            && isset($_GET['_wpnonce'])
+            && wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'])), 'cocolis_create_delivery_' . $order->get_id())
+            && current_user_can('edit_shop_orders')
+        ) {
             if (empty($order->get_meta('_cocolis_ride_id'))) {
-                echo '<b style="color:#0069d8">' . __("The delivery offer has just been published on cocolis.fr", 'cocolis') . '</b>';
-                $this->cocolis_payment_complete($post_id);
+                echo '<b style="color:#0069d8">' . esc_html__("The delivery offer has just been published on cocolis.fr", 'cocolis') . '</b>';
+                $this->cocolis_payment_complete($order->get_id());
             } else {
-                echo '<b style="color:red">' . __("We have find a related cocolis ad to this order, so the ad was not published.", 'cocolis') . '</b>';
+                echo '<b style="color:red">' . esc_html__("We have find a related cocolis ad to this order, so the ad was not published.", 'cocolis') . '</b>';
             }
         }
     }

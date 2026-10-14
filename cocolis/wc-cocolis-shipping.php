@@ -6,18 +6,25 @@
  * Description: A plugin to add Cocolis.fr as a carrier on Woocommerce
  * Author:  Cocolis.fr
  * Author URI: https://www.cocolis.fr
- * Version: 1.1.5
+ * Version: 1.2.0
  * Developer: Alexandre BETTAN, Sebastien FIELOUX
  * Developer URI: https://github.com/btnalexandre, https://github.com/sebfie
+ * Text Domain: cocolis
  * Domain Path: /languages
+ * Requires at least: 5.0
+ * Requires PHP: 7.4
+ * WC requires at least: 4.0
+ * WC tested up to: 11.2
  * License: GNU General Public License v3.0
- * License URI: http://www.gnu.org/licenses/gpl-3.O.html
+ * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  */
 
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
+
+define('WC_COCOLIS_VERSION', '1.2.0');
 
 require_once dirname(__FILE__) . '/vendor/autoload.php';
 include_once "class/wc-cocolis-payment.php";
@@ -26,15 +33,53 @@ include_once "class/wc-cocolis-webhooks.php";
 use Cocolis\Api\Client;
 
 /**
- * Check if WooCommerce is active
+ * Expose the module version on window, to ease debugging partner shops
+ * (type "window.cocolisVersion" in the browser console).
  */
+function cocolis_expose_version_in_js()
+{
+    $script = 'window.cocolisVersion = ' . wp_json_encode(WC_COCOLIS_VERSION) . ';';
+    if (function_exists('wp_print_inline_script_tag')) {
+        wp_print_inline_script_tag($script);
+    } else {
+        echo '<script>' . $script . '</script>';
+    }
+}
+add_action('wp_head', 'cocolis_expose_version_in_js');
+add_action('admin_head', 'cocolis_expose_version_in_js');
 
-if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
+/**
+ * Declare compatibility with WooCommerce High-Performance Order Storage (HPOS)
+ */
+add_action('before_woocommerce_init', function () {
+    if (class_exists('\Automattic\WooCommerce\Utilities\FeaturesUtil')) {
+        \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('custom_order_tables', __FILE__, true);
+    }
+});
+
+/**
+ * Check if WooCommerce is active (single site or network activated)
+ */
+$cocolis_active_plugins = apply_filters('active_plugins', get_option('active_plugins', array()));
+if (is_multisite()) {
+    $cocolis_active_plugins = array_merge($cocolis_active_plugins, array_keys(get_site_option('active_sitewide_plugins', array())));
+}
+
+if (in_array('woocommerce/woocommerce.php', $cocolis_active_plugins, true)) {
     function cocolis_shipping_method_init()
     {
         if (!class_exists('WC_Cocolis_Shipping_Method')) {
             class WC_Cocolis_Shipping_Method extends WC_Shipping_Method
             {
+                // Declared explicitly: dynamic properties are deprecated since PHP 8.2.
+                public $production_mode;
+                public $api_key;
+                public $app_id;
+                public $password;
+                public $width;
+                public $length;
+                public $height;
+
                 /**
                  * Constructor for your shipping class
                  *
@@ -50,6 +95,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     $this->method_description = __('Cocolis Woocommerce Plugin to add Cocolis.fr as a delivery method', 'cocolis');
                     // Define user set variables.
                     $this->production_mode = apply_filters('cocolis_store_production_mode', $this->get_option('production_mode'));
+                    $this->api_key = apply_filters('cocolis_store_api_key', $this->get_option('api_key'));
                     $this->app_id = apply_filters('cocolis_store_app_id', $this->get_option('app_id'));
                     $this->password = apply_filters('cocolis_store_password', $this->get_option('password'));
                     $this->width = apply_filters('cocolis_store_width', $this->get_option('width'));
@@ -104,15 +150,19 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     // The country/state
                     $store_raw_country = apply_filters('cocolis_store_country', get_option('woocommerce_default_country'), $product_id);
 
-                    $app_id = $this->settings['app_id'];
-                    $password = $this->settings['password'];
-                    $width = $this->settings['width'];
-                    $height = $this->settings['height'];
-                    $length = $this->settings['length'];
-                    $email = $this->settings['email'];
-                    $phone = $this->settings['phone'];
+                    $api_key = $this->get_option('api_key');
+                    $app_id = $this->get_option('app_id');
+                    $password = $this->get_option('password');
+                    $width = $this->get_option('width');
+                    $height = $this->get_option('height');
+                    $length = $this->get_option('length');
+                    $email = $this->get_option('email');
+                    $phone = $this->get_option('phone');
 
-                    if (empty($app_id) || empty($password) || empty($width) || empty($height) || empty($length) || empty($email) || empty($phone)) {
+                    // Credentials are valid with either an API key or an app-id / password pair.
+                    $missing_credentials = empty($api_key) && (empty($app_id) || empty($password));
+
+                    if ($missing_credentials || empty($width) || empty($height) || empty($length) || empty($email) || empty($phone)) {
                         echo '<div class="notice notice-error is-dismissible">
                              <h3>
                                 <b style="color: red">' . __('The configuration of the Cocolis module is not correctly configured to fully use it.', 'cocolis') . '</b>
@@ -147,6 +197,14 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                                 'sandbox' => __('Sandbox', 'cocolis'),
                                 'production' => __('Production', 'cocolis')
                             ),
+                            'css'      => 'width:196px;',
+                        ),
+                        'api_key' => array(
+                            'title'             => __('API Key', 'cocolis'),
+                            'type'              => 'password',
+                            'description'       => __('Enter the API key provided to you by Cocolis. When filled in, it takes precedence over the app-id / password authentication.', 'cocolis'),
+                            'desc_tip'          => true,
+                            'default'           => '',
                             'css'      => 'width:196px;',
                         ),
                         'app_id' => array(
@@ -215,9 +273,10 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 public function cocolis_validate_settings_fields($form_field = array())
                 {
                     // get the posted value
-                    $this->production_mode = $form_field['production_mode'] == "sandbox" ? false : true;
-                    $this->app_id = $form_field['app_id'];
-                    $this->password = $form_field['password'];
+                    $this->production_mode = isset($form_field['production_mode']) && $form_field['production_mode'] == "sandbox" ? false : true;
+                    $this->api_key = isset($form_field['api_key']) ? $form_field['api_key'] : '';
+                    $this->app_id = isset($form_field['app_id']) ? $form_field['app_id'] : '';
+                    $this->password = isset($form_field['password']) ? $form_field['password'] : '';
                     try {
                         $this->cocolis_authenticated_client();
                         $this->cocolis_register_webhooks();
@@ -230,14 +289,28 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
 
                 /**
-                 * Authentificate request to API
+                 * Authentificate request to API.
+                 * The API key, when configured, takes precedence over the app-id / password pair.
                  */
                 public function cocolis_authenticated_client()
                 {
-                    $prod = $this->settings['production_mode'] == "sandbox" ? false : true;
+                    $prod = $this->get_option('production_mode') == "sandbox" ? false : true;
+                    $api_key = trim((string) $this->get_option('api_key'));
+
+                    if (!empty($api_key)) {
+                        return Client::create(array(
+                            'api_key' => $api_key,
+                            'live' => $prod,
+                        ));
+                    }
+
+                    // Clear any API key left in the static client state so the
+                    // app-id / password authentication is actually used.
+                    Client::setApiKey(null);
+
                     $client = Client::create(array(
-                        'app_id' => $this->settings['app_id'],
-                        'password' => $this->settings['password'],
+                        'app_id' => $this->get_option('app_id'),
+                        'password' => $this->get_option('password'),
                         'live' => $prod,
                     ));
                     $client->signIn();
@@ -271,7 +344,8 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     }
 
                     foreach ($required_events as $event) {
-                        $webhook_url = get_home_url() . '/wp-json/cocolis/v1/webhook_' . $event;
+                        // rest_url() honors the permalink configuration (plain permalinks included).
+                        $webhook_url = rest_url('cocolis/v1/webhook_' . $event);
 
                         if (isset($existing_webhooks[$event])) {
                             $existing_webhook = $existing_webhooks[$event];
@@ -292,6 +366,11 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                                 'active' => true
                             ]);
                         }
+                    }
+
+                    // Store the signing secret used to verify incoming webhook signatures.
+                    if (class_exists('WC_Cocolis_Webhooks_Method')) {
+                        WC_Cocolis_Webhooks_Method::refresh_signing_secret();
                     }
                 }
 
@@ -329,7 +408,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                                     $dimensions += (($width * $length * $height) / pow(10, 6)) * (int) $product->quantity;
                                 }
 
-                                $total += (int) $product->data->get_price() * (int) $product->quantity;
+                                $total += (float) $product->data->get_price() * (int) $product->quantity;
                             }
 
 
@@ -339,7 +418,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
                             $dimensions = round($dimensions, 2);
 
-                            $match = $client->getRideClient()->canMatch(apply_filters('cocolis_store_postcode', get_option('woocommerce_store_postcode'), $product->data->get_id()), $postcode, $dimensions, $total * 100);
+                            $match = $client->getRideClient()->canMatch(apply_filters('cocolis_store_postcode', get_option('woocommerce_store_postcode'), $product->data->get_id()), $postcode, $dimensions, (int) round($total * 100));
 
                             // Register the rate
                             if ($match->result) {
@@ -353,18 +432,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                                     );
 
                                     $this->add_rate($rate);
-
-                                    if ($total >= 150) {
-                                        $shipping_cost_insurance = ($match->estimated_prices->with_insurance) / 100;
-                                        if ($shipping_cost_insurance > 0) {
-                                            $rate = array(
-                                                'id'   => 'cocolis_assurance',
-                                                'label' => $this->title . __(' with insurance', 'cocolis'),
-                                                'cost' => $shipping_cost_insurance,
-                                            );
-                                            $this->add_rate($rate);
-                                        }
-                                    }
                                 }
                             }
                         }
@@ -378,12 +445,38 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
     }
 
     /**
+     * One-time upgrade routine, run when the stored version differs from the code version.
+     */
+    function cocolis_maybe_upgrade()
+    {
+        if (get_option('cocolis_plugin_version') === WC_COCOLIS_VERSION) {
+            return;
+        }
+
+        // Invalidate the cached shipping rates so the removed "with insurance"
+        // rate (cocolis_assurance) disappears immediately from carts.
+        if (class_exists('WC_Cache_Helper')) {
+            WC_Cache_Helper::get_transient_version('shipping', true);
+        }
+
+        // Fetch the webhook signing secret so existing installs can verify
+        // webhook signatures without having to re-save the settings.
+        if (class_exists('WC_Cocolis_Webhooks_Method')) {
+            WC_Cocolis_Webhooks_Method::refresh_signing_secret();
+        }
+
+        update_option('cocolis_plugin_version', WC_COCOLIS_VERSION, false);
+    }
+
+    add_action('admin_init', 'cocolis_maybe_upgrade');
+
+    /**
      * On activation, redirect to configuration of the plugin
      */
     function cocolis_activation_redirect($plugin)
     {
         if ($plugin == plugin_basename(__FILE__)) {
-            exit(wp_redirect(admin_url('admin.php?page=wc-settings&tab=shipping&section=cocolis')));
+            exit(wp_safe_redirect(admin_url('admin.php?page=wc-settings&tab=shipping&section=cocolis')));
         }
     }
 
@@ -434,29 +527,10 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
         if ($method->id === "cocolis") {
             $label = $label . "</b> </br>" . __("Cocolis insurance included. <a target='_blank' href='https://www.cocolis.fr/static/docs/notice_information_COCOLIS_ACM.pdf'>Notice</a>", 'cocolis');
-        } elseif ($method->id === "cocolis_assurance") {
-            $total = WC()->cart->get_subtotal();
-            // Maximal cost insurance
-            if ($total <= 150) {
-                $max_value = 150;
-            } elseif ($total <= 500) {
-                $max_value = 500;
-            } elseif ($total <= 1500) {
-                $max_value = 1500;
-            } elseif ($total <= 3000) {
-                $max_value = 3000;
-            } else {
-                $max_value = 5000;
-            }
-
-            $label = $label . "</b> <br>" . __("Supplementary insurance up to ", 'cocolis') . $max_value . " €";
-        }
-
-        if ($method->id === "cocolis" || $method->id === "cocolis_assurance") {
             return $label;
-        } else {
-            return $default_label;
         }
+
+        return $default_label;
     }
 
     /**
