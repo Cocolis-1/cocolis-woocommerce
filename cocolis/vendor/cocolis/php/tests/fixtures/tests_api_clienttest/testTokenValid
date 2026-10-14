@@ -1,0 +1,80 @@
+
+-
+    request:
+        method: GET
+        url: 'https://sandbox-api.cocolis.fr/api/v1/app_auth/validate_token?token-type=Bearer&access-token=nBfCK2mL3rp83hSjhUFLYg&client=wFPP7k01OacAzC-tXni-fA&expiry=1604318220&uid=e0611906'
+        headers:
+            Host: sandbox-api.cocolis.fr
+            access-token: pq915g6fXYsZwByHh2Tr7g
+            client: FdTizxGOBSm9fXrkShOVdw
+            expiry: '1643332505'
+            uid: e0611906
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Server: Cowboy
+            Date: 'Fri, 14 Jan 2022 01:15:05 GMT'
+            Connection: keep-alive
+            X-Frame-Options: SAMEORIGIN
+            X-Xss-Protection: '1; mode=block'
+            X-Content-Type-Options: nosniff
+            X-Download-Options: noopen
+            X-Permitted-Cross-Domain-Policies: none
+            Referrer-Policy: strict-origin-when-cross-origin
+            Content-Type: 'application/json; charset=utf-8'
+            Vary: 'Accept, Origin'
+            Access-Token: pq915g6fXYsZwByHh2Tr7g
+            Token-Type: Bearer
+            Client: FdTizxGOBSm9fXrkShOVdw
+            Expiry: '1643332505'
+            Uid: e0611906
+            Set-Cookie: ['_session_id=FiKi5DCKPgBnzCudsD22JaUxwiqaUNnkLOCxjfo%2BuUM9N1vzWC3Cm4a68nvoa0ionWvBvZNoAbM%2F%2FhcJ1NFJ9ryq0KBh%2FRjy%2FX4CWR8g%2FegNG1RcWwvqrT8EU%2F%2FJyoMeffwmdN1Tv4hNVC69gs2Rpa489FhY3N0kjLvWcbAPTGO1gxQhUWpWtefBiITCOPZURo6h6c4gpeoEgcWgC0jr7He29%2BIaFuIQ9XGzspAoklB76LrxoYWTYOFIOWDA1uZbsyD1oIZ8vNNkSYxV86632QTJbFFYaybaOWqYp%2Fk7sYXOTvSQZsh67YlGytILjBIhD0Jb6HsDJfRxNuEGwPmjzpvfNUdQHx6ofMTXFhHbyDXVzNKXfLAtVJeujST7kJeaCSypJ2TgpteCUZCG7q0UR60k9ulqRJ8jsBhO3t3ED7NSea2HoaBTi6ZLjq2Omn9FOpNeBBDOVG7w3OK6CBxs420RcBLVv1O5GSlj9GVEkVYYscQns2v0V6mAQQelfvR80tq30UHBTSFeaN68WjvIz3qxOWkoNqey98b3B2thnHbYMW4xLlGC--NloE38ZpG8y8pkcG--Cq8%2FPHdjLM79VPEgjN23Iw%3D%3D; path=/; HttpOnly; secure', '_session_id=FiKi5DCKPgBnzCudsD22JaUxwiqaUNnkLOCxjfo%2BuUM9N1vzWC3Cm4a68nvoa0ionWvBvZNoAbM%2F%2FhcJ1NFJ9ryq0KBh%2FRjy%2FX4CWR8g%2FegNG1RcWwvqrT8EU%2F%2FJyoMeffwmdN1Tv4hNVC69gs2Rpa489FhY3N0kjLvWcbAPTGO1gxQhUWpWtefBiITCOPZURo6h6c4gpeoEgcWgC0jr7He29%2BIaFuIQ9XGzspAoklB76LrxoYWTYOFIOWDA1uZbsyD1oIZ8vNNkSYxV86632QTJbFFYaybaOWqYp%2Fk7sYXOTvSQZsh67YlGytILjBIhD0Jb6HsDJfRxNuEGwPmjzpvfNUdQHx6ofMTXFhHbyDXVzNKXfLAtVJeujST7kJeaCSypJ2TgpteCUZCG7q0UR60k9ulqRJ8jsBhO3t3ED7NSea2HoaBTi6ZLjq2Omn9FOpNeBBDOVG7w3OK6CBxs420RcBLVv1O5GSlj9GVEkVYYscQns2v0V6mAQQelfvR80tq30UHBTSFeaN68WjvIz3qxOWkoNqey98b3B2thnHbYMW4xLlGC--NloE38ZpG8y8pkcG--Cq8%2FPHdjLM79VPEgjN23Iw%3D%3D; path=/; HttpOnly; secure', '_backend_session=s8um0Nrxl3HTUOniwBAxv3e1WBsurSJuQbZ2LsyMD27cbd7UUkE8RBBlNMy5FjjMRhbXYGnfWsLLKDmFn63iFq3UtEaJn6sBhJWikf24H5ddKEZ6YoOarpBUVWsk%2Fk5HXsK5wohQ6VWDNqjS%2FDnV2dVe5h3oKcYr1u1zeEELMm7zeIbZ35x4ssa7IH7%2Bpj7xMI6Ei3zIIew4mhI2JfdzSGh7zItBhth7PosnwTKYJLwclsjmkCiu7%2BwYxdkrPd1bLLYAJ1AdEXle284PqNwxztWOVLCZbj8qdhqR0yG13VdT6I9tFyapZ5e2GFZhKIZPFhg%2FrjKtJ91f8Xlg9WS3yHy6Z9BxY2Eb1ApGa9Ol%2BOYHmhtwj%2F5YBg1Qgc2bDG5I8CNip2J4SzJuwNeONiE3qHhUVOPyGTTEoS5jYkA0t2R85pytYhZbgeZfqjs0EJRIVBrm%2FYHpRikTL4o2xbI%2FGzZXI32nV7Nt9QqQXyZZbAEr43h9KnHrB0XTXAt91Log4Q5kAMYJNAutaLf4ludJSFQeDXWnKh4KEfa%2FzSFNBKD7qT2%2FLngJ6PBjNhg%3D--Fw%2Bn55lyAJbzm6qH--zRZM2xLIWGOmCpk02iFX4A%3D%3D; path=/; HttpOnly; secure']
+            Etag: 'W/"dd8e78a4aa5f637af02b9cd2a48fa8e9"'
+            Cache-Control: 'max-age=0, private, must-revalidate'
+            X-Request-Id: 5badbced-8c6c-4a8c-8aa8-2a2660efb2e6
+            X-Runtime: '0.071511'
+            Strict-Transport-Security: 'max-age=63072000; includeSubDomains'
+            Transfer-Encoding: chunked
+            Via: '1.1 vegur'
+        body: '{"success":true,"data":{"id":1,"app_id":"e0611906","name":"Selency","description":null,"user_id":2,"created_at":"2020-04-20T18:15:12.542+02:00","updated_at":"2022-01-14T02:15:05.205+01:00","reserve_amount":0}}'
+        curl_info:
+            url: 'https://sandbox-api.cocolis.fr/api/v1/app_auth/validate_token?token-type=Bearer&access-token=nBfCK2mL3rp83hSjhUFLYg&client=wFPP7k01OacAzC-tXni-fA&expiry=1604318220&uid=e0611906'
+            content_type: 'application/json; charset=utf-8'
+            http_code: 200
+            header_size: 2856
+            request_size: 371
+            filetime: -1
+            ssl_verify_result: 0
+            redirect_count: 0
+            total_time: 0.187315
+            namelookup_time: 0.001345
+            connect_time: 0.02802
+            pretransfer_time: 0.075489
+            size_upload: 0.0
+            size_download: 209.0
+            speed_download: 1115.0
+            speed_upload: 0.0
+            download_content_length: -1.0
+            upload_content_length: 0.0
+            starttransfer_time: 0.183302
+            redirect_time: 0.0
+            redirect_url: ''
+            primary_ip: 54.73.26.109
+            certinfo: {  }
+            primary_port: 443
+            local_ip: 192.168.68.103
+            local_port: 55818
+            http_version: 2
+            protocol: 2
+            ssl_verifyresult: 0
+            scheme: HTTPS
+            appconnect_time_us: 75415
+            connect_time_us: 28020
+            namelookup_time_us: 1345
+            pretransfer_time_us: 75489
+            redirect_time_us: 0
+            starttransfer_time_us: 183302
+            total_time_us: 187315

@@ -7,22 +7,22 @@ namespace Composer\Autoload;
 class ComposerStaticInit322f102fd9e3e13154594cc51287238b
 {
     public static $prefixLengthsPsr4 = array (
-        'P' => 
+        'P' =>
         array (
             'PrestaShop\\Module\\Cocolis\\' => 26,
         ),
-        'C' => 
+        'C' =>
         array (
             'Cocolis\\Api\\' => 12,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'PrestaShop\\Module\\Cocolis\\' => 
+        'PrestaShop\\Module\\Cocolis\\' =>
         array (
             0 => __DIR__ . '/../../..' . '/src',
         ),
-        'Cocolis\\Api\\' => 
+        'Cocolis\\Api\\' =>
         array (
             0 => __DIR__ . '/..' . '/cocolis/php/src',
         ),

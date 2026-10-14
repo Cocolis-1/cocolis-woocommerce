@@ -1,0 +1,17 @@
+.vscode
+.history
+composer.phar
+/vendor/
+.idea/
+.php*
+!.php_cs
+!.php-cs-fixer.php
+build/
+clover.xml
+crap4j.xml
+coverage.*
+xml-coverage
+html-coverage
+node_modules
+.DS_Store
+composer.lock

@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f18a046beb0ac5ba60062220da56921c",
+    "content-hash": "7278fe5c105945e8422a79a3722590bc",
     "packages": [
         {
             "name": "cocolis/php",
-            "version": "dev-develop",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Cocolis-1/cocolis-php.git",
-                "reference": "b761cf189d420d8242850755781c3d7ac959ff77"
+                "reference": "de0412fa976e2a81cabef96008cba1d491d941e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Cocolis-1/cocolis-php/zipball/b761cf189d420d8242850755781c3d7ac959ff77",
-                "reference": "b761cf189d420d8242850755781c3d7ac959ff77",
+                "url": "https://api.github.com/repos/Cocolis-1/cocolis-php/zipball/de0412fa976e2a81cabef96008cba1d491d941e1",
+                "reference": "de0412fa976e2a81cabef96008cba1d491d941e1",
                 "shasum": ""
             },
             "require": {
@@ -26,12 +26,10 @@
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.3",
                 "kint-php/kint": "dev-master",
-                "php-coveralls/php-coveralls": "dev-master",
                 "php-vcr/php-vcr": "^1.5.2",
                 "phpunit/php-code-coverage": "^9.2",
                 "phpunit/phpunit": "^9.4"
             },
-            "default-branch": true,
             "type": "package",
             "autoload": {
                 "psr-4": {
@@ -63,20 +61,18 @@
             ],
             "support": {
                 "issues": "https://github.com/Cocolis-1/cocolis-php/issues",
-                "source": "https://github.com/Cocolis-1/cocolis-php/tree/develop"
+                "source": "https://github.com/Cocolis-1/cocolis-php/tree/2.2.0"
             },
-            "time": "2023-05-15T10:03:33+00:00"
+            "time": "2026-10-14T07:56:33+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "cocolis/php": 20
-    },
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "platform": {},
+    "platform-dev": {},
+    "plugin-api-version": "2.9.0"
 }

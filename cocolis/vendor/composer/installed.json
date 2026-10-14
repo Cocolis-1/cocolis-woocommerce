@@ -2,17 +2,17 @@
     "packages": [
         {
             "name": "cocolis/php",
-            "version": "dev-develop",
-            "version_normalized": "dev-develop",
+            "version": "2.2.0",
+            "version_normalized": "2.2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Cocolis-1/cocolis-php.git",
-                "reference": "b761cf189d420d8242850755781c3d7ac959ff77"
+                "reference": "de0412fa976e2a81cabef96008cba1d491d941e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Cocolis-1/cocolis-php/zipball/b761cf189d420d8242850755781c3d7ac959ff77",
-                "reference": "b761cf189d420d8242850755781c3d7ac959ff77",
+                "url": "https://api.github.com/repos/Cocolis-1/cocolis-php/zipball/de0412fa976e2a81cabef96008cba1d491d941e1",
+                "reference": "de0412fa976e2a81cabef96008cba1d491d941e1",
                 "shasum": ""
             },
             "require": {
@@ -21,15 +21,13 @@
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.3",
                 "kint-php/kint": "dev-master",
-                "php-coveralls/php-coveralls": "dev-master",
                 "php-vcr/php-vcr": "^1.5.2",
                 "phpunit/php-code-coverage": "^9.2",
                 "phpunit/phpunit": "^9.4"
             },
-            "time": "2023-05-15T10:03:33+00:00",
-            "default-branch": true,
+            "time": "2026-10-14T07:56:33+00:00",
             "type": "package",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Cocolis\\Api\\": "src/"
@@ -60,7 +58,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Cocolis-1/cocolis-php/issues",
-                "source": "https://github.com/Cocolis-1/cocolis-php/tree/develop"
+                "source": "https://github.com/Cocolis-1/cocolis-php/tree/2.2.0"
             },
             "install-path": "../cocolis/php"
         }
