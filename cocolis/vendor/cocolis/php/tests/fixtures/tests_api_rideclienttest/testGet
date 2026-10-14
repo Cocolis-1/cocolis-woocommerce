@@ -1,0 +1,158 @@
+
+-
+    request:
+        method: POST
+        url: 'https://sandbox-api.cocolis.fr/api/v1/app_auth/sign_in'
+        headers:
+            Host: sandbox-api.cocolis.fr
+            User-Agent: cURL
+            Accept-Charset: UTF-8
+        body: 'app_id=e0611906&password=sebfie'
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Server: Cowboy
+            Date: 'Fri, 10 Dec 2021 10:54:25 GMT'
+            Connection: keep-alive
+            X-Frame-Options: SAMEORIGIN
+            X-Xss-Protection: '1; mode=block'
+            X-Content-Type-Options: nosniff
+            X-Download-Options: noopen
+            X-Permitted-Cross-Domain-Policies: none
+            Referrer-Policy: strict-origin-when-cross-origin
+            Content-Type: 'application/json; charset=utf-8'
+            Access-Token: djXxbBupA8t3x_4Lei1-PA
+            Token-Type: Bearer
+            Client: euTFNA2HPAUeFUk6OTlrmg
+            Expiry: '1640343266'
+            Uid: e0611906
+            Set-Cookie: ['_session_id=9gtOohqCzWXXlasPxEbtIvEP7G8aQ23loicWHyr5BVCCxo843%2Fb0Q5%2B%2B%2FyXHcgh88LQrjprMOelCl0TExCBilzaeI2HPHVjWCUxYBLCKUi4ZnDfp18F7CAJ8m8nvPWTNGiHe9sC34Y2uWo96%2BKNfENIbwwQbmLJQFy3w3cv4PKTjgFI%3D--NL0nQTKgvzuqKzdC--clwWYFNy2WLjHZjcmWYCuA%3D%3D; path=/; HttpOnly; secure', '_session_id=9gtOohqCzWXXlasPxEbtIvEP7G8aQ23loicWHyr5BVCCxo843%2Fb0Q5%2B%2B%2FyXHcgh88LQrjprMOelCl0TExCBilzaeI2HPHVjWCUxYBLCKUi4ZnDfp18F7CAJ8m8nvPWTNGiHe9sC34Y2uWo96%2BKNfENIbwwQbmLJQFy3w3cv4PKTjgFI%3D--NL0nQTKgvzuqKzdC--clwWYFNy2WLjHZjcmWYCuA%3D%3D; path=/; HttpOnly; secure', '_backend_session=SjSMgTAdu75ZqF3%2BrR6rknBsztAC3jyLTMyiczQo7VaAKLjj0UNA0H2qj4yiFHaj3FU8NgtBRGpdd8RbzgK%2BWQ0rgNbt76665W8KjrHSWd4uZn%2FUUmvuG3R0WOt9lF3jEND2Pt5fvN9tKDr16%2FvdpCncooe4m81PKqbZ2jn5AVBXcRJ8kKXZxA%3D%3D--0hgY7gEsJW%2Bfzfv3--Qv7mAKk6FQ4NNLuIHwA7vg%3D%3D; path=/; HttpOnly; secure']
+            Etag: 'W/"2f597b147c5b692104b4235a53392d0d"'
+            Cache-Control: 'max-age=0, private, must-revalidate'
+            X-Request-Id: 27baf0d8-f7bc-434d-9e9b-d74b94619b83
+            X-Runtime: '0.211599'
+            Strict-Transport-Security: 'max-age=63072000; includeSubDomains'
+            Vary: Origin
+            Transfer-Encoding: chunked
+            Via: '1.1 vegur'
+        body: '{"data":{"user_id":2,"id":1,"app_id":"e0611906","name":"Selency","description":null,"created_at":"2020-04-20T18:15:12.542+02:00","updated_at":"2021-12-10T11:54:26.327+01:00","reserve_amount":0}}'
+        curl_info:
+            url: 'https://sandbox-api.cocolis.fr/api/v1/app_auth/sign_in'
+            content_type: 'application/json; charset=utf-8'
+            http_code: 200
+            header_size: 1652
+            request_size: 268
+            filetime: -1
+            ssl_verify_result: 0
+            redirect_count: 0
+            total_time: 0.489038
+            namelookup_time: 0.037944
+            connect_time: 0.066438
+            pretransfer_time: 0.188666
+            size_upload: !!float 31
+            size_download: !!float 194
+            speed_download: !!float 396
+            speed_upload: !!float 63
+            download_content_length: !!float -1
+            upload_content_length: !!float 31
+            starttransfer_time: 0.486906
+            redirect_time: !!float 0
+            redirect_url: ''
+            primary_ip: 54.73.26.109
+            certinfo: {  }
+            primary_port: 443
+            local_ip: 192.168.68.104
+            local_port: 57854
+            http_version: 2
+            protocol: 2
+            ssl_verifyresult: 0
+            scheme: HTTPS
+            appconnect_time_us: 188419
+            connect_time_us: 66438
+            namelookup_time_us: 37944
+            pretransfer_time_us: 188666
+            redirect_time_us: 0
+            starttransfer_time_us: 486906
+            total_time_us: 489038
+-
+    request:
+        method: GET
+        url: 'https://sandbox-api.cocolis.fr/api/v1/rides//231'
+        headers:
+            Host: sandbox-api.cocolis.fr
+            access-token: djXxbBupA8t3x_4Lei1-PA
+            client: euTFNA2HPAUeFUk6OTlrmg
+            expiry: '1640343266'
+            uid: e0611906
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Server: Cowboy
+            Date: 'Fri, 10 Dec 2021 10:54:26 GMT'
+            Connection: keep-alive
+            X-Frame-Options: SAMEORIGIN
+            X-Xss-Protection: '1; mode=block'
+            X-Content-Type-Options: nosniff
+            X-Download-Options: noopen
+            X-Permitted-Cross-Domain-Policies: none
+            Referrer-Policy: strict-origin-when-cross-origin
+            Content-Type: 'application/json; charset=utf-8'
+            Access-Token: djXxbBupA8t3x_4Lei1-PA
+            Token-Type: Bearer
+            Client: euTFNA2HPAUeFUk6OTlrmg
+            Expiry: '1640343266'
+            Uid: e0611906
+            Set-Cookie: ['_session_id=KuzUU6davLGoXT69PZY9uXCFImzGTnYAGXXr4zpM1FWtg2iUn85dX3J6lDH33%2BCgHKdCbCqypX1223FyvtcXSu8uu7zM14g5jdfZfskjRlb8fHW3NgvC7TOZzyFXwSWm4WOZ5SbkB48C2RcB4LNch4LiSgNcACsBOgpnYitH8X6QHsYAwNFThHSFlYO8l2PuS09px5UTRZU%2Bp%2BnLXJj2Jm1e1n5lAAfKUWm%2BZg0lm1BmKdyzz%2ByewiqFv6nLMT3v0lIUgbR1beF0%2FA2KcX7hTJXR26c2bodXFa3oDRBkzmeTmy9sB%2FBUoizVA6rLM3ub9UxmbskFlvCnknGY25NzhdrjiJapiSHbVLGo5NgGGLj%2BDaSloFAgGj63Ho6YEeOgRMOoGU1OSxCABWIu5j0%2FE8g0lKE1thSUE%2BraNLNebvT%2BN80NORrPkhiXDet0sCdeRAo338GwwZpeYKqRKuzXLZr11VKlE1yM4tInSFUxfwQzdhklL8vb4j6ueKpZEFyyuDMtz5ioBoe0KOnZYhmkSOIZvm8mePSvRVBqmfKKT6wncoMIbA5V--17SLSRnU9cMerlML--LTehufN6TH6wcU8MIRak2g%3D%3D; path=/; HttpOnly; secure', '_session_id=KuzUU6davLGoXT69PZY9uXCFImzGTnYAGXXr4zpM1FWtg2iUn85dX3J6lDH33%2BCgHKdCbCqypX1223FyvtcXSu8uu7zM14g5jdfZfskjRlb8fHW3NgvC7TOZzyFXwSWm4WOZ5SbkB48C2RcB4LNch4LiSgNcACsBOgpnYitH8X6QHsYAwNFThHSFlYO8l2PuS09px5UTRZU%2Bp%2BnLXJj2Jm1e1n5lAAfKUWm%2BZg0lm1BmKdyzz%2ByewiqFv6nLMT3v0lIUgbR1beF0%2FA2KcX7hTJXR26c2bodXFa3oDRBkzmeTmy9sB%2FBUoizVA6rLM3ub9UxmbskFlvCnknGY25NzhdrjiJapiSHbVLGo5NgGGLj%2BDaSloFAgGj63Ho6YEeOgRMOoGU1OSxCABWIu5j0%2FE8g0lKE1thSUE%2BraNLNebvT%2BN80NORrPkhiXDet0sCdeRAo338GwwZpeYKqRKuzXLZr11VKlE1yM4tInSFUxfwQzdhklL8vb4j6ueKpZEFyyuDMtz5ioBoe0KOnZYhmkSOIZvm8mePSvRVBqmfKKT6wncoMIbA5V--17SLSRnU9cMerlML--LTehufN6TH6wcU8MIRak2g%3D%3D; path=/; HttpOnly; secure', '_backend_session=VNVcx%2B4zM4JaVsqJl9tMz3EcrIGBi8nmpQjg9G0Ik%2Fh2i04fZR%2B02yjN70pgW1HUIqTeJ3PeKiNL0UpH1%2FhclxHUi7B%2FCqd%2BsbFNJ7OoaadX63nGQNdAEJXfQWe9Ee8F1ZscfbiQnWMuhw63F%2F%2FjfC163l52pk7szLnpfIvxz65EBWCm6XsA4%2F19y%2B70lEtnUL%2B2tLcF8B%2FG%2BUZl3BtiVw00ICXAWopRtPMfaeppOevUgIrUs%2BhQpX9ml3orML5DZox0ElvT2sXIOl0pM36Fc9tjnD4h6uuKURU%2BjLKv2Z2sBSquMV%2FddwkNbmX5ow%2Fkn4jcBgjevvWh0y4k71wHieODtWP7eQG8Oh%2F1QI40m8JfGFlZJSRh%2BEgNhO72CzJ%2FukDBLUfvpPiNLyk%2F%2B%2F9q%2B1%2FWKUQ1gnmNnZOPEcvqeF21t4m4sZLV7MuPm9TS2GtpjjCPqUZfS0CtjxW%2BDgV2M9toRFRzOWpX%2FRyDDmU21W2CZF2PpLt60vxQGPSSUY7tvlHebvR2J%2B1vwv60fhLsp%2FHDgvEB23ab2tPqZZiH08sBcy9ALYx%2FquA1X2Y%3D--hbmFOfGN%2BxdgW2Ua--l2YV0oq8xbNSFVRJx59Hkw%3D%3D; path=/; HttpOnly; secure']
+            Etag: 'W/"6121c87e79a9703b9eade10fbbc14c1f"'
+            Cache-Control: 'max-age=0, private, must-revalidate'
+            X-Request-Id: 5d7abdca-5510-460d-a143-34e96248f62c
+            X-Runtime: '0.143801'
+            Strict-Transport-Security: 'max-age=63072000; includeSubDomains'
+            Vary: Origin
+            Transfer-Encoding: chunked
+            Via: '1.1 vegur'
+        body: '{"id":231,"title":"Canapé","description":"Carcassonne vers toulu","owner_id":2,"from_lat":43.212498,"to_lat":43.59912,"ga_sent":null,"price":57000,"created_at":"2020-11-04T17:13:24.332+01:00","updated_at":"2020-11-05T05:30:10.703+01:00","from_lng":2.350351,"to_lng":1.444391,"from_is_flexible":true,"from_pickup_date":"2020-06-13T16:21:21.000+02:00","to_is_flexible":true,"to_pickup_date":"2020-06-13T23:59:59.999+02:00","is_packaged":false,"is_passenger":false,"volume":1.5,"environment":"objects","deleted_at":null,"slug":"canape-14514803-3aa1-456e-bd8d-f0c1645fc5fd","rider_extra_information":"Extra informations","from_need_help":false,"from_need_help_floor":0,"from_need_help_elevator":false,"from_need_help_furniture_lift":false,"to_need_help":false,"to_need_help_floor":0,"to_need_help_elevator":false,"to_need_help_furniture_lift":false,"state":"expired","owner_status":"sender","moderated_by":null,"moderated_at":null,"moderated_reason_content":null,"completed_at":null,"published_at":"2020-11-04T17:13:33.637+01:00","gat_sent":false,"v2_id":null,"last_activity_at":"2020-11-04T17:13:24.332+01:00","fees":9700.0,"validated_by_id":null,"environment_kind":null,"api_application_id":1,"seller_tracking":"17C903BFFAB87B2A","buyer_tracking":"AE2FF8F5CFA1E73A","external_id":null,"content_value":null,"offers_count":0,"last_edited_at":"2020-11-05T05:30:10.703+01:00","last_standby_at":null,"managed_by_id":null,"is_automatic":true,"sinister":false,"removed_at":null,"price_formula":null,"has_heavy_objects":false,"packaging_needed":false,"suggested_price":null,"published_price":null,"rider_price":47300.0,"owner":{"id":2,"last_sign_in_at":"2020-10-30T11:52:01.392+01:00","nickname":"Selency M.","gender":"M","firstname":"Selency","business_name":null,"phone_verified":true,"role":"developer","sign_up_finished":true,"v2_id":null,"deleted_at":null,"rate":4.82,"banned_at":null,"referral_code":"SEBSM204","rating_count":11,"email_verified":true,"response_percent":0.0,"api_application":{"id":1,"app_id":"e0611906","name":"Selency","description":null,"user_id":2,"created_at":"2020-04-20T18:15:12.542+02:00","updated_at":"2021-12-10T11:54:26.327+01:00","reserve_amount":0,"balance":65997400},"avatar":"/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBadz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--2ba0653212de4902fbce250a16b23b1e3930809a/FAVICON%20SELENCY.png?disposition=attachment","avatar_key":"stzcx17yvrcz5hr5r38ausg6jenu","kyc_validated":false,"identity_validated":false,"role_label":"Partenaire de Cocolis"},"ride_state_histories":[],"api_application":{"id":1,"app_id":"e0611906","name":"Selency","description":null,"user_id":2,"created_at":"2020-04-20T18:15:12.542+02:00","updated_at":"2021-12-10T11:54:26.327+01:00","reserve_amount":0},"previous_pay_in":false,"conversations":{"count":0,"unreaded_messages":0},"from_address":"Carcassonne, 11000","to_address":"Toulouse, 31000","offers_made_by_others_count":0,"volume_only_for_pro":false,"photos":[],"mine":true,"current_offer_id":null,"price_to_pay":57000,"buyer_availabilities":[],"seller_availabilities":[],"ride_objects_attributes":[{"id":252,"ride_id":231,"qty":1,"title":"Canapé","length":null,"width":null,"height":null,"format":"xxl","integer":null,"created_at":"2020-11-04T17:13:24.367+01:00","updated_at":"2020-11-04T17:13:24.367+01:00","weight":"between_5_and_30_kg","external_url":null,"exact_weight":null}]}'
+        curl_info:
+            url: 'https://sandbox-api.cocolis.fr/api/v1/rides//231'
+            content_type: 'application/json; charset=utf-8'
+            http_code: 200
+            header_size: 2886
+            request_size: 243
+            filetime: -1
+            ssl_verify_result: 0
+            redirect_count: 0
+            total_time: 0.255715
+            namelookup_time: 0.001999
+            connect_time: 0.030586
+            pretransfer_time: 0.073854
+            size_upload: !!float 0
+            size_download: !!float 3405
+            speed_download: !!float 13315
+            speed_upload: !!float 0
+            download_content_length: !!float -1
+            upload_content_length: !!float 0
+            starttransfer_time: 0.251948
+            redirect_time: !!float 0
+            redirect_url: ''
+            primary_ip: 54.73.26.109
+            certinfo: {  }
+            primary_port: 443
+            local_ip: 192.168.68.104
+            local_port: 57855
+            http_version: 2
+            protocol: 2
+            ssl_verifyresult: 0
+            scheme: HTTPS
+            appconnect_time_us: 73804
+            connect_time_us: 30586
+            namelookup_time_us: 1999
+            pretransfer_time_us: 73854
+            redirect_time_us: 0
+            starttransfer_time_us: 251948
+            total_time_us: 255715

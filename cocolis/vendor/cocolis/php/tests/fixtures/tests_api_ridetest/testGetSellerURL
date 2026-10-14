@@ -1,0 +1,524 @@
+
+-
+    request:
+        method: GET
+        url: 'https://sandbox-api.cocolis.fr/api/v1/rides//1'
+        headers:
+            Host: sandbox-api.cocolis.fr
+            Expect: null
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/Guzzle curl/7.57.0 PHP/7.3.7'
+            Content-Type: application/json
+            access-token: eT00t6RMIeZRqDV0qH-9yw
+            client: mghSYiwe0EsUyP6qxi6ZIg
+            expiry: '1591008268'
+            uid: e0611906
+            Accept: null
+        body: '[]'
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Server: Cowboy
+            Date: 'Tue, 02 Jun 2020 14:14:52 GMT'
+            Connection: keep-alive
+            X-Frame-Options: SAMEORIGIN
+            X-Xss-Protection: '1; mode=block'
+            X-Content-Type-Options: nosniff
+            X-Download-Options: noopen
+            X-Permitted-Cross-Domain-Policies: none
+            Referrer-Policy: strict-origin-when-cross-origin
+            Content-Type: 'application/json; charset=utf-8'
+            Set-Cookie: '_session_id=7bz%2Fk0xVpThqlNXoCjavc31eX3r0x%2Fk5oFpo%2BDhhoO194tGX0TvuT9kpdVM9aalUkEbcZiis2QojcaK%2Byr45paZOF5B5Utd9NKZRxcW4s5xv5UlZ9LYONKf1YJMbDGjdUiHEDf5jXFjSsXtJEJKveSEuaGRwyqZzPOTSf5%2BlH9kKYr0%3D--H0iBwgRxl4yv%2FnQs--vVbtcNfWOuTG%2FOGiUOmOGA%3D%3D; path=/; HttpOnly; secure, _session_id=7bz%2Fk0xVpThqlNXoCjavc31eX3r0x%2Fk5oFpo%2BDhhoO194tGX0TvuT9kpdVM9aalUkEbcZiis2QojcaK%2Byr45paZOF5B5Utd9NKZRxcW4s5xv5UlZ9LYONKf1YJMbDGjdUiHEDf5jXFjSsXtJEJKveSEuaGRwyqZzPOTSf5%2BlH9kKYr0%3D--H0iBwgRxl4yv%2FnQs--vVbtcNfWOuTG%2FOGiUOmOGA%3D%3D; path=/; HttpOnly; secure, _backend_session=Q6cvqvcP%2FsROxiYhYpHVaWrIm2n3NLVJm9SesY8n2YOy99qucgMgVql00%2FugKdHR8d1hyOCqUd1AUsgixc0oWC9xtCw3HLJbEA3xNJmo0eIGb73vyKkTwARXNWwyMr8NyM7d%2BKSdAXa7ZjkzqnKbqrb%2BiJzv15lhCwvJp%2B9SG6gSlzC%2Bz3FdEg%3D%3D--sp8d2NTbNEsPC6Qy--d%2Fp5%2B%2BIIQNGHYYK7opWsLw%3D%3D; path=/; HttpOnly; secure'
+            Etag: 'W/"a6b7081663eefe49bf8b06eeeb5b3751"'
+            Cache-Control: 'max-age=0, private, must-revalidate'
+            X-Request-Id: 6b0075a5-6baa-482f-8cca-037d3b388947
+            X-Runtime: '0.148406'
+            Strict-Transport-Security: 'max-age=31536000; includeSubDomains'
+            Transfer-Encoding: chunked
+            Via: '1.1 vegur'
+        body: '{"id":1,"title":"guitare","description":null,"owner_id":1,"from_lat":43.311852,"to_lat":48.85658,"ga_sent":null,"price":1300,"created_at":"2020-04-17T22:48:01.236+02:00","updated_at":"2020-05-01T05:30:21.118+02:00","from_lng":6.013474,"to_lng":2.35183,"from_is_flexible":false,"from_pickup_date":"2020-04-17T12:00:00.000+02:00","to_is_flexible":false,"to_pickup_date":"2020-04-30T23:59:59.999+02:00","is_packaged":null,"is_passenger":false,"volume":0.01,"environment":"objects","deleted_at":null,"slug":"guitare","rider_extra_information":"","from_need_help":false,"from_need_help_floor":null,"from_need_help_elevator":null,"from_need_help_furniture_lift":null,"to_need_help":false,"to_need_help_floor":null,"to_need_help_elevator":null,"to_need_help_furniture_lift":null,"state":"expired","owner_status":"sender","moderated_by":null,"moderated_at":null,"moderated_reason_content":null,"completed_at":null,"published_at":"2020-04-17T22:48:01.376+02:00","gat_sent":false,"v2_id":null,"last_activity_at":"2020-04-17T22:48:01.237+02:00","fees":200.0,"validated_by_id":null,"environment_kind":null,"api_application_id":null,"seller_tracking":"5CC4E42CF5A9AA33","buyer_tracking":"04060F3C48B239CB","external_id":null,"content_value":null,"rider_price":1100.0,"owner":{"id":1,"last_sign_in_at":"2020-05-28T11:24:01.931+02:00","nickname":"Sébastien F.","gender":"M","business_name":"","phone_verified":true,"role":"superadmin","sign_up_finished":true,"v2_id":null,"rate":null,"rating_count":0,"email_verified":true,"response_percent":0.0,"kyc_validated":false,"identity_validated":true,"role_label":"Super administrateur"},"previous_pay_in":false,"conversations":{"count":0,"unreaded_messages":0},"from_address":"Néoules, 83136","to_address":"Paris, 75004","offers_count":0,"photos":[],"mine":false,"ride_objects_attributes":[{"id":1,"ride_id":1,"qty":1,"title":"guitare","length":20,"width":20,"height":20,"format":null,"integer":null,"created_at":"2020-04-17T22:48:01.268+02:00","updated_at":"2020-04-17T22:48:01.268+02:00","weight":"between_5_and_30_kg","external_url":null}]}'
+-
+    request:
+        method: GET
+        url: 'https://sandbox-api.cocolis.fr/api/v1/rides//1'
+        headers:
+            Host: sandbox-api.cocolis.fr
+            access-token: fS1zFsneqetmmWC-gvm64g
+            client: oFjgBoX-NacILoPo-Kz81Q
+            expiry: '1604319868'
+            uid: e0611906
+    response:
+        status:
+            http_version: '2'
+            code: '200'
+            message: ''
+        headers:
+            date: 'Mon, 19 Oct 2020 11:31:21 GMT'
+            content-type: 'application/json; charset=utf-8'
+            set-cookie: ['__cfduid=d251980f740c6311a2a6cbb0efae4425f1603107081; expires=Wed, 18-Nov-20 11:31:21 GMT; path=/; domain=.cocolis.fr; HttpOnly; SameSite=Lax', '_session_id=cMHp0tmumf4LGgjwtpwWnzNki2dLjWzyOr1KwKweo8f0njppvVslXBwjj2%2Fq%2BmCe4wwATxHFQqnvsQIbzrphv2zJQf2ybc1HC02vDRFwJKJ651SkriAl0naITH1E5hgZv3Xqkr2SIZvyvKh7J7JRQsfW%2FyxkyNo%2FkenW94rEIHqxDVbSBUViTT5q8fV8tpf36ALAiEBJ0MMpzyiNBvF2dkcEOs%2FgLFPiRTiJpQrTBWPjySrN6RewY%2BwtX94kJEeGtUgJbt2%2B9IdLFBj%2Fy8ui5IFHN1%2F2ikt2obQAwiymIVqw9ZmSIf13sDmTF8tmlUOOgX3fz3Sxni2FfS48li8SV575bE8jmxrpGwaFVcpY289iO0yPH2VzBEOBgExanKgddVAWGIaGe0M%2FZRwMFsBJGHNQuandlf43UIkhpdopve4PX5wFJpwVdg7iYX2%2FrzLbz7mjGY%2B%2BvIN6AwQ2rRdV%2FPOP6MhvdfsSLPL%2BuBcKTZ680oJXZ1ifXF7Yn7BlSSB0eN2BW4usSVNOpG7ne4lMu3z4wukqvxseb93wRPQmBapmOs%2B%2F3As2APk%2F1nWDsnEnJ2JXl8yy0ADXM2QG7WapEFZQFeRPNpepB%2B1M%2BEcjjtd35KhfRASYw%2BRCDmGEgPd5EhIG7NEZJ4sns%2BkK0yJWRZJj8II%2FYXRmkOTuoP5PIiBRoP0%3D--GCiESgb2nuRl%2FBF8--Bzvh7wWzAHQbkoNX02bYsQ%3D%3D; path=/; HttpOnly; secure', '_session_id=cMHp0tmumf4LGgjwtpwWnzNki2dLjWzyOr1KwKweo8f0njppvVslXBwjj2%2Fq%2BmCe4wwATxHFQqnvsQIbzrphv2zJQf2ybc1HC02vDRFwJKJ651SkriAl0naITH1E5hgZv3Xqkr2SIZvyvKh7J7JRQsfW%2FyxkyNo%2FkenW94rEIHqxDVbSBUViTT5q8fV8tpf36ALAiEBJ0MMpzyiNBvF2dkcEOs%2FgLFPiRTiJpQrTBWPjySrN6RewY%2BwtX94kJEeGtUgJbt2%2B9IdLFBj%2Fy8ui5IFHN1%2F2ikt2obQAwiymIVqw9ZmSIf13sDmTF8tmlUOOgX3fz3Sxni2FfS48li8SV575bE8jmxrpGwaFVcpY289iO0yPH2VzBEOBgExanKgddVAWGIaGe0M%2FZRwMFsBJGHNQuandlf43UIkhpdopve4PX5wFJpwVdg7iYX2%2FrzLbz7mjGY%2B%2BvIN6AwQ2rRdV%2FPOP6MhvdfsSLPL%2BuBcKTZ680oJXZ1ifXF7Yn7BlSSB0eN2BW4usSVNOpG7ne4lMu3z4wukqvxseb93wRPQmBapmOs%2B%2F3As2APk%2F1nWDsnEnJ2JXl8yy0ADXM2QG7WapEFZQFeRPNpepB%2B1M%2BEcjjtd35KhfRASYw%2BRCDmGEgPd5EhIG7NEZJ4sns%2BkK0yJWRZJj8II%2FYXRmkOTuoP5PIiBRoP0%3D--GCiESgb2nuRl%2FBF8--Bzvh7wWzAHQbkoNX02bYsQ%3D%3D; path=/; HttpOnly; secure', '_backend_session=5gsbenmksQ6AK3N55suKjrES0rIM0CjSQd74fLEw6PAyQ4qkbW%2BRVzRIIT0P1xQ%2FJUCoPbXXix92ATf1XkEr9YIZutHEE5V3BKYOWJHjqnIcSbUzfk0DeYQv8W714YGRXoYMEjO4a1HG3Jorc1h96wEVhA2hx%2Fs4E4voFEXdz0Ws%2Boinw%2FYOan%2F1YH8hLc8A4RFj30vSzRCd21t55L1fJqAWMBZodle7lEPt27fq%2FqsT2r7FRtE5qEIQ2xbUe90Www3TzsM%2FA2kOhj%2BGiSzW4xY8JWBHcVFDa%2FpxuYynDEbZaFREKTNXxqD3TSzFddRwFEDR0H%2BN4Vmr5OfbY5SFeKRyxinHLATVP%2BNa%2BT6qyaf8H%2BWZGv9hw2K2i2M0rd9tdlpQlFe3j%2B41v6OSwOeEvvFKB3pMZJ5tFAVXMPOlrx3rHu4lFKytsyFFtikCS8UUQ59U8GOt6QdWxpvW8xnIujp8DWOloAv6qE5bSmuR%2FpNg4AHGMPKDLuR1qduI7AS4PN%2BsLhrUZo4zmEGVZAXpwRZuJNLcmAOSzpt6lEQfWdLIhS%2FImVktgT98GNyXCyIbJLz08GDsZTW1qG3fervimOF%2BdZi9I1tpTQX%2FAQaQ3VhMguVi6g3Pjb8NH%2BPhiY4KRlo%2F22oU8U8cPtej6X%2F0VwQk7KWEWkxtYJniLifjNiZu6PbQ0rLcxw%3D%3D--N3Etr1DMtkAG8LSu--IVYQT64UgSwzDp18uyRzcw%3D%3D; path=/; HttpOnly; secure']
+            x-frame-options: SAMEORIGIN
+            x-xss-protection: '1; mode=block'
+            x-content-type-options: nosniff
+            x-download-options: noopen
+            x-permitted-cross-domain-policies: none
+            referrer-policy: strict-origin-when-cross-origin
+            access-token: fS1zFsneqetmmWC-gvm64g
+            token-type: Bearer
+            client: oFjgBoX-NacILoPo-Kz81Q
+            expiry: '1604319868'
+            uid: e0611906
+            etag: 'W/"70bc4e5063835240de1007acccbc1acf"'
+            cache-control: 'max-age=0, private, must-revalidate'
+            x-request-id: 494dca2b-5523-4376-b167-d48300026fc5
+            x-runtime: '0.101697'
+            strict-transport-security: 'max-age=31536000; includeSubDomains'
+            via: '1.1 vegur'
+            cf-cache-status: DYNAMIC
+            cf-request-id: 05e239e4830000cdab3f091000000001
+            expect-ct: 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"'
+            report-to: '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report?lkg-colo=19&lkg-time=1603107082"}],"group":"cf-nel","max_age":604800}'
+            nel: '{"report_to":"cf-nel","max_age":604800}'
+            server: cloudflare
+            cf-ray: 5e4a2c1a6889cdab-CDG
+            content-encoding: br
+        body: '{"id":1,"title":"guitare","description":null,"owner_id":1,"from_lat":43.311852,"to_lat":48.85658,"ga_sent":null,"price":1300,"created_at":"2020-04-17T22:48:01.236+02:00","updated_at":"2020-05-01T05:30:21.118+02:00","from_lng":6.013474,"to_lng":2.35183,"from_is_flexible":false,"from_pickup_date":"2020-04-17T12:00:00.000+02:00","to_is_flexible":false,"to_pickup_date":"2020-04-30T23:59:59.999+02:00","is_packaged":null,"is_passenger":false,"volume":0.01,"environment":"objects","deleted_at":null,"slug":"guitare","rider_extra_information":"","from_need_help":false,"from_need_help_floor":null,"from_need_help_elevator":null,"from_need_help_furniture_lift":null,"to_need_help":false,"to_need_help_floor":null,"to_need_help_elevator":null,"to_need_help_furniture_lift":null,"state":"expired","owner_status":"sender","moderated_by":null,"moderated_at":null,"moderated_reason_content":null,"completed_at":null,"published_at":"2020-04-17T22:48:01.376+02:00","gat_sent":false,"v2_id":null,"last_activity_at":"2020-04-17T22:48:01.237+02:00","fees":200.0,"validated_by_id":null,"environment_kind":null,"api_application_id":null,"seller_tracking":"5CC4E42CF5A9AA33","buyer_tracking":"04060F3C48B239CB","external_id":null,"content_value":null,"offers_count":0,"last_edited_at":"2020-05-01T05:30:21.118+02:00","last_standby_at":null,"managed_by_id":null,"rider_price":1100.0,"owner":{"id":1,"last_sign_in_at":"2020-10-12T09:49:09.449+02:00","nickname":"Sébastien F.","gender":"M","business_name":"","phone_verified":true,"role":"superadmin","sign_up_finished":true,"v2_id":null,"deleted_at":null,"rate":null,"banned_at":null,"rating_count":0,"email_verified":true,"response_percent":0.0,"kyc_validated":false,"identity_validated":true,"role_label":"Super administrateur"},"previous_pay_in":false,"conversations":{"count":0,"unreaded_messages":0},"from_address":"Néoules, 83136","to_address":"Paris, 75004","offers_made_by_others_count":0,"photos":[],"mine":false,"current_offer_id":null,"ride_objects_attributes":[{"id":1,"ride_id":1,"qty":1,"title":"guitare","length":20,"width":20,"height":20,"format":null,"integer":null,"created_at":"2020-04-17T22:48:01.268+02:00","updated_at":"2020-04-17T22:48:01.268+02:00","weight":"between_5_and_30_kg","external_url":null}]}'
+        curl_info:
+            url: 'https://sandbox-api.cocolis.fr/api/v1/rides//1'
+            content_type: 'application/json; charset=utf-8'
+            http_code: 200
+            header_size: 3805
+            request_size: 239
+            filetime: -1
+            ssl_verify_result: 0
+            redirect_count: 0
+            total_time: 0.2704
+            namelookup_time: 0.001324
+            connect_time: 0.016743
+            pretransfer_time: 0.044179
+            size_upload: !!float 0
+            size_download: !!float 870
+            speed_download: !!float 3222
+            speed_upload: !!float 0
+            download_content_length: !!float -1
+            upload_content_length: !!float -1
+            starttransfer_time: 0.269381
+            redirect_time: !!float 0
+            redirect_url: ''
+            primary_ip: 172.67.73.171
+            certinfo: {  }
+            primary_port: 443
+            local_ip: 192.168.1.81
+            local_port: 54142
+            http_version: 3
+            protocol: 2
+            ssl_verifyresult: 0
+            scheme: HTTPS
+            appconnect_time_us: 44109
+            connect_time_us: 16743
+            namelookup_time_us: 1324
+            pretransfer_time_us: 44179
+            redirect_time_us: 0
+            starttransfer_time_us: 269381
+            total_time_us: 270400
+-
+    request:
+        method: GET
+        url: 'https://sandbox-api.cocolis.fr/api/v1/rides//1'
+        headers:
+            Host: sandbox-api.cocolis.fr
+            User-Agent: cURL
+            Accept-Charset: UTF-8
+    response:
+        status:
+            http_version: '2'
+            code: '200'
+            message: ''
+        headers:
+            date: 'Mon, 19 Oct 2020 11:36:25 GMT'
+            content-type: 'application/json; charset=utf-8'
+            set-cookie: ['__cfduid=d9c6f95ae72db966e8491f77d51d36bd11603107385; expires=Wed, 18-Nov-20 11:36:25 GMT; path=/; domain=.cocolis.fr; HttpOnly; SameSite=Lax', '_session_id=kiS6M4fV4qkCMFw2cn2Z8KvIUzN3P1ygeTgyzw5A0IRbNtPVWsP3%2BBbR8f0sN4xbrCfOavWGtOokCzLoAeVoU6RZIIF%2FK7cibAC4h6OD3ArHTDO989iAUXI7vxXB11bFjxQjPIE19XJWPZfgxuStKjn1b5Ps0PG2zZRQsuznyzCSHn0%3D--ZADMjSAYwKogaHE8--FlCCh56vTP%2F3E2kVwWLfQA%3D%3D; path=/; HttpOnly; secure', '_session_id=kiS6M4fV4qkCMFw2cn2Z8KvIUzN3P1ygeTgyzw5A0IRbNtPVWsP3%2BBbR8f0sN4xbrCfOavWGtOokCzLoAeVoU6RZIIF%2FK7cibAC4h6OD3ArHTDO989iAUXI7vxXB11bFjxQjPIE19XJWPZfgxuStKjn1b5Ps0PG2zZRQsuznyzCSHn0%3D--ZADMjSAYwKogaHE8--FlCCh56vTP%2F3E2kVwWLfQA%3D%3D; path=/; HttpOnly; secure', '_backend_session=VRixqcNkO5JDM1RnUVB1oRsB37FQ04qNzogdmFXl%2FDMJT92qsJshSs%2FpAWH0stQaNueCqaT89XBKMt%2BYqNFh%2BANdKmgdnFZLhHCmIAHoX2hf2PQPtyfLEY%2B5U67RBhqHT9%2FrlDz8KEaPuNh7kt18xJaAxh3ZrKPFq7hrjOu6dqTtYv2M1XEv0A%3D%3D--v4FIznzwMCOVdjPS--iibrmrcYPRxmEsXw3UWUfA%3D%3D; path=/; HttpOnly; secure']
+            x-frame-options: SAMEORIGIN
+            x-xss-protection: '1; mode=block'
+            x-content-type-options: nosniff
+            x-download-options: noopen
+            x-permitted-cross-domain-policies: none
+            referrer-policy: strict-origin-when-cross-origin
+            etag: 'W/"59d47ca1ec6e96a47689729eaa7faf8a"'
+            cache-control: 'max-age=0, private, must-revalidate'
+            x-request-id: 00c3abb4-177b-47b0-91f1-df5d32fea43f
+            x-runtime: '0.095088'
+            strict-transport-security: 'max-age=31536000; includeSubDomains'
+            via: '1.1 vegur'
+            cf-cache-status: DYNAMIC
+            cf-request-id: 05e23e871f0000ee17ca8ff000000001
+            expect-ct: 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"'
+            report-to: '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report?lkg-colo=19&lkg-time=1603107385"}],"group":"cf-nel","max_age":604800}'
+            nel: '{"report_to":"cf-nel","max_age":604800}'
+            server: cloudflare
+            cf-ray: 5e4a3384f91aee17-CDG
+            content-encoding: br
+        body: '{"id":1,"title":"guitare","description":null,"owner_id":1,"from_lat":43.311852,"to_lat":48.85658,"ga_sent":null,"price":1300,"created_at":"2020-04-17T22:48:01.236+02:00","updated_at":"2020-05-01T05:30:21.118+02:00","from_lng":6.013474,"to_lng":2.35183,"from_is_flexible":false,"from_pickup_date":"2020-04-17T12:00:00.000+02:00","to_is_flexible":false,"to_pickup_date":"2020-04-30T23:59:59.999+02:00","is_packaged":null,"is_passenger":false,"volume":0.01,"environment":"objects","deleted_at":null,"slug":"guitare","rider_extra_information":"","from_need_help":false,"from_need_help_floor":null,"from_need_help_elevator":null,"from_need_help_furniture_lift":null,"to_need_help":false,"to_need_help_floor":null,"to_need_help_elevator":null,"to_need_help_furniture_lift":null,"state":"expired","owner_status":"sender","moderated_by":null,"moderated_at":null,"moderated_reason_content":null,"completed_at":null,"published_at":"2020-04-17T22:48:01.376+02:00","gat_sent":false,"v2_id":null,"last_activity_at":"2020-04-17T22:48:01.237+02:00","fees":200.0,"validated_by_id":null,"environment_kind":null,"api_application_id":null,"seller_tracking":"5CC4E42CF5A9AA33","buyer_tracking":"04060F3C48B239CB","external_id":null,"content_value":null,"offers_count":0,"last_edited_at":"2020-05-01T05:30:21.118+02:00","last_standby_at":null,"managed_by_id":null,"rider_price":1100.0,"owner":{"id":1,"last_sign_in_at":"2020-10-12T09:49:09.449+02:00","nickname":"Sébastien F.","gender":"M","business_name":"","phone_verified":true,"role":"superadmin","sign_up_finished":true,"v2_id":null,"deleted_at":null,"rate":null,"banned_at":null,"rating_count":0,"email_verified":true,"response_percent":0.0,"kyc_validated":false,"identity_validated":true,"role_label":"Super administrateur"},"previous_pay_in":false,"conversations":{"count":0,"unreaded_messages":0},"from_address":"Néoules, 83136","to_address":"Paris, 75004","offers_made_by_others_count":0,"photos":[],"mine":false,"ride_objects_attributes":[{"id":1,"ride_id":1,"qty":1,"title":"guitare","length":20,"width":20,"height":20,"format":null,"integer":null,"created_at":"2020-04-17T22:48:01.268+02:00","updated_at":"2020-04-17T22:48:01.268+02:00","weight":"between_5_and_30_kg","external_url":null}]}'
+        curl_info:
+            url: 'https://sandbox-api.cocolis.fr/api/v1/rides//1'
+            content_type: 'application/json; charset=utf-8'
+            http_code: 200
+            header_size: 2026
+            request_size: 157
+            filetime: -1
+            ssl_verify_result: 0
+            redirect_count: 0
+            total_time: 0.274487
+            namelookup_time: 0.001274
+            connect_time: 0.017089
+            pretransfer_time: 0.048542
+            size_upload: !!float 0
+            size_download: !!float 857
+            speed_download: !!float 3127
+            speed_upload: !!float 0
+            download_content_length: !!float -1
+            upload_content_length: !!float -1
+            starttransfer_time: 0.274392
+            redirect_time: !!float 0
+            redirect_url: ''
+            primary_ip: 172.67.73.171
+            certinfo: {  }
+            primary_port: 443
+            local_ip: 192.168.1.81
+            local_port: 55468
+            http_version: 3
+            protocol: 2
+            ssl_verifyresult: 0
+            scheme: HTTPS
+            appconnect_time_us: 48463
+            connect_time_us: 17089
+            namelookup_time_us: 1274
+            pretransfer_time_us: 48542
+            redirect_time_us: 0
+            starttransfer_time_us: 274392
+            total_time_us: 274487
+-
+    request:
+        method: GET
+        url: 'https://sandbox-api.cocolis.fr/api/v1/rides//1'
+        headers:
+            Host: sandbox-api.cocolis.fr
+    response:
+        status:
+            http_version: '2'
+            code: '200'
+            message: ''
+        headers:
+            date: 'Mon, 19 Oct 2020 11:39:16 GMT'
+            content-type: 'application/json; charset=utf-8'
+            set-cookie: ['__cfduid=d33a653e04ad2940de02db09c1eaf17091603107556; expires=Wed, 18-Nov-20 11:39:16 GMT; path=/; domain=.cocolis.fr; HttpOnly; SameSite=Lax', '_session_id=ffmuqsEIEano%2F3omAUqLHxAeH4UBWA4vBwWZmH%2FParvJFgagE1Ep6LVTeDp6I5M9NLk1ZX4roK9JpxgT4KAIRHgfUjOtLruIcGENblpcTdcqCI8CcVADdIGxMU5H5vBUjapL8ksIaHmmQ0Ut15eXkXUQpdaFNhgOHtg2VhRG2oOcKBo%3D--D9i%2FpY0xSePW6p3e--eBtLJ8zOpR3mFhDsKbTErw%3D%3D; path=/; HttpOnly; secure', '_session_id=ffmuqsEIEano%2F3omAUqLHxAeH4UBWA4vBwWZmH%2FParvJFgagE1Ep6LVTeDp6I5M9NLk1ZX4roK9JpxgT4KAIRHgfUjOtLruIcGENblpcTdcqCI8CcVADdIGxMU5H5vBUjapL8ksIaHmmQ0Ut15eXkXUQpdaFNhgOHtg2VhRG2oOcKBo%3D--D9i%2FpY0xSePW6p3e--eBtLJ8zOpR3mFhDsKbTErw%3D%3D; path=/; HttpOnly; secure', '_backend_session=ME%2FiXxqr%2BXT98sEj%2Be2ElfWMmGQ%2Fmkoy6kwacTlH7QU56DoBfwVe0DuIxkCKYP17I9wlaloKYfX%2B9Kua0Kcnk7OhenWy6WuoqEO6yZvFRdOXlLuyoSv%2FZqoIhLkuKfo9iKEA5A8Jv3fjlb1s8pTL19wR6Z0wN%2B63GBBV2OfWjCZ57XPX8sWVGg%3D%3D--8V0GS9gLa9%2BUurdy--Sr%2BfzHnR6xlL9tKsvvStHQ%3D%3D; path=/; HttpOnly; secure']
+            x-frame-options: SAMEORIGIN
+            x-xss-protection: '1; mode=block'
+            x-content-type-options: nosniff
+            x-download-options: noopen
+            x-permitted-cross-domain-policies: none
+            referrer-policy: strict-origin-when-cross-origin
+            etag: 'W/"59d47ca1ec6e96a47689729eaa7faf8a"'
+            cache-control: 'max-age=0, private, must-revalidate'
+            x-request-id: bd6bebf5-526f-4d05-b62b-fc451c8e900b
+            x-runtime: '0.046173'
+            strict-transport-security: 'max-age=31536000; includeSubDomains'
+            via: '1.1 vegur'
+            cf-cache-status: DYNAMIC
+            cf-request-id: 05e24122ac000032c8049ac000000001
+            expect-ct: 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"'
+            report-to: '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report?lkg-colo=19&lkg-time=1603107556"}],"group":"cf-nel","max_age":604800}'
+            nel: '{"report_to":"cf-nel","max_age":604800}'
+            server: cloudflare
+            cf-ray: 5e4a37b11ffb32c8-CDG
+            content-encoding: br
+        body: '{"id":1,"title":"guitare","description":null,"owner_id":1,"from_lat":43.311852,"to_lat":48.85658,"ga_sent":null,"price":1300,"created_at":"2020-04-17T22:48:01.236+02:00","updated_at":"2020-05-01T05:30:21.118+02:00","from_lng":6.013474,"to_lng":2.35183,"from_is_flexible":false,"from_pickup_date":"2020-04-17T12:00:00.000+02:00","to_is_flexible":false,"to_pickup_date":"2020-04-30T23:59:59.999+02:00","is_packaged":null,"is_passenger":false,"volume":0.01,"environment":"objects","deleted_at":null,"slug":"guitare","rider_extra_information":"","from_need_help":false,"from_need_help_floor":null,"from_need_help_elevator":null,"from_need_help_furniture_lift":null,"to_need_help":false,"to_need_help_floor":null,"to_need_help_elevator":null,"to_need_help_furniture_lift":null,"state":"expired","owner_status":"sender","moderated_by":null,"moderated_at":null,"moderated_reason_content":null,"completed_at":null,"published_at":"2020-04-17T22:48:01.376+02:00","gat_sent":false,"v2_id":null,"last_activity_at":"2020-04-17T22:48:01.237+02:00","fees":200.0,"validated_by_id":null,"environment_kind":null,"api_application_id":null,"seller_tracking":"5CC4E42CF5A9AA33","buyer_tracking":"04060F3C48B239CB","external_id":null,"content_value":null,"offers_count":0,"last_edited_at":"2020-05-01T05:30:21.118+02:00","last_standby_at":null,"managed_by_id":null,"rider_price":1100.0,"owner":{"id":1,"last_sign_in_at":"2020-10-12T09:49:09.449+02:00","nickname":"Sébastien F.","gender":"M","business_name":"","phone_verified":true,"role":"superadmin","sign_up_finished":true,"v2_id":null,"deleted_at":null,"rate":null,"banned_at":null,"rating_count":0,"email_verified":true,"response_percent":0.0,"kyc_validated":false,"identity_validated":true,"role_label":"Super administrateur"},"previous_pay_in":false,"conversations":{"count":0,"unreaded_messages":0},"from_address":"Néoules, 83136","to_address":"Paris, 75004","offers_made_by_others_count":0,"photos":[],"mine":false,"ride_objects_attributes":[{"id":1,"ride_id":1,"qty":1,"title":"guitare","length":20,"width":20,"height":20,"format":null,"integer":null,"created_at":"2020-04-17T22:48:01.268+02:00","updated_at":"2020-04-17T22:48:01.268+02:00","weight":"between_5_and_30_kg","external_url":null}]}'
+        curl_info:
+            url: 'https://sandbox-api.cocolis.fr/api/v1/rides//1'
+            content_type: 'application/json; charset=utf-8'
+            http_code: 200
+            header_size: 2032
+            request_size: 134
+            filetime: -1
+            ssl_verify_result: 0
+            redirect_count: 0
+            total_time: 0.226408
+            namelookup_time: 0.001164
+            connect_time: 0.016429
+            pretransfer_time: 0.043613
+            size_upload: !!float 0
+            size_download: !!float 859
+            speed_download: !!float 3800
+            speed_upload: !!float 0
+            download_content_length: !!float -1
+            upload_content_length: !!float -1
+            starttransfer_time: 0.223081
+            redirect_time: !!float 0
+            redirect_url: ''
+            primary_ip: 172.67.73.171
+            certinfo: {  }
+            primary_port: 443
+            local_ip: 192.168.1.81
+            local_port: 56303
+            http_version: 3
+            protocol: 2
+            ssl_verifyresult: 0
+            scheme: HTTPS
+            appconnect_time_us: 43559
+            connect_time_us: 16429
+            namelookup_time_us: 1164
+            pretransfer_time_us: 43613
+            redirect_time_us: 0
+            starttransfer_time_us: 223081
+            total_time_us: 226408
+-
+    request:
+        method: GET
+        url: 'https://sandbox-api.cocolis.fr/api/v1/rides//1'
+        headers:
+            Host: sandbox-api.cocolis.fr
+            access-token: k535AMv4LKjsKeqeULKhhw
+            client: 5Qlozec04hJorzuGunGvwA
+            expiry: '1604321337'
+            uid: e0611906
+    response:
+        status:
+            http_version: '2'
+            code: '200'
+            message: ''
+        headers:
+            date: 'Mon, 19 Oct 2020 11:52:13 GMT'
+            content-type: 'application/json; charset=utf-8'
+            set-cookie: ['__cfduid=da2255cf844bc65d60aa3367f4c85328b1603108333; expires=Wed, 18-Nov-20 11:52:13 GMT; path=/; domain=.cocolis.fr; HttpOnly; SameSite=Lax', '_session_id=QoD6aJ9xj8X0bd9DWkuPVaQ5FTDfJj6nWN474oRh1dHbRXIYg%2B7XKvaZW9a7XSs62Vf4qtsGy8WucH2fBV6gEqrm%2Bmh101gKnzuAks2I66imXUYL9fo%2BmDvyvhOOThBoig0ySf8mM2aNetU0AzWiucIB%2BqtfsorA%2FEVxc55KrmuFNLrJDZwJjwM9yKaHJWWb6t0AdmRnEFUldPy2EVOIl79szjSP%2B5Xu8sUwjL%2Biw779fA4Mx5rMP3vXb%2FdFWNu5elUhyGOf9g7k%2BVJhOha3SJ58DgyrIbV%2BJIpk6Dv5aIdr40BSsLi4YTT0diC%2BKa4c7lzZSUs4Giar8J9gMDC58UrPlkP5%2B9Jbr3Dnd98FikaNsT5hlafpOlzb3UkIBzNRqctLA5LewSDcgwGAl8V6lp6ilz85EaQtBA6IQJlr9VLG5nYZGz9Th%2BMP02oOUcNLFiVSd8F9RyM6HWv7cMEVqHRoXM8BY34%2BNNalMV4%2FxJhn3UVk2vjkFZMbTEfHTdoxzdqXC4GypLrIFZmXUJUwsFliGVFv6Gxxq5vx7I%2BIBVUtxSWL49GXn468g4EDxu4iIj4tBBnre7nksMIfvFj%2FFershlajC8qA9G%2F05A6sKVQqZ8zMbEo7rRBqlaVt%2F8HWU0t4U7NTnHqOcZfvkDGXsrglD04OAzflLTdqwBjIVLeZKRc%3D--0wZzLCoqJvpU%2BrrI--dFMOCYdLaThNgiD3F%2Bp66A%3D%3D; path=/; HttpOnly; secure', '_session_id=QoD6aJ9xj8X0bd9DWkuPVaQ5FTDfJj6nWN474oRh1dHbRXIYg%2B7XKvaZW9a7XSs62Vf4qtsGy8WucH2fBV6gEqrm%2Bmh101gKnzuAks2I66imXUYL9fo%2BmDvyvhOOThBoig0ySf8mM2aNetU0AzWiucIB%2BqtfsorA%2FEVxc55KrmuFNLrJDZwJjwM9yKaHJWWb6t0AdmRnEFUldPy2EVOIl79szjSP%2B5Xu8sUwjL%2Biw779fA4Mx5rMP3vXb%2FdFWNu5elUhyGOf9g7k%2BVJhOha3SJ58DgyrIbV%2BJIpk6Dv5aIdr40BSsLi4YTT0diC%2BKa4c7lzZSUs4Giar8J9gMDC58UrPlkP5%2B9Jbr3Dnd98FikaNsT5hlafpOlzb3UkIBzNRqctLA5LewSDcgwGAl8V6lp6ilz85EaQtBA6IQJlr9VLG5nYZGz9Th%2BMP02oOUcNLFiVSd8F9RyM6HWv7cMEVqHRoXM8BY34%2BNNalMV4%2FxJhn3UVk2vjkFZMbTEfHTdoxzdqXC4GypLrIFZmXUJUwsFliGVFv6Gxxq5vx7I%2BIBVUtxSWL49GXn468g4EDxu4iIj4tBBnre7nksMIfvFj%2FFershlajC8qA9G%2F05A6sKVQqZ8zMbEo7rRBqlaVt%2F8HWU0t4U7NTnHqOcZfvkDGXsrglD04OAzflLTdqwBjIVLeZKRc%3D--0wZzLCoqJvpU%2BrrI--dFMOCYdLaThNgiD3F%2Bp66A%3D%3D; path=/; HttpOnly; secure', '_backend_session=ZoYnl4zQXOXMheAIW%2BnABHpR1U6Z5Sp7hSAEf%2B%2FLqaR5LKQmEUXML%2FHty%2FaQYY%2BSriQ0cUU8thLxfQXRIVihj%2F8zu4V7QsHvd0%2BEEKW1NPIIwle2KdJRKu3%2BXogJZe1SRE3Lvk2KWnLRQbqxTCjjVgq90edNMbXoz2wfiwawfltW6579ao1Oqn45fKGi1inahfykEx3li6txEZzh3lFYprKZ7EvO1DmXFnZr5XEFMdMYvo0Likm1tfkJDyNEZHILE7mYVCZNKKghYmISJmF1bP17ofwQ4ZSC3XZGj0iKRmo61ydMeNFPsG5Kchb%2BI5QV45msj8ZwHJAVwjblmSzS%2FW8BpDTbqEn7AtDOfFRYBnVMm8zwZU1lUMNna%2BGj02Gk7mPuRcJFYYWjXSjdtVr6a7AoSYIGeahIs9nz7epr9aP45J3LA6%2FDQyNqOfoYZy4jHHW8%2BAasdYxRFRz3rRz5zEFWD7%2F59WhhOmSJxv8SXCAD1GejOJfhqcMS7zvWpBSoRc%2FDv8FVP9vE%2FQwZHEPySjtLXrqkMakWlWnhm9ZCWEEH8RVrL4Wp5x6m43a9VHWD83HMFYjtHIOGEjCLQUqVDZO9NLz9F7NfXFalea5oSGRPsGcRMmUbuJut5SksouVDJ8kp8Yrj1ZcjXy%2FHK7dWrfSOUNZ2CUmIl02BMl6mdc5cu9F9o6SS5Q%3D%3D--9EtgE7GghZsQUaZV--72cS%2BUsVe9gJRO8NPLhfRQ%3D%3D; path=/; HttpOnly; secure']
+            x-frame-options: SAMEORIGIN
+            x-xss-protection: '1; mode=block'
+            x-content-type-options: nosniff
+            x-download-options: noopen
+            x-permitted-cross-domain-policies: none
+            referrer-policy: strict-origin-when-cross-origin
+            access-token: k535AMv4LKjsKeqeULKhhw
+            token-type: Bearer
+            client: 5Qlozec04hJorzuGunGvwA
+            expiry: '1604321337'
+            uid: e0611906
+            etag: 'W/"70bc4e5063835240de1007acccbc1acf"'
+            cache-control: 'max-age=0, private, must-revalidate'
+            x-request-id: d9d6b627-9a08-4de7-9a78-7a3eb261cc90
+            x-runtime: '0.122032'
+            strict-transport-security: 'max-age=31536000; includeSubDomains'
+            via: '1.1 vegur'
+            cf-cache-status: DYNAMIC
+            cf-request-id: 05e24cfeaf00000838c934d000000001
+            expect-ct: 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"'
+            report-to: '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report?lkg-colo=19&lkg-time=1603108333"}],"group":"cf-nel","max_age":604800}'
+            nel: '{"report_to":"cf-nel","max_age":604800}'
+            server: cloudflare
+            cf-ray: 5e4a4aaabf410838-CDG
+            content-encoding: br
+        body: '{"id":1,"title":"guitare","description":null,"owner_id":1,"from_lat":43.311852,"to_lat":48.85658,"ga_sent":null,"price":1300,"created_at":"2020-04-17T22:48:01.236+02:00","updated_at":"2020-05-01T05:30:21.118+02:00","from_lng":6.013474,"to_lng":2.35183,"from_is_flexible":false,"from_pickup_date":"2020-04-17T12:00:00.000+02:00","to_is_flexible":false,"to_pickup_date":"2020-04-30T23:59:59.999+02:00","is_packaged":null,"is_passenger":false,"volume":0.01,"environment":"objects","deleted_at":null,"slug":"guitare","rider_extra_information":"","from_need_help":false,"from_need_help_floor":null,"from_need_help_elevator":null,"from_need_help_furniture_lift":null,"to_need_help":false,"to_need_help_floor":null,"to_need_help_elevator":null,"to_need_help_furniture_lift":null,"state":"expired","owner_status":"sender","moderated_by":null,"moderated_at":null,"moderated_reason_content":null,"completed_at":null,"published_at":"2020-04-17T22:48:01.376+02:00","gat_sent":false,"v2_id":null,"last_activity_at":"2020-04-17T22:48:01.237+02:00","fees":200.0,"validated_by_id":null,"environment_kind":null,"api_application_id":null,"seller_tracking":"5CC4E42CF5A9AA33","buyer_tracking":"04060F3C48B239CB","external_id":null,"content_value":null,"offers_count":0,"last_edited_at":"2020-05-01T05:30:21.118+02:00","last_standby_at":null,"managed_by_id":null,"rider_price":1100.0,"owner":{"id":1,"last_sign_in_at":"2020-10-12T09:49:09.449+02:00","nickname":"Sébastien F.","gender":"M","business_name":"","phone_verified":true,"role":"superadmin","sign_up_finished":true,"v2_id":null,"deleted_at":null,"rate":null,"banned_at":null,"rating_count":0,"email_verified":true,"response_percent":0.0,"kyc_validated":false,"identity_validated":true,"role_label":"Super administrateur"},"previous_pay_in":false,"conversations":{"count":0,"unreaded_messages":0},"from_address":"Néoules, 83136","to_address":"Paris, 75004","offers_made_by_others_count":0,"photos":[],"mine":false,"current_offer_id":null,"ride_objects_attributes":[{"id":1,"ride_id":1,"qty":1,"title":"guitare","length":20,"width":20,"height":20,"format":null,"integer":null,"created_at":"2020-04-17T22:48:01.268+02:00","updated_at":"2020-04-17T22:48:01.268+02:00","weight":"between_5_and_30_kg","external_url":null}]}'
+        curl_info:
+            url: 'https://sandbox-api.cocolis.fr/api/v1/rides//1'
+            content_type: 'application/json; charset=utf-8'
+            http_code: 200
+            header_size: 3785
+            request_size: 239
+            filetime: -1
+            ssl_verify_result: 0
+            redirect_count: 0
+            total_time: 0.298479
+            namelookup_time: 0.00125
+            connect_time: 0.01781
+            pretransfer_time: 0.051382
+            size_upload: !!float 0
+            size_download: !!float 868
+            speed_download: !!float 2912
+            speed_upload: !!float 0
+            download_content_length: !!float -1
+            upload_content_length: !!float -1
+            starttransfer_time: 0.298408
+            redirect_time: !!float 0
+            redirect_url: ''
+            primary_ip: 172.67.73.171
+            certinfo: {  }
+            primary_port: 443
+            local_ip: 192.168.1.81
+            local_port: 59711
+            http_version: 3
+            protocol: 2
+            ssl_verifyresult: 0
+            scheme: HTTPS
+            appconnect_time_us: 51291
+            connect_time_us: 17810
+            namelookup_time_us: 1250
+            pretransfer_time_us: 51382
+            redirect_time_us: 0
+            starttransfer_time_us: 298408
+            total_time_us: 298479
+-
+    request:
+        method: GET
+        url: 'https://sandbox-api.cocolis.fr/api/v1/rides//1'
+        headers:
+            Host: sandbox-api.cocolis.fr
+            access-token: Bip3N8OlkmtqL5ojiOOQ6Q
+            client: XhInmD60O8cJLW5ljC4ePg
+            expiry: '1604321623'
+            uid: e0611906
+    response:
+        status:
+            http_version: '2'
+            code: '200'
+            message: ''
+        headers:
+            date: 'Mon, 19 Oct 2020 11:53:44 GMT'
+            content-type: 'application/json; charset=utf-8'
+            set-cookie: ['__cfduid=dfcf2bf21d9ba8f192758426e9f74b5231603108424; expires=Wed, 18-Nov-20 11:53:44 GMT; path=/; domain=.cocolis.fr; HttpOnly; SameSite=Lax', '_session_id=HJoghSqqb%2FjHG4XuxqWlFhBHiU4ZsOmyiWbqic%2F4GlNH6BoiBN%2FTwWMXzkZiqCTuSYRL86iustvJFz6qKj7CzaQ330uAJnbzM4vWrzZIiO6Ey5CAM3DG9lfXUO1ammwoxa9GO3%2FwNaIoNazZMhXglljHnlUX39yPw2rU41clcwVHDHZ%2BuSA8xhIiniK3N2yu44lVTVE0qWuC6Ned6PZNNXvqx%2Fh%2BfjoLbSwPf6y2sCHBuabIXn2CLtcF2F2WnZ8LY2RMRGuuvRMnQaExbvs4Mkp6TF6ivZvQSzcLsqGm5BbHPJgPBkmO1qMnLpbBijp7FdQxnizFXgj3Vw5zzatWK9Kitzv4zH00Q98jDR0LSkI6Ljb3Sa2lYND%2FMdny2ZNPSA84TTnL9WJqO2xWoG3N8kUmy7MMrWwnM9smYmTvuOvfvRBVaozBO5p1UZSXIyuiEyXYPhaqEx4t8DRqPyKVJazQbS%2BQw2eQI37nBKwvenZvXyht6N%2B2YHcz9biEDDtPFgKUn2EpO%2FSFywDkbs5lOtsDYl%2BatcVW2IbV1MlKe4x5gWbMxyKUXvr23fm9LV6nDnMGXgB8RH%2FqE1Oqu3QdCYQf384%2BLlHjklhjjBXLHNxreUEMf4Qyu%2F3eQWUsgv2E2RLnALY7%2BVXJIH5amrXS6AnP2Y51Ae5I87dF9jtEF%2FIH%2B7U%3D--PVFADPBykZkW%2FbwQ--2OuWjAa%2ByL2rH8fYFMSEYQ%3D%3D; path=/; HttpOnly; secure', '_session_id=HJoghSqqb%2FjHG4XuxqWlFhBHiU4ZsOmyiWbqic%2F4GlNH6BoiBN%2FTwWMXzkZiqCTuSYRL86iustvJFz6qKj7CzaQ330uAJnbzM4vWrzZIiO6Ey5CAM3DG9lfXUO1ammwoxa9GO3%2FwNaIoNazZMhXglljHnlUX39yPw2rU41clcwVHDHZ%2BuSA8xhIiniK3N2yu44lVTVE0qWuC6Ned6PZNNXvqx%2Fh%2BfjoLbSwPf6y2sCHBuabIXn2CLtcF2F2WnZ8LY2RMRGuuvRMnQaExbvs4Mkp6TF6ivZvQSzcLsqGm5BbHPJgPBkmO1qMnLpbBijp7FdQxnizFXgj3Vw5zzatWK9Kitzv4zH00Q98jDR0LSkI6Ljb3Sa2lYND%2FMdny2ZNPSA84TTnL9WJqO2xWoG3N8kUmy7MMrWwnM9smYmTvuOvfvRBVaozBO5p1UZSXIyuiEyXYPhaqEx4t8DRqPyKVJazQbS%2BQw2eQI37nBKwvenZvXyht6N%2B2YHcz9biEDDtPFgKUn2EpO%2FSFywDkbs5lOtsDYl%2BatcVW2IbV1MlKe4x5gWbMxyKUXvr23fm9LV6nDnMGXgB8RH%2FqE1Oqu3QdCYQf384%2BLlHjklhjjBXLHNxreUEMf4Qyu%2F3eQWUsgv2E2RLnALY7%2BVXJIH5amrXS6AnP2Y51Ae5I87dF9jtEF%2FIH%2B7U%3D--PVFADPBykZkW%2FbwQ--2OuWjAa%2ByL2rH8fYFMSEYQ%3D%3D; path=/; HttpOnly; secure', '_backend_session=5NfzdlJYPiy8iobw2%2FT1Vhg7CJ5VmYbjakGPuaB8FAlePIeQIh%2B3b6bDFUjA7lD99ixzpJ9crVwNop2clRatmTrwQMREgt3O08a3qXnSqKLqX6UCy0AtqVcukUiITyDSxlAcoI6YrelkpngiTf7pbZxMhvzp%2F4aQUj3QlbLyP2N929Fk%2FWFgu%2FI3pLmBwxxwLS9tIX%2FDPnz5xgiV2QCiNd5jorWNRTca0TxByIv%2FJepOJt%2B5tLfRZ1%2F7vOXnUx4Bpbe5xHmTxQhE2y6rUS5NsUINsmKMxSXeqBde71jXN%2Be6ECt938K5xbx36UgnIdR8zHxENqn6v9BLzAcoQGECujxs4OS%2B3MYAJCui4oLdipKayyeADeY5ggq2pvnvUM9vhtqNy9aP4rVz%2FXPv8Qjtd0sO8xmsp9Nb01eb%2BTh04XIYJQK9ueB2qSTYexvySxoFdzKF5oRnW6wBALHoWAFdiMRrlDWvIRi7zP6Y6cfZ8Vo91w3%2BQBqqqeOoYiBPLS5oggtvXsXG8oxsO7g%2FnnBfV20vT8vOIEBwaKpxWxMj6%2FoOPXA53K1V4rXFy6bPVl7k5PCCgDWCTmr4B6HTQsGJmHGR3%2B%2F%2FX3eWIV6MFL75APWKyyS1YEMKHlVqI1y%2BRYm1TjorA84PQ9yezjn4daXD56Xvq0aR5M%2F%2BGbJm1cwrUhpVyw65Pdpdvw%3D%3D--rtch1TP%2BkawUpWdd--2H5wWlONfkFH3AXQwZ8tGQ%3D%3D; path=/; HttpOnly; secure']
+            x-frame-options: SAMEORIGIN
+            x-xss-protection: '1; mode=block'
+            x-content-type-options: nosniff
+            x-download-options: noopen
+            x-permitted-cross-domain-policies: none
+            referrer-policy: strict-origin-when-cross-origin
+            access-token: Bip3N8OlkmtqL5ojiOOQ6Q
+            token-type: Bearer
+            client: XhInmD60O8cJLW5ljC4ePg
+            expiry: '1604321623'
+            uid: e0611906
+            etag: 'W/"70bc4e5063835240de1007acccbc1acf"'
+            cache-control: 'max-age=0, private, must-revalidate'
+            x-request-id: 15b36d6e-1842-45aa-b3db-fc8d7e204798
+            x-runtime: '0.131952'
+            strict-transport-security: 'max-age=31536000; includeSubDomains'
+            via: '1.1 vegur'
+            cf-cache-status: DYNAMIC
+            cf-request-id: 05e24e625f00000834da076000000001
+            expect-ct: 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"'
+            report-to: '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report?lkg-colo=19&lkg-time=1603108425"}],"group":"cf-nel","max_age":604800}'
+            nel: '{"report_to":"cf-nel","max_age":604800}'
+            server: cloudflare
+            cf-ray: 5e4a4ce3c9090834-CDG
+            content-encoding: br
+        body: '{"id":1,"title":"guitare","description":null,"owner_id":1,"from_lat":43.311852,"to_lat":48.85658,"ga_sent":null,"price":1300,"created_at":"2020-04-17T22:48:01.236+02:00","updated_at":"2020-05-01T05:30:21.118+02:00","from_lng":6.013474,"to_lng":2.35183,"from_is_flexible":false,"from_pickup_date":"2020-04-17T12:00:00.000+02:00","to_is_flexible":false,"to_pickup_date":"2020-04-30T23:59:59.999+02:00","is_packaged":null,"is_passenger":false,"volume":0.01,"environment":"objects","deleted_at":null,"slug":"guitare","rider_extra_information":"","from_need_help":false,"from_need_help_floor":null,"from_need_help_elevator":null,"from_need_help_furniture_lift":null,"to_need_help":false,"to_need_help_floor":null,"to_need_help_elevator":null,"to_need_help_furniture_lift":null,"state":"expired","owner_status":"sender","moderated_by":null,"moderated_at":null,"moderated_reason_content":null,"completed_at":null,"published_at":"2020-04-17T22:48:01.376+02:00","gat_sent":false,"v2_id":null,"last_activity_at":"2020-04-17T22:48:01.237+02:00","fees":200.0,"validated_by_id":null,"environment_kind":null,"api_application_id":null,"seller_tracking":"5CC4E42CF5A9AA33","buyer_tracking":"04060F3C48B239CB","external_id":null,"content_value":null,"offers_count":0,"last_edited_at":"2020-05-01T05:30:21.118+02:00","last_standby_at":null,"managed_by_id":null,"rider_price":1100.0,"owner":{"id":1,"last_sign_in_at":"2020-10-12T09:49:09.449+02:00","nickname":"Sébastien F.","gender":"M","business_name":"","phone_verified":true,"role":"superadmin","sign_up_finished":true,"v2_id":null,"deleted_at":null,"rate":null,"banned_at":null,"rating_count":0,"email_verified":true,"response_percent":0.0,"kyc_validated":false,"identity_validated":true,"role_label":"Super administrateur"},"previous_pay_in":false,"conversations":{"count":0,"unreaded_messages":0},"from_address":"Néoules, 83136","to_address":"Paris, 75004","offers_made_by_others_count":0,"photos":[],"mine":false,"current_offer_id":null,"ride_objects_attributes":[{"id":1,"ride_id":1,"qty":1,"title":"guitare","length":20,"width":20,"height":20,"format":null,"integer":null,"created_at":"2020-04-17T22:48:01.268+02:00","updated_at":"2020-04-17T22:48:01.268+02:00","weight":"between_5_and_30_kg","external_url":null}]}'
+        curl_info:
+            url: 'https://sandbox-api.cocolis.fr/api/v1/rides//1'
+            content_type: 'application/json; charset=utf-8'
+            http_code: 200
+            header_size: 3789
+            request_size: 239
+            filetime: -1
+            ssl_verify_result: 0
+            redirect_count: 0
+            total_time: 0.327134
+            namelookup_time: 0.00135
+            connect_time: 0.016489
+            pretransfer_time: 0.043875
+            size_upload: !!float 0
+            size_download: !!float 868
+            speed_download: !!float 2654
+            speed_upload: !!float 0
+            download_content_length: !!float -1
+            upload_content_length: !!float -1
+            starttransfer_time: 0.327036
+            redirect_time: !!float 0
+            redirect_url: ''
+            primary_ip: 172.67.73.171
+            certinfo: {  }
+            primary_port: 443
+            local_ip: 192.168.1.81
+            local_port: 60122
+            http_version: 3
+            protocol: 2
+            ssl_verifyresult: 0
+            scheme: HTTPS
+            appconnect_time_us: 43797
+            connect_time_us: 16489
+            namelookup_time_us: 1350
+            pretransfer_time_us: 43875
+            redirect_time_us: 0
+            starttransfer_time_us: 327036
+            total_time_us: 327134
+-
+    request:
+        method: GET
+        url: 'https://sandbox-api.cocolis.fr/api/v1/rides//1'
+        headers:
+            Host: sandbox-api.cocolis.fr
+            access-token: ohkhfbCZzxfCrTlzzqWmEw
+            client: S89BjvJRIF2HlPCd8p44gw
+            expiry: '1604321670'
+            uid: e0611906
+    response:
+        status:
+            http_version: '2'
+            code: '200'
+            message: ''
+        headers:
+            date: 'Mon, 19 Oct 2020 11:54:40 GMT'
+            content-type: 'application/json; charset=utf-8'
+            set-cookie: ['__cfduid=d0aa9a40723aec0adce242509e4507eb41603108480; expires=Wed, 18-Nov-20 11:54:40 GMT; path=/; domain=.cocolis.fr; HttpOnly; SameSite=Lax', '_session_id=buh%2F%2FPC%2Fc%2BxJAgWV1%2Fq60BifOufhUZq5PKtSfM2CG4EdTD5kwSyLa2w7XpYLh5PE750iVmaKuxM7a5Hv%2B8WayRokOhRmo%2FlYNfXGoFRvWd5rpNXJPDF0NSbkrjl4UPsFHGwze5Z5rJl0EkOa5f73ZnRvZQbzE1vX0VHJHJOUr5h7f3hF4Ljf2xLF3AmWYu863ndIycv8CQ7LKFEbA7agHVQgIPme1TEs6iDD5BuaLx5sighARnGt9n3VmACJXQqopVaZamp%2Fe7hgjPBbHXbK2ArvnLld0S4qn2UezJg18fwlPwThNl3tpLecrSuswtl8yyyBnDMpQFvh0fApaZCbV6VqQLHE7yGOKd2DNuh9gk7%2B3cqKDVEvgds2GfjTgnX%2B993s9BHc%2F2SyQbwoWox5ndwQbfVJBK2%2B5QhRrgVXUB%2BmwHQ9DCBVFB4e1n5MG%2FL4jh4SBLA9Dt9aLVs7yJObUp8eUdAEjc186mbZhy6OB%2Fs7A7hNPKyFZz8LRvqSOt4vv63UT9J8MS62cT%2B2vX9TWrnMzxXKmx0VEeixn0%2BlxzllSAJYesAKBRwhcqyEEhTOOULfcMbNKf7W2W3CgGR4jA%2Bo3LLnZ3pV%2Bndr9xmV3l57jajQ9C6HCWAkbLn1ttR0XC%2BGBJ%2Bigb5x26GiijgCd79iefQEpdyqiJ7K7lQClo55z2Y%3D--rW177Ima2XvxDZT3--IIeBgBbXevPXsNt%2FplBPLg%3D%3D; path=/; HttpOnly; secure', '_session_id=buh%2F%2FPC%2Fc%2BxJAgWV1%2Fq60BifOufhUZq5PKtSfM2CG4EdTD5kwSyLa2w7XpYLh5PE750iVmaKuxM7a5Hv%2B8WayRokOhRmo%2FlYNfXGoFRvWd5rpNXJPDF0NSbkrjl4UPsFHGwze5Z5rJl0EkOa5f73ZnRvZQbzE1vX0VHJHJOUr5h7f3hF4Ljf2xLF3AmWYu863ndIycv8CQ7LKFEbA7agHVQgIPme1TEs6iDD5BuaLx5sighARnGt9n3VmACJXQqopVaZamp%2Fe7hgjPBbHXbK2ArvnLld0S4qn2UezJg18fwlPwThNl3tpLecrSuswtl8yyyBnDMpQFvh0fApaZCbV6VqQLHE7yGOKd2DNuh9gk7%2B3cqKDVEvgds2GfjTgnX%2B993s9BHc%2F2SyQbwoWox5ndwQbfVJBK2%2B5QhRrgVXUB%2BmwHQ9DCBVFB4e1n5MG%2FL4jh4SBLA9Dt9aLVs7yJObUp8eUdAEjc186mbZhy6OB%2Fs7A7hNPKyFZz8LRvqSOt4vv63UT9J8MS62cT%2B2vX9TWrnMzxXKmx0VEeixn0%2BlxzllSAJYesAKBRwhcqyEEhTOOULfcMbNKf7W2W3CgGR4jA%2Bo3LLnZ3pV%2Bndr9xmV3l57jajQ9C6HCWAkbLn1ttR0XC%2BGBJ%2Bigb5x26GiijgCd79iefQEpdyqiJ7K7lQClo55z2Y%3D--rW177Ima2XvxDZT3--IIeBgBbXevPXsNt%2FplBPLg%3D%3D; path=/; HttpOnly; secure', '_backend_session=24XMMgZSytDMCanF9%2BV8JF57xuMCqTBLA3o2DRSFg8Tr3UoqF6uErGP81MUD7WfeSLd6Ympm9gkEFqfqwTL2UceojzPTghqqiPaxOvz1hrlIUg%2FlExwf9srPtFmZpfxGztOfaPge6Wv%2BBbnXCtcuzyyxp7%2FLzyKJ4HE650FQENsi9uW204PmPzPlKEbzrkNiLRkF7JLE2LIon7PlekkUQ4hQVggwCMARB1%2BT3SIz6TKchXQEyJdtSEsfFFLflWUlQe9bDGky00YNYvfLTR9o%2FvbfHRWiAN82Sz%2FePXjjVQmzg2sR%2FTqKiOa6hgtEcye75XMxQYHYfrHHSvRecHcZO2MWwLBagv4JuctHmSbQIjJuwzwGRAJ8ezpb9QTMaCq2b7P0wOWgrNHB%2FMAcS8FjMuP10rKvxQRZ%2FYF6DeZTg4e85lbQvyeBgiFv3y0m6uNfiXpyjXiRO3uvan%2BfVC7OTEWq%2BDIuQKqWe86ZwkZIdQsHgalWKnSY92TJta68ergWOsnBu%2BjIih9qTMYSwGiwJCBZcCtx3lLxtRhhVAfU0BuOilI5fl61BCPtQIerZ0CzvNL7CuHCDo9p25ytz2aVZX6YI4H%2FTjent9UCr2qzLCvt3DmA%2BXHKGaAHhA7q83woB8xnao%2BBw3EG7WhXmCn%2Bgz6I%2BfZK73LVok%2F0az%2FPCr8o2PMFAMb5gA%3D%3D--YiQLGqOh%2BIYnHJaW--xrc3agL5Z0b2JwbIOBj%2Fag%3D%3D; path=/; HttpOnly; secure']
+            x-frame-options: SAMEORIGIN
+            x-xss-protection: '1; mode=block'
+            x-content-type-options: nosniff
+            x-download-options: noopen
+            x-permitted-cross-domain-policies: none
+            referrer-policy: strict-origin-when-cross-origin
+            access-token: ohkhfbCZzxfCrTlzzqWmEw
+            token-type: Bearer
+            client: S89BjvJRIF2HlPCd8p44gw
+            expiry: '1604321670'
+            uid: e0611906
+            etag: 'W/"70bc4e5063835240de1007acccbc1acf"'
+            cache-control: 'max-age=0, private, must-revalidate'
+            x-request-id: 3ff1f706-cf12-49be-8dd8-641f12a518b4
+            x-runtime: '0.094148'
+            strict-transport-security: 'max-age=31536000; includeSubDomains'
+            via: '1.1 vegur'
+            cf-cache-status: DYNAMIC
+            cf-request-id: 05e24f3e3d0000ee33b00d5000000001
+            expect-ct: 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"'
+            report-to: '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report?lkg-colo=19&lkg-time=1603108481"}],"group":"cf-nel","max_age":604800}'
+            nel: '{"report_to":"cf-nel","max_age":604800}'
+            server: cloudflare
+            cf-ray: 5e4a4e439d77ee33-CDG
+            content-encoding: br
+        body: '{"id":1,"title":"guitare","description":null,"owner_id":1,"from_lat":43.311852,"to_lat":48.85658,"ga_sent":null,"price":1300,"created_at":"2020-04-17T22:48:01.236+02:00","updated_at":"2020-05-01T05:30:21.118+02:00","from_lng":6.013474,"to_lng":2.35183,"from_is_flexible":false,"from_pickup_date":"2020-04-17T12:00:00.000+02:00","to_is_flexible":false,"to_pickup_date":"2020-04-30T23:59:59.999+02:00","is_packaged":null,"is_passenger":false,"volume":0.01,"environment":"objects","deleted_at":null,"slug":"guitare","rider_extra_information":"","from_need_help":false,"from_need_help_floor":null,"from_need_help_elevator":null,"from_need_help_furniture_lift":null,"to_need_help":false,"to_need_help_floor":null,"to_need_help_elevator":null,"to_need_help_furniture_lift":null,"state":"expired","owner_status":"sender","moderated_by":null,"moderated_at":null,"moderated_reason_content":null,"completed_at":null,"published_at":"2020-04-17T22:48:01.376+02:00","gat_sent":false,"v2_id":null,"last_activity_at":"2020-04-17T22:48:01.237+02:00","fees":200.0,"validated_by_id":null,"environment_kind":null,"api_application_id":null,"seller_tracking":"5CC4E42CF5A9AA33","buyer_tracking":"04060F3C48B239CB","external_id":null,"content_value":null,"offers_count":0,"last_edited_at":"2020-05-01T05:30:21.118+02:00","last_standby_at":null,"managed_by_id":null,"rider_price":1100.0,"owner":{"id":1,"last_sign_in_at":"2020-10-12T09:49:09.449+02:00","nickname":"Sébastien F.","gender":"M","business_name":"","phone_verified":true,"role":"superadmin","sign_up_finished":true,"v2_id":null,"deleted_at":null,"rate":null,"banned_at":null,"rating_count":0,"email_verified":true,"response_percent":0.0,"kyc_validated":false,"identity_validated":true,"role_label":"Super administrateur"},"previous_pay_in":false,"conversations":{"count":0,"unreaded_messages":0},"from_address":"Néoules, 83136","to_address":"Paris, 75004","offers_made_by_others_count":0,"photos":[],"mine":false,"current_offer_id":null,"ride_objects_attributes":[{"id":1,"ride_id":1,"qty":1,"title":"guitare","length":20,"width":20,"height":20,"format":null,"integer":null,"created_at":"2020-04-17T22:48:01.268+02:00","updated_at":"2020-04-17T22:48:01.268+02:00","weight":"between_5_and_30_kg","external_url":null}]}'
+        curl_info:
+            url: 'https://sandbox-api.cocolis.fr/api/v1/rides//1'
+            content_type: 'application/json; charset=utf-8'
+            http_code: 200
+            header_size: 3795
+            request_size: 239
+            filetime: -1
+            ssl_verify_result: 0
+            redirect_count: 0
+            total_time: 0.272739
+            namelookup_time: 0.001299
+            connect_time: 0.017293
+            pretransfer_time: 0.047676
+            size_upload: !!float 0
+            size_download: !!float 870
+            speed_download: !!float 3198
+            speed_upload: !!float 0
+            download_content_length: !!float -1
+            upload_content_length: !!float -1
+            starttransfer_time: 0.272644
+            redirect_time: !!float 0
+            redirect_url: ''
+            primary_ip: 104.26.6.43
+            certinfo: {  }
+            primary_port: 443
+            local_ip: 192.168.1.81
+            local_port: 60386
+            http_version: 3
+            protocol: 2
+            ssl_verifyresult: 0
+            scheme: HTTPS
+            appconnect_time_us: 47604
+            connect_time_us: 17293
+            namelookup_time_us: 1299
+            pretransfer_time_us: 47676
+            redirect_time_us: 0
+            starttransfer_time_us: 272644
+            total_time_us: 272739

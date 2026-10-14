@@ -150,10 +150,7 @@ class WC_Cocolis_Webhooks_Method
 
             $shipping_class = new WC_Cocolis_Shipping_Method();
             $client = $shipping_class->cocolis_authenticated_client();
-            $response = $client->callAuthentificated('applications/webhook_signing_secret', 'GET');
-            $body = json_decode($response->text(), true);
-
-            $secret = isset($body['data']['webhook_signing_secret']) ? (string) $body['data']['webhook_signing_secret'] : '';
+            $secret = (string) $client->getWebhookClient()->getSigningSecret();
 
             if (!empty($secret)) {
                 update_option(self::SIGNING_SECRET_OPTION, $secret, false);

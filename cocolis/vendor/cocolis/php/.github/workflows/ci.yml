@@ -1,0 +1,40 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: ['7.4', '8.1', '8.2', '8.3', '8.4']
+    name: PHP ${{ matrix.php-version }}
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php-version }}
+        coverage: xdebug
+        extensions: soap
+
+    - name: Install dependent libraries
+      run: |
+        sudo apt-get update
+
+    - name: Cache Packages
+      uses: actions/cache@v4
+      with:
+        path: vendor
+        key: v2-dependencies-php${{ matrix.php-version }}-${{ hashFiles('composer.lock') }}
+        restore-keys: |
+          v2-dependencies-php${{ matrix.php-version }}-
+
+    - name: Install dependencies
+      run: composer install
+
+    - name: Run php-cs-fixer
+      run: ./vendor/bin/php-cs-fixer fix ./ --diff --dry-run
+    - name: Run phpunit
+      run: ./vendor/bin/phpunit --coverage-clover build/logs/clover.xml
