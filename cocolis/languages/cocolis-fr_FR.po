@@ -218,6 +218,16 @@ msgstr "Vos identifiants sont valides, mais l’API Cocolis a refusé un devis d
 msgid "Error on a Cocolis test quotation"
 msgstr "Erreur sur un devis de test Cocolis"
 
+#: wc-cocolis-shipping.php:267
+msgid "Order status for publication"
+msgstr "Statut de commande pour la publication"
+
+#: wc-cocolis-shipping.php:269
+msgid "The delivery ad is published on Cocolis when an order reaches this status. Developers can override it with the cocolis_publish_order_status filter."
+msgstr ""
+"L’annonce de livraison est publiée sur Cocolis lorsqu’une commande atteint ce statut. Les développeurs peuvent le "
+"remplacer via le filtre cocolis_publish_order_status."
+
 #: class/wc-cocolis-webhooks.php:53
 msgid "Missing Cocolis webhook signature."
 msgstr "Signature du webhook Cocolis manquante."

@@ -263,6 +263,15 @@ if (in_array('woocommerce/woocommerce.php', $cocolis_active_plugins, true)) {
                             'default'           => '0600000000',
                             'css'      => 'width:196px;',
                         ),
+                        'publish_order_status' => array(
+                            'title'             => __('Order status for publication', 'cocolis'),
+                            'type'              => 'select',
+                            'description'       => __('The delivery ad is published on Cocolis when an order reaches this status. Developers can override it with the cocolis_publish_order_status filter.', 'cocolis'),
+                            'desc_tip'          => true,
+                            'default'           => 'wc-processing',
+                            'options'           => wc_get_order_statuses(),
+                            'css'      => 'width:196px;',
+                        ),
                     );
                 }
 
