@@ -49,6 +49,7 @@ Rendez-vous [ici](https://doc.cocolis.fr "Documentation de Cocolis") pour obteni
 
 == Changelog ==
 = 1.3.0 =
+* New setting "Order status for publication": choose which order status publishes the delivery ad on Cocolis (default: processing), with a cocolis_publish_order_status filter for developers
 * When saving the settings, run a test quotation (can_match) to detect accounts without an active Cocolis subscription and display a clear error message
 * Update the French translations (webhook security, API key and subscription messages) and remove obsolete insurance strings
 
