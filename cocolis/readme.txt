@@ -1,7 +1,7 @@
 === Cocolis Officiel : Méthodes de livraison pour WooCommerce ===
 Contributors: cocolis
 Tags: woocommerce, delivery, cocolis, livraison
-Stable tag: 1.2.0
+Stable tag: 1.3.0
 Requires at least: 5.0
 Tested up to: 7.1
 Requires PHP: 7.4
@@ -48,6 +48,11 @@ Rendez-vous [ici](https://doc.cocolis.fr "Documentation de Cocolis") pour obteni
 3. Réglage du module
 
 == Changelog ==
+= 1.3.0 =
+* New setting "Order status for publication": choose which order status publishes the delivery ad on Cocolis (default: processing), with a cocolis_publish_order_status filter for developers
+* When saving the settings, run a test quotation (can_match) to detect accounts without an active Cocolis subscription and display a clear error message
+* Update the French translations (webhook security, API key and subscription messages) and remove obsolete insurance strings
+
 = 1.2.0 =
 * Security: webhooks are now authenticated with the Cocolis HMAC signature (X-Cocolis-Signature header)
 * Add API key authentication (takes precedence over the app-id / password authentication)

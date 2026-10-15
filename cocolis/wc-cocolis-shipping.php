@@ -6,7 +6,7 @@
  * Description: A plugin to add Cocolis.fr as a carrier on Woocommerce
  * Author:  Cocolis.fr
  * Author URI: https://www.cocolis.fr
- * Version: 1.2.0
+ * Version: 1.3.0
  * Developer: Alexandre BETTAN, Sebastien FIELOUX
  * Developer URI: https://github.com/btnalexandre, https://github.com/sebfie
  * Text Domain: cocolis
@@ -24,7 +24,7 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
-define('WC_COCOLIS_VERSION', '1.2.0');
+define('WC_COCOLIS_VERSION', '1.3.0');
 
 require_once dirname(__FILE__) . '/vendor/autoload.php';
 include_once "class/wc-cocolis-payment.php";
@@ -263,6 +263,15 @@ if (in_array('woocommerce/woocommerce.php', $cocolis_active_plugins, true)) {
                             'default'           => '0600000000',
                             'css'      => 'width:196px;',
                         ),
+                        'publish_order_status' => array(
+                            'title'             => __('Order status for publication', 'cocolis'),
+                            'type'              => 'select',
+                            'description'       => __('The delivery ad is published on Cocolis when an order reaches this status. Developers can override it with the cocolis_publish_order_status filter.', 'cocolis'),
+                            'desc_tip'          => true,
+                            'default'           => 'wc-processing',
+                            'options'           => wc_get_order_statuses(),
+                            'css'      => 'width:196px;',
+                        ),
                     );
                 }
 
@@ -278,13 +287,56 @@ if (in_array('woocommerce/woocommerce.php', $cocolis_active_plugins, true)) {
                     $this->app_id = isset($form_field['app_id']) ? $form_field['app_id'] : '';
                     $this->password = isset($form_field['password']) ? $form_field['password'] : '';
                     try {
-                        $this->cocolis_authenticated_client();
+                        $client = $this->cocolis_authenticated_client();
+                        $this->cocolis_verify_account_can_match($client);
                         $this->cocolis_register_webhooks();
                     } catch (\Cocolis\Api\Errors\UnauthorizedException $th) {
                         wp_die(__("The credentials provided are not recognized by the Cocolis API.", 'cocolis'), __("Authentication error on the API server", 'cocolis'), ['response' => 401, 'back_link' => true]);
                         exit;
                     }
                     return $form_field;
+                }
+
+                /**
+                 * Run a test quotation (can_match) so account-level issues, such as a
+                 * missing Cocolis subscription, surface when the settings are saved
+                 * instead of silently hiding the shipping rate at checkout.
+                 *
+                 * @param \Cocolis\Api\Client $client An authenticated client.
+                 */
+                public function cocolis_verify_account_can_match($client)
+                {
+                    try {
+                        $postcode = trim((string) get_option('woocommerce_store_postcode'));
+                        if (empty($postcode)) {
+                            $postcode = '75011';
+                        }
+                        // 0.1 m3 and a 100 € declared value: the goal is only to surface
+                        // account-level errors, not to get a realistic quotation.
+                        $client->getRideClient()->canMatch($postcode, $postcode, 0.1, 10000);
+                    } catch (\Cocolis\Api\Errors\UnprocessableEntityException $th) {
+                        $body = json_decode($th->getMessage(), true);
+                        $code = isset($body['code']) ? (string) $body['code'] : '';
+                        $message = isset($body['error']) ? (string) $body['error'] : $th->getMessage();
+
+                        if ('missing_subscription' === $code) {
+                            wp_die(
+                                __("Your credentials are valid, but your Cocolis account has no active subscription, so no shipping rate would be displayed. Please subscribe from your Cocolis account, then save these settings again.", 'cocolis'),
+                                __("A Cocolis subscription is required", 'cocolis'),
+                                ['response' => 422, 'back_link' => true]
+                            );
+                        }
+
+                        wp_die(
+                            sprintf(
+                                /* translators: %s: error message returned by the Cocolis API. */
+                                __("Your credentials are valid, but the Cocolis API refused a test quotation: %s", 'cocolis'),
+                                $message
+                            ),
+                            __("Error on a Cocolis test quotation", 'cocolis'),
+                            ['response' => 422, 'back_link' => true]
+                        );
+                    }
                 }
 
 

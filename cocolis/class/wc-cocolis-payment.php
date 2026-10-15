@@ -8,11 +8,38 @@ class WC_Cocolis_Payment_Method
 {
     public function __construct()
     {
-        add_action('woocommerce_order_status_processing', array($this, 'cocolis_payment_complete'), 100);
+        // Registered on init so that both the module setting and themes/plugins
+        // using the cocolis_publish_order_status filter are taken into account
+        // (this file is loaded before the theme's functions.php).
+        add_action('init', array($this, 'cocolis_register_publish_hook'));
 
         add_action('woocommerce_order_refunded', array($this, 'cocolis_order_refunded'), 10, 2);
 
         add_action('add_meta_boxes', array($this, 'add_meta_boxesws'), 10, 2);
+    }
+
+    /**
+     * Hook the ride publication on the configured order status.
+     *
+     * The status comes from the "Order status for publication" module setting
+     * (default: processing) and can be overridden with the
+     * cocolis_publish_order_status filter. Both the wc-prefixed slug stored by
+     * WooCommerce (wc-processing) and the bare slug (processing) are accepted.
+     */
+    public function cocolis_register_publish_hook()
+    {
+        $settings = get_option('woocommerce_cocolis_settings', array());
+        $status = !empty($settings['publish_order_status']) ? $settings['publish_order_status'] : 'processing';
+
+        /**
+         * Filters the order status that publishes the delivery ad on Cocolis.
+         *
+         * @param string $status Order status slug, with or without the wc- prefix.
+         */
+        $status = apply_filters('cocolis_publish_order_status', $status);
+        $status = preg_replace('/^wc-/', '', (string) $status);
+
+        add_action('woocommerce_order_status_' . $status, array($this, 'cocolis_payment_complete'), 100);
     }
 
     /**
