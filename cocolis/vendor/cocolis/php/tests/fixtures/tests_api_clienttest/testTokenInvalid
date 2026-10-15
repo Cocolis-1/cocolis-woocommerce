@@ -1,0 +1,72 @@
+
+-
+    request:
+        method: GET
+        url: 'https://sandbox-api.cocolis.fr/api/v1/app_auth/validate_token?token-type=Bearer&uid=e0611906&access-token=thisisnotavalidtoken&client=HLSmEW1TIDqsSMiwuKjnQg&expiry=1590748027'
+        headers:
+            Host: sandbox-api.cocolis.fr
+            User-Agent: cURL
+            Accept-Charset: UTF-8
+    response:
+        status:
+            http_version: '1.1'
+            code: '401'
+            message: Unauthorized
+        headers:
+            Server: Cowboy
+            Date: 'Fri, 14 Jan 2022 01:15:05 GMT'
+            Connection: keep-alive
+            X-Frame-Options: SAMEORIGIN
+            X-Xss-Protection: '1; mode=block'
+            X-Content-Type-Options: nosniff
+            X-Download-Options: noopen
+            X-Permitted-Cross-Domain-Policies: none
+            Referrer-Policy: strict-origin-when-cross-origin
+            Content-Type: 'application/json; charset=utf-8'
+            Vary: 'Accept, Origin'
+            Set-Cookie: ['_session_id=Tvm67i%2BSveudKxWlkbWZ2XHfiXuuOgBX0OAI%2FbMzQP%2BWdS0g1e3ltK5zgGOOTkx4n6qe5AtY0GqNkO81uhY8tgww8cCfCf%2FsBUEsrcuV9ipVistZdQWx6cu71%2FbJK8eFYjxCgE9Ms0LgZFPQNuPxez8xZhXPpZQKCXLIS5%2FmFAtES5o%3D--nG7cte2O6ZPgSPga--Qg2byWKVmSugXuP8B96yQw%3D%3D; path=/; HttpOnly; secure', '_session_id=Tvm67i%2BSveudKxWlkbWZ2XHfiXuuOgBX0OAI%2FbMzQP%2BWdS0g1e3ltK5zgGOOTkx4n6qe5AtY0GqNkO81uhY8tgww8cCfCf%2FsBUEsrcuV9ipVistZdQWx6cu71%2FbJK8eFYjxCgE9Ms0LgZFPQNuPxez8xZhXPpZQKCXLIS5%2FmFAtES5o%3D--nG7cte2O6ZPgSPga--Qg2byWKVmSugXuP8B96yQw%3D%3D; path=/; HttpOnly; secure', '_backend_session=pLlsY%2Byb0ozYYHv7Z0AmQBeXAQsKDCQnwnandSLsC96mCQwp7k7M2tM0KXghJSFAEoXhTHDORkKnbdjqdLO%2B7R0o3MKi4jFtiq8QttG4KuybQPVvHcZxGsl06D1O0dZieDYG3anxc4QU1mJdr3e4zaRM0TqOoV1b5Gbq%2F8M0DXdmRJCJOxkDHQ%3D%3D--4ysk4X2c29%2F51OjX--71Z5cNH%2BUGV4dKUJ%2FqhorQ%3D%3D; path=/; HttpOnly; secure']
+            Cache-Control: no-cache
+            X-Request-Id: 5b65b3b7-5808-42a7-b3b2-bcc34847344e
+            X-Runtime: '0.008612'
+            Strict-Transport-Security: 'max-age=63072000; includeSubDomains'
+            Transfer-Encoding: chunked
+            Via: '1.1 vegur'
+        body: '{"success":false,"errors":["Mot de passe ou identifiant invalide."]}'
+        curl_info:
+            url: 'https://sandbox-api.cocolis.fr/api/v1/app_auth/validate_token?token-type=Bearer&uid=e0611906&access-token=thisisnotavalidtoken&client=HLSmEW1TIDqsSMiwuKjnQg&expiry=1590748027'
+            content_type: 'application/json; charset=utf-8'
+            http_code: 401
+            header_size: 1480
+            request_size: 287
+            filetime: -1
+            ssl_verify_result: 0
+            redirect_count: 0
+            total_time: 0.127186
+            namelookup_time: 0.001622
+            connect_time: 0.034588
+            pretransfer_time: 0.084822
+            size_upload: 0.0
+            size_download: 68.0
+            speed_download: 534.0
+            speed_upload: 0.0
+            download_content_length: -1.0
+            upload_content_length: 0.0
+            starttransfer_time: 0.124514
+            redirect_time: 0.0
+            redirect_url: ''
+            primary_ip: 54.73.26.109
+            certinfo: {  }
+            primary_port: 443
+            local_ip: 192.168.68.103
+            local_port: 55819
+            http_version: 2
+            protocol: 2
+            ssl_verifyresult: 0
+            scheme: HTTPS
+            appconnect_time_us: 84767
+            connect_time_us: 34588
+            namelookup_time_us: 1622
+            pretransfer_time_us: 84822
+            redirect_time_us: 0
+            starttransfer_time_us: 124514
+            total_time_us: 127186

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         bootstrap="bootstrap.php"
+         colors="true"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+    <testsuites>
+        <testsuite name="Tests">
+            <directory suffix="Test.php">./tests</directory>
+            <exclude>./tests/CocolisTest.php</exclude>
+        </testsuite>
+    </testsuites>
+    <coverage includeUncoveredFiles="true"
+              processUncoveredFiles="true"
+              ignoreDeprecatedCodeUnits="true">
+      <include>
+        <directory suffix=".php">src</directory>
+      </include>
+      <exclude>
+          <file>src/Curl.php</file>
+      </exclude>
+
+      <report>
+        <clover outputFile="clover.xml"/>
+        <crap4j outputFile="crap4j.xml" threshold="50"/>
+        <html outputDirectory="html-coverage" lowUpperBound="50" highLowerBound="90"/>
+        <php outputFile="coverage.php"/>
+        <text outputFile="php://stdout" showUncoveredFiles="false" showOnlySummary="true"/>
+        <xml outputDirectory="xml-coverage"/>
+      </report>
+    </coverage>
+</phpunit>

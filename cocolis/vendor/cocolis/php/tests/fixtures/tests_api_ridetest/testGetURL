@@ -1,0 +1,42 @@
+
+-
+    request:
+        method: GET
+        url: 'https://sandbox-api.cocolis.fr/api/v1/rides//1'
+        headers:
+            Host: sandbox-api.cocolis.fr
+            Expect: null
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/Guzzle curl/7.57.0 PHP/7.3.7'
+            Content-Type: application/json
+            access-token: eT00t6RMIeZRqDV0qH-9yw
+            client: mghSYiwe0EsUyP6qxi6ZIg
+            expiry: '1591008268'
+            uid: e0611906
+            Accept: null
+        body: '[]'
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Server: Cowboy
+            Date: 'Tue, 02 Jun 2020 14:09:50 GMT'
+            Connection: keep-alive
+            X-Frame-Options: SAMEORIGIN
+            X-Xss-Protection: '1; mode=block'
+            X-Content-Type-Options: nosniff
+            X-Download-Options: noopen
+            X-Permitted-Cross-Domain-Policies: none
+            Referrer-Policy: strict-origin-when-cross-origin
+            Content-Type: 'application/json; charset=utf-8'
+            Set-Cookie: '_session_id=qGTyWXZIvj9Ap6aK2%2BjCsCoVIZeUshqb7hMiWt%2BDi5ZQFwIJ52ZsC69CIwOEKBDvFZVpvorEFkyeTSLkbCnJl6rDaGXoaZPKhXFWJgOfXysh%2BoB9EhaJNkiccvTdWJC2P0pBOU8sojkwTJh%2FvQOpK%2F8FHRqqcagAPt%2FLl%2BBUZQO4QZc%3D--WRQGBrzhYNlVnfPE--AFzGIrgW1ovF%2F6Bj%2Bonjeg%3D%3D; path=/; HttpOnly; secure, _session_id=qGTyWXZIvj9Ap6aK2%2BjCsCoVIZeUshqb7hMiWt%2BDi5ZQFwIJ52ZsC69CIwOEKBDvFZVpvorEFkyeTSLkbCnJl6rDaGXoaZPKhXFWJgOfXysh%2BoB9EhaJNkiccvTdWJC2P0pBOU8sojkwTJh%2FvQOpK%2F8FHRqqcagAPt%2FLl%2BBUZQO4QZc%3D--WRQGBrzhYNlVnfPE--AFzGIrgW1ovF%2F6Bj%2Bonjeg%3D%3D; path=/; HttpOnly; secure, _backend_session=nDleSGXR%2F9f6wlPrFdiuX4ikaa%2FpXwuu7FGJLon8U8Gp6Kxx%2Ft52jHIwIrE2n80LYpTWA%2FRCwSITlCiqEDOG27jrqPiryujDuFWi%2BYYDLqi%2BNgtg7fLPH%2F644GH1BnxUo7P%2F2fWdn8ojRFIuxarhaBJ5M9mAWVRijdZxfSf2ou5NbTdOrWuGIQ%3D%3D--qHmVN3xyKodN23AC--ZAHNFYeWEr%2FyjT3mG%2FyTXg%3D%3D; path=/; HttpOnly; secure'
+            Etag: 'W/"a6b7081663eefe49bf8b06eeeb5b3751"'
+            Cache-Control: 'max-age=0, private, must-revalidate'
+            X-Request-Id: 9a9e313c-999a-485c-a9a8-5eca27f46e30
+            X-Runtime: '0.254864'
+            Strict-Transport-Security: 'max-age=31536000; includeSubDomains'
+            Transfer-Encoding: chunked
+            Via: '1.1 vegur'
+        body: '{"id":1,"title":"guitare","description":null,"owner_id":1,"from_lat":43.311852,"to_lat":48.85658,"ga_sent":null,"price":1300,"created_at":"2020-04-17T22:48:01.236+02:00","updated_at":"2020-05-01T05:30:21.118+02:00","from_lng":6.013474,"to_lng":2.35183,"from_is_flexible":false,"from_pickup_date":"2020-04-17T12:00:00.000+02:00","to_is_flexible":false,"to_pickup_date":"2020-04-30T23:59:59.999+02:00","is_packaged":null,"is_passenger":false,"volume":0.01,"environment":"objects","deleted_at":null,"slug":"guitare","rider_extra_information":"","from_need_help":false,"from_need_help_floor":null,"from_need_help_elevator":null,"from_need_help_furniture_lift":null,"to_need_help":false,"to_need_help_floor":null,"to_need_help_elevator":null,"to_need_help_furniture_lift":null,"state":"expired","owner_status":"sender","moderated_by":null,"moderated_at":null,"moderated_reason_content":null,"completed_at":null,"published_at":"2020-04-17T22:48:01.376+02:00","gat_sent":false,"v2_id":null,"last_activity_at":"2020-04-17T22:48:01.237+02:00","fees":200.0,"validated_by_id":null,"environment_kind":null,"api_application_id":null,"seller_tracking":"5CC4E42CF5A9AA33","buyer_tracking":"04060F3C48B239CB","external_id":null,"content_value":null,"rider_price":1100.0,"owner":{"id":1,"last_sign_in_at":"2020-05-28T11:24:01.931+02:00","nickname":"Sébastien F.","gender":"M","business_name":"","phone_verified":true,"role":"superadmin","sign_up_finished":true,"v2_id":null,"rate":null,"rating_count":0,"email_verified":true,"response_percent":0.0,"kyc_validated":false,"identity_validated":true,"role_label":"Super administrateur"},"previous_pay_in":false,"conversations":{"count":0,"unreaded_messages":0},"from_address":"Néoules, 83136","to_address":"Paris, 75004","offers_count":0,"photos":[],"mine":false,"ride_objects_attributes":[{"id":1,"ride_id":1,"qty":1,"title":"guitare","length":20,"width":20,"height":20,"format":null,"integer":null,"created_at":"2020-04-17T22:48:01.268+02:00","updated_at":"2020-04-17T22:48:01.268+02:00","weight":"between_5_and_30_kg","external_url":null}]}'

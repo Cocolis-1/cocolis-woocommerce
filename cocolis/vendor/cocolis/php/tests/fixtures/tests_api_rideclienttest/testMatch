@@ -1,0 +1,408 @@
+
+-
+    request:
+        method: POST
+        url: 'https://sandbox-api.cocolis.fr/api/v1/app_auth/sign_in'
+        headers:
+            Host: sandbox-api.cocolis.fr
+            Expect: null
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/Guzzle curl/7.70.0 PHP/7.3.18'
+            Content-Type: application/json
+            Accept: null
+        body: '{"app_id":"e0611906","password":"sebfie"}'
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Server: Cowboy
+            Date: 'Tue, 02 Jun 2020 19:58:03 GMT'
+            Connection: keep-alive
+            X-Frame-Options: SAMEORIGIN
+            X-Xss-Protection: '1; mode=block'
+            X-Content-Type-Options: nosniff
+            X-Download-Options: noopen
+            X-Permitted-Cross-Domain-Policies: none
+            Referrer-Policy: strict-origin-when-cross-origin
+            Content-Type: 'application/json; charset=utf-8'
+            access-token: avyMAbINZN964E-eS3KLaw
+            Token-Type: Bearer
+            client: iy7L1HAOFi9PbhofiIkWog
+            expiry: '1592337484'
+            uid: e0611906
+            Set-Cookie: '_session_id=Vl7%2FZp61C%2BKQ%2B%2BUEF5fgPZqT1SOvVOZgAjQO8sG35c7hE3viMgiuq2nvA49ftO62heiN4GanblUnahKp%2BuBCP2YaJGquHVm2sNbg92XYr%2F0fC21KerKhgeQPImJdM2Fbi89nbQuHGCIqHjBGZQ2nat1FNQA%2BiO8LhImPhd6IgG8624o%3D--SGLVuz6W7GqWphlW--6QLyBdOMWvLgfw02jJwv%2Fw%3D%3D; path=/; HttpOnly; secure, _session_id=Vl7%2FZp61C%2BKQ%2B%2BUEF5fgPZqT1SOvVOZgAjQO8sG35c7hE3viMgiuq2nvA49ftO62heiN4GanblUnahKp%2BuBCP2YaJGquHVm2sNbg92XYr%2F0fC21KerKhgeQPImJdM2Fbi89nbQuHGCIqHjBGZQ2nat1FNQA%2BiO8LhImPhd6IgG8624o%3D--SGLVuz6W7GqWphlW--6QLyBdOMWvLgfw02jJwv%2Fw%3D%3D; path=/; HttpOnly; secure, _backend_session=9SREMreFslP5LGEdk%2BTpnZq9q147GegyZGcS7rU9T%2BGzUY0E%2FsTSmAReBKXRIgCRVYEIsyoRik53EV%2B9LZpwGRoGV%2B%2FGBrbbGX5hDz82rtAQreGpctMnwuEEg3l47mOZ15PMZnhWL8GBXa5YTbnQoOw%2BDJFH5oGEzFYqjlFUQ8DyB2WnMM3nFg%3D%3D--7Pi9wPOLwPXbpzNo--oNhcE2M4swkO%2BKLE6HdCnA%3D%3D; path=/; HttpOnly; secure'
+            Etag: 'W/"9ab502b086bcd859439521a31bc53979"'
+            Cache-Control: 'max-age=0, private, must-revalidate'
+            X-Request-Id: c4e1c53e-217c-43d2-990c-1d2c44f69ee1
+            X-Runtime: '0.325122'
+            Strict-Transport-Security: 'max-age=31536000; includeSubDomains'
+            Transfer-Encoding: chunked
+            Via: '1.1 vegur'
+        body: '{"data":{"id":1,"user_id":2,"app_id":"e0611906","name":"Sebfie","description":null,"created_at":"2020-04-20T18:15:12.542+02:00","updated_at":"2020-06-02T21:58:04.617+02:00","reserve_amount":0,"balance":3000000,"running_balance":1560300,"suffisant_balance?":true}}'
+-
+    request:
+        method: POST
+        url: 'https://sandbox-api.cocolis.fr/api/v1/rides/can_match'
+        headers:
+            Host: sandbox-api.cocolis.fr
+            Expect: null
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/Guzzle curl/7.70.0 PHP/7.3.18'
+            Content-Type: application/json
+            access-token: avyMAbINZN964E-eS3KLaw
+            client: iy7L1HAOFi9PbhofiIkWog
+            expiry: '1592337484'
+            uid: e0611906
+            Accept: null
+        body: '{"from":{"postal_code":"75015"},"to":{"postal_code":"31400"},"volume":10,"content_value":150100}'
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Server: Cowboy
+            Date: 'Tue, 02 Jun 2020 19:58:05 GMT'
+            Connection: keep-alive
+            X-Frame-Options: SAMEORIGIN
+            X-Xss-Protection: '1; mode=block'
+            X-Content-Type-Options: nosniff
+            X-Download-Options: noopen
+            X-Permitted-Cross-Domain-Policies: none
+            Referrer-Policy: strict-origin-when-cross-origin
+            Content-Type: 'application/json; charset=utf-8'
+            access-token: avyMAbINZN964E-eS3KLaw
+            Token-Type: Bearer
+            client: iy7L1HAOFi9PbhofiIkWog
+            expiry: '1592337484'
+            uid: e0611906
+            Set-Cookie: '_session_id=j7pjPGQPPMDh18bIyNFQrGDegavomPlNMQ08fDnHVPFkDU7AZD2pnGViymHw7hVQHlMG%2F6T%2BQmqWz2GBan5UVE50Fo6xkZ6y%2BL9F933vzHDW36V1QqfFskaDgoTA54AO6EF0oLt6h0IHmLQKanci46OQta9tMS9YsFAXFNrzy1N%2FlfJj0LUcfCmQEtINngku%2FaqSams8yrTUY87FbeKYPeJLItKqsr70BuPuNLW9%2FZ%2FDtgb4RrbNqtFSMPqj9m1l4ICXyrYjlmgWVAA2%2BcJTU2el7rhixzwl%2B6FvTyXkZRrLYcFMZ7yH5X4MwQlsBesnYi29QKqkRrjWoTyiKWttX%2FfpM1vXN3%2BcFnLUdiFsWQPnLhU6g0cgZhPugczP75XT2a4WolVEGaa%2FAtFsvOCQbkjAsitAucLb21avxF5ktp%2BIbRcLgUyORJgcHs3PhdmMLKCv812bKFbilBk2xE6C40GwRhlKuGqiI%2FQt6vNA%2BJ0t6xMCN6zWOaxhnsfWUOdc7aX1JmsdikauOM%2FSou540CVTpKMgq5OH1o%2Fjte3ex21qbfgqqAd%2Fp8KZ54DirVnr2ewp573u0RMweeCUuOKeLKGX2CdaWpbIpP0MibV2xslrwPaN8ylH7nbdHR%2FsVbvo8I%2F0FTVPuxllshGTOw5hBQqrbOYQDeu5FLvFpHtcN19Ike4%3D--JbQqbIO3E381bi%2Fg--8meLb%2FbxCkAFpysy%2FT4dSQ%3D%3D; path=/; HttpOnly; secure, _session_id=j7pjPGQPPMDh18bIyNFQrGDegavomPlNMQ08fDnHVPFkDU7AZD2pnGViymHw7hVQHlMG%2F6T%2BQmqWz2GBan5UVE50Fo6xkZ6y%2BL9F933vzHDW36V1QqfFskaDgoTA54AO6EF0oLt6h0IHmLQKanci46OQta9tMS9YsFAXFNrzy1N%2FlfJj0LUcfCmQEtINngku%2FaqSams8yrTUY87FbeKYPeJLItKqsr70BuPuNLW9%2FZ%2FDtgb4RrbNqtFSMPqj9m1l4ICXyrYjlmgWVAA2%2BcJTU2el7rhixzwl%2B6FvTyXkZRrLYcFMZ7yH5X4MwQlsBesnYi29QKqkRrjWoTyiKWttX%2FfpM1vXN3%2BcFnLUdiFsWQPnLhU6g0cgZhPugczP75XT2a4WolVEGaa%2FAtFsvOCQbkjAsitAucLb21avxF5ktp%2BIbRcLgUyORJgcHs3PhdmMLKCv812bKFbilBk2xE6C40GwRhlKuGqiI%2FQt6vNA%2BJ0t6xMCN6zWOaxhnsfWUOdc7aX1JmsdikauOM%2FSou540CVTpKMgq5OH1o%2Fjte3ex21qbfgqqAd%2Fp8KZ54DirVnr2ewp573u0RMweeCUuOKeLKGX2CdaWpbIpP0MibV2xslrwPaN8ylH7nbdHR%2FsVbvo8I%2F0FTVPuxllshGTOw5hBQqrbOYQDeu5FLvFpHtcN19Ike4%3D--JbQqbIO3E381bi%2Fg--8meLb%2FbxCkAFpysy%2FT4dSQ%3D%3D; path=/; HttpOnly; secure, _backend_session=fdhjSbMvMwU802PpO6fYgFPFG0nntQvLtRbhwHONVd6U5HkvZtt40MUxj3nUzHjJIw1Or9XlWlMcC%2BSza7SKzJGezJkZVXDblLrgf06hbLVVye8C4CHcs1Iy6P04yRFy%2F%2FhSxLZToZTSzsfWOODoE85CsJ7XC9tUXAO2s58LmDi6XNMnvtYT1Y3Hf60q7DgcEg5x98et82SMdR856JQK8Ihd2NpXBUPUsyzHvq%2B4bm2JOU%2FeEKQo1k4A%2BHi3RY3QOQ9DM%2FygsGt6AKP82jgQ60WV8oG66rFW2TVVKfomfI9FaYCNo3fU%2FKZr2VdvSstMRubqOAWzDWyn5q6CXS7693uv9N8Q3Ltm4XkKUNNg7%2B%2FeTZSnEPogeHgKesoff3xxCgrsSDzTud1Wihj9iCuGJRLzYZ54UFdZlGN1b05ekvEqIHgkuv%2BJnnnPFu5R1Jg1AJZc5El5YyP7pBljUWNortGbdvyqjP7jz0UPsnrdHpqpxt%2FKKl5LzMoAQZsbYO85YB%2BrglhpSlrld29glKSK1fuk34pwWWQvAKBOAZZnEnMxnOuFaPsYdksmfh8YNwACaoA2mAtAF7ri1rNu706qR5O5cAcIETZWcRBdVb%2ByGlSGgNvi7%2FH695ZGKTIJ1Aw%2FWZZBp67B%2FLbovFH1lgcEXU1ta8rPuYjIvnz0XbHfMPw880Vk4PInTA%3D%3D--1%2BHRbx%2BVNKY1vqpu--QkkRNJFdIgfkm4fr%2B1IfuA%3D%3D; path=/; HttpOnly; secure'
+            Etag: 'W/"d48846047840d1551c42ca0ea92e20fa"'
+            Cache-Control: 'max-age=0, private, must-revalidate'
+            X-Request-Id: fc4af32e-5308-4a44-b12a-ca85d46726fe
+            X-Runtime: '0.512647'
+            Strict-Transport-Security: 'max-age=31536000; includeSubDomains'
+            Transfer-Encoding: chunked
+            Via: '1.1 vegur'
+        body: '{"result":true,"estimated_prices":{"regular":95500,"with_insurance":96728},"insurance_detail":{"amount":150100,"conditions_url":"https://sandbox.cocolis.fr/assurance/conditions-assurance-optionnelle-jusqu-a-3000.pdf"},"rider_count":0}'
+-
+    request:
+        method: POST
+        url: 'https://sandbox-api.cocolis.fr/api/v1/app_auth/sign_in'
+        headers:
+            Host: sandbox-api.cocolis.fr
+            User-Agent: cURL
+            Accept-Charset: UTF-8
+        body: 'app_id=e0611906&password=sebfie'
+    response:
+        status:
+            http_version: '2'
+            code: '200'
+            message: ''
+        headers:
+            date: 'Mon, 19 Oct 2020 11:18:08 GMT'
+            content-type: 'application/json; charset=utf-8'
+            set-cookie: ['__cfduid=d4e04567fc22852cb57a8ef572eef8dc81603106288; expires=Wed, 18-Nov-20 11:18:08 GMT; path=/; domain=.cocolis.fr; HttpOnly; SameSite=Lax', '_session_id=qVbgTTgv3Zn2ynNaptJsHzYfYbI5wzx9rKv0njfuM4%2B7YqrJx1pa5jFHGU4cLHFfD311QENbs%2FOf0ZTnfnpLTEm59iMA%2FwEpQj4gktapKP6uDUkdVrN9GHBYTOLvvQgQqz9PgAoo8gxqIov2WqnOL8mmxCp45txItE5KnWTLcyu%2FXlQ%3D--irp71N37yvhbd27u--Lw0VWlNLaGo%2B42shEt5Byw%3D%3D; path=/; HttpOnly; secure', '_session_id=qVbgTTgv3Zn2ynNaptJsHzYfYbI5wzx9rKv0njfuM4%2B7YqrJx1pa5jFHGU4cLHFfD311QENbs%2FOf0ZTnfnpLTEm59iMA%2FwEpQj4gktapKP6uDUkdVrN9GHBYTOLvvQgQqz9PgAoo8gxqIov2WqnOL8mmxCp45txItE5KnWTLcyu%2FXlQ%3D--irp71N37yvhbd27u--Lw0VWlNLaGo%2B42shEt5Byw%3D%3D; path=/; HttpOnly; secure', '_backend_session=qNb9XV%2BDHW55jPbRxUcPyxvEjn3ICvGZSNfeuTCYvuWFI%2F1rNF1rHq1XBvWX9JeEpeq0T2bUf66ZfJccStXF48gq30%2B6%2FSFXRY0bFdcppeuyBgh5MhhkjB3S4BFJN2e65B2JpwySm0LJqTvviIXTpXTAC4qjvR2CQXpQp43ZwML37L1MQdWAmQ%3D%3D--lCbddt4%2FVxeD%2B4nD--bP4c6ug%2FoW%2FMFXPcc5cLSg%3D%3D; path=/; HttpOnly; secure']
+            x-frame-options: SAMEORIGIN
+            x-xss-protection: '1; mode=block'
+            x-content-type-options: nosniff
+            x-download-options: noopen
+            x-permitted-cross-domain-policies: none
+            referrer-policy: strict-origin-when-cross-origin
+            access-token: emUXP57Bhy3KZrXfh__jOg
+            token-type: Bearer
+            client: 6kTkpHPQiWWKTmxfJl4G2A
+            expiry: '1604319488'
+            uid: e0611906
+            etag: 'W/"0d86f5f5d6e86b4f6d7d4ff54ebfef24"'
+            cache-control: 'max-age=0, private, must-revalidate'
+            x-request-id: 0625c808-5491-465a-a466-c5ed05115494
+            x-runtime: '0.288795'
+            strict-transport-security: 'max-age=31536000; includeSubDomains'
+            via: '1.1 vegur'
+            cf-cache-status: DYNAMIC
+            cf-request-id: 05e22dca7500000818e9b16000000001
+            expect-ct: 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"'
+            report-to: '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report?lkg-colo=19&lkg-time=1603106289"}],"group":"cf-nel","max_age":604800}'
+            nel: '{"report_to":"cf-nel","max_age":604800}'
+            server: cloudflare
+            cf-ray: 5e4a18bd88680818-CDG
+            content-encoding: br
+        body: '{"data":{"id":1,"user_id":2,"app_id":"e0611906","name":"Selency","description":null,"created_at":"2020-04-20T18:15:12.542+02:00","updated_at":"2020-10-19T13:18:08.604+02:00","reserve_amount":0,"balance":3000000,"running_balance":1860839,"suffisant_balance?":true}}'
+        curl_info:
+            url: 'https://sandbox-api.cocolis.fr/api/v1/app_auth/sign_in'
+            content_type: 'application/json; charset=utf-8'
+            http_code: 200
+            header_size: 2163
+            request_size: 235
+            filetime: -1
+            ssl_verify_result: 0
+            redirect_count: 0
+            total_time: 0.470548
+            namelookup_time: 0.002118
+            connect_time: 0.018565
+            pretransfer_time: 0.04536
+            size_upload: !!float 31
+            size_download: !!float 176
+            speed_download: !!float 374
+            speed_upload: !!float 65
+            download_content_length: !!float -1
+            upload_content_length: !!float 31
+            starttransfer_time: 0.045366
+            redirect_time: !!float 0
+            redirect_url: ''
+            primary_ip: 172.67.73.171
+            certinfo: {  }
+            primary_port: 443
+            local_ip: 192.168.1.81
+            local_port: 50551
+            http_version: 3
+            protocol: 2
+            ssl_verifyresult: 0
+            scheme: HTTPS
+            appconnect_time_us: 45294
+            connect_time_us: 18565
+            namelookup_time_us: 2118
+            pretransfer_time_us: 45360
+            redirect_time_us: 0
+            starttransfer_time_us: 45366
+            total_time_us: 470548
+-
+    request:
+        method: POST
+        url: 'https://sandbox-api.cocolis.fr/api/v1/rides/can_match'
+        headers:
+            Host: sandbox-api.cocolis.fr
+            access-token: emUXP57Bhy3KZrXfh__jOg
+            client: 6kTkpHPQiWWKTmxfJl4G2A
+            expiry: '1604319488'
+            uid: e0611906
+        body: 'from%5Bpostal_code%5D=75015&to%5Bpostal_code%5D=31400&volume=10&content_value=150100'
+    response:
+        status:
+            http_version: '2'
+            code: '200'
+            message: ''
+        headers:
+            date: 'Mon, 19 Oct 2020 11:18:09 GMT'
+            content-type: 'application/json; charset=utf-8'
+            set-cookie: ['__cfduid=d40dbd32881613be3c9fea291beeb71821603106288; expires=Wed, 18-Nov-20 11:18:08 GMT; path=/; domain=.cocolis.fr; HttpOnly; SameSite=Lax', '_session_id=PEbzdcbo%2FRBaCCYbnGFeFdjotKm0F1VyRChQIDhuAQpIMF5xTZJE%2FsDAeFucEftWC3pqo6k%2FPX3ajZQtsZO%2B%2Byw69vy5VpI3IL8pI6suuUdmYOO17vwkE22YxcLIbfOfAAhns0HWPtcS7zk2wj48BobYNwrWG0uLHNvc8d9oH%2Bu%2Fsa%2F3pJ6VVaOrpVcyN40V3lChq5R9BhqDUKrU%2BFddb3trrlpBIVU9%2F4kYu%2FzVBbhX69rY0R1hT3jSj80FwxtmcnIFbkzw4yvCUWvf7JiO85TySNKMOtHxQFBheWBmussiAP6NxubT8Ux%2FJt5IrmdY7fpfAnHVq9yK8nBjzGhFxhFHYCGnvINCu6OLrI6kIt8hbEFmwBbZfPiMD5o4seKBNv2gfvH9HKd1I78o2pH9d5brHJylNTGKF4YQCTKWpGsqc5c7iXAOypoQC7CsRsZpT4OeJ0AFZlbijPOIfUzTJRbWryQ3zvVwW0GxjhycVj6AsxatXdZRdMm4d%2FzyXLPeTT5NR6Vf5zzMSNTmu5IlOBaIKKrIFNPkxEvWbg6NCq%2BYIJiVzpzGDCvweFLHswnlcjp1GJLst6vYes92qoVx4jercdy6PYEp2DuUbv%2FecjHSgAn9PnGOfcHe9DMEh7QsG7Z%2BZgcTrViftefK3z3n4zG2C5RI8dsw0wgTTVb0InwnbrI%3D--OwYlBxP0F3XA%2FpYb--4b3UarxpFFYAazsmIoPnAw%3D%3D; path=/; HttpOnly; secure', '_session_id=PEbzdcbo%2FRBaCCYbnGFeFdjotKm0F1VyRChQIDhuAQpIMF5xTZJE%2FsDAeFucEftWC3pqo6k%2FPX3ajZQtsZO%2B%2Byw69vy5VpI3IL8pI6suuUdmYOO17vwkE22YxcLIbfOfAAhns0HWPtcS7zk2wj48BobYNwrWG0uLHNvc8d9oH%2Bu%2Fsa%2F3pJ6VVaOrpVcyN40V3lChq5R9BhqDUKrU%2BFddb3trrlpBIVU9%2F4kYu%2FzVBbhX69rY0R1hT3jSj80FwxtmcnIFbkzw4yvCUWvf7JiO85TySNKMOtHxQFBheWBmussiAP6NxubT8Ux%2FJt5IrmdY7fpfAnHVq9yK8nBjzGhFxhFHYCGnvINCu6OLrI6kIt8hbEFmwBbZfPiMD5o4seKBNv2gfvH9HKd1I78o2pH9d5brHJylNTGKF4YQCTKWpGsqc5c7iXAOypoQC7CsRsZpT4OeJ0AFZlbijPOIfUzTJRbWryQ3zvVwW0GxjhycVj6AsxatXdZRdMm4d%2FzyXLPeTT5NR6Vf5zzMSNTmu5IlOBaIKKrIFNPkxEvWbg6NCq%2BYIJiVzpzGDCvweFLHswnlcjp1GJLst6vYes92qoVx4jercdy6PYEp2DuUbv%2FecjHSgAn9PnGOfcHe9DMEh7QsG7Z%2BZgcTrViftefK3z3n4zG2C5RI8dsw0wgTTVb0InwnbrI%3D--OwYlBxP0F3XA%2FpYb--4b3UarxpFFYAazsmIoPnAw%3D%3D; path=/; HttpOnly; secure', '_backend_session=9BG24WFGriHem0UK1rwnlzWZRsci1vy%2BXaaw2i4%2F7nQHnvaM3BydUOIE5kjZU4JSi%2FvXuRbAj6%2BytQDOGEKySVAHShcZ57s25mc5ramWdVa%2BhP2ncLTBhlX%2BNbTjg2CwuXrdWnqucGU9ClogQJkQuPp12E0W4tsXAJQjGRWshYJ%2BLxTtHDOJM77BDWd5HqreTM0PQ4%2BzjSWPUPSqg1yd6yfVZRDe1X23IDuNOxJJ2VkuUelWbcqR0qO%2B2uqJ5fCgqzHzldBxU04zDCtj8d16%2BHStiei5rdfQDNEw74%2FPBd5rzP1Axvbh%2FgNZTKOzypvYUVruyrYXXYvysV%2Fw%2BzkLI7xj%2Fs0qRWRNteHr5nI1deTcL4apK0a5nM43rHiKponoKQmdkBGPVWrGLN9gYRQ%2FQo1xBa1cTkZnnYjCG6Uv65Itoa2XO7aqab99qCENpb7mSbfm6wA9tCv10uH20WI7xQV06lodgd%2FULi%2Fr02Wkwckdg5uxbO31ckwTT1ermz1saKDkPWXbW9agMYmiEZTaCF%2Bg4HvJtKWMMTRRjDBYz52ICU0PGrLk4I37cwmcfWgRrLNfOjs%2FnU2f3ghFAES35IXiJGaRZW8d%2BLniPcSh0jMC9MDrciiCaVpSXS3aKeZuyEYxuEOsfFeL331pua%2FQcwpMkIz0bS7SlPC0kiJU%2Bhx9E5o24l5Sew%3D%3D--IPAyOcUUxxg0%2FxtC--OZ2iX9LedpNWfyjR94F0tQ%3D%3D; path=/; HttpOnly; secure']
+            x-frame-options: SAMEORIGIN
+            x-xss-protection: '1; mode=block'
+            x-content-type-options: nosniff
+            x-download-options: noopen
+            x-permitted-cross-domain-policies: none
+            referrer-policy: strict-origin-when-cross-origin
+            access-token: emUXP57Bhy3KZrXfh__jOg
+            token-type: Bearer
+            client: 6kTkpHPQiWWKTmxfJl4G2A
+            expiry: '1604319488'
+            uid: e0611906
+            etag: 'W/"3f2ea96666a2e61ef2fdf3c5820910cf"'
+            cache-control: 'max-age=0, private, must-revalidate'
+            x-request-id: ca99444f-d8b5-4b0f-98ba-54e4730b3ec6
+            x-runtime: '0.398345'
+            strict-transport-security: 'max-age=31536000; includeSubDomains'
+            via: '1.1 vegur'
+            cf-cache-status: DYNAMIC
+            cf-request-id: 05e22dcc710000edfb3d2ff000000001
+            expect-ct: 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"'
+            report-to: '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report?lkg-colo=19&lkg-time=1603106289"}],"group":"cf-nel","max_age":604800}'
+            nel: '{"report_to":"cf-nel","max_age":604800}'
+            server: cloudflare
+            cf-ray: 5e4a18c0bcb6edfb-CDG
+            content-encoding: br
+        body: '{"result":true,"estimated_prices":{"regular":97500,"with_insurance":98728},"insurance_detail":{"amount":150100,"conditions_url":"https://sandbox.cocolis.fr/assurance/conditions-assurance-optionnelle-jusqu-a-3000.pdf"},"rider_count":0}'
+        curl_info:
+            url: 'https://sandbox-api.cocolis.fr/api/v1/rides/can_match'
+            content_type: 'application/json; charset=utf-8'
+            http_code: 200
+            header_size: 3779
+            request_size: 316
+            filetime: -1
+            ssl_verify_result: 0
+            redirect_count: 0
+            total_time: 0.572669
+            namelookup_time: 0.001282
+            connect_time: 0.016688
+            pretransfer_time: 0.045387
+            size_upload: !!float 84
+            size_download: !!float 149
+            speed_download: !!float 260
+            speed_upload: !!float 146
+            download_content_length: !!float -1
+            upload_content_length: !!float 84
+            starttransfer_time: 0.045396
+            redirect_time: !!float 0
+            redirect_url: ''
+            primary_ip: 104.26.7.43
+            certinfo: {  }
+            primary_port: 443
+            local_ip: 192.168.1.81
+            local_port: 50560
+            http_version: 3
+            protocol: 2
+            ssl_verifyresult: 0
+            scheme: HTTPS
+            appconnect_time_us: 45296
+            connect_time_us: 16688
+            namelookup_time_us: 1282
+            pretransfer_time_us: 45387
+            redirect_time_us: 0
+            starttransfer_time_us: 45396
+            total_time_us: 572669
+-
+    request:
+        method: POST
+        url: 'https://sandbox-api.cocolis.fr/api/v1/app_auth/sign_in'
+        headers:
+            Host: sandbox-api.cocolis.fr
+        body: 'app_id=e0611906&password=sebfie'
+    response:
+        status:
+            http_version: '2'
+            code: '200'
+            message: ''
+        headers:
+            date: 'Mon, 19 Oct 2020 11:39:10 GMT'
+            content-type: 'application/json; charset=utf-8'
+            set-cookie: ['__cfduid=d543438f3fe68761b14f8ee2e8f97b6001603107550; expires=Wed, 18-Nov-20 11:39:10 GMT; path=/; domain=.cocolis.fr; HttpOnly; SameSite=Lax', '_session_id=Xs65CPktu6CJT2A9oF5WGxEqUXRAkeftNCebj%2FswKvOpuJz9uBB5FW0Sx5gHRJXl0Km2m0LmUD4zpllNEaqvyW3X3g4Qy0tz0X8V6Fzxrae%2BgLIGyvQm%2BtNNGzVDTTW5kPtOKH%2BAQK5NJmGI6UJ7zH47sKg%2F4u2fTHpiHJ7GHGTbqR0%3D--aTx5sY37WcFKbCVo--2pMjSmdVijyoHdZWXXGuKg%3D%3D; path=/; HttpOnly; secure', '_session_id=Xs65CPktu6CJT2A9oF5WGxEqUXRAkeftNCebj%2FswKvOpuJz9uBB5FW0Sx5gHRJXl0Km2m0LmUD4zpllNEaqvyW3X3g4Qy0tz0X8V6Fzxrae%2BgLIGyvQm%2BtNNGzVDTTW5kPtOKH%2BAQK5NJmGI6UJ7zH47sKg%2F4u2fTHpiHJ7GHGTbqR0%3D--aTx5sY37WcFKbCVo--2pMjSmdVijyoHdZWXXGuKg%3D%3D; path=/; HttpOnly; secure', '_backend_session=8en%2B7qogj7XVpPI8RcGyaUZ4QXThhyQWZTA%2Fbs9yD33vSpgRoE5Vnx95JQiCAcwd8ya2DV3uNIVatp2p6fbd9gvameBZrYsD5ViLjSpofOLPgWoBcTOEvTfusrinUgpvPZgHDLUIjzBtqAGnLW8o2T15uet11h1m67OJobDiasR3Zfp19j3OGA%3D%3D--0mAIBPDTtCTA4AsH--XaA3DsV%2F5gdZP6I1R6hrlw%3D%3D; path=/; HttpOnly; secure']
+            x-frame-options: SAMEORIGIN
+            x-xss-protection: '1; mode=block'
+            x-content-type-options: nosniff
+            x-download-options: noopen
+            x-permitted-cross-domain-policies: none
+            referrer-policy: strict-origin-when-cross-origin
+            access-token: 56UHzQlg48m1Ha5zNWK-Nw
+            token-type: Bearer
+            client: j8Y2hRliiHRICCM1CAF1Ag
+            expiry: '1604320750'
+            uid: e0611906
+            etag: 'W/"f5130d3e4d7bab767cb236b501bcab35"'
+            cache-control: 'max-age=0, private, must-revalidate'
+            x-request-id: 3f433d3d-cc01-4b23-ab03-bbf0041cabb1
+            x-runtime: '0.282886'
+            strict-transport-security: 'max-age=31536000; includeSubDomains'
+            via: '1.1 vegur'
+            cf-cache-status: DYNAMIC
+            cf-request-id: 05e2410beb0000cddfa0bb8000000001
+            expect-ct: 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"'
+            report-to: '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report?lkg-colo=19&lkg-time=1603107551"}],"group":"cf-nel","max_age":604800}'
+            nel: '{"report_to":"cf-nel","max_age":604800}'
+            server: cloudflare
+            cf-ray: 5e4a378caa10cddf-CDG
+            content-encoding: br
+        body: '{"data":{"id":1,"user_id":2,"app_id":"e0611906","name":"Selency","description":null,"created_at":"2020-04-20T18:15:12.542+02:00","updated_at":"2020-10-19T13:39:10.539+02:00","reserve_amount":0,"balance":3000000,"running_balance":1974839,"suffisant_balance?":true}}'
+        curl_info:
+            url: 'https://sandbox-api.cocolis.fr/api/v1/app_auth/sign_in'
+            content_type: 'application/json; charset=utf-8'
+            http_code: 200
+            header_size: 2153
+            request_size: 212
+            filetime: -1
+            ssl_verify_result: 0
+            redirect_count: 0
+            total_time: 0.454754
+            namelookup_time: 0.001324
+            connect_time: 0.016007
+            pretransfer_time: 0.04555
+            size_upload: !!float 31
+            size_download: !!float 175
+            speed_download: !!float 385
+            speed_upload: !!float 68
+            download_content_length: !!float -1
+            upload_content_length: !!float 31
+            starttransfer_time: 0.045556
+            redirect_time: !!float 0
+            redirect_url: ''
+            primary_ip: 172.67.73.171
+            certinfo: {  }
+            primary_port: 443
+            local_ip: 192.168.1.81
+            local_port: 56218
+            http_version: 3
+            protocol: 2
+            ssl_verifyresult: 0
+            scheme: HTTPS
+            appconnect_time_us: 45490
+            connect_time_us: 16007
+            namelookup_time_us: 1324
+            pretransfer_time_us: 45550
+            redirect_time_us: 0
+            starttransfer_time_us: 45556
+            total_time_us: 454754
+-
+    request:
+        method: POST
+        url: 'https://sandbox-api.cocolis.fr/api/v1/rides/can_match'
+        headers:
+            Host: sandbox-api.cocolis.fr
+        body: 'from%5Bpostal_code%5D=75015&to%5Bpostal_code%5D=31400&volume=10&content_value=150100'
+    response:
+        status:
+            http_version: '2'
+            code: '401'
+            message: ''
+        headers:
+            date: 'Mon, 19 Oct 2020 11:39:10 GMT'
+            content-type: 'application/json; charset=utf-8'
+            set-cookie: ['__cfduid=dec4872d4c40485739c5abff4e56a3c501603107550; expires=Wed, 18-Nov-20 11:39:10 GMT; path=/; domain=.cocolis.fr; HttpOnly; SameSite=Lax', '_session_id=dH2itCtnPoB3kZQCFTOrCKw8fhecNFBrh%2BmMQZ%2BGHc9cOfUkFoE0QGnaMi%2FqYvbAsxsliLzHzuA9Ws18WsvKOxCTHGsHJPClk0cLr%2F1xBWK8pR4z4Y0w4FufbTaB5Ylxe5li%2FG4mxB4lNq2xg%2B%2Fu7MAKprNi71WBrsjcAQDcd%2F0dPro%3D--AlDCk%2B3Wb7FFXsdA--QjSXVTATviaOvKnHu3W98A%3D%3D; path=/; HttpOnly; secure', '_session_id=dH2itCtnPoB3kZQCFTOrCKw8fhecNFBrh%2BmMQZ%2BGHc9cOfUkFoE0QGnaMi%2FqYvbAsxsliLzHzuA9Ws18WsvKOxCTHGsHJPClk0cLr%2F1xBWK8pR4z4Y0w4FufbTaB5Ylxe5li%2FG4mxB4lNq2xg%2B%2Fu7MAKprNi71WBrsjcAQDcd%2F0dPro%3D--AlDCk%2B3Wb7FFXsdA--QjSXVTATviaOvKnHu3W98A%3D%3D; path=/; HttpOnly; secure', '_backend_session=em4UHNeWd2N0rfwIlRx8DLDL91X16BV2aRZ1kNiwDyKkLF92bmGagYR2eqcPjk4yWFV42ewYRj%2BKP0%2FI2JnlHpMZFJzuNHDEa9g4qse4h7vrpvZKH0JdAkscLq%2BylyOdibCDMgwT2rD%2BsXd7ZA2cZb%2FYy56B1Ojyykz3cRWy9x9NJUn3Y%2Fj4eA%3D%3D--raZ0Qurcb3diDSqf--v1znUT9ePU0M%2B4sfIiwJJA%3D%3D; path=/; HttpOnly; secure']
+            x-frame-options: SAMEORIGIN
+            x-xss-protection: '1; mode=block'
+            x-content-type-options: nosniff
+            x-download-options: noopen
+            x-permitted-cross-domain-policies: none
+            referrer-policy: strict-origin-when-cross-origin
+            cache-control: no-cache
+            x-request-id: ce0cee99-4785-4984-8c46-749e1c1b3fbf
+            x-runtime: '0.015227'
+            strict-transport-security: 'max-age=31536000; includeSubDomains'
+            via: '1.1 vegur'
+            cf-cache-status: DYNAMIC
+            cf-request-id: 05e2410dfd000008631f11f000000001
+            expect-ct: 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"'
+            report-to: '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report?lkg-colo=19&lkg-time=1603107551"}],"group":"cf-nel","max_age":604800}'
+            nel: '{"report_to":"cf-nel","max_age":604800}'
+            server: cloudflare
+            cf-ray: 5e4a378ffc240863-CDG
+        body: '{"errors":["Vous devez vous connecter ou vous enregistrer pour continuer."]}'
+        curl_info:
+            url: 'https://sandbox-api.cocolis.fr/api/v1/rides/can_match'
+            content_type: 'application/json; charset=utf-8'
+            http_code: 401
+            header_size: 1959
+            request_size: 211
+            filetime: -1
+            ssl_verify_result: 0
+            redirect_count: 0
+            total_time: 0.182856
+            namelookup_time: 0.001223
+            connect_time: 0.01696
+            pretransfer_time: 0.046238
+            size_upload: !!float 84
+            size_download: !!float 76
+            speed_download: !!float 417
+            speed_upload: !!float 461
+            download_content_length: !!float -1
+            upload_content_length: !!float 84
+            starttransfer_time: 0.046245
+            redirect_time: !!float 0
+            redirect_url: ''
+            primary_ip: 104.26.7.43
+            certinfo: {  }
+            primary_port: 443
+            local_ip: 192.168.1.81
+            local_port: 56222
+            http_version: 3
+            protocol: 2
+            ssl_verifyresult: 0
+            scheme: HTTPS
+            appconnect_time_us: 46170
+            connect_time_us: 16960
+            namelookup_time_us: 1223
+            pretransfer_time_us: 46238
+            redirect_time_us: 0
+            starttransfer_time_us: 46245
+            total_time_us: 182856

@@ -1,10 +1,10 @@
 === Cocolis Officiel : Méthodes de livraison pour WooCommerce ===
 Contributors: cocolis
 Tags: woocommerce, delivery, cocolis, livraison
-Stable tag: 1.1.5
-Requires at least: 4.7
-Tested up to: 6.8.2
-Requires PHP: 5.6.0
+Stable tag: 1.3.0
+Requires at least: 5.0
+Tested up to: 7.1
+Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,6 +48,23 @@ Rendez-vous [ici](https://doc.cocolis.fr "Documentation de Cocolis") pour obteni
 3. Réglage du module
 
 == Changelog ==
+= 1.3.0 =
+* New setting "Order status for publication": choose which order status publishes the delivery ad on Cocolis (default: processing), with a cocolis_publish_order_status filter for developers
+* When saving the settings, run a test quotation (can_match) to detect accounts without an active Cocolis subscription and display a clear error message
+* Update the French translations (webhook security, API key and subscription messages) and remove obsolete insurance strings
+
+= 1.2.0 =
+* Security: webhooks are now authenticated with the Cocolis HMAC signature (X-Cocolis-Signature header)
+* Add API key authentication (takes precedence over the app-id / password authentication)
+* Remove the optional "with insurance" shipping rate: insurance is now always included by the Cocolis API
+* Declare compatibility with WooCommerce High-Performance Order Storage (HPOS)
+* Add an upgrade routine that clears cached shipping rates and fetches the webhook signing secret
+* Expose the module version as window.cocolisVersion for easier debugging
+* Fix the missing ride_expired webhook route
+* Fix price rounding sent to the Cocolis API (cents were truncated)
+* Harden the admin order metabox (nonce, capability check, escaped output)
+* PHP 8.2 to 8.5 compatibility fixes
+
 = 1.1.5 =
 * Fix an issue on installation when creating webhooks
 * Attach photos to ride objects instead of ride itself
