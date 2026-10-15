@@ -6,7 +6,7 @@
  * Description: A plugin to add Cocolis.fr as a carrier on Woocommerce
  * Author:  Cocolis.fr
  * Author URI: https://www.cocolis.fr
- * Version: 1.2.0
+ * Version: 1.3.0
  * Developer: Alexandre BETTAN, Sebastien FIELOUX
  * Developer URI: https://github.com/btnalexandre, https://github.com/sebfie
  * Text Domain: cocolis
@@ -24,7 +24,7 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
-define('WC_COCOLIS_VERSION', '1.2.0');
+define('WC_COCOLIS_VERSION', '1.3.0');
 
 require_once dirname(__FILE__) . '/vendor/autoload.php';
 include_once "class/wc-cocolis-payment.php";

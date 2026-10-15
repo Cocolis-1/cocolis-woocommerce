@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cocolis\n"
 "POT-Creation-Date: 2025-06-27 09:07+0200\n"
-"PO-Revision-Date: 2025-12-23 15:21+0100\n"
+"PO-Revision-Date: 2026-10-15 10:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: Cocolis\n"
 "Language: fr_FR\n"
@@ -15,35 +15,9 @@ msgstr ""
 "X-Poedit-KeywordsList: __\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: class/wc-cocolis-payment.php:49
-msgid "insurance conditions"
-msgstr "conditions d’assurance"
-
-#: class/wc-cocolis-payment.php:54
-msgid "Birth date for insurance"
-msgstr "Date de naissance (pour l’assurance)"
-
-#: class/wc-cocolis-payment.php:62
-msgid "I confirm that I have read the "
-msgstr "Je confirme que j’ai lu les "
-
-#: class/wc-cocolis-payment.php:62
-msgid " and that I choose the insurance up to "
-msgstr " et que je choisis l’assurance jusqu’à "
-
-#: class/wc-cocolis-payment.php:86
-msgid "Please fill insurance details for Cocolis delivery (refresh if you have changed delivery mode)"
-msgstr ""
-"Veuillez remplir les détails de l’assurance pour la livraison Cocolis (actualiser si vous avez changé de mode de "
-"livraison)"
-
 #: class/wc-cocolis-payment.php:172
 msgid "No phone number provided in the Cocolis configuration"
 msgstr "Pas de numéro de téléphone fourni dans la configuration Cocolis"
-
-#: class/wc-cocolis-payment.php:172
-msgid "Required seller phone number"
-msgstr "Le numéro de téléphone du vendeur est requis"
 
 #: class/wc-cocolis-payment.php:297
 msgid "Link to buyer tracking: "
@@ -89,19 +63,11 @@ msgstr "Un transporteur a été sélectionné pour effectuer la livraison Cocoli
 msgid "Delivery completed by Cocolis"
 msgstr "Livraison complétée par Cocolis"
 
-#: class/wc-cocolis-webhooks.php:99
+#: class/wc-cocolis-webhooks.php:259
 msgid "Link to ad: "
 msgstr "Lien vers l’annonce : "
 
-#: class/wc-cocolis-webhooks.php:123
-msgid "The buyer has updated his availability"
-msgstr "L'acheteur a mis à jour sa disponibilité"
-
-#: class/wc-cocolis-webhooks.php:147
-msgid "The seller has updated his availability"
-msgstr "Le vendeur a mis à jour sa disponibilité"
-
-#: class/wc-cocolis-webhooks.php:171
+#: class/wc-cocolis-webhooks.php:319
 msgid "The delivery is cancelled by the carrier. The seller and the buyer are informed, their tracking page is updated."
 msgstr ""
 "La livraison est annulée par le transporteur. Le vendeur et l’acheteur sont informés, leur page de suivi est mise à "
@@ -221,9 +187,68 @@ msgstr "Les informations d’identification fournies ne sont pas reconnues par l
 msgid "Authentication error on the API server"
 msgstr "Erreur d’authentification sur le serveur API"
 
-#: wc-cocolis-shipping.php:371
-msgid " with insurance"
-msgstr " avec assurance"
+#: wc-cocolis-shipping.php:203
+msgid "API Key"
+msgstr "Clé API"
+
+#: wc-cocolis-shipping.php:205
+msgid "Enter the API key provided to you by Cocolis. When filled in, it takes precedence over the app-id / password authentication."
+msgstr ""
+"Entrez la clé API qui vous a été fournie par Cocolis. Lorsqu’elle est renseignée, elle prend le pas sur "
+"l’authentification app-id / mot de passe."
+
+#: wc-cocolis-shipping.php:315
+msgid ""
+"Your credentials are valid, but your Cocolis account has no active subscription, so no shipping rate would be "
+"displayed. Please subscribe from your Cocolis account, then save these settings again."
+msgstr ""
+"Vos identifiants sont valides, mais votre compte Cocolis n’a pas d’abonnement actif : aucun tarif de livraison ne "
+"serait donc affiché. Veuillez souscrire un abonnement depuis votre compte Cocolis, puis enregistrez à nouveau ces "
+"réglages."
+
+#: wc-cocolis-shipping.php:316
+msgid "A Cocolis subscription is required"
+msgstr "Un abonnement Cocolis est requis"
+
+#: wc-cocolis-shipping.php:324
+msgid "Your credentials are valid, but the Cocolis API refused a test quotation: %s"
+msgstr "Vos identifiants sont valides, mais l’API Cocolis a refusé un devis de test : %s"
+
+#: wc-cocolis-shipping.php:327
+msgid "Error on a Cocolis test quotation"
+msgstr "Erreur sur un devis de test Cocolis"
+
+#: class/wc-cocolis-webhooks.php:53
+msgid "Missing Cocolis webhook signature."
+msgstr "Signature du webhook Cocolis manquante."
+
+#: class/wc-cocolis-webhooks.php:62
+msgid "Malformed Cocolis webhook signature header."
+msgstr "En-tête de signature du webhook Cocolis malformé."
+
+#: class/wc-cocolis-webhooks.php:70
+msgid "Cocolis webhook signature timestamp is outside of the allowed tolerance."
+msgstr "L’horodatage de la signature du webhook Cocolis est en dehors de la tolérance autorisée."
+
+#: class/wc-cocolis-webhooks.php:90
+msgid "Invalid Cocolis webhook signature."
+msgstr "Signature du webhook Cocolis invalide."
+
+#: class/wc-cocolis-webhooks.php:180
+msgid "Event or order ID missing from Webhook"
+msgstr "Événement ou identifiant de commande manquant dans le webhook"
+
+#: class/wc-cocolis-webhooks.php:190
+msgid "No order found for the given external_id"
+msgstr "Aucune commande trouvée pour l’external_id fourni"
+
+#: class/wc-cocolis-webhooks.php:239
+msgid "Ride ID missing from Webhook"
+msgstr "Identifiant d’annonce manquant dans le webhook"
+
+#: class/wc-cocolis-webhooks.php:265
+msgid "Unable to fetch the ride from the Cocolis API"
+msgstr "Impossible de récupérer l’annonce depuis l’API Cocolis"
 
 #: wc-cocolis-shipping.php:445
 msgid ""
@@ -232,13 +257,6 @@ msgid ""
 msgstr ""
 "Assurance Cocolis incluse. <a target='_blank' href='https://www.cocolis.fr/static/docs/"
 "notice_information_COCOLIS_ACM.pdf'>Notice d'assurance</a>"
-
-#: wc-cocolis-shipping.php:461
-msgid "Supplementary insurance up to "
-msgstr "Assurance complémentaire jusqu'à "
-
-msgid "Birth date required for insurance"
-msgstr "Date de naissance requise pour l’assurance"
 
 msgid "A carrier offers their services in response to a ride, and confirmation is awaited from the sender and recipient."
 msgstr ""
